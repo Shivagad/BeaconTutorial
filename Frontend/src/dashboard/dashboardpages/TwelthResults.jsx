@@ -3,11 +3,11 @@ import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Add10StudentModal from '../10thResult/Add10StudentModal';
-import Edit10StudentModal from '../10thResult/Edit10Student';
-import Delete10StudentModal from '../10thResult/Delete10StudentModal';
+import Add12StudentModal from '../12thResult/Add12StudentModal';
+import Edit12StudentModal from '../12thResult/Edit12Student';
+import Delete12StudentModal from '../12thResult/Delete12StudentModal';
 
-const TenthResults = () => {
+const TwelthResult = () => {
   // Modal control states
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -19,7 +19,7 @@ const TenthResults = () => {
   const [students, setStudents] = useState([]);
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/tenth/students");
+      const response = await axios.get("http://localhost:4000/server/twelve/students");
      console.log(response.data.data);
       setStudents(response.data.data);
     } catch (error) {
@@ -65,7 +65,7 @@ const TenthResults = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">10th Class Toppers</h1>
+        <h1 className="text-2xl font-bold text-gray-800">12th Class Toppers</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -99,10 +99,16 @@ const TenthResults = () => {
                  Percentage : {(student.percentage)}%
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Science Mark : {parseFloat(student.scienceMarks)}%
+                 Physics Mark : {parseInt(student.physicsMarks)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Math Marks : {parseFloat(student.mathMarks)}%
+                 Physics Mark : {parseInt(student.chemistryMarks)}
+                </p>
+                <p className="text-blue-600  text-xl">
+                 Math Marks : {parseInt(student.mathMarks)}
+                </p>
+                <p className="text-blue-600  text-xl">
+                 Biology Marks : {parseInt(student.biologyMarks)}
                 </p>
                 <p className="text-blue-600  text-xl">
                  Board : {(student.boardName)}
@@ -133,14 +139,14 @@ const TenthResults = () => {
       </div>
 
       {/* Add Student Modal */}
-      <Add10StudentModal
+      <Add12StudentModal
         setToast={setToast}
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
       />
 
       {/* Edit Student Modal: Pass the selected student's ID and onSubmit callback */}
-      <Edit10StudentModal
+      <Edit12StudentModal
         setToast={setToast}
         isEditOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
@@ -149,7 +155,7 @@ const TenthResults = () => {
       />
 
       {/* Delete Student Modal: Pass the selected student's ID and onDelete callback */}
-      <Delete10StudentModal
+      <Delete12StudentModal
         setToast={setToast}
         isDeleteOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -160,4 +166,4 @@ const TenthResults = () => {
   );
 };
 
-export default TenthResults;
+export default TwelthResult;

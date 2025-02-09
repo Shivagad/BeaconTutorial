@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { X, Upload } from "lucide-react";
 import axios from "axios";
 
-const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
+const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const fileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -10,11 +10,13 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
     lastName: "",
     percentage: "",
     seqno: "",
-    image: "",
-    math: "",
-    science: "",
-    board: "",
-    tags: ""
+    imagePath: "",
+    chemistryMarks: "",
+    physicsMarks: "",
+    mathMarks:"",
+    boardName: "",
+    biologyMarks:"",
+    Tag: ""
   });
 
   const [previewImage, setPreviewImage] = useState("");
@@ -28,7 +30,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
       reader.onloadend = () => {
         const result = reader.result;
         setPreviewImage(result);
-        setFormData({ ...formData, image: result });
+        setFormData({ ...formData, imagePath: result });
       };
       reader.readAsDataURL(file);
     }
@@ -39,7 +41,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
      setIsSubmitting(true);
-      const response = await axios.post('http://localhost:4000/server/tenth/students', formData);
+      const response = await axios.post('http://localhost:4000/server/twelve/students', formData);
 
       if (response.data.success) {
         setToast({
@@ -67,7 +69,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg p-6 mt-20 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Add New 10th Topper</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Add New 12th Topper</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
@@ -142,7 +144,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                           type="button"
                           onClick={() => {
                             setPreviewImage("");
-                            setFormData({ ...formData, image: "" });
+                            setFormData({ ...formData, imagePath: "" });
                           }}
                           className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
                         >
@@ -164,6 +166,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                       type="file"
                       accept="image/*"
                       className="hidden"
+                      required
                       onChange={handleImageChange}
                     />
                   </div>
@@ -201,24 +204,69 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.math}
+                    value={formData.mathMarks}
                     onChange={e =>
-                      setFormData({ ...formData, math: e.target.value })
+                      setFormData({ ...formData, mathMarks: e.target.value })
                     }
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Science Marks
+                    Physics Marks
                   </label>
                   <input
                     type="number"
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.science}
+                    value={formData.physicsMarks}
                     onChange={e =>
-                      setFormData({ ...formData, science: e.target.value })
+                      setFormData({ ...formData, physicsMarks: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Chemistry Marks
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.chemistryMarks}
+                    onChange={e =>
+                      setFormData({ ...formData, chemistryMarks: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Math Marks
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.mathMarks}
+                    onChange={e =>
+                      setFormData({ ...formData, mathMarks: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Biology Marks
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.biologyMarks}
+                    onChange={e =>
+                      setFormData({ ...formData, biologyMarks: e.target.value })
                     }
                   />
                 </div>
@@ -229,9 +277,9 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                   <input
                     type="text"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.board}
+                    value={formData.boardName}
                     onChange={e =>
-                      setFormData({ ...formData, board: e.target.value })
+                      setFormData({ ...formData, boardName: e.target.value })
                     }
                     placeholder="Enter Board Name"
                   />
@@ -243,9 +291,9 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                   <input
                     type="text"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.tags}
+                    value={formData.Tag}
                     onChange={e =>
-                      setFormData({ ...formData, tags: e.target.value })
+                      setFormData({ ...formData, Tag: e.target.value })
                     }
                     placeholder="Enter tag like, Board Topper"
                   />
@@ -269,4 +317,4 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   );
 };
 
-export default Add10StudentModal;
+export default Add12StudentModal;

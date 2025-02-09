@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import axios from 'axios';
 
-const DeleteStudentModal = ({
+const Delete10StudentModal = ({
   isDeleteOpen,
   onClose,
   setToast3,
@@ -88,5 +88,5 @@ const DeleteStudentModal = ({
   );
 };
 
-export default DeleteStudentModal;
+export default Delete10StudentModal;
 
