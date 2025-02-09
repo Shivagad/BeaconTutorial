@@ -1,5 +1,5 @@
 import express from 'express';
-import { addTwelfthStudentResult, getAllTwelfthStudentResults, editTwelfthStudentResult, deleteTwelfthStudentResult } from '../Controller/12th.js';
+import { addTwelfthStudentResult, getAllTwelfthStudentResults, editTwelfthStudentResult, deleteTwelfthStudentResult, getTwelfthResultById } from '../Controller/12th.js';
 
 const router = express.Router();
 
@@ -15,4 +15,7 @@ router.put('/students/:id', editTwelfthStudentResult);
 
 router.delete('/students/:id', deleteTwelfthStudentResult);
 
+router.get('/students/:id', getTwelfthResultById);
+
 export default router;
+
