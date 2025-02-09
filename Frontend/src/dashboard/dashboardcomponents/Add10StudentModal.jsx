@@ -4,6 +4,7 @@ import axios from "axios";
 
 const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const fileInputRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -36,27 +37,8 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // const submissionData = new FormData();
-    // submissionData.append("firstName", formData.firstName);
-    // submissionData.append("lastName", formData.lastName);
-    // submissionData.append("percentage", formData.percentage);
-    // submissionData.append("seqno", formData.seqno);
-    // submissionData.append("boardName", formData.board);
-    // submissionData.append("scienceMarks", formData.subjects.science);
-    // submissionData.append("mathMarks", formData.subjects.math);
-    // submissionData.append("Tag", formData.tags);
-
-    // if (fileInputRef.current.files[0]) {
-    //   submissionData.append("image", fileInputRef.current.files[0]);
-    // }
-
-    // // Log each key/value pair in the FormData for debugging
-    // for (const [key, value] of submissionData.entries()) {
-    //   console.log(`${key}:`, value);
-    // }
-
     try {
-      console.log(formData)
+     setIsSubmitting(true);
       const response = await axios.post('http://localhost:4000/server/tenth/students', formData);
 
       if (response.data.success) {
@@ -275,9 +257,10 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
           <div className="border-t pt-6">
             <button
               type="submit"
+              disabled={isSubmitting} 
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
-              Add Student
+             {isSubmitting ? "Submitting..." : "Add Student"}
             </button>
           </div>
         </form>

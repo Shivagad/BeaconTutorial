@@ -16,7 +16,7 @@ const DeleteStudentModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`http://localhost:4000/server/thenth/students/${id}`);
+      const response = await axios.delete(`http://localhost:4000/server/tenth/students/${id}`);
       response.data.success ? (setToast3({
         success: true,
         message: `10th Student deleted successfully`,

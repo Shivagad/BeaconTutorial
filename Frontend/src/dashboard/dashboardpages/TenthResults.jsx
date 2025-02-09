@@ -1,56 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
-import Add10StudentModal from '../dashboardcomponents/Add10StudentModal';
+import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Add10StudentModal from '../dashboardcomponents/Add10StudentModal';
 import Edit10StudentModal from '../dashboardcomponents/Edit10Student';
 import DeleteStudentModal from '../dashboardcomponents/DeleteStudentModal';
 
 const TenthResults = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [handleDelete,setHandleDelete]=useState(false);
-  const [handleEdit,setHandleEdit]=useState(false);
-  const [students, setStudents] = useState([
-    {
-      id: '1',
-      firstName: 'John',
-      lastName: 'Doe',
-      percentage: 95.6,
-      subjects: {
-        math: 98,
-        science: 95,
-        english: 90,
-        history: 85,
-      },
-    },
-  ]);
+  // Modal control states
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Function to show toast notifications
-  const setToast = (msg) => 
-    msg.success ? toast.success(msg.message) : toast.error(msg.message);  
+  const [editStudentId, setEditStudentId] = useState(null);
+  const [deleteStudentId, setDeleteStudentId] = useState(null);
 
-  // Handle adding a new student from modal
-  const handleAddStudent = (studentData) => {
-    if (!studentData.firstName || !studentData.lastName || !studentData.percentage) {
-      setToast({ success: false, message: "All fields are required!" });
-      return;
+  const [students, setStudents] = useState([]);
+  const fetchStudents = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/server/tenth/students");
+     console.log(response.data.data);
+      setStudents(response.data.data);
+    } catch (error) {
+      setToast({ success: false, message: "Error fetching student data" });
+      console.error("Error fetching student data:", error);
     }
-
-    setStudents([
-      ...students,
-      {
-        ...studentData,
-        id: Math.random().toString(36).substr(2, 9), // Unique ID
-      },
-    ]);
-
-    setToast({ success: true, message: "Student added successfully!" });
   };
 
-  // Handle deleting a student
-  const handleDeleteStudent = (id) => {
-    setStudents(students.filter((student) => student.id !== id));
-    setToast({ success: true, message: "Student removed successfully!" });
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const setToast = (msg) => {
+    msg.success ? toast.success(msg.message) : toast.error(msg.message);
+    fetchStudents();
+  }
+
+  const setToast2 = (msg) => {
+    msg.success ? toast.success(msg.message) : toast.error(msg.message);
+    fetchStudents();
+  }
+  const setToast3 = (msg) => {
+    msg.success ? toast.success(msg.message) : toast.error(msg.message);
+    fetchStudents();
+  }
+
+  // When the Edit button is clicked, store the selected student ID and open the Edit modal.
+  const openEditModal = (id) => {
+    setEditStudentId(id);
+    setIsEditModalOpen(true);
+  };
+
+  // When the Delete button is clicked, store the selected student ID and open the Delete modal.
+  const openDeleteModal = (id) => {
+    setDeleteStudentId(id);
+    setIsDeleteModalOpen(true);
   };
 
   return (
@@ -59,10 +64,10 @@ const TenthResults = () => {
       <ToastContainer position="top-right" autoClose={3000} />
 
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 ">
+      <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">10th Class Toppers</h1>
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           <PlusCircle className="w-5 h-5 mr-2" />
@@ -77,25 +82,44 @@ const TenthResults = () => {
             key={student.id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
+            {/* Display student's image if available */}
+            {student.imagePath && (
+              <img
+                src={student.imagePath}
+                alt={`${student.firstName} ${student.lastName}`}
+                className="w-full h-40 object-cover rounded-lg mb-4"
+              />
+            )}
             <div className="flex justify-between items-start mb-4">
               <div>
                 <h3 className="text-lg font-semibold">
                   {student.firstName} {student.lastName}
                 </h3>
-                <p className="text-blue-600 font-bold text-xl">
-                  {parseFloat(student.percentage).toFixed(1)}%
+                <p className="text-blue-600 text-xl">
+                 Percentage : {(student.percentage)}%
+                </p>
+                <p className="text-blue-600  text-xl">
+                 Science Mark : {parseFloat(student.scienceMarks)}%
+                </p>
+                <p className="text-blue-600  text-xl">
+                 Math Marks : {parseFloat(student.mathMarks)}%
+                </p>
+                <p className="text-blue-600  text-xl">
+                 Board : {(student.boardName)}
+                </p>
+                <p className="text-blue-600 text-xl">
+                 Tag : {(student.Tag)}
                 </p>
               </div>
               <div className="flex space-x-2">
                 <button
-                  onClick={() => setHandleEdit(true)}
+                  onClick={() => openEditModal(student._id)}
                   className="text-gray-600 hover:text-blue-600 transition-colors"
                 >
-                  <Edit className="w-5 h-5"
-                   />
+                  <Edit className="w-5 h-5" />
                 </button>
                 <button
-                  onClick={() => setHandleDelete(true)}
+                  onClick={() => openDeleteModal(student._id)}
                   className="text-gray-600 hover:text-red-600 transition-colors"
                 >
                   <Trash2 className="w-5 h-5" />
@@ -103,18 +127,7 @@ const TenthResults = () => {
               </div>
             </div>
 
-            {/* Subjects & Marks */}
-            <div className="space-y-2">
-              {student.subjects &&
-                Object.entries(student.subjects).map(([subject, marks]) => (
-                  <div key={subject} className="flex justify-between items-center">
-                    <span className="text-gray-600 capitalize">
-                      {subject.replace(/([A-Z])/g, ' $1').trim()}
-                    </span>
-                    <span className="font-medium">{marks}%</span>
-                  </div>
-                ))}
-            </div>
+           
           </div>
         ))}
       </div>
@@ -122,20 +135,26 @@ const TenthResults = () => {
       {/* Add Student Modal */}
       <Add10StudentModal
         setToast={setToast}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
       />
 
+      {/* Edit Student Modal: Pass the selected student's ID and onSubmit callback */}
       <Edit10StudentModal
-      setToast={setToast}
-      isEditOpen={handleEdit}
-      onClose={() => setHandleEdit(false)}
+        setToast={setToast}
+        isEditOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        id={editStudentId}
+        setToast2={setToast2}
       />
 
+      {/* Delete Student Modal: Pass the selected student's ID and onDelete callback */}
       <DeleteStudentModal
-      setToast={setToast}
-      isDeleteOpen={handleDelete}
-      onClose={() => setHandleDelete(false)}
+        setToast={setToast}
+        isDeleteOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        id={deleteStudentId}
+        setToast3={setToast3}
       />
     </div>
   );

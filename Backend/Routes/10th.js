@@ -14,6 +14,6 @@ router.put('/students/:id', editStudentResult);
 
 router.delete('/students/:id', deleteStudentResult);
 
-router.get('/student/getbyid/:id',getResultById)
+router.get('/students/getbyid/:id',getResultById)
 
 export default router;
