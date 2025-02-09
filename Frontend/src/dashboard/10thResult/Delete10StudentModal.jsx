@@ -26,6 +26,7 @@ const Delete10StudentModal = ({
           message: `Failed to delete Student`,
         })
       )
+      setConfirmText('');
       onClose();
     } else {
       setToast3({

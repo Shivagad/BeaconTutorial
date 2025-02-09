@@ -58,7 +58,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
         message: "Error Adding Student"
       });
     }
-
+    setIsSubmitting(false);
     onClose();
   };
 

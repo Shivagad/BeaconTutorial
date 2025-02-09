@@ -37,8 +37,17 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   // Submit updated student data.
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!previewImage) {
+      setToast({
+        success:false,
+        message: "Please select an image.",
+      })
+      return;
+    }
+
     try {
-        setIsSubmitting(true);
+      setIsSubmitting(true);
       // Sending JSON (the image field is a base64 string if updated)
       const response = await axios.put(`http://localhost:4000/server/tenth/students/${id}`, formData);
       if (response.data.success) {
@@ -49,6 +58,7 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     } catch (error) {
       setToast2({ success: false, message: "Error updating student" });
     }
+    setIsSubmitting(false);
     onClose();
   };
 
@@ -163,7 +173,7 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      required
+                      // required
                       onChange={handleImageChange}
                     />
                   </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useCallback, useEffect } from 'react';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
@@ -8,7 +8,7 @@ import Edit12StudentModal from '../12thResult/Edit12Student';
 import Delete12StudentModal from '../12thResult/Delete12StudentModal';
 
 const TwelthResult = () => {
-  // Modal control states
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -17,20 +17,20 @@ const TwelthResult = () => {
   const [deleteStudentId, setDeleteStudentId] = useState(null);
 
   const [students, setStudents] = useState([]);
-  const fetchStudents = async () => {
+  const fetchStudents = useCallback(async () => {
     try {
       const response = await axios.get("http://localhost:4000/server/twelve/students");
-     console.log(response.data.data);
+      console.log(response.data.data)
       setStudents(response.data.data);
     } catch (error) {
-      setToast({ success: false, message: "Error fetching student data" });
       console.error("Error fetching student data:", error);
     }
-  };
-
+  }, []);
+  
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, [fetchStudents]);
+  
 
   const setToast = (msg) => {
     msg.success ? toast.success(msg.message) : toast.error(msg.message);

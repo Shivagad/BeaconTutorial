@@ -6,7 +6,7 @@ import { useAuth } from "../../Context/AuthProvider";
 const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   const { currentUser } = useAuth();
   const fileInputRef = useRef(null);
-   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -15,9 +15,9 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     imagePath: "",
     chemistryMarks: "",
     physicsMarks: "",
-    mathMarks:"",
+    mathMarks: "",
     boardName: "",
-    biologyMarks:"",
+    biologyMarks: "",
     Tag: ""
   });
   const [previewImage, setPreviewImage] = useState("");
@@ -30,19 +30,29 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
       reader.onloadend = () => {
         const result = reader.result;
         setPreviewImage(result);
-        setFormData((prev) => ({ ...prev, image: result }));
+        setFormData((prev) => ({ ...prev, imagePath: result }));
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Submit updated student data.
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (!previewImage) {
+      setToast2({
+        success:false,
+        message: "Please select an image.",
+      })
+      return;
+    }
+  
+    setIsSubmitting(true);
     try {
-        setIsSubmitting(true);
-      // Sending JSON (the image field is a base64 string if updated)
-      const response = await axios.put(`http://localhost:4000/server/twelve/students/${id}`, formData);
+      const response = await axios.put(
+        `http://localhost:4000/server/twelve/students/${id}`,
+        formData
+      );
       if (response.data.success) {
         setToast2({ success: true, message: "Student updated successfully" });
       } else {
@@ -51,13 +61,15 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     } catch (error) {
       setToast2({ success: false, message: "Error updating student" });
     }
+    setIsSubmitting(false);
     onClose();
   };
+  
 
   // Fetch student details by id when the modal opens.
   const fetchAllDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/twelve/students/getbyid/${id}`);
+      const response = await axios.get(`http://localhost:4000/server/twelve/students/${id}`);
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",
@@ -88,7 +100,7 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
 
   return isEditOpen ? (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 mt-20 w-full max-w-3xl">
+      <div className="bg-white rounded-lg p-6 mt-80 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Edit 10th Topper</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
@@ -165,11 +177,13 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
                     <input
                       ref={fileInputRef}
                       type="file"
+                      name="studentPhoto"
                       accept="image/*"
                       className="hidden"
-                      required
+                      // required
                       onChange={handleImageChange}
                     />
+
                   </div>
                 </div>
               </div>
@@ -254,10 +268,10 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
           <div className="border-t pt-6">
             <button
               type="submit"
-              disabled={isSubmitting} 
+              disabled={isSubmitting}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
-               {isSubmitting ? "Submitting..." : "Update Student"}
+              {isSubmitting ? "Submitting..." : "Update Student"}
             </button>
           </div>
         </form>

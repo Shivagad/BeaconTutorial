@@ -41,6 +41,7 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
      setIsSubmitting(true);
+     console.log(formData)
       const response = await axios.post('http://localhost:4000/server/twelve/students', formData);
 
       if (response.data.success) {
@@ -61,13 +62,14 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
       });
     }
 
+    setIsSubmitting(false);
     onClose();
   };
 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 mt-20 w-full max-w-3xl">
+      <div className="bg-white rounded-lg p-6 mt-80 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Add New 12th Topper</h2>
           <button
