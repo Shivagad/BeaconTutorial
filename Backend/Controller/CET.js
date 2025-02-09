@@ -3,16 +3,26 @@ import cloudinary from 'cloudinary';
 
 export const addCETStudentResult = async (req, res) => {
     try {
-        const { firstName, lastName, college, totalPercentile, AIR, mathematicsPercentile, physicsPercentile, chemistryPercentile, biologyPercentile, seqno, Tag } = req.body;
-        const image = req.files ? req.files.image : null;
+        const { firstName, lastName, college,image, totalPercentile, AIR, mathematicsPercentile, physicsPercentile, chemistryPercentile, biologyPercentile, seqno, Tag } = req.body;
+        
 
         if (!image) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
-
-        const uploadResult = await cloudinary.uploader.upload(image.tempFilePath, {
-            folder: 'cet_student_results',
-        });
+            const base64Image = image.split(";base64,").pop(); 
+             const uploadResponse = await cloudinary.uploader.upload(
+               `data:image/png;base64,${base64Image}`,
+               {
+                 folder: "10thResult",
+                 use_filename: true,
+                 unique_filename: true,
+                 quality: "auto:best",
+                 format: "auto", 
+                 width: 374,
+                 height: 305,
+                 crop: "fit",
+               }
+             );
 
         const newResult = new CETResult({
             firstName,
