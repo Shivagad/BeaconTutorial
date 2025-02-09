@@ -3,7 +3,7 @@ import { X, Upload } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthProvider";
 
-const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
+const EditCETStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   const { currentUser } = useAuth();
   const fileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,7 +16,6 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     chemistryMarks: "",
     physicsMarks: "",
     mathMarks: "",
-    boardName: "",
     biologyMarks: "",
     Tag: ""
   });
@@ -41,16 +40,16 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   
     if (!previewImage) {
       setToast2({
-        success:false,
+        success: false,
         message: "Please select an image.",
-      })
+      });
       return;
     }
   
     setIsSubmitting(true);
     try {
       const response = await axios.put(
-        `http://localhost:4000/server/twelve/students/${id}`,
+        `http://localhost:4000/server/cet/students/${id}`,
         formData
       );
       if (response.data.success) {
@@ -65,23 +64,21 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     onClose();
   };
   
-
   // Fetch student details by id when the modal opens.
   const fetchAllDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/twelve/students/${id}`);
+      const response = await axios.get(`http://localhost:4000/server/cet/students/${id}`);
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",
         firstName: data.firstName || "",
         lastName: data.lastName || "",
         percentage: data.percentage || "",
-        image: data.imagePath || "",
+        imagePath: data.imagePath || "",
         mathMarks: data.mathMarks || "",
         physicsMarks: data.physicsMarks || "",
         chemistryMarks: data.chemistryMarks || "",
         biologyMarks: data.biologyMarks || "",
-        boardName: data.boardName || "",
         Tag: data.Tag || "",
       });
       if (data.imagePath) {
@@ -102,7 +99,7 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg p-6 mt-80 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Edit 10th Topper</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Edit CET Topper</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
           </button>
@@ -118,7 +115,7 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                     value={formData.firstName}
                     onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                   />
@@ -128,63 +125,10 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                     value={formData.lastName}
                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Sequence Number</label>
-                  <input
-                    type="number"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.seqno}
-                    onChange={(e) => setFormData({ ...formData, seqno: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Student Photo</label>
-                  <div className="flex flex-col items-center space-y-4">
-                    {previewImage ? (
-                      <div className="relative w-40 h-40">
-                        <img
-                          src={previewImage}
-                          alt="Preview"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setPreviewImage("");
-                            setFormData({ ...formData, imagePath: "" });
-                          }}
-                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors"
-                      >
-                        <Upload className="w-8 h-8 mb-2" />
-                        <span className="text-sm">Upload Photo</span>
-                      </button>
-                    )}
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      name="studentPhoto"
-                      accept="image/*"
-                      className="hidden"
-                      // required
-                      onChange={handleImageChange}
-                    />
-
-                  </div>
                 </div>
               </div>
             </div>
@@ -197,69 +141,9 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
                   <input
                     type="number"
                     step="any"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                     value={formData.percentage}
                     onChange={(e) => setFormData({ ...formData, percentage: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Science Marks</label>
-                  <input
-                    type="number"
-                    step="any"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.physicsMarks}
-                    onChange={(e) => setFormData({ ...formData, physicsMarks: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Science Marks</label>
-                  <input
-                    type="number"
-                    step="any"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.chemistryMarks}
-                    onChange={(e) => setFormData({ ...formData, chemistryMarks: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Math Marks</label>
-                  <input
-                    type="number"
-                    step="any"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.mathMarks}
-                    onChange={(e) => setFormData({ ...formData, mathMarks: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Science Marks</label>
-                  <input
-                    type="number"
-                    step="any"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.biologyMarks}
-                    onChange={(e) => setFormData({ ...formData, biologyMarks: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Board Name</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.boardName}
-                    onChange={(e) => setFormData({ ...formData, boardName: e.target.value })}
-                    placeholder="Enter Board Name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.Tag}
-                    onChange={(e) => setFormData({ ...formData, Tag: e.target.value })}
-                    placeholder="Enter tag like, Board Topper"
                   />
                 </div>
               </div>
@@ -269,7 +153,7 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg"
             >
               {isSubmitting ? "Submitting..." : "Update Student"}
             </button>
@@ -280,4 +164,4 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   ) : null;
 };
 
-export default Edit12StudentModal;
+export default EditCETStudentModal;
