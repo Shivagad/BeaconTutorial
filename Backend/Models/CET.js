@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 const cetResultSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -9,6 +11,7 @@ const cetResultSchema = new mongoose.Schema({
     physicsPercentile: { type: Number, min: 0, max: 100 },
     chemistryPercentile: { type: Number, min: 0, max: 100 },
     biologyPercentile: { type: Number, min: 0, max: 100 },
+    seqno: { type: Number,required:true },
     Tag: { type: String }
 }, { timestamps: true });
 

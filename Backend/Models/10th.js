@@ -8,6 +8,7 @@ const studentResultSchema = new mongoose.Schema({
     boardName: { type: String },
     scienceMarks: { type: Number, min: 0, max: 100 },
     mathMarks: { type: Number,  min: 0, max: 100 },
+    seqno: { type: Number,required:true },
     Tag:{type:String}
 }, { timestamps: true });
 
