@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 const jeeResultSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -8,6 +10,7 @@ const jeeResultSchema = new mongoose.Schema({
     physicsPercentile: { type: Number, min: 0, max: 100 },
     chemistryPercentile: { type: Number, min: 0, max: 100 },
     mathematicsPercentile: { type: Number, min: 0, max: 100 },
+    seqno: { type: Number,required:true },
     Tag: { type: String }
 }, { timestamps: true });
 

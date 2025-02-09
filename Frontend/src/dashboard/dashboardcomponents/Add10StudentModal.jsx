@@ -1,19 +1,18 @@
 import React, { useState, useRef } from "react";
 import { X, Upload } from "lucide-react";
+import axios from "axios";
 
-const Add10StudentModal = ({ isOpen, onClose, setToast,onSubmit }) => {
+const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     percentage: "",
-    seqno:"",
+    seqno: "",
     image: "",
-    subjects: {
-      math: "",
-      science: "",
-    },
-    board:"",
+    math: "",
+    science: "",
+    board: "",
     tags: ""
   });
 
@@ -36,32 +35,51 @@ const Add10StudentModal = ({ isOpen, onClose, setToast,onSubmit }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const submissionData = {
-      ...formData,
-      percentage: parseFloat(formData.percentage) || 0,
-      subjects: {
-        math: parseFloat(formData.subjects.math) || 0,
-        science: parseFloat(formData.subjects.science) || 0,
+
+    // const submissionData = new FormData();
+    // submissionData.append("firstName", formData.firstName);
+    // submissionData.append("lastName", formData.lastName);
+    // submissionData.append("percentage", formData.percentage);
+    // submissionData.append("seqno", formData.seqno);
+    // submissionData.append("boardName", formData.board);
+    // submissionData.append("scienceMarks", formData.subjects.science);
+    // submissionData.append("mathMarks", formData.subjects.math);
+    // submissionData.append("Tag", formData.tags);
+
+    // if (fileInputRef.current.files[0]) {
+    //   submissionData.append("image", fileInputRef.current.files[0]);
+    // }
+
+    // // Log each key/value pair in the FormData for debugging
+    // for (const [key, value] of submissionData.entries()) {
+    //   console.log(`${key}:`, value);
+    // }
+
+    try {
+      console.log(formData)
+      const response = await axios.post('http://localhost:4000/server/tenth/students', formData);
+
+      if (response.data.success) {
+        setToast({
+          success: true,
+          message: "Student added successfully"
+        });
+      } else {
+        setToast({
+          success: false,
+          message: "Error Adding Student"
+        });
       }
-    };
-
-    const response=await axios.post('http://localhost:4000/server/thenth/',
-      ...submissionData,
-    );
-
-    response.data.success ? (
+    } catch (error) {
       setToast({
-        success:true,
-        message: "Student added successfully"
-      })
-    ) : (
-      setToast({
-        success:true,
+        success: false,
         message: "Error Adding Student"
-      })
-    )
+      });
+    }
+
     onClose();
   };
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
@@ -113,19 +131,19 @@ const Add10StudentModal = ({ isOpen, onClose, setToast,onSubmit }) => {
                   />
                 </div>
                 <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Sequence Number
-                                </label>
-                                <input
-                                    type="number"
-                                    required
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                                    value={formData.seqno}
-                                    onChange={(e) =>
-                                        setFormData({ ...formData, seqno: e.target.value })
-                                    }
-                                />
-                            </div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Sequence Number
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.seqno}
+                    onChange={(e) =>
+                      setFormData({ ...formData, seqno: e.target.value })
+                    }
+                  />
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Student Photo
@@ -201,12 +219,9 @@ const Add10StudentModal = ({ isOpen, onClose, setToast,onSubmit }) => {
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.subjects.math}
+                    value={formData.math}
                     onChange={e =>
-                      setFormData({
-                        ...formData,
-                        subjects: { ...formData.subjects, math: e.target.value }
-                      })
+                      setFormData({ ...formData, math: e.target.value })
                     }
                   />
                 </div>
@@ -219,12 +234,9 @@ const Add10StudentModal = ({ isOpen, onClose, setToast,onSubmit }) => {
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.subjects.science}
+                    value={formData.science}
                     onChange={e =>
-                      setFormData({
-                        ...formData,
-                        subjects: { ...formData.subjects, science: e.target.value }
-                      })
+                      setFormData({ ...formData, science: e.target.value })
                     }
                   />
                 </div>

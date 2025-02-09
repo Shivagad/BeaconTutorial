@@ -5,7 +5,7 @@ import axios from 'axios';
 const DeleteStudentModal = ({
   isDeleteOpen,
   onClose,
-  setToast,
+  setToast3,
   studentName,
   id
 }) => {
@@ -16,19 +16,19 @@ const DeleteStudentModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`http://localhost:4000/server/thenth/${id}`);
-      response.data.success ? (setToast({
+      const response = await axios.delete(`http://localhost:4000/server/thenth/students/${id}`);
+      response.data.success ? (setToast3({
         success: true,
         message: `10th Student deleted successfully`,
       })) : (
-        setToast({
+        setToast3({
           success: false,
           message: `Failed to delete Student`,
         })
       )
       onClose();
     } else {
-      setToast({
+      setToast3({
         success: false,
         message: `Please confirm deletion`,
       })

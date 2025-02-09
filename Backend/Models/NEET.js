@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 const neetResultSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -8,6 +10,7 @@ const neetResultSchema = new mongoose.Schema({
     physicsMarks: { type: Number,  min: 0, max: 180 },
     chemistryMarks: { type: Number,  min: 0, max: 180 },
     biologyMarks: { type: Number,  min: 0, max: 360 },
+    seqno: { type: Number,required:true },
     Tag: { type: String}
 }, { timestamps: true });
 

@@ -6,6 +6,7 @@ const twelfthResultSchema = new mongoose.Schema({
     imagePath: { type: String, required: true },
     percentage: { type: Number },
     boardName: { type: String },
+    seqno: { type: Number,required:true },
     physicsMarks: { type: Number, min: 0, max: 100 },
     chemistryMarks: { type: Number, min: 0, max: 100 },
     mathMarks: { type: Number, min: 0, max: 100 },

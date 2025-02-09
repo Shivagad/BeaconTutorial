@@ -3,7 +3,7 @@ import { X, Upload } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthProvider";
 
-const Edit10StudentModal = ({ isEditOpen, onClose, setToast,id }) => {
+const Edit10StudentModal = ({ isEditOpen, onClose, setToast2,id }) => {
     const { currentUser } = useAuth();
     const fileInputRef = useRef(null);
     const [formData, setFormData] = useState({
@@ -53,17 +53,17 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast,id }) => {
         }
 
         try {
-            const response = await axios.put(`http://localhost:4000/server/thenth/${id}`, formData, {
+            const response = await axios.put(`http://localhost:4000/server/thenth/students/${id}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
             if (response.data.success) {
-                setToast({ success: true, message: "Student updated successfully" });
+                setToast2({ success: true, message: "Student updated successfully" });
             } else {
-                setToast({ success: false, message: "Error updating student" });
+                setToast2({ success: false, message: "Error updating student" });
             }
         } catch (error) {
-            setToast({ success: false, message: "Error updating student" });
+            setToast2({ success: false, message: "Error updating student" });
         }
         onClose();
     };
@@ -71,7 +71,7 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast,id }) => {
     const fetchAllDetails = async () => {
         try {
             if (currentUser) {
-                const response = await axios.get("http://localhost:4000/server/thenth/");
+                const response = await axios.get(`http://localhost:4000/server/thenth/students/getbyid/${id}`);
                 setFormData({
                     seqno: response.data.seqno || "",
                     firstName: response.data.firstName || "",
