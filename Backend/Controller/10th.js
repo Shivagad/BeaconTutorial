@@ -3,33 +3,25 @@ import cloudinary from 'cloudinary';
 
 export const addStudentResult = async (req, res) => {
     try {
-        // console.log(req.body);
         const { firstName, lastName,image, percentage, board, science, math, tags, seqno } = req.body;
-        // const image = req.files ? req.files.image : null;
         if (!image) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
-
-        const base64Image = image.split(";base64,").pop(); // Extract base64 string
-
-      // Upload the image to Cloudinary
+        const base64Image = image.split(";base64,").pop(); 
       const uploadResponse = await cloudinary.uploader.upload(
         `data:image/png;base64,${base64Image}`,
         {
           folder: "10thResult",
           use_filename: true,
           unique_filename: true,
-          quality: "auto:best", // Dynamically adjust quality for best result
-          format: "auto", // Automatically select the best image format
+          quality: "auto:best", 
+          format: "auto",
           width: 374,
           height: 305,
-          crop: "fit", // Maintain original aspect ratio without cropping
+          crop: "fit", 
         }
       );
-      
-
         console.log(uploadResponse)
-
         const newResult = new tenthResult({
             firstName,
             lastName,
