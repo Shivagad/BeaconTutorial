@@ -4,10 +4,11 @@ import { GraduationCap, Award, Users, BarChart } from 'lucide-react';
 
 const Sidebar = () => {
   const menuItems = [
-    { icon: Award, label: '10th Results', path: '/dashboard/10th-results' },
-    { icon: GraduationCap, label: '12th Results', path: '/dashboard/12th-results' },
-    { icon: Users, label: 'Students', path: '/dashboard/students' },
-    { icon: BarChart, label: 'Analytics', path: '/dashboard/analytics' },
+    { icon: Users, label: '10th Results', path: '/dashboard/10th-results' },
+    { icon: Users, label: '12th Results', path: '/dashboard/12th-results' },
+    { icon: Users, label: 'MHT-CET Results', path: '/dashboard/cet-results' },
+    { icon: Users, label: 'JEE Results', path: '/dashboard/jee-results' },
+    { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
   ];
 
   return (
