@@ -3,13 +3,13 @@ import cloudinary from 'cloudinary';
 
 export const addJEEStudentResult = async (req, res) => {
     try {
-        const { firstName, lastName, college, totalPercentile, image, AIR, physicsPercentile, chemistryPercentile, mathematicsPercentile, seqno, Tag } = req.body;
+        const { firstName, lastName, college, totalPercentile, imagePath, AIR, physicsPercentile, chemistryPercentile, mathematicsPercentile, seqno, Tag } = req.body;
 
-        if (!image) {
+        if (!imagePath) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
 
-        const base64Image = image.split(";base64,").pop();
+        const base64Image = imagePath.split(";base64,").pop();
         const uploadResponse = await cloudinary.uploader.upload(
             `data:image/png;base64,${base64Image}`,
             {

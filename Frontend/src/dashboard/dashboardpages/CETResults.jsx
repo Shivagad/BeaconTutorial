@@ -18,9 +18,9 @@ const CETResults = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("http://localhost:4000/server/cet/students");
-      setStudents(response.data.results);
+      response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
-      toast.error("Error fetching student data");
+        setStudents([])
       console.error("Error fetching student data:", error);
     }
   };
@@ -29,7 +29,17 @@ const CETResults = () => {
     fetchStudents();
   }, []);
 
-  const showToast = (msg) => {
+  const setToast = (msg) => {
+    msg.success ? toast.success(msg.message) : toast.error(msg.message);
+    fetchStudents();
+  };
+
+  const setToast2 = (msg) => {
+    msg.success ? toast.success(msg.message) : toast.error(msg.message);
+    fetchStudents();
+  };
+
+  const setToast3 = (msg) => {
     msg.success ? toast.success(msg.message) : toast.error(msg.message);
     fetchStudents();
   };
@@ -60,7 +70,7 @@ const CETResults = () => {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {students.map((student) => (
+        {students.length!==0 && students.map((student) => (
           <div
             key={student._id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
@@ -78,7 +88,7 @@ const CETResults = () => {
                   {student.firstName} {student.lastName}
                 </h3>
                 <p className="text-blue-600 text-xl">
-                  Total Percentile: {student.totalPercentile}%
+                  Total Percentile: {student.totalPercentile}%ile
                 </p>
                 <p className="text-blue-600 text-xl">
                   Mathematics Percentile: {student.mathematicsPercentile}%
@@ -89,17 +99,13 @@ const CETResults = () => {
                 <p className="text-blue-600 text-xl">
                   Chemistry Percentile: {student.chemistryPercentile}%
                 </p>
-                {student.biologyPercentile && (
-                  <p className="text-blue-600 text-xl">
+                <p className="text-blue-600 text-xl">
                     Biology Percentile: {student.biologyPercentile}%
                   </p>
-                )}
                 <p className="text-blue-600 text-xl">
                   College: {student.college || "N/A"}
                 </p>
-                <p className="text-blue-600 text-xl">
-                  AIR: {student.AIR || "N/A"}
-                </p>
+                
                 <p className="text-blue-600 text-xl">
                   Tag: {student.Tag || "N/A"}
                 </p>
@@ -124,20 +130,20 @@ const CETResults = () => {
       </div>
 
       <AddCETStudentModal
-        setToast={showToast}
+        setToast={setToast}
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
       />
 
       <EditCETStudentModal
-        setToast={showToast}
+        setToast2={setToast2}
         isEditOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         id={editStudentId}
       />
 
       <DeleteCETStudentModal
-        setToast={showToast}
+        setToast3={setToast3}
         isDeleteOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         id={deleteStudentId}

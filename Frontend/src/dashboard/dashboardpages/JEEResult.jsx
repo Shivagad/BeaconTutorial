@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useCallback, useEffect } from 'react';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Add10StudentModal from '../10thResult/Add10StudentModal';
-import Edit10StudentModal from '../10thResult/Edit10Student';
-import Delete10StudentModal from '../10thResult/Delete10StudentModal';
+import AddJEEStudentModal from '../JEEResult/AddJEEStudentModal';
+import EditJEEStudentModal from '../JEEResult/EditJEEStudent';
+import DeleteJEEStudentModal from '../JEEResult/DeleteJEEStudentModal';
 
-const TenthResults = () => {
-  // Modal control states
+const JEEResult = () => {
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -17,21 +17,21 @@ const TenthResults = () => {
   const [deleteStudentId, setDeleteStudentId] = useState(null);
 
   const [students, setStudents] = useState([]);
-  const fetchStudents = async () => {
+  const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/tenth/students");
-     console.log(response.data.data);
+      const response = await axios.get("http://localhost:4000/server/jee/students");
+      console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
-      setStudents([])
-      
+        setStudents([])
       console.error("Error fetching student data:", error);
     }
-  };
-
+  }, []);
+  
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, [fetchStudents]);
+  
 
   const setToast = (msg) => {
     msg.success ? toast.success(msg.message) : toast.error(msg.message);
@@ -66,7 +66,7 @@ const TenthResults = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">10th Class Toppers</h1>
+        <h1 className="text-2xl font-bold text-gray-800">JEE Class Toppers</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -97,17 +97,24 @@ const TenthResults = () => {
                   {student.firstName} {student.lastName}
                 </h3>
                 <p className="text-blue-600 text-xl">
-                 Percentage : {(student.percentage)}%
+                 Total Percentile : {(student.totalPercentile)}%
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Science Mark : {parseFloat(student.scienceMarks)}%
+                 College : {(student.college)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Math Marks : {parseFloat(student.mathMarks)}%
+                 Physics Percentile : {parseInt(student.physicsPercentile)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Board : {(student.boardName)}
+                 Chemistry Percentile : {parseInt(student.chemistryPercentile)}
                 </p>
+                <p className="text-blue-600  text-xl">
+                 Math Percentile : {parseInt(student.mathematicsPercentile)}
+                </p>
+                <p className="text-blue-600  text-xl">
+                 AIR : {parseInt(student.AIR)}
+                </p>
+                
                 <p className="text-blue-600 text-xl">
                  Tag : {(student.Tag)}
                 </p>
@@ -127,19 +134,21 @@ const TenthResults = () => {
                 </button>
               </div>
             </div>
+
+           
           </div>
         ))}
       </div>
 
       {/* Add Student Modal */}
-      <Add10StudentModal
+      <AddJEEStudentModal
         setToast={setToast}
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
       />
 
       {/* Edit Student Modal: Pass the selected student's ID and onSubmit callback */}
-      <Edit10StudentModal
+      <EditJEEStudentModal
         setToast={setToast}
         isEditOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
@@ -148,7 +157,7 @@ const TenthResults = () => {
       />
 
       {/* Delete Student Modal: Pass the selected student's ID and onDelete callback */}
-      <Delete10StudentModal
+      <DeleteJEEStudentModal
         setToast={setToast}
         isDeleteOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -159,4 +168,4 @@ const TenthResults = () => {
   );
 };
 
-export default TenthResults;
+export default JEEResult;

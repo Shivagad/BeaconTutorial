@@ -4,7 +4,7 @@ import DashboardLayout from './dashboard/Layout';
 import TenthResults from './dashboard/dashboardpages/TenthResults';
 import TwelthResult from './dashboard/dashboardpages/TwelthResults';
 import CETResult from './dashboard/dashboardpages/CETResults';
-import JEEResult from '../../Backend/Models/JEE';
+import JEEResult from './dashboard/dashboardpages/JEEResult';
 
 function App() {
   return (

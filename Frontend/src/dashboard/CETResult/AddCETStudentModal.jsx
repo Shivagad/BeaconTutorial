@@ -11,7 +11,6 @@ const AddCETStudentModal = ({ isOpen, onClose, setToast }) => {
     imagePath: "",
     college: "",
     totalPercentile: "",
-    AIR: "",
     mathematicsPercentile: "",
     physicsPercentile: "",
     chemistryPercentile: "",
@@ -40,14 +39,29 @@ const AddCETStudentModal = ({ isOpen, onClose, setToast }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    if (!previewImage) {
+      setToast({
+        success:false,
+        message: "Please select an image.",
+      })
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       const response = await axios.post("http://localhost:4000/server/cet/students", formData);
 
-      setToast({
-        success: response.data.success,
-        message: response.data.success ? "Student added successfully" : "Error Adding Student"
-      });
+      if (response.data.success) {
+        setToast({
+          success: true,
+          message: "Student added successfully"
+        });
+      } else {
+        setToast({
+          success: false,
+          message: "Error Adding Student"
+        });
+      }
     } catch (error) {
       setToast({ success: false, message: "Error Adding Student" });
     }
@@ -92,13 +106,17 @@ const AddCETStudentModal = ({ isOpen, onClose, setToast }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Rank (AIR)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Sequence Number
+                  </label>
                   <input
                     type="number"
                     required
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                    value={formData.AIR}
-                    onChange={e => setFormData({ ...formData, AIR: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.seqno}
+                    onChange={(e) =>
+                      setFormData({ ...formData, seqno: e.target.value })
+                    }
                   />
                 </div>
                 <div>
@@ -128,23 +146,119 @@ const AddCETStudentModal = ({ isOpen, onClose, setToast }) => {
                         <span className="text-sm">Upload Photo</span>
                       </button>
                     )}
-                    <input ref={fileInputRef} type="file" accept="image/*" className="hidden" required onChange={handleImageChange} />
+                    <input ref={fileInputRef} type="file" accept="image/*" className="hidden"  onChange={handleImageChange} />
                   </div>
                 </div>
               </div>
             </div>
             <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">Marks & Tags</h3>
+              <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                Marks & Tags
+              </h3>
               <div className="space-y-4">
+              <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    College
+                  </label>
+                  <input
+                    type="text"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.college}
+                    onChange={e =>
+                      setFormData({ ...formData, college: e.target.value })
+                    }
+                  />
+                </div>
+             
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Total Percentile</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Total Percentile
+                  </label>
                   <input
                     type="number"
                     step="any"
-                    required
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     value={formData.totalPercentile}
-                    onChange={e => setFormData({ ...formData, totalPercentile: e.target.value })}
+                    onChange={e =>
+                      setFormData({ ...formData, totalPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Maths Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.mathematicsPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, mathematicsPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Physics Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.physicsPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, physicsPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Chemistry Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.chemistryPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, chemistryPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Biology Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.biologyPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, biologyPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Tags
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.Tag}
+                    onChange={e =>
+                      setFormData({ ...formData, Tag: e.target.value })
+                    }
+                    placeholder="Enter tag like, Board Topper"
                   />
                 </div>
               </div>

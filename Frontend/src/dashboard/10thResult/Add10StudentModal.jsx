@@ -35,6 +35,15 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   };
 
   const handleSubmit = async e => {
+
+    if (!previewImage) {
+      setToast2({
+        success:false,
+        message: "Please select an image.",
+      })
+      return;
+    }
+    
     e.preventDefault();
 
     try {

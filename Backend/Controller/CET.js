@@ -3,13 +3,13 @@ import cloudinary from 'cloudinary';
 
 export const addCETStudentResult = async (req, res) => {
     try {
-        const { firstName, lastName, college, image, totalPercentile, AIR, mathematicsPercentile, physicsPercentile, chemistryPercentile, biologyPercentile, seqno, Tag } = req.body;
+        const { firstName, lastName, college, imagePath, totalPercentile, mathematicsPercentile, physicsPercentile, chemistryPercentile, biologyPercentile, seqno, Tag } = req.body;
 
-        if (!image) {
+        if (!imagePath) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
 
-        const base64Image = image.split(";base64,").pop();
+        const base64Image = imagePath.split(";base64,").pop();
         const uploadResponse = await cloudinary.uploader.upload(
             `data:image/png;base64,${base64Image}`,
             {
@@ -30,7 +30,6 @@ export const addCETStudentResult = async (req, res) => {
             imagePath: uploadResponse.secure_url,
             college,
             totalPercentile,
-            AIR,
             mathematicsPercentile,
             physicsPercentile,
             chemistryPercentile,
@@ -80,12 +79,12 @@ export const getCETResultById = async (req, res) => {
 export const editCETStudentResult = async (req, res) => {
     try {
         const { id } = req.params;
-        const { firstName, lastName, image, college, totalPercentile, AIR, mathematicsPercentile, physicsPercentile, chemistryPercentile, biologyPercentile, seqno, Tag } = req.body;
+        const { firstName, lastName, imagePath, college, totalPercentile, AIR, mathematicsPercentile, physicsPercentile, chemistryPercentile, biologyPercentile, seqno, Tag } = req.body;
 
-        let newImageUrl = image;
+        let newImageUrl = imagePath;
 
-        if (image && image.startsWith("data:image")) {
-            const base64Image = image.split(";base64,").pop();
+        if (imagePath && imagePath.startsWith("data:image")) {
+            const base64Image = imagePath.split(";base64,").pop();
             const uploadResponse = await cloudinary.uploader.upload(
                 `data:image/png;base64,${base64Image}`,
                 {

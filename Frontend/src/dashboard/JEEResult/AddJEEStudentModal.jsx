@@ -2,20 +2,20 @@ import React, { useState, useRef } from "react";
 import { X, Upload } from "lucide-react";
 import axios from "axios";
 
-const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
+const AddJEEStudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const fileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    percentage: "",
+    college:"",
+    totalPercentile: "",
     seqno: "",
+    AIR:"",
     imagePath: "",
-    chemistryMarks: "",
-    physicsMarks: "",
-    mathMarks:"",
-    boardName: "",
-    biologyMarks:"",
+    physicsPercentile:"",
+    chemistryPercentile:"",
+    mathematicsPercentile:"",
     Tag: ""
   });
 
@@ -40,7 +40,7 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
     e.preventDefault();
 
     if (!previewImage) {
-      setToast2({
+      setToast({
         success:false,
         message: "Please select an image.",
       })
@@ -50,7 +50,7 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
     try {
      setIsSubmitting(true);
      console.log(formData)
-      const response = await axios.post('http://localhost:4000/server/twelve/students', formData);
+      const response = await axios.post('http://localhost:4000/server/jee/students', formData);
 
       if (response.data.success) {
         setToast({
@@ -77,9 +77,9 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 mt-80 w-full max-w-3xl">
+      <div className="bg-white rounded-lg p-6 mt-60 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Add New 12th Topper</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Add New JEE Topper</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
@@ -176,7 +176,7 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      required
+                      // required
                       onChange={handleImageChange}
                     />
                   </div>
@@ -190,108 +190,94 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                 Marks & Tags
               </h3>
               <div className="space-y-4">
-                <div>
+              <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Percentage
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.percentage}
-                    onChange={e =>
-                      setFormData({ ...formData, percentage: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Math Marks
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.mathMarks}
-                    onChange={e =>
-                      setFormData({ ...formData, mathMarks: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Physics Marks
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.physicsMarks}
-                    onChange={e =>
-                      setFormData({ ...formData, physicsMarks: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Chemistry Marks
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.chemistryMarks}
-                    onChange={e =>
-                      setFormData({ ...formData, chemistryMarks: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Math Marks
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.mathMarks}
-                    onChange={e =>
-                      setFormData({ ...formData, mathMarks: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Biology Marks
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.biologyMarks}
-                    onChange={e =>
-                      setFormData({ ...formData, biologyMarks: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Board Name
+                    College
                   </label>
                   <input
                     type="text"
+                    step="any"
+                    // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.boardName}
+                    value={formData.college}
                     onChange={e =>
-                      setFormData({ ...formData, boardName: e.target.value })
+                      setFormData({ ...formData, college: e.target.value })
                     }
-                    placeholder="Enter Board Name"
+                  />
+                </div>
+              <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    All India Rank
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.AIR}
+                    onChange={e =>
+                      setFormData({ ...formData, AIR: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Total Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.totalPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, totalPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Maths Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.mathematicsPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, mathematicsPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Physics Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.physicsPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, physicsPercentile: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Chemistry Percentile
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    // required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    value={formData.chemistryPercentile}
+                    onChange={e =>
+                      setFormData({ ...formData, chemistryPercentile: e.target.value })
+                    }
                   />
                 </div>
                 <div>
@@ -327,4 +313,4 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   );
 };
 
-export default Add12StudentModal;
+export default AddJEEStudentModal;
