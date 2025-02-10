@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import axios from 'axios';
 
-const Delete12StudentModal = ({
+const DeleteCETStudentModal = ({
   isDeleteOpen,
   onClose,
   setToast3,
@@ -11,28 +11,28 @@ const Delete12StudentModal = ({
 }) => {
   const [confirmText, setConfirmText] = useState('');
 
-  if(!isDeleteOpen) return null;
+  if (!isDeleteOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`http://localhost:4000/server/twelve/students/${id}`);
-      response.data.success ? (setToast3({
-        success: true,
-        message: `12th Student deleted successfully`,
-      })) : (
-        setToast3({
-          success: false,
-          message: `Failed to delete Student`,
-        })
-      )
+      const response = await axios.delete(`http://localhost:4000/server/cet/students/${id}`);
+      response.data.success
+        ? setToast3({
+            success: true,
+            message: `CET Student deleted successfully`,
+          })
+        : setToast3({
+            success: false,
+            message: `Failed to delete Student`,
+          });
       setConfirmText('');
       onClose();
     } else {
       setToast3({
         success: false,
         message: `Please confirm deletion`,
-      })
+      });
     }
   };
 
@@ -89,5 +89,4 @@ const Delete12StudentModal = ({
   );
 };
 
-export default Delete12StudentModal;
-
+export default DeleteCETStudentModal;

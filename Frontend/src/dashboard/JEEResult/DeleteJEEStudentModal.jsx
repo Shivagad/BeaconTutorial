@@ -19,7 +19,7 @@ const DeleteJEEStudentModal = ({
       const response = await axios.delete(`http://localhost:4000/server/jee/students/${id}`);
       response.data.success ? (setToast3({
         success: true,
-        message: `12th Student deleted successfully`,
+        message: `JEE Student deleted successfully`,
       })) : (
         setToast3({
           success: false,

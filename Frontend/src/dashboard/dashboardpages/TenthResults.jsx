@@ -21,9 +21,10 @@ const TenthResults = () => {
     try {
       const response = await axios.get("http://localhost:4000/server/tenth/students");
      console.log(response.data.data);
-      setStudents(response.data.data);
+      response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
-      setToast({ success: false, message: "Error fetching student data" });
+      setStudents([])
+      
       console.error("Error fetching student data:", error);
     }
   };

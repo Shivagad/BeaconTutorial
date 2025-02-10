@@ -21,8 +21,9 @@ const JEEResult = () => {
     try {
       const response = await axios.get("http://localhost:4000/server/jee/students");
       console.log(response.data.data)
-      setStudents(response.data.data);
+      response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
+        setStudents([])
       console.error("Error fetching student data:", error);
     }
   }, []);
