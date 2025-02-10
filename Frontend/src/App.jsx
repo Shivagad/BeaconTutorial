@@ -6,6 +6,7 @@ import TwelthResult from './dashboard/dashboardpages/TwelthResults';
 import CETResult from './dashboard/dashboardpages/CETResults';
 import JEEResult from './dashboard/dashboardpages/JEEResult';
 import NEETResult from './dashboard/dashboardpages/NEETResult';
+import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="10th-results" element={<TenthResults />} />
           {/* Add other routes as needed */}
           <Route path="12th-results" element={<TwelthResult/>} />
+          <Route path="poster" element={<Poster/>} />
           <Route path="cet-results" element={<CETResult/>}/>
           <Route path="jee-results" element={<JEEResult/>}/>
           <Route path="neet-results" element={<NEETResult/>}/>
