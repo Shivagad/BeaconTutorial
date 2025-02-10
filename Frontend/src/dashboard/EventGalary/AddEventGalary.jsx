@@ -2,323 +2,200 @@ import React, { useState, useRef } from "react";
 import { X, Upload } from "lucide-react";
 import axios from "axios";
 
-const AddEventGalary = ({ isOpen, onClose, setToast, onSubmit }) => {
+const AddEventGallery = ({ isOpen, onClose, setToast }) => {
   const fileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    college:"",
-    totalPercentile: "",
-    seqno: "",
-    AIR:"",
-    imagePath: "",
-    physicsPercentile:"",
-    chemistryPercentile:"",
-    mathematicsPercentile:"",
-    Tag: ""
+    eventName: "",
+    year: "",
+    images: [], // will store objects: { name, base64 }
+    description: "",
   });
-
-  const [previewImage, setPreviewImage] = useState("");
 
   if (!isOpen) return null;
 
-  const handleImageChange = e => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result;
-        setPreviewImage(result);
-        setFormData({ ...formData, imagePath: result });
-      };
-      reader.readAsDataURL(file);
-    }
+  const validateForm = () => {
+    let newErrors = {};
+    if (!formData.eventName.trim()) newErrors.eventName = "Event Name is required.";
+    if (!formData.year) newErrors.year = "Please select a year.";
+    if (formData.images.length === 0) newErrors.images = "At least one image is required.";
+    if (!formData.description.trim()) newErrors.description = "Description is required.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    if (!previewImage) {
-      setToast({
-        success:false,
-        message: "Please select an image.",
-      })
+  const handleImageChange = async (e) => {
+    const files = Array.from(e.target.files);
+    // Use formData.images (not imagePath) for counting
+    if (files.length + formData.images.length > 10) {
+      setToast({ success: false, message: "You can upload a maximum of 10 images." });
       return;
     }
 
-    try {
-     setIsSubmitting(true);
-     console.log(formData)
-      const response = await axios.post('http://localhost:4000/server/jee/students', formData);
+    // Function to convert file to Base64 string
+    const convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve({ name: file.name, base64: reader.result });
+        reader.onerror = (error) => reject(error);
+      });
+    };
 
-      setFormData({
-        firstName: "",
-    lastName: "",
-    college:"",
-    totalPercentile: "",
-    seqno: "",
-    AIR:"",
-    imagePath: "",
-    physicsPercentile:"",
-    chemistryPercentile:"",
-    mathematicsPercentile:"",
-    Tag: ""
-  });
+    try {
+      const newImages = await Promise.all(files.map(file => convertToBase64(file)));
+      setFormData((prev) => ({ ...prev, images: [...prev.images, ...newImages] }));
+      setErrors((prev) => ({ ...prev, images: null }));
+    } catch (error) {
+      setToast({ success: false, message: "Error processing images." });
+    }
+  };
+
+  const removeImage = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    // Create data object that includes only the base64 image strings
+    const dataToSend = {
+      eventName: formData.eventName,
+      year: formData.year,
+      description: formData.description,
+      imagesPath: formData.images.map((img) => img.base64), // only send the base64 strings
+    };
+
+    console.log(dataToSend)
+
+    try {
+      const response = await axios.post("http://localhost:4000/server/event/addevent", dataToSend);
 
       if (response.data.success) {
-        setToast({
-          success: true,
-          message: "Student added successfully"
-        });
+        setToast({ success: true, message: "Event added successfully!" });
+        setFormData({ eventName: "", year: "", images: [], description: "" });
+        onClose();
       } else {
-        setToast({
-          success: false,
-          message: "Error Adding Student"
-        });
+        setToast({ success: false, message: "Error adding event." });
       }
     } catch (error) {
-      setToast({
-        success: false,
-        message: "Error Adding Student"
-      });
+      setToast({ success: false, message: "Server error. Try again later." });
     }
 
     setIsSubmitting(false);
-    onClose();
   };
-
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 mt-60 w-full max-w-3xl">
+      <div className="bg-white rounded-lg p-6 mt-10 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Add New JEE Topper</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
+          <h2 className="text-2xl font-bold text-gray-800">Add New Event</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Personal Information */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">
-                Personal Information
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.firstName}
-                    onChange={e =>
-                      setFormData({ ...formData, firstName: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.lastName}
-                    onChange={e =>
-                      setFormData({ ...formData, lastName: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Sequence Number
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.seqno}
-                    onChange={(e) =>
-                      setFormData({ ...formData, seqno: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Student Photo
-                  </label>
-                  <div className="flex flex-col items-center space-y-4">
-                    {previewImage ? (
-                      <div className="relative w-40 h-40">
-                        <img
-                          src={previewImage}
-                          alt="Preview"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setPreviewImage("");
-                            setFormData({ ...formData, imagePath: "" });
-                          }}
-                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors"
-                      >
-                        <Upload className="w-8 h-8 mb-2" />
-                        <span className="text-sm">Upload Photo</span>
-                      </button>
-                    )}
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      // required
-                      onChange={handleImageChange}
-                    />
-                  </div>
-                </div>
-              </div>
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+          {/* Left Side: Form Inputs */}
+          <div className="space-y-4">
+            {/* Event Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Event Name</label>
+              <input
+                type="text"
+                className="w-full px-4 py-2 border rounded-lg"
+                value={formData.eventName}
+                onChange={(e) => setFormData({ ...formData, eventName: e.target.value })}
+              />
+              {errors.eventName && <p className="text-red-500 text-sm">{errors.eventName}</p>}
             </div>
 
-            {/* Marks & Tags */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">
-                Marks & Tags
-              </h3>
-              <div className="space-y-4">
-              <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    College
-                  </label>
-                  <input
-                    type="text"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.college}
-                    onChange={e =>
-                      setFormData({ ...formData, college: e.target.value })
-                    }
-                  />
-                </div>
-              <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    All India Rank
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.AIR}
-                    onChange={e =>
-                      setFormData({ ...formData, AIR: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Total Percentile
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.totalPercentile}
-                    onChange={e =>
-                      setFormData({ ...formData, totalPercentile: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Maths Percentile
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.mathematicsPercentile}
-                    onChange={e =>
-                      setFormData({ ...formData, mathematicsPercentile: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Physics Percentile
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.physicsPercentile}
-                    onChange={e =>
-                      setFormData({ ...formData, physicsPercentile: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Chemistry Percentile
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.chemistryPercentile}
-                    onChange={e =>
-                      setFormData({ ...formData, chemistryPercentile: e.target.value })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Tags
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.Tag}
-                    onChange={e =>
-                      setFormData({ ...formData, Tag: e.target.value })
-                    }
-                    placeholder="Enter tag like, Board Topper"
-                  />
-                </div>
-              </div>
+            {/* Year Dropdown */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+              <select
+                className="w-full px-4 py-2 border rounded-lg"
+                value={formData.year}
+                onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+              >
+                <option value="">Select Year</option>
+                {Array.from({ length: new Date().getFullYear() - 1999 }, (_, i) => (
+                  <option key={i} value={2000 + i}>
+                    {2000 + i}
+                  </option>
+                ))}
+              </select>
+              {errors.year && <p className="text-red-500 text-sm">{errors.year}</p>}
+            </div>
+
+            {/* Description */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <textarea
+                className="w-full px-4 py-2 border rounded-lg"
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              />
+              {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+            </div>
+
+            {/* Image Upload Button */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Event Photos (Max: 10)
+              </label>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                <Upload className="w-5 h-5 inline-block mr-2" /> Upload Photos
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageChange}
+              />
+              {errors.images && <p className="text-red-500 text-sm">{errors.images}</p>}
             </div>
           </div>
 
-          <div className="border-t pt-6">
+          {/* Right Side: Image Preview List */}
+          <div className="space-y-2">
+            {formData.images.length > 0 && (
+              <div className="border rounded-lg p-3 bg-gray-100 max-h-64 overflow-y-auto">
+                {formData.images.map((img, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between relative p-2 bg-white rounded-md shadow-sm"
+                  >
+                    <span className="truncate w-40">{img.name}</span>
+                    <button onClick={() => removeImage(index)} className="absolute top-0 right-0">
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Submit Button - Spanning Full Width */}
+          <div className="col-span-2 border-t pt-6">
             <button
               type="submit"
-              disabled={isSubmitting} 
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              disabled={isSubmitting}
+              className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
             >
-             {isSubmitting ? "Submitting..." : "Add Student"}
+              {isSubmitting ? "Submitting..." : "Add Event"}
             </button>
           </div>
         </form>
@@ -327,4 +204,4 @@ const AddEventGalary = ({ isOpen, onClose, setToast, onSubmit }) => {
   );
 };
 
-export default AddEventGalary;
+export default AddEventGallery;

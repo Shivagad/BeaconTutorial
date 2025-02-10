@@ -8,16 +8,15 @@ import JEEResult from './dashboard/dashboardpages/JEEResult';
 import NEETResult from './dashboard/dashboardpages/NEETResult';
 import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
+import Home from './Components/Home'
 import EventGalary from './dashboard/dashboardpages/EventGalary';
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard/10th-results" replace />} />
+        <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
-          {/* Add other routes as needed */}
           <Route path="event-galary" element={<EventGalary/>} />
           <Route path="12th-results" element={<TwelthResult/>} />
           <Route path="poster" element={<Poster/>} />

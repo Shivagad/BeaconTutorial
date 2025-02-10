@@ -19,7 +19,7 @@ const EventGalary = () => {
   const [students, setStudents] = useState([]);
   const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/jee/students");
+      const response = await axios.get("http://localhost:4000/server/event/getevent");
       console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
@@ -66,13 +66,13 @@ const EventGalary = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">JEE Class Toppers</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Events</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           <PlusCircle className="w-5 h-5 mr-2" />
-          Add Student
+          Add Event
         </button>
       </div>
 
@@ -84,10 +84,10 @@ const EventGalary = () => {
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
             {/* Display student's image if available */}
-            {student.imagePath && (
+            {student.imagesPath && (
               <img
-                src={student.imagePath}
-                alt={`${student.firstName} ${student.lastName}`}
+                src={student.imagesPath[0]}
+                // alt={`${student.firstName} ${student.lastName}`}
                 className="w-full h-40 object-cover rounded-lg mb-4"
               />
             )}
@@ -97,28 +97,15 @@ const EventGalary = () => {
                   {student.firstName} {student.lastName}
                 </h3>
                 <p className="text-blue-600 text-xl">
-                 Total Percentile : {(student.totalPercentile)}%
+                 Event Name : {(student.eventName)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 College : {(student.college)}
+                 Event Year : {(student.year)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Physics Percentile : {parseInt(student.physicsPercentile)}
+                 Event Description : {(student.description)}
                 </p>
-                <p className="text-blue-600  text-xl">
-                 Chemistry Percentile : {parseInt(student.chemistryPercentile)}
-                </p>
-                <p className="text-blue-600  text-xl">
-                 Math Percentile : {parseInt(student.mathematicsPercentile)}
-                </p>
-                <p className="text-blue-600  text-xl">
-                 AIR : {parseInt(student.AIR)}
-                </p>
-                
-                <p className="text-blue-600 text-xl">
-                 Tag : {(student.Tag)}
-                </p>
-              </div>
+                </div>
               <div className="flex space-x-2">
                 <button
                   onClick={() => openEditModal(student._id)}
