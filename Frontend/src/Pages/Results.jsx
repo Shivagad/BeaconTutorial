@@ -1,7 +1,6 @@
 import React from 'react';
 import { Trophy } from 'lucide-react';
-import { examData } from './data/students';
-import ResultSection from './components/ResultSection';
+import ResultSection from '../Components/ResultSection';
 
 const sectionColors = [
   'bg-blue-50',
@@ -11,7 +10,34 @@ const sectionColors = [
   'bg-emerald-50'
 ];
 
-function App() {
+const Results =()=> {
+
+  const [examData, setExamData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    axios.get('http://localhost:4000/server/exams') // Replace with your API endpoint
+      .then(response => {
+        if (response.data.success) {
+          setExamData(response.data.data);
+        } else {
+          setError('Error fetching exam data');
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching data:', err);
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div>Loading exam results...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -56,5 +82,5 @@ function App() {
   );
 }
 
-export default App;
+export default Results;
 

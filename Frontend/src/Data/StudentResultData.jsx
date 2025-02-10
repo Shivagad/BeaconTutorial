@@ -1,4 +1,4 @@
-const examData = [
+export const examData = [
     {
       title: "Class 10th Toppers",
       students: Array.from({ length: 25 }, (_, i) => ({
@@ -50,5 +50,3 @@ const examData = [
       }))
     }
   ];
-  
-  
