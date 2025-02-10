@@ -10,6 +10,7 @@ import twelve from './Routes/12th.js';
 import CET from './Routes/CET.js';
 import JEE from './Routes/JEE.js';
 import NEET from './Routes/NEET.js';
+import Poster from './Routes/Poster.js';
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,7 @@ app.use('/server/twelve', twelve);
 app.use('/server/cet', CET);
 app.use('/server/jee', JEE);
 app.use('/server/neet', NEET);
+app.use('/server/poster', Poster);
 
 
 app.get('/', (req, res) => {

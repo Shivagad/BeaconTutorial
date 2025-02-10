@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { GraduationCap, Award, Users, BarChart } from 'lucide-react';
+import { GraduationCap, Award, Users, BarChart,FileImage } from 'lucide-react';
 
 const Sidebar = () => {
   const menuItems = [
@@ -9,6 +9,8 @@ const Sidebar = () => {
     { icon: Users, label: 'MHT-CET Results', path: '/dashboard/cet-results' },
     { icon: Users, label: 'JEE Results', path: '/dashboard/jee-results' },
     { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
+    { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
+
   ];
 
   return (
