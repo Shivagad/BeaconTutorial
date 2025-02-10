@@ -127,8 +127,6 @@ const TenthResults = () => {
                 </button>
               </div>
             </div>
-
-           
           </div>
         ))}
       </div>
