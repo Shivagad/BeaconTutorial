@@ -18,9 +18,9 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   });
 
   const [previewImage, setPreviewImage] = useState("");
-
+  
   if (!isOpen) return null;
-
+  
   const handleImageChange = e => {
     const file = e.target.files?.[0];
     if (file) {
@@ -254,7 +254,6 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
               </div>
             </div>
           </div>
-
           <div className="border-t pt-6">
             <button
               type="submit"
