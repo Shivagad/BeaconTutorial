@@ -39,13 +39,13 @@ const ResultSection = ({ title, students, bgColor }) => {
               >
                 <div className="aspect-square overflow-hidden flex items-center justify-center">
                   <img
-                    src={student.image}
-                    alt={student.name}
+                    src={student.imagePath}
+                    alt={student.firstName}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-center">{student.name}</h3>
+                  <h3 className="font-semibold text-lg mb-2 text-center">{student.firstName}{student.lastName}</h3>
                   <div className="flex justify-between items-center bg-indigo-50 p-2 rounded-lg">
                     <span className="text-indigo-600 font-bold">
                       {student.percentage.toFixed(2)}%

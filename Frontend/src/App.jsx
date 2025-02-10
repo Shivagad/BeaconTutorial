@@ -6,6 +6,7 @@ import TwelthResult from './dashboard/dashboardpages/TwelthResults';
 import CETResult from './dashboard/dashboardpages/CETResults';
 import JEEResult from './dashboard/dashboardpages/JEEResult';
 import NEETResult from './dashboard/dashboardpages/NEETResult';
+import Results from './Pages/Results';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="students" element={<div className="p-6 mr-64">Students Page (Coming Soon)</div>} />
           <Route path="analytics" element={<div className="p-6 mr-64">Analytics Page (Coming Soon)</div>} />
         </Route>
+        <Route path="/all-results" element={<Results/>}/>
       </Routes>
     </BrowserRouter>
   );
