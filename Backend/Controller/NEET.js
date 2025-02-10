@@ -3,13 +3,13 @@ import cloudinary from 'cloudinary';
 
 export const addNeetStudentResult = async (req, res) => {
     try {
-        const { firstName, image, lastName, college, totalMarks, AIR, physicsMarks, chemistryMarks, biologyMarks, seqno, Tag } = req.body;
+        const { firstName, imagePath, lastName, college, totalMarks, AIR, physicsMarks, chemistryMarks, biologyMarks, seqno, Tag } = req.body;
 
-        if (!image) {
+        if (!imagePath) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
 
-        const base64Image = image.split(";base64,").pop();
+        const base64Image = imagePath.split(";base64,").pop();
         const uploadResponse = await cloudinary.uploader.upload(
             `data:image/png;base64,${base64Image}`,
             {
@@ -64,12 +64,12 @@ export const getAllNeetStudentResults = async (req, res) => {
 export const editNeetStudentResult = async (req, res) => {
     try {
         const { id } = req.params;
-        const { firstName, lastName, image, college, totalMarks, AIR, physicsMarks, chemistryMarks, biologyMarks, seqno, Tag } = req.body;
+        const { firstName, lastName, imagePath, college, totalMarks, AIR, physicsMarks, chemistryMarks, biologyMarks, seqno, Tag } = req.body;
 
-        let newImageUrl = image;
+        let newImageUrl = imagePath;
 
-        if (image && image.startsWith("data:image")) {
-            const base64Image = image.split(";base64,").pop();
+        if (imagePath && imagePath.startsWith("data:image")) {
+            const base64Image = imagePath.split(";base64,").pop();
             const uploadResponse = await cloudinary.uploader.upload(
                 `data:image/png;base64,${base64Image}`,
                 {

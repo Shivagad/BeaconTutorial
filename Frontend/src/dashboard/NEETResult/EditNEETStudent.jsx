@@ -3,7 +3,7 @@ import { X, Upload } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthProvider";
 
-const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
+const EditNEETStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   const { currentUser } = useAuth();
   const fileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -11,13 +11,13 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     firstName: "",
     lastName: "",
     college: "",
-    totalPercentile: "",
+    totalMarks: "",
     seqno: "",
     AIR: "",
     imagePath: "",
-    physicsPercentile: "",
-    chemistryPercentile: "",
-    mathematicsPercentile: "",
+    physicsMarks: "",
+    chemistryMarks: "",
+    biologyMarks: "",
     Tag: ""
   });
   const [previewImage, setPreviewImage] = useState("");
@@ -50,7 +50,7 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     setIsSubmitting(true);
     try {
       const response = await axios.put(
-        `http://localhost:4000/server/jee/students/${id}`,
+        `http://localhost:4000/server/neet/students/${id}`,
         formData
       );
       if (response.data.success) {
@@ -69,17 +69,17 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   // Fetch student details by id when the modal opens.
   const fetchAllDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/jee/students/${id}`);
+      const response = await axios.get(`http://localhost:4000/server/neet/students/${id}`);
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",
         firstName: data.firstName || "",
         lastName: data.lastName || "",
-        totalPercentile: data.totalPercentile || "",
+        totalMarks: data.totalMarks || "",
         imagePath: data.imagePath || "",
-        mathematicsPercentile: data.mathematicsPercentile || "",
-        physicsPercentile: data.physicsPercentile || "",
-        chemistryPercentile: data.chemistryPercentile || "",
+        biologyMarks: data.biologyMarks || "",
+        physicsMarks: data.physicsMarks || "",
+        chemistryMarks: data.chemistryMarks || "",
         AIR: data.AIR || "",
         college: data.college || "",
         Tag: data.Tag || "",
@@ -102,7 +102,7 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg p-6 mt-80 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Edit JEE Topper</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Edit NEET Topper</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
           </button>
@@ -224,61 +224,61 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Total Percentile
+                    Total Marks
                   </label>
                   <input
                     type="number"
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.totalPercentile}
+                    value={formData.totalMarks}
                     onChange={e =>
-                      setFormData({ ...formData, totalPercentile: e.target.value })
+                      setFormData({ ...formData, totalMarks: e.target.value })
                     }
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Maths Percentile
+                    Physics Marks
                   </label>
                   <input
                     type="number"
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.mathematicsPercentile}
+                    value={formData.physicsMarks}
                     onChange={e =>
-                      setFormData({ ...formData, mathematicsPercentile: e.target.value })
+                      setFormData({ ...formData, physicsMarks: e.target.value })
                     }
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Physics Percentile
+                    Chemistry Marks
                   </label>
                   <input
                     type="number"
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.physicsPercentile}
+                    value={formData.chemistryMarks}
                     onChange={e =>
-                      setFormData({ ...formData, physicsPercentile: e.target.value })
+                      setFormData({ ...formData, chemistryMarks: e.target.value })
                     }
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Chemistry Percentile
+                    Biology Marks
                   </label>
                   <input
                     type="number"
                     step="any"
                     // required
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.chemistryPercentile}
+                    value={formData.biologyMarks}
                     onChange={e =>
-                      setFormData({ ...formData, chemistryPercentile: e.target.value })
+                      setFormData({ ...formData, biologyMarks: e.target.value })
                     }
                   />
                 </div>
@@ -314,4 +314,4 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   ) : null;
 };
 
-export default EditJEEStudentModal;
+export default EditNEETStudentModal;

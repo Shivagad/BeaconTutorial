@@ -3,11 +3,11 @@ import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AddJEEStudentModal from '../JEEResult/AddJEEStudentModal';
-import EditJEEStudentModal from '../JEEResult/EditJEEStudent';
-import DeleteJEEStudentModal from '../JEEResult/DeleteJEEStudentModal';
+import AddNEETStudentModal from '../NEETResult/AddNEETStudentModal';
+import EditNEETStudentModal from '../NEETResult/EditNEETStudent';
+import DeleteNEETStudentModal from '../NEETResult/DeleteNEETStudentModal';
 
-const JEEResult = () => {
+const NEETResult = () => {
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -19,7 +19,7 @@ const JEEResult = () => {
   const [students, setStudents] = useState([]);
   const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/jee/students");
+      const response = await axios.get("http://localhost:4000/server/neet/students");
       console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
@@ -66,7 +66,7 @@ const JEEResult = () => {
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">JEE Class Toppers</h1>
+        <h1 className="text-2xl font-bold text-gray-800">NEET Class Toppers</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -97,19 +97,19 @@ const JEEResult = () => {
                   {student.firstName} {student.lastName}
                 </h3>
                 <p className="text-blue-600 text-xl">
-                 Total Percentile : {(student.totalPercentile)}%
+                 Total Marks : {(student.totalMarks)}%
                 </p>
                 <p className="text-blue-600  text-xl">
                  College : {(student.college)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Physics Percentile : {parseInt(student.physicsPercentile)}
+                 Physics Marks : {parseInt(student.physicsMarks)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Chemistry Percentile : {parseInt(student.chemistryPercentile)}
+                 Chemistry Marks : {parseInt(student.chemistryMarks)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Math Percentile : {parseInt(student.mathematicsPercentile)}
+                 Biology Marks : {parseInt(student.biologyMarks)}
                 </p>
                 <p className="text-blue-600  text-xl">
                  AIR : {parseInt(student.AIR)}
@@ -141,14 +141,14 @@ const JEEResult = () => {
       </div>
 
       {/* Add Student Modal */}
-      <AddJEEStudentModal
+      <AddNEETStudentModal
         setToast={setToast}
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
       />
 
       {/* Edit Student Modal: Pass the selected student's ID and onSubmit callback */}
-      <EditJEEStudentModal
+      <EditNEETStudentModal
         setToast={setToast}
         isEditOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
@@ -157,7 +157,7 @@ const JEEResult = () => {
       />
 
       {/* Delete Student Modal: Pass the selected student's ID and onDelete callback */}
-      <DeleteJEEStudentModal
+      <DeleteNEETStudentModal
         setToast={setToast}
         isDeleteOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -168,4 +168,4 @@ const JEEResult = () => {
   );
 };
 
-export default JEEResult;
+export default NEETResult;

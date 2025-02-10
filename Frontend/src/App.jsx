@@ -5,11 +5,12 @@ import TenthResults from './dashboard/dashboardpages/TenthResults';
 import TwelthResult from './dashboard/dashboardpages/TwelthResults';
 import CETResult from './dashboard/dashboardpages/CETResults';
 import JEEResult from './dashboard/dashboardpages/JEEResult';
+import NEETResult from './dashboard/dashboardpages/NEETResult';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>``
+      <Routes>
         <Route path="/" element={<Navigate to="/dashboard/10th-results" replace />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
@@ -17,7 +18,7 @@ function App() {
           <Route path="12th-results" element={<TwelthResult/>} />
           <Route path="cet-results" element={<CETResult/>}/>
           <Route path="jee-results" element={<JEEResult/>}/>
-          {/* <Route path="neet-results" element={<CETResult/>}/> */}
+          <Route path="neet-results" element={<NEETResult/>}/>
           <Route path="students" element={<div className="p-6 mr-64">Students Page (Coming Soon)</div>} />
           <Route path="analytics" element={<div className="p-6 mr-64">Analytics Page (Coming Soon)</div>} />
         </Route>
