@@ -1,5 +1,9 @@
 import tenthResult from '../Models/10th.js';
 import cloudinary from 'cloudinary';
+import TwelthExamModel from '../Models/12th.js';
+import CetExamModel from '../Models/CET.js';
+import JeeExamModel from '../Models/JEE.js';
+import NeetExamModel from '../Models/NEET.js';
 
 export const addStudentResult = async (req, res) => {
     try {
@@ -142,3 +146,36 @@ export const getResultById = async (req, res) => {
         res.status(500).json({ message: error.message, success: false });
     }
 };
+
+
+
+
+
+
+export const getAllExamResults = async (req, res) => {
+  try {
+    const [tenthResults, twelthResults, cetResults, jeeResults, neetResults] = await Promise.all([
+      tenthResult.find().sort({ seqno: 1 }),
+      TwelthExamModel.find().sort({ seqno: 1 }),
+      CetExamModel.find().sort({ seqno: 1 }),
+      JeeExamModel.find().sort({ seqno: 1 }),
+      NeetExamModel.find().sort({ seqno: 1 })
+    ]);
+
+    // Structure the response
+    const examData = [
+      { title: "Class 10th Toppers", students: tenthResults },
+      { title: "Class 12th Achievers", students: twelthResults },
+      { title: "CET Stars", students: cetResults },
+      { title: "JEE Champions", students: jeeResults },
+      { title: "NEET Achievers", students: neetResults }
+    ];
+    
+    res.status(200).json({ success: true, secondSuccess: true, data: examData });
+
+  } catch (error) {
+    res.status(500).json({ success: false, secondSuccess: false, message: 'Error fetching results', error });
+  }
+};
+
+
