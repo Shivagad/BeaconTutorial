@@ -20,9 +20,9 @@ const ResultSection = ({ title, students, bgColor }) => {
   );
 
   return (
-    <div className={`w-full py-12 ${bgColor}`}>
+    <div className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4">
-        <div className="sticky top-4 z-10 mb-8">
+      <div className="sticky  z-10  mb-8">
           <div className="bg-white/95 backdrop-blur-sm py-4 rounded-full shadow-lg">
             <h2 className="text-3xl font-bold text-center text-indigo-700">
               {title}
@@ -50,91 +50,91 @@ const ResultSection = ({ title, students, bgColor }) => {
                   <div className={`flex-row justify-between items-center bg-${bgColor}-50 p-0 rounded-lg`}>
 
                     {student.AIR && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           AIR - {student.AIR}
                         </span>
                       </div>
                     )}
                     {student.mathMarks && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Maths - {student.mathMarks}
                         </span>
                       </div>
                     )}
                     {student.scienceMarks && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Science - {student.scienceMarks}
                         </span>
                       </div>
                     )}
                     {student.chemistryMarks && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Chemistry - {student.chemistryMarks}
                         </span>
                       </div>
                     )}
                     {student.physicsMarks && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Physics - {student.physicsMarks}
                         </span>
                       </div>
                     )}
                     {student.biologyMarks && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Biology - {student.biologyMarks}
                         </span>
                       </div>
                     )}
                     {student.physicsPercentile && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Physics - {student.physicsPercentile}%ile
                         </span>
                       </div>
                     )}
                     {student.mathematicsPercentile && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Math - {student.mathematicsPercentile}%ile
                         </span>
                       </div>
                     )}
                     {student.chemistryPercentile && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Chemistry - {student.chemistryPercentile}%ile
                         </span>
                       </div>
                     )}
                     {student.biologyPercentile && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-small">
                           Biology - {student.biologoPercentile}%ile
                         </span>
                       </div>
                     )}
                     {student.totalPercentile && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-medium">
                           Aggregate - {student.totalPercentile}%ile
                         </span>
                       </div>
                     )}
                     {student.totalMarks && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 text-sm font-medium">
                           Aggregate - {student.totalMarks}
                         </span>
                       </div>
                     )}
                     {student.percentage && (
-                      <div className='p-0 pl-1'>
+                      <div className='p-0 pl-1 flex justify-center'>
                         <span className="text-gray-600 font-medium">
                         Aggregate - {student.percentage.toFixed(2)}%
                         </span>

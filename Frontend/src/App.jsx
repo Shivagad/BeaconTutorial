@@ -8,14 +8,12 @@ import JEEResult from './dashboard/dashboardpages/JEEResult';
 import NEETResult from './dashboard/dashboardpages/NEETResult';
 import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
-import Navbar from './Pages/Navbar'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard/10th-results" replace />} />
-        <Route path="navbar" element={<Navbar/>} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
           {/* Add other routes as needed */}

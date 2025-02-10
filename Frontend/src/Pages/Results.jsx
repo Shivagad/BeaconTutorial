@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { Trophy } from 'lucide-react';
 import ResultSection from '../Components/ResultSection';
 import axios from 'axios';
+import Navbar from '../Components/Navbar';
 
 const sectionColors = [
   'bg-blue-50',
@@ -41,7 +42,10 @@ const Results =()=> {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+    <Navbar/>
+    <div className="w-full min-h-screen bg-gray-50">
+
       {/* Header */}
       <header className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto">
@@ -60,7 +64,7 @@ const Results =()=> {
 
       {/* Main Content */}
       <main>
-        <div>
+      <div className={`w-full pt-24 py-12`}>
           {examData.map((section, index) => (
             <ResultSection
               key={index}
@@ -81,6 +85,7 @@ const Results =()=> {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 

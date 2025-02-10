@@ -17,7 +17,7 @@ const Navbar = ({ logoSrc }) => {
   ];
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top bar with contact info */}
       <div className="hidden md:block bg-gray-100 py-2">
         <div className="container mx-auto px-4 flex justify-end items-center space-x-6">
