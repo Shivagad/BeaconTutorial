@@ -18,9 +18,9 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   });
 
   const [previewImage, setPreviewImage] = useState("");
-  
+
   if (!isOpen) return null;
-  
+
   const handleImageChange = e => {
     const file = e.target.files?.[0];
     if (file) {
@@ -38,17 +38,28 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     if (!previewImage) {
       setToast2({
-        success:false,
+        success: false,
         message: "Please select an image.",
       })
       return;
     }
-    
+
     e.preventDefault();
 
     try {
-     setIsSubmitting(true);
+      setIsSubmitting(true);
       const response = await axios.post('http://localhost:4000/server/tenth/students', formData);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        seqno: "",
+        percentage: "",
+        image: "",
+        math: "",
+        science: "",
+        board: "",
+        tags: "",
+      });
 
       if (response.data.success) {
         setToast({
@@ -173,7 +184,6 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      required
                       onChange={handleImageChange}
                     />
                   </div>
@@ -266,10 +276,10 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
           <div className="border-t pt-6">
             <button
               type="submit"
-              disabled={isSubmitting} 
+              disabled={isSubmitting}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
-             {isSubmitting ? "Submitting..." : "Add Student"}
+              {isSubmitting ? "Submitting..." : "Add Student"}
             </button>
           </div>
         </form>

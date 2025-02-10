@@ -52,6 +52,20 @@ const AddJEEStudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
      console.log(formData)
       const response = await axios.post('http://localhost:4000/server/jee/students', formData);
 
+      setFormData({
+        firstName: "",
+    lastName: "",
+    college:"",
+    totalPercentile: "",
+    seqno: "",
+    AIR:"",
+    imagePath: "",
+    physicsPercentile:"",
+    chemistryPercentile:"",
+    mathematicsPercentile:"",
+    Tag: ""
+  });
+
       if (response.data.success) {
         setToast({
           success: true,

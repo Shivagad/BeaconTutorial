@@ -52,6 +52,20 @@ const AddNEETStudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
      console.log(formData)
       const response = await axios.post('http://localhost:4000/server/neet/students', formData);
 
+      setFormData({
+        firstName: "",
+        lastName: "",
+        college: "",
+        totalMarks: "",
+        seqno: "",
+        AIR: "",
+        imagePath: "",
+        physicsMarks: "",
+        chemistryMarks: "",
+        biologyMarks: "",
+        Tag: ""
+      })
+
       if (response.data.success) {
         setToast({
           success: true,

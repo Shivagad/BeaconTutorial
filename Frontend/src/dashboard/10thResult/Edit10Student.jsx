@@ -6,7 +6,7 @@ import { useAuth } from "../../Context/AuthProvider";
 const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   const { currentUser } = useAuth();
   const fileInputRef = useRef(null);
-   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -40,7 +40,7 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
 
     if (!previewImage) {
       setToast({
-        success:false,
+        success: false,
         message: "Please select an image.",
       })
       return;
@@ -50,6 +50,17 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
       setIsSubmitting(true);
       // Sending JSON (the image field is a base64 string if updated)
       const response = await axios.put(`http://localhost:4000/server/tenth/students/${id}`, formData);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        seqno: "",
+        percentage: "",
+        image: "",
+        math: "",
+        science: "",
+        board: "",
+        tags: "",
+      });
       if (response.data.success) {
         setToast2({ success: true, message: "Student updated successfully" });
       } else {
@@ -240,10 +251,10 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
           <div className="border-t pt-6">
             <button
               type="submit"
-              disabled={isSubmitting} 
+              disabled={isSubmitting}
               className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
-               {isSubmitting ? "Submitting..." : "Update Student"}
+              {isSubmitting ? "Submitting..." : "Update Student"}
             </button>
           </div>
         </form>

@@ -51,6 +51,19 @@ const AddCETStudentModal = ({ isOpen, onClose, setToast }) => {
       setIsSubmitting(true);
       const response = await axios.post("http://localhost:4000/server/cet/students", formData);
 
+      setFormData({
+        firstName: "",
+    lastName: "",
+    imagePath: "",
+    college: "",
+    totalPercentile: "",
+    mathematicsPercentile: "",
+    physicsPercentile: "",
+    chemistryPercentile: "",
+    biologyPercentile: "",
+    seqno: "",
+    Tag: ""
+      })
       if (response.data.success) {
         setToast({
           success: true,

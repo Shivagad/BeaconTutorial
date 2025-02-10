@@ -53,6 +53,22 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
         `http://localhost:4000/server/twelve/students/${id}`,
         formData
       );
+
+      setFormData(
+        {
+          firstName: "",
+          lastName: "",
+          percentage: "",
+          seqno: "",
+          imagePath: "",
+          chemistryMarks: "",
+          physicsMarks: "",
+          mathMarks:"",
+          boardName: "",
+          biologyMarks:"",
+          Tag: ""
+        }
+      )
       if (response.data.success) {
         setToast2({ success: true, message: "Student updated successfully" });
       } else {

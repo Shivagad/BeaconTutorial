@@ -52,6 +52,22 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
      console.log(formData)
       const response = await axios.post('http://localhost:4000/server/twelve/students', formData);
 
+      setFormData(
+        {
+          firstName: "",
+          lastName: "",
+          percentage: "",
+          seqno: "",
+          imagePath: "",
+          chemistryMarks: "",
+          physicsMarks: "",
+          mathMarks:"",
+          boardName: "",
+          biologyMarks:"",
+          Tag: ""
+        }
+      )
+
       if (response.data.success) {
         setToast({
           success: true,
@@ -205,21 +221,7 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                     }
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Math Marks
-                  </label>
-                  <input
-                    type="number"
-                    step="any"
-                    // required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.mathMarks}
-                    onChange={e =>
-                      setFormData({ ...formData, mathMarks: e.target.value })
-                    }
-                  />
-                </div>
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Physics Marks

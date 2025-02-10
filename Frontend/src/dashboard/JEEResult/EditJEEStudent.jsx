@@ -53,6 +53,21 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
         `http://localhost:4000/server/jee/students/${id}`,
         formData
       );
+
+      setFormData({
+        firstName: "",
+    lastName: "",
+    college:"",
+    totalPercentile: "",
+    seqno: "",
+    AIR:"",
+    imagePath: "",
+    physicsPercentile:"",
+    chemistryPercentile:"",
+    mathematicsPercentile:"",
+    Tag: ""
+  });
+  
       if (response.data.success) {
         setToast2({ success: true, message: "Student updated successfully" });
       } else {

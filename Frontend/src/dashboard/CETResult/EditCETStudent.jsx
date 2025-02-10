@@ -53,6 +53,21 @@ const EditCETStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
         `http://localhost:4000/server/cet/students/${id}`,
         formData
       );
+
+      setFormData({
+        firstName: "",
+    lastName: "",
+    imagePath: "",
+    college: "",
+    totalPercentile: "",
+    mathematicsPercentile: "",
+    physicsPercentile: "",
+    chemistryPercentile: "",
+    biologyPercentile: "",
+    seqno: "",
+    Tag: ""
+      })
+      
       if (response.data.success) {
         setToast2({ success: true, message: "Student updated successfully" });
       } else {

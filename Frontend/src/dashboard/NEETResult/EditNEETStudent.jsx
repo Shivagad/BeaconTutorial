@@ -53,6 +53,20 @@ const EditNEETStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
         `http://localhost:4000/server/neet/students/${id}`,
         formData
       );
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        college: "",
+        totalMarks: "",
+        seqno: "",
+        AIR: "",
+        imagePath: "",
+        physicsMarks: "",
+        chemistryMarks: "",
+        biologyMarks: "",
+        Tag: ""
+      })
       if (response.data.success) {
         setToast2({ success: true, message: "Student updated successfully" });
       } else {

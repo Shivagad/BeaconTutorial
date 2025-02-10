@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Trophy } from 'lucide-react';
 import ResultSection from '../Components/ResultSection';
+import axios from 'axios';
 
 const sectionColors = [
   'bg-blue-50',
@@ -18,9 +19,10 @@ const Results =()=> {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:4000/server/exams') // Replace with your API endpoint
+    axios.get('http://localhost:4000/server/tenth/result') // Replace with your API endpoint
       .then(response => {
         if (response.data.success) {
+          console.log(response.data.data)
           setExamData(response.data.data);
         } else {
           setError('Error fetching exam data');
