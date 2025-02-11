@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, GraduationCap, Trophy, Users, BookOpen, BrainCircuit, Calculator, Clock, Award } from 'lucide-react';
+import {
+    ChevronLeft, ChevronRight, GraduationCap, Trophy, Users, BrainCircuit,
+    BookOpen, Award, Calculator, UsersRound, Clock
+} from 'lucide-react';
 import Navbar from "../Components/Navbar";
 import axios from 'axios';
 
 const courses = [
-  { id: 1, title: "JEE Main & Advanced", icon: Calculator, description: "Comprehensive preparation for IIT entrance", students: "10,000+" },
-  { id: 2, title: "NEET Preparation", icon: BrainCircuit, description: "Complete medical entrance preparation", students: "8,000+" },
-  { id: 3, title: "CET Coaching", icon: BookOpen, description: "State-level engineering entrance", students: "15,000+" },
-  { id: 4, title: "Class 12th Excellence", icon: GraduationCap, description: "Board exam preparation", students: "12,000+" }
+    { id: 1, title: "JEE Main & Advanced", icon: Calculator, description: "Comprehensive preparation for IIT entrance", students: "10,000+" },
+    { id: 2, title: "NEET Preparation", icon: BrainCircuit, description: "Complete medical entrance preparation", students: "8,000+" },
+    { id: 3, title: "CET Coaching", icon: BookOpen, description: "State-level engineering entrance", students: "15,000+" },
+    { id: 4, title: "Class 12th Excellence", icon: GraduationCap, description: "Board exam preparation", students: "12,000+" }
 ];
 
 function Home() {
@@ -54,11 +57,10 @@ function Home() {
                         posters.map((poster, index) => (
                             <div
                                 key={poster.id || `poster-${index}`}
-                                className={`absolute inset-0 transition-opacity duration-1000 ${
-                                    index === currentSlide ? 'opacity-100' : 'opacity-0'
-                                }`}
+                                className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                                    }`}
                             >
-                               <img src={poster.imagePath} alt={`Poster ${index + 1}`} className="w-full h-full object-contain" />
+                                <img src={poster.imagePath} alt={`Poster ${index + 1}`} className="w-full h-full object-contain" />
                             </div>
                         ))
                     ) : (
@@ -80,23 +82,117 @@ function Home() {
                     )}
                 </div>
 
-                {/* Stats Section */}
-                <div className="bg-blue-600 text-white py-12">
-                    <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                        {[
-                            { icon: Users, value: "50,000+", label: "Students" },
-                            { icon: Trophy, value: "95%", label: "Success Rate" },
-                            { icon: GraduationCap, value: "200+", label: "Expert Faculty" },
-                            { icon: Award, value: "15+", label: "Years Experience" }
-                        ].map((stat, index) => (
-                            <div key={index}>
-                                <stat.icon className="w-8 h-8 mx-auto mb-2" />
-                                <div className="text-3xl font-bold">{stat.value}</div>
-                                <div className="text-sm">{stat.label}</div>
+                <div className="max-w-7xl mx-auto">
+                    {/* Card Container */}
+                    <div className="bg-white rounded-xl shadow-md p-6 md:p-10">
+                        {/* Heading */}
+                        <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-2">
+                            15+ Years of Legacy
+                        </h2>
+                        <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
+                            with excellent Results
+                        </p>
+
+                        {/* Subtext */}
+                        <p className="text-center text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
+                            Be the next stellar of Beacon Tutorial. Accomplish greatness and be a part
+                            of our legacy. Find your course now.
+                        </p>
+
+                        {/* Stats Row */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {/* Stat 1 */}
+                            <div className="flex flex-col items-center">
+                                <BookOpen className="w-10 h-10 text-blue-500 mb-2" />
+                                <p className="text-xl font-bold text-gray-800">300+</p>
+                                <p className="text-gray-600">Coaching centers in India</p>
                             </div>
-                        ))}
+
+                            {/* Stat 2 */}
+                            <div className="flex flex-col items-center">
+                                <Award className="w-10 h-10 text-blue-500 mb-2" />
+                                <p className="text-xl font-bold text-gray-800">131,700+</p>
+                                <p className="text-gray-600">
+                                    Aakashians qualified NEET &amp; JEE in 2024
+                                </p>
+                            </div>
+
+                            {/* Stat 3 */}
+                            <div className="flex flex-col items-center">
+                                <UsersRound className="w-10 h-10 text-blue-500 mb-2" />
+                                <p className="text-xl font-bold text-gray-800">5000+</p>
+                                <p className="text-gray-600">Expert Faculty</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div className=" w-full overflow-hidden leading-[0]">
+                <svg id="wave" style={{transform:"rotate(0deg)", transition: "0.3s"}} viewBox="0 0 1440 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(74.812, 162.276, 229.552, 1)" offset="0%"></stop><stop stop-color="rgba(11, 255, 253.622, 1)" offset="100%"></stop></linearGradient></defs><path style={{transform:"translate(0, 0px)", opacity:"1"}} fill="url(#sw-gradient-0)" d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path></svg>
+
+                    </div>
+                <div className="relative bg-blue-600 text-white overflow-hidden">
+                    
+                    {/* Content Container */}
+                    <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col items-center space-y-4 md:space-y-6">
+                        <h1 className="text-3xl md:text-4xl font-bold text-center">
+                            BEST - Talent Test
+                        </h1>
+                        <p className="text-center text-lg md:text-xl max-w-xl">
+                            Up to 99% Scholarship for qualifying students from 10th SSC / CBSE / ICSE
+                        </p>
+                        <button
+                            className="bg-orange-400 hover:bg-orange-500 px-6 py-2 
+                     rounded-full text-white text-lg font-semibold 
+                     transform hover:-translate-y-1 hover:scale-105 
+                     transition duration-300"
+                        >
+                            Register Now for Free
+                        </button>
+                    </div>
+                    
+                </div>
+                <div className='w-full overflow-hidden leading-[0]'>
+                    <svg id="wave" style={{transform:"rotate(180deg)", transition: "0.3s"}} viewBox="0 0 1440 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(74.812, 162.276, 229.552, 1)" offset="0%"></stop><stop stop-color="rgba(11, 255, 253.622, 1)" offset="100%"></stop></linearGradient></defs><path style={{transform:"translate(0, 0px)", opacity:"1"}} fill="url(#sw-gradient-0)" d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path></svg>
+                    </div>
+
+                <div className="relative bg-white">
+                    
+                    {/* Content Grid */}
+                    <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        {/* Left Side: Text */}
+                        <div className="space-y-4 md:pr-8 z-10">
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                                Beacon Tutorials
+                            </h2>
+                            <p className="text-gray-600 leading-relaxed">
+                                The mission behind all these efforts is to develop an environment
+                                for students, bridging a gap between real life and education.
+                                Accomplish greatness and be a part of our legacy.
+                            </p>
+                            <button
+                                className="bg-blue-600 hover:bg-blue-700 text-white 
+                       px-6 py-2 rounded-full transform transition 
+                       hover:rotate-3 hover:scale-105"
+                            >
+                                Know About Beacon
+                            </button>
+                        </div>
+
+                        {/* Right Side: Image with 3D Hover */}
+                        <div className="flex justify-center md:justify-end z-10">
+                            <div className="group perspective-1000">
+                                <img
+                                    src="https://placehold.co/600x400"
+                                    alt="Beacon Classes"
+                                    className="rounded-lg shadow-lg transform transition duration-500 
+                         group-hover:rotate-y-6 group-hover:scale-105"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 {/* Popular Courses */}
                 <div className="py-16 bg-white">
@@ -146,6 +242,23 @@ function Home() {
                         <button className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
                             Enroll Now
                         </button>
+                    </div>
+                </div>
+                {/* Stats Section */}
+                <div className="bg-blue-600 text-white py-12">
+                    <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        {[
+                            { icon: Users, value: "50,000+", label: "Students" },
+                            { icon: Trophy, value: "95%", label: "Success Rate" },
+                            { icon: GraduationCap, value: "200+", label: "Expert Faculty" },
+                            { icon: Award, value: "15+", label: "Years Experience" }
+                        ].map((stat, index) => (
+                            <div key={index}>
+                                <stat.icon className="w-8 h-8 mx-auto mb-2" />
+                                <div className="text-3xl font-bold">{stat.value}</div>
+                                <div className="text-sm">{stat.label}</div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
