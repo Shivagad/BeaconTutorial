@@ -8,13 +8,16 @@ import JEEResult from './dashboard/dashboardpages/JEEResult';
 import NEETResult from './dashboard/dashboardpages/NEETResult';
 import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
-import Home from './Components/Home'
+import Home from './Pages/Home'
 import EventGalary from './dashboard/dashboardpages/EventGalary';
+import Event from './Pages/Event';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/event-gallery" element={<Event/>}/>
         <Route path="/" element={<Home />} />
+        <Route path="/all-results" element={<Results/>}/>
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
           <Route path="event-galary" element={<EventGalary/>} />
@@ -23,10 +26,8 @@ function App() {
           <Route path="cet-results" element={<CETResult/>}/>
           <Route path="jee-results" element={<JEEResult/>}/>
           <Route path="neet-results" element={<NEETResult/>}/>
-          <Route path="students" element={<div className="p-6 mr-64">Students Page (Coming Soon)</div>} />
-          <Route path="analytics" element={<div className="p-6 mr-64">Analytics Page (Coming Soon)</div>} />
         </Route>
-        <Route path="/all-results" element={<Results/>}/>
+        
       </Routes>
     </BrowserRouter>
   );

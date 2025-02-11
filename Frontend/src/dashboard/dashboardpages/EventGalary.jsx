@@ -1,4 +1,4 @@
-import React, { useState,useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
@@ -23,15 +23,15 @@ const EventGalary = () => {
       console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
-        setStudents([])
+      setStudents([])
       console.error("Error fetching student data:", error);
     }
   }, []);
-  
+
   useEffect(() => {
     fetchStudents();
   }, [fetchStudents]);
-  
+
 
   const setToast = (msg) => {
     msg.success ? toast.success(msg.message) : toast.error(msg.message);
@@ -97,15 +97,19 @@ const EventGalary = () => {
                   {student.firstName} {student.lastName}
                 </h3>
                 <p className="text-blue-600 text-xl">
-                 Event Name : {(student.eventName)}
+                  Event Name : {(student.eventName)}
                 </p>
                 <p className="text-blue-600  text-xl">
-                 Event Year : {(student.year)}
+                  Event Year : {(student.year)}
                 </p>
-                <p className="text-blue-600  text-xl">
-                 Event Description : {(student.description)}
-                </p>
+                <div className="w-full">
+                  <p className="text-blue-600 text-xl break-all whitespace-normal">
+                    <strong>Event Description:</strong><br />
+                    {student.description}
+                  </p>
                 </div>
+
+              </div>
               <div className="flex space-x-2">
                 <button
                   onClick={() => openEditModal(student._id)}
@@ -122,7 +126,7 @@ const EventGalary = () => {
               </div>
             </div>
 
-           
+
           </div>
         ))}
       </div>

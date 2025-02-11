@@ -4,16 +4,17 @@ import { Menu, X, Phone, Mail } from 'lucide-react';
 const Navbar = ({ logoSrc }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Corrected navItems array: all items are objects.
   const navItems = [
-    'Home',
-    'About Us',
-    'Courses',
-    'Results',
-    'Testimonials',
-    'Student Corner',
-    'Scholarships',
-    'Event Gallery',
-    'Contact Us'
+    { label: "Home", path: "/" },
+    { label: "About Us", path: "/about" },
+    { label: "Courses", path: "/courses" },
+    { label: "Results", path: "/all-results" },
+    { label: "Testimonials", path: "/testimonials" },
+    { label: "Student Corner", path: "/student-corner" },
+    { label: "Scholarships", path: "/scholarships" },
+    { label: "Event Gallery", path: "/event-gallery" },
+    { label: "Contact Us", path: "/contact" },
   ];
 
   return (
@@ -51,11 +52,11 @@ const Navbar = ({ logoSrc }) => {
           <div className="hidden md:flex items-center space-x-8 ml-4">
             {navItems.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                key={item.label}
+                href={item.path}
                 className="text-gray-700 hover:text-blue-600 transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
@@ -91,11 +92,11 @@ const Navbar = ({ logoSrc }) => {
               {/* Mobile nav items */}
               {navItems.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                  key={item.label}
+                  href={item.path}
                   className="text-gray-700 hover:text-blue-600 transition-colors px-4 py-2 hover:bg-gray-50"
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
             </div>
