@@ -10,6 +10,7 @@ import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
 import Home from './Pages/Home'
 import EventGalary from './dashboard/dashboardpages/EventGalary';
+import Contact from './Pages/Contact'
 import Event from './Pages/Event';
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/event-gallery" element={<Event/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/all-results" element={<Results/>}/>
+        <Route path="/contact" element={<Contact/>}/>
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
           <Route path="event-galary" element={<EventGalary/>} />
