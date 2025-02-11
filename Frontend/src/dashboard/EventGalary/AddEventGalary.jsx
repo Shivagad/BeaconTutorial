@@ -20,7 +20,7 @@ const AddEventGallery = ({ isOpen, onClose, setToast }) => {
     if (!formData.eventName.trim()) newErrors.eventName = "Event Name is required.";
     if (!formData.year) newErrors.year = "Please select a year.";
     if (formData.images.length === 0) newErrors.images = "At least one image is required.";
-    if (!formData.description.trim()) newErrors.description = "Description is required.";
+    // if (!formData.description.trim()) newErrors.description = "Description is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -142,7 +142,7 @@ const AddEventGallery = ({ isOpen, onClose, setToast }) => {
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               />
-              {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
+              {/* {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>} */}
             </div>
 
             {/* Image Upload Button */}
