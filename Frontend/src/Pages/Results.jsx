@@ -3,7 +3,7 @@ import { Trophy } from 'lucide-react';
 import ResultSection from '../Components/ResultSection';
 import axios from 'axios';
 import Navbar from '../Components/Navbar';
-
+import Footer from '../Components/Footer'
 const sectionColors = [
   'bg-blue-50',
   'bg-purple-50',
@@ -76,15 +76,8 @@ const Results =()=> {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-indigo-900 to-indigo-800 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-indigo-200 text-lg">
-            © 2024 Academic Excellence Institute. All rights reserved.
-          </p>
-        </div>
-      </footer>
     </div>
+    <Footer/>
     </>
   );
 }

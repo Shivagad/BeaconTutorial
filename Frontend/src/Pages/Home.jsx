@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, GraduationCap, Trophy, Users, BookOpen, BrainCircuit, Calculator, Clock, Award } from 'lucide-react';
 import Navbar from "../Components/Navbar";
 import axios from 'axios';
-
+import Footer from '../Components/Footer'
 const courses = [
   { id: 1, title: "JEE Main & Advanced", icon: Calculator, description: "Comprehensive preparation for IIT entrance", students: "10,000+" },
   { id: 2, title: "NEET Preparation", icon: BrainCircuit, description: "Complete medical entrance preparation", students: "8,000+" },
@@ -149,6 +149,8 @@ function Home() {
                     </div>
                 </div>
             </div>
+            <Footer/>
+        
         </>
     );
 }
