@@ -14,11 +14,11 @@ router.post('/addevent', addEventGallery);
 router.get('/getevent', getAllEvents);
 
 
-router.get('/event/:id', getEventById);
+router.get('/geteventbyid/:id', getEventById);
 
-router.put('/event/:id', editEventGallery);
+router.put('/editevent/:id', editEventGallery);
 
-router.delete('/event/:id', deleteEventGallery);
+router.delete('/deleteevent/:id', deleteEventGallery);
 
 export default router;
 

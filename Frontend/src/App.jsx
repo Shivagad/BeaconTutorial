@@ -9,7 +9,7 @@ import NEETResult from './dashboard/dashboardpages/NEETResult';
 import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
 import Home from './Pages/Home'
-
+import EventGalary from './dashboard/dashboardpages/EventGalary';
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/all-results" element={<Results/>}/>
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
+          <Route path="event-galary" element={<EventGalary/>} />
           <Route path="12th-results" element={<TwelthResult/>} />
           <Route path="poster" element={<Poster/>} />
           <Route path="cet-results" element={<CETResult/>}/>
