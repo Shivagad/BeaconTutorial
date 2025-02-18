@@ -12,6 +12,7 @@ import JEE from './Routes/JEE.js';
 import NEET from './Routes/NEET.js';
 import Poster from './Routes/Poster.js';
 import Event from './Routes/Event.js';
+import DashAdmin from './Routes/DashAdmin.js'
 
 dotenv.config();
 const app = express();
@@ -34,6 +35,7 @@ app.use('/server/jee', JEE);
 app.use('/server/neet', NEET);
 app.use('/server/poster', Poster);
 app.use('/server/Event', Event);
+app.use('/server/dashadmin', DashAdmin);
 
 
 app.get('/', (req, res) => {

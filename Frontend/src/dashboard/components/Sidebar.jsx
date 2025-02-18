@@ -11,6 +11,7 @@ const Sidebar = () => {
     { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
     { icon: Album, label: 'Event Galary', path: '/dashboard/event-galary' },
+    { icon: Users, label: 'Manage Admins', path: '/dashboard/admin' },
 
   ];
 

@@ -12,16 +12,20 @@ import Home from './Pages/Home'
 import EventGalary from './dashboard/dashboardpages/EventGalary';
 import Contact from './Pages/Contact'
 import Event from './Pages/Event';
+import Admin from './dashboard/dashboardpages/Admin';
+import Login from './Pages/Login';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
       <Route path="/event-gallery" element={<Event/>}/>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/all-results" element={<Results/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path="10th-results" element={<TenthResults />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="event-galary" element={<EventGalary/>} />
           <Route path="12th-results" element={<TwelthResult/>} />
           <Route path="poster" element={<Poster/>} />

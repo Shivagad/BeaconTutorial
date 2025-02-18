@@ -16,7 +16,6 @@ const Footer = () => {
             <li><a href="#testimonials" className="hover:underline">Testimonials</a></li>
           </ul>
         </div>
-
         {/* Admission Policies */}
         <div>
           <h3 className="text-xl font-semibold text-orange-500 mb-4">Admission Policies</h3>
