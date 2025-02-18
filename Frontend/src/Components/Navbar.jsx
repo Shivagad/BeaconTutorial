@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthProvider';
 
 const Navbar = ({ logoSrc }) => {
+  const { currentUser, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Corrected navItems array: all items are objects.
   const navItems = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about" },
@@ -30,9 +34,44 @@ const Navbar = ({ logoSrc }) => {
             <Mail size={16} className="text-gray-600" />
             <span className="text-sm text-gray-600">info@example.com</span>
           </div>
-          <button className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors">
-            Login
-          </button>
+          {currentUser ? (
+            <div className="relative">
+              {/* Profile Icon with Dropdown */}
+              <img
+                className="h-7 w-7 cursor-pointer rounded-full"
+                src={currentUser.profilePicture}
+                alt="Profile"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md w-40">
+                  <button
+                    onClick={() => navigate('/dashboard')}
+                    className="w-full text-gray-700 px-4 py-2 text-left hover:bg-gray-100"
+                  >
+                    Dashboard
+                  </button>
+                  <button
+                    onClick={() => {
+                      logout();
+                      navigate('/');
+                    }}
+                    className="w-full text-gray-700 px-4 py-2 text-left hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={() => { navigate(`/login`) }}
+              className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
 
@@ -85,10 +124,36 @@ const Navbar = ({ logoSrc }) => {
                 <Mail size={16} className="text-gray-600" />
                 <span className="text-sm text-gray-600">info@example.com</span>
               </div>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors mx-4">
-                Login
-              </button>
-              
+              {currentUser ? (
+                <div className="flex items-center space-x-4 px-4 py-2 bg-gray-50 rounded">
+                  <img className="h-7 w-7" src={currentUser.profilePicture} alt="Profile" />
+                  <div className="flex flex-col">
+                    <button
+                      onClick={() => navigate('/dashboard')}
+                      className="text-gray-700 hover:text-blue-600"
+                    >
+                      Dashboard
+                    </button>
+                    <button
+                      onClick={() => {
+                        logout();
+                        navigate('/');
+                      }}
+                      className="text-gray-700 hover:text-blue-600"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => { navigate(`/login`) }}
+                  className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors"
+                >
+                  Login
+                </button>
+              )}
+
               {/* Mobile nav items */}
               {navItems.map((item) => (
                 <a

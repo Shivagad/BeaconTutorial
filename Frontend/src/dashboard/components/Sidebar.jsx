@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { GraduationCap, Award, Users, BarChart,FileImage,Album } from 'lucide-react';
+import { GraduationCap, Award, Users, BarChart, FileImage, Album } from 'lucide-react';
+import { useAuth } from '../../Context/AuthProvider';
 
 const Sidebar = () => {
+  const {logout}=useAuth();
   const menuItems = [
     { icon: Users, label: '10th Results', path: '/dashboard/10th-results' },
     { icon: Users, label: '12th Results', path: '/dashboard/12th-results' },
@@ -11,6 +13,7 @@ const Sidebar = () => {
     { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
     { icon: Album, label: 'Event Galary', path: '/dashboard/event-galary' },
+    { icon: Users, label: 'Manage Admins', path: '/dashboard/admin' },
 
   ];
 
@@ -20,16 +23,24 @@ const Sidebar = () => {
         <GraduationCap className="w-8 h-8 mr-2" />
         <h1 className="text-xl font-bold">Admin Dashboard</h1>
       </div>
+      <button
+        onClick={() => {
+          logout();
+          navigate('/login');
+        }}
+        className="text-red-700 flex items-center rounded-lg ml-20 mb-5 hover:text-blue-600"
+      >
+        Logout
+      </button>
       <nav>
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center p-3 mb-2 rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+              `flex items-center p-3 mb-2 rounded-lg transition-colors ${isActive
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
               }`
             }
           >

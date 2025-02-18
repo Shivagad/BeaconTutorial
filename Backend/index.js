@@ -12,6 +12,10 @@ import JEE from './Routes/JEE.js';
 import NEET from './Routes/NEET.js';
 import Poster from './Routes/Poster.js';
 import Event from './Routes/Event.js';
+import DashAdmin from './Routes/DashAdmin.js'
+import Student from './Routes/Student.js'
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
@@ -34,11 +38,23 @@ app.use('/server/jee', JEE);
 app.use('/server/neet', NEET);
 app.use('/server/poster', Poster);
 app.use('/server/Event', Event);
+app.use('/server/dashadmin', DashAdmin);
+app.use('/server/student',Student)
 
 
 app.get('/', (req, res) => {
     res.send('Server is running');
 });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, '..', 'src', 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.get("/s", (req, res) => {
+  res.render("SignupOTP", { name: "OM",otp:"123456"});
+});
+
 
 
 app.listen(PORT, () => {
