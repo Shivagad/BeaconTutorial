@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from "mongoose";
 const eventGallerySchema = new mongoose.Schema({
   eventName: {
     type: String,
@@ -20,5 +19,5 @@ const eventGallerySchema = new mongoose.Schema({
     trim: true,
   },
 });
-const EventGallery = mongoose.model('EventGallery', eventGallerySchema);
-module.exports = EventGallery;
+export default mongoose.model('EventGallery', eventGallerySchema);
+

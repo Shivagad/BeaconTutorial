@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import Navbar from "../Components/Navbar"
 import axios from "axios"
-
+import Footer from '../Components/Footer'
 const FancyDescription = ({ text, maxLength = 70 }) => {
   const [expanded, setExpanded] = useState(false)
   const isLong = text.length > maxLength
@@ -187,6 +187,8 @@ const Event = () => {
           />
         )}
       </div>
+      <Footer/>
+    
     </>
   )
 }
