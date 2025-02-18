@@ -6,6 +6,10 @@ import {
 import Navbar from "../Components/Navbar";
 import axios from 'axios';
 import Footer from '../Components/Footer'
+import HomeCourses from '../Components/HomeComponents/HomeCourses';
+import HomeWhyChooseUse from '../Components/HomeComponents/HomeWhyChooseUs';
+import TestimonialSection from '../Components/HomeComponents/TestiMonialSection';
+import ClassGallery from '../Components/HomeComponents/ClassGallery';
 const courses = [
     { id: 1, title: "JEE Main & Advanced", icon: Calculator, description: "Comprehensive preparation for IIT entrance", students: "10,000+" },
     { id: 2, title: "NEET Preparation", icon: BrainCircuit, description: "Complete medical entrance preparation", students: "8,000+" },
@@ -128,11 +132,11 @@ function Home() {
                 </div>
 
                 <div className=" w-full overflow-hidden leading-[0]">
-                <svg id="wave" style={{transform:"rotate(0deg)", transition: "0.3s"}} viewBox="0 0 1440 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(74.812, 162.276, 229.552, 1)" offset="0%"></stop><stop stop-color="rgba(11, 255, 253.622, 1)" offset="100%"></stop></linearGradient></defs><path style={{transform:"translate(0, 0px)", opacity:"1"}} fill="url(#sw-gradient-0)" d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path></svg>
+                    <svg id="wave" style={{ transform: "rotate(0deg)", transition: "0.3s" }} viewBox="0 0 1440 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(74.812, 162.276, 229.552, 1)" offset="0%"></stop><stop stop-color="rgba(11, 255, 253.622, 1)" offset="100%"></stop></linearGradient></defs><path style={{ transform: "translate(0, 0px)", opacity: "1" }} fill="url(#sw-gradient-0)" d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path></svg>
 
-                    </div>
+                </div>
                 <div className="relative bg-blue-600 text-white overflow-hidden">
-                    
+
                     {/* Content Container */}
                     <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col items-center space-y-4 md:space-y-6">
                         <h1 className="text-3xl md:text-4xl font-bold text-center">
@@ -150,14 +154,14 @@ function Home() {
                             Register Now for Free
                         </button>
                     </div>
-                    
+
                 </div>
                 <div className='w-full overflow-hidden leading-[0]'>
-                    <svg id="wave" style={{transform:"rotate(180deg)", transition: "0.3s"}} viewBox="0 0 1440 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(74.812, 162.276, 229.552, 1)" offset="0%"></stop><stop stop-color="rgba(11, 255, 253.622, 1)" offset="100%"></stop></linearGradient></defs><path style={{transform:"translate(0, 0px)", opacity:"1"}} fill="url(#sw-gradient-0)" d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path></svg>
-                    </div>
+                    <svg id="wave" style={{ transform: "rotate(180deg)", transition: "0.3s" }} viewBox="0 0 1440 120" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(74.812, 162.276, 229.552, 1)" offset="0%"></stop><stop stop-color="rgba(11, 255, 253.622, 1)" offset="100%"></stop></linearGradient></defs><path style={{ transform: "translate(0, 0px)", opacity: "1" }} fill="url(#sw-gradient-0)" d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"></path></svg>
+                </div>
 
                 <div className="relative bg-white">
-                    
+
                     {/* Content Grid */}
                     <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         {/* Left Side: Text */}
@@ -166,9 +170,9 @@ function Home() {
                                 Beacon Tutorials
                             </h2>
                             <p className="text-gray-600 leading-relaxed">
-                                The mission behind all these efforts is to develop an environment
-                                for students, bridging a gap between real life and education.
-                                Accomplish greatness and be a part of our legacy.
+                                The name itself denotes the aim of its establishment, that is, being a guiding signal that will bolster the enthusiastic minds to their life goals. We started with humble beginnings with a mission to revolutionize education and transform young lives.
+
+                                With a small classroom in Pune and some students of class 9th and 10th, Beacon Tutorials’ teachers made an impact on the way teaching is done and results are achieved. The students started recommending Us to everyone because they had found the teaching innovative and result oriented.
                             </p>
                             <button
                                 className="bg-blue-600 hover:bg-blue-700 text-white 
@@ -193,60 +197,35 @@ function Home() {
                     </div>
                 </div>
 
-
-                {/* Popular Courses */}
-                <div className="py-16 bg-white">
-                    <div className="container mx-auto px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Popular Courses</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {courses.map((course) => (
-                                <div key={course.id} className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-                                    <course.icon className="w-12 h-12 text-blue-600 mb-4" />
-                                    <h3 className="text-xl font-semibold mb-2">{course.title}</h3>
-                                    <p className="text-gray-600 mb-4">{course.description}</p>
-                                    <div className="flex items-center text-sm text-gray-500">
-                                        <Users className="w-4 h-4 mr-2" />
-                                        {course.students} students
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                <div>
+                    <HomeCourses />
                 </div>
 
-                {/* Why Choose Us */}
-                <div className="py-16 bg-gray-50">
-                    <div className="container mx-auto px-4">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose Us</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {[
-                                { icon: BookOpen, title: "Comprehensive Study Material", text: "Well-researched and regularly updated study materials designed by experts" },
-                                { icon: Users, title: "Experienced Faculty", text: "Learn from the best teachers with years of experience" },
-                                { icon: Clock, title: "Regular Practice Tests", text: "Weekly tests and assessments to track your progress" }
-                            ].map((feature, index) => (
-                                <div key={index} className="text-center p-6">
-                                    <feature.icon className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                                    <p className="text-gray-600">{feature.text}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                <div>
+                    <HomeWhyChooseUse />
+                </div>
+
+                <div>
+                    <TestimonialSection />
+                </div>
+
+                <div>
+                    <ClassGallery />
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-blue-600 text-white py-16">
+                <div className="bg-white text-blue-500 py-16">
                     <div className="container mx-auto px-4 text-center">
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">Start Your Journey Today</h2>
                         <p className="mb-8 text-lg">Join thousands of successful students who achieved their dreams with us</p>
-                        <button className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors">
+                        <button className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-200 transition-colors">
                             Enroll Now
                         </button>
                     </div>
                 </div>
                 {/* Stats Section */}
-                <div className="bg-blue-600 text-white py-12">
-                    <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div className="bg-blue-600 -mb-14 text-white py-12">
+                    <div className="container px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         {[
                             { icon: Users, value: "50,000+", label: "Students" },
                             { icon: Trophy, value: "95%", label: "Success Rate" },
@@ -262,8 +241,8 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <Footer/>
-        
+            <Footer />
+
         </>
     );
 }
