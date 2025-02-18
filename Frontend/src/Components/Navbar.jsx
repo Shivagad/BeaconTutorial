@@ -10,13 +10,15 @@ const Navbar = ({ logoSrc }) => {
     { label: "About Us", path: "/about" },
     { label: "Courses", path: "/courses" },
     { label: "Results", path: "/all-results" },
-    { label: "Testimonials", path: "/testimonials" },
+    { label: "Testimonials", path: "/testimonial" },
     { label: "Student Corner", path: "/student-corner" },
-    { label: "Scholarships", path: "/scholarships" },
+    { label: "Scholarships", path: "/scholarship" },
     { label: "Event Gallery", path: "/event-gallery" },
     { label: "Contact Us", path: "/contact" },
   ];
 
+
+  
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top bar with contact info */}

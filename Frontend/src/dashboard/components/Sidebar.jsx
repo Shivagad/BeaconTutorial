@@ -12,6 +12,8 @@ const Sidebar = () => {
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
     { icon: Album, label: 'Event Galary', path: '/dashboard/event-galary' },
     { icon: Users, label: 'Manage Admins', path: '/dashboard/admin' },
+    { icon: Users, label: 'Testimonial', path: '/dashboard/testimonial' },
+    { icon: Users, label: 'Scholarship', path: '/dashboard/scholarship' },
 
   ];
 
