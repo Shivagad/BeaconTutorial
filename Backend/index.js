@@ -16,7 +16,8 @@ import DashAdmin from './Routes/DashAdmin.js'
 import Student from './Routes/Student.js'
 import path from "path";
 import { fileURLToPath } from "url";
-
+import Testimonial from './Routes/Testimonial.js'
+import Scholarship from './Routes/Scholarship.js'
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -31,6 +32,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 
 
+
 app.use('/server/tenth', tenth);
 app.use('/server/twelve', twelve);
 app.use('/server/cet', CET);
@@ -40,7 +42,8 @@ app.use('/server/poster', Poster);
 app.use('/server/Event', Event);
 app.use('/server/dashadmin', DashAdmin);
 app.use('/server/student',Student)
-
+app.use('/server/testimonial', Testimonial);
+app.use('/server/scholarship',Scholarship);
 
 app.get('/', (req, res) => {
     res.send('Server is running');
