@@ -15,7 +15,7 @@ import Event from './Pages/Event';
 import Admin from './dashboard/dashboardpages/Admin';
 import Testimonial from './dashboard/dashboardpages/Testimonial';
 import Login from './Pages/Login';
-import {NonDashboardRoute,ProtectedRoute} from './Context/ProtectedRoute.jsx'
+import { NonDashboardRoute, ProtectedRoute } from './Context/ProtectedRoute.jsx'
 import MainTestimonial from './Pages/Testimonial'
 import About from './Pages/About'
 import Scholarships from './Pages/Scholarships'
@@ -33,7 +33,7 @@ function App() {
             </NonDashboardRoute>
           }
         />
-                <Route
+        <Route
           path="/scholarship"
           element={
             <NonDashboardRoute>
@@ -41,7 +41,7 @@ function App() {
             </NonDashboardRoute>
           }
         />
-                <Route
+        <Route
           path="/testimonial"
           element={
             <NonDashboardRoute>
@@ -73,7 +73,7 @@ function App() {
             </NonDashboardRoute>
           }
         />
-                <Route
+        <Route
           path="/about"
           element={
             <NonDashboardRoute>
@@ -190,7 +190,7 @@ function App() {
             </NonDashboardRoute>
           }
         />
-      {/* <Route path="/event-gallery" element={<Event/>}/>
+        {/* <Route path="/event-gallery" element={<Event/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/scholarship" element={<Scholarships/>} />

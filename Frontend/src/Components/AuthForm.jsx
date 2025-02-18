@@ -11,10 +11,10 @@ import { useAuth } from "../Context/AuthProvider";
 
 export function AuthForm({ mode }) {
   const navigate = useNavigate();
-  const{login}=useAuth()
+  const { login } = useAuth()
   const { loadings, error: errorMsg } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -108,7 +108,7 @@ export function AuthForm({ mode }) {
           : "http://localhost:4000/server/dashadmin/login-admin";
         requestData = { email, password };
       }
-      
+
       dispatch(signInStart());
       const response = await axios.post(apiEndpoint, requestData);
 
@@ -153,16 +153,17 @@ export function AuthForm({ mode }) {
         .then((response) => {
           if (response.data.success === false) {
             toast.error(response.data.message);
+            setEmailVerified(false)
             dispatch(signInFailure(response.data.message));
           } else {
-            // Set the user in Redux after successful signup
             dispatch(signInSuccess(response.data.user));
             toast.success(response.data.message);
             setOtpModalOpen(false);
-            navigate('/student-dashboard'); // Adjust route as needed
+            navigate('/student-dashboard'); 
           }
         })
         .catch((error) => {
+          setEmailVerified(false)
           toast.error(error.response?.data?.message || error.message);
           dispatch(signInFailure(error.response?.data?.message || error.message));
         });
@@ -283,10 +284,10 @@ export function AuthForm({ mode }) {
           {loading
             ? "Please wait..."
             : isSignup
-            ? "Sign Up"
-            : isStudentLogin
-            ? "Student Login"
-            : "Admin Login"}
+              ? "Sign Up"
+              : isStudentLogin
+                ? "Student Login"
+                : "Admin Login"}
         </button>
       </form>
 

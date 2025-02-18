@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import { AuthForm } from '../Components/AuthForm';
-import { GraduationCap, UserCog } from 'lucide-react';
+import { GraduationCap, UserCog, X, ArrowLeft } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [userType, setUserType] = useState('student');
   const [authMode, setAuthMode] = useState('student-login');
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 relative">
       <Toaster position="top-right" />
-      
+
+      {/* Close Button (for larger screens) */}
+      <button 
+        onClick={() => navigate('/')} 
+        className="hidden sm:block absolute top-4 right-4 bg-gray-200 p-2 rounded-full hover:bg-gray-300 transition"
+      >
+        <X className="h-5 w-5 text-gray-700" />
+      </button>
+
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          {/* User Type Selection Buttons - Always Visible */}
+          
+          {/* User Type Selection Buttons */}
           <div className="flex justify-center gap-6 mb-8">
             <button
               onClick={() => {
@@ -46,8 +57,17 @@ function Login() {
             </button>
           </div>
 
-          {/* Authentication Forms */}
-          <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
+          {/* Authentication Form */}
+          <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8 relative">
+            
+            {/* Back Arrow (for smaller screens) */}
+            <button 
+              onClick={() => navigate('/')} 
+              className="sm:hidden absolute top-4 left-4 bg-gray-200 p-2 rounded-full hover:bg-gray-300 transition"
+            >
+              <ArrowLeft className="h-5 w-5 text-gray-700" />
+            </button>
+
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900">
                 {authMode === 'admin-login' ? 'Admin Login' : 
@@ -70,6 +90,7 @@ function Login() {
               </div>
             )}
           </div>
+
         </div>
       </div>
     </div>
@@ -77,4 +98,3 @@ function Login() {
 }
 
 export default Login;
-
