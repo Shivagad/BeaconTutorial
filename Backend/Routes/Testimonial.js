@@ -5,7 +5,8 @@ import {
   getTestimonialById,
   updateTestimonial,
   deleteTestimonial,
-  getSortedTestimonials
+  getSortedTestimonials,
+  getThreeTestimonial
 } from '../Controller/Testimonial.js'; // Adjust the path as needed
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.get('/', getTestimonials);
 router.get('/:id', getTestimonialById);
 router.put('/:id', updateTestimonial);
 router.delete('/:id', deleteTestimonial);
+router.get("/test/three", getThreeTestimonial);
 
 export default router;

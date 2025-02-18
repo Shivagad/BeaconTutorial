@@ -10,6 +10,7 @@ import HomeCourses from '../Components/HomeComponents/HomeCourses';
 import HomeWhyChooseUse from '../Components/HomeComponents/HomeWhyChooseUs';
 import TestimonialSection from '../Components/HomeComponents/TestiMonialSection';
 import ClassGallery from '../Components/HomeComponents/ClassGallery';
+import { useNavigate } from 'react-router-dom';
 const courses = [
     { id: 1, title: "JEE Main & Advanced", icon: Calculator, description: "Comprehensive preparation for IIT entrance", students: "10,000+" },
     { id: 2, title: "NEET Preparation", icon: BrainCircuit, description: "Complete medical entrance preparation", students: "8,000+" },
@@ -18,6 +19,7 @@ const courses = [
 ];
 
 function Home() {
+    const navigate=useNavigate()
     const [posters, setPosters] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -146,6 +148,7 @@ function Home() {
                             Up to 99% Scholarship for qualifying students from 10th SSC / CBSE / ICSE
                         </p>
                         <button
+                        onClick={() =>  {navigate('/scholarship')}}
                             className="bg-orange-400 hover:bg-orange-500 px-6 py-2 
                      rounded-full text-white text-lg font-semibold 
                      transform hover:-translate-y-1 hover:scale-105 

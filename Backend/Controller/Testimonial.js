@@ -89,3 +89,12 @@ export const deleteTestimonial = async (req, res) => {
     res.status(500).json({ message: "Error deleting testimonial", error: error.message });
   }
 };
+
+export const getThreeTestimonial = async (req, res) => {
+  try {
+    const testimonials = await Testimonial.find().sort({ seqno: 1 }).limit(3);
+    res.status(200).json({ data: testimonials });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching sorted testimonials", error: error.message });
+  }
+};
