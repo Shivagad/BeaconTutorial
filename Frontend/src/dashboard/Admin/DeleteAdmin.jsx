@@ -17,7 +17,7 @@ const DeleteAdminModal = ({
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
       try {
-        const response = await axios.delete(`http://localhost:4000/server/dashadmin/${id}`);
+        const response = await axios.delete(`https://beacon-tutorial.vercel.app/server/dashadmin/${id}`);
         if (response.status === 200) {
           setToast({
             success: true,

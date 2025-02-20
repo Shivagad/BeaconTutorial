@@ -56,11 +56,11 @@ const Scholarships = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post("http://localhost:4000/server/scholarship/create", formData)
+        .post("https://beacon-tutorial.vercel.app/server/scholarship/create", formData)
         .then((response) => {
           toast.success("Form submitted successfully.");
           // Proceed to the next POST request after the first one succeeds
-          return axios.post("http://localhost:4000/server/student/scholarregsuccess", formData);
+          return axios.post("https://beacon-tutorial.vercel.app/server/student/scholarregsuccess", formData);
         })
         .then((response) => {
           toast.success("Check your email for confirmation.");

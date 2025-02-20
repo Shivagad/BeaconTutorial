@@ -6,7 +6,7 @@ const AdminScholarshipTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/server/scholarship/getall")
+      .get("https://beacon-tutorial.vercel.app/server/scholarship/getall")
       .then((response) => {
         setScholarships(response.data.data);
       })

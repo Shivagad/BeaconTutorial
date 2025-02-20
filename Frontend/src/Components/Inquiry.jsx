@@ -30,7 +30,7 @@ const InquiryForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/server/inquiry", formData);
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/inquiry", formData);
       if (response.status === 200) {
         toast.success("Form submitted successfully!");
         setFormData({

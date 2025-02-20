@@ -48,7 +48,7 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post('http://localhost:4000/server/tenth/students', formData);
+      const response = await axios.post('https://beacon-tutorial.vercel.app/server/tenth/students', formData);
       setFormData({
         firstName: "",
         lastName: "",

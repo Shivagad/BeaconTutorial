@@ -16,7 +16,7 @@ const Delete12StudentModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`http://localhost:4000/server/twelve/students/${id}`);
+      const response = await axios.delete(`https://beacon-tutorial.vercel.app/server/twelve/students/${id}`);
       response.data.success ? (setToast3({
         success: true,
         message: `12th Student deleted successfully`,

@@ -6,7 +6,7 @@ const AdminInquiryTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/server/getinquiries")
+      .get("https://beacon-tutorial.vercel.app/server/getinquiries")
       .then((response) => {
         setInquiries(response.data.data);
       })

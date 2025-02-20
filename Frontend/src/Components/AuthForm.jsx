@@ -76,7 +76,7 @@ export function AuthForm({ mode }) {
 
         // Send OTP email
         axios
-          .post("http://localhost:4000/server/student/otp-email", {
+          .post("https://beacon-tutorial.vercel.app/server/student/otp-email", {
             email,
             name,
             otp,
@@ -104,8 +104,8 @@ export function AuthForm({ mode }) {
           throw new Error("Email and password are required!");
         }
         apiEndpoint = isStudentLogin
-          ? "http://localhost:4000/server/student/login-student"
-          : "http://localhost:4000/server/dashadmin/login-admin";
+          ? "https://beacon-tutorial.vercel.app/server/student/login-student"
+          : "https://beacon-tutorial.vercel.app/server/dashadmin/login-admin";
         requestData = { email, password };
       }
 
@@ -144,7 +144,7 @@ export function AuthForm({ mode }) {
   useEffect(() => {
     if (isSignup && emailVerified) {
       axios
-        .post("http://localhost:4000/server/student/signup-student", {
+        .post("https://beacon-tutorial.vercel.app/server/student/signup-student", {
           name,
           email,
           password,

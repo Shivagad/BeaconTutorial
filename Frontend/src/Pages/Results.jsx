@@ -20,7 +20,7 @@ const Results =()=> {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:4000/server/tenth/result') // Replace with your API endpoint
+    axios.get('https://beacon-tutorial.vercel.app/server/tenth/result') // Replace with your API endpoint
       .then(response => {
         if (response.data.success) {
           console.log(response.data.data)
