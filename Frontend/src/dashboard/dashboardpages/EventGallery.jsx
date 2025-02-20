@@ -7,7 +7,7 @@ import AddEventGalary from '../EventGalary/AddEventGalary';
 import EditEventGalary from '../EventGalary/EditEventGalary';
 import DeleteEventGalary from '../EventGalary/DeleteEventGalary';
 
-const EventGalary = () => {
+const EventGallery = () => {
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -159,4 +159,4 @@ const EventGalary = () => {
   );
 };
 
-export default EventGalary;
+export default EventGallery;

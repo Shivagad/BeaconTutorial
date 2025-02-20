@@ -29,7 +29,7 @@ export const sendOTPEmail = async (req, res) => {
     let htmlContent = template({ name, email, otp });
 
     const mailOptions = {
-        from: `CodeFolio <${process.env.MAIL_USER}>`,
+        from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
         to: email,
         subject: "Your OTP Verification Code",
         html: htmlContent,
@@ -66,6 +66,32 @@ export const sendSignUpSuccessfulEmail = async (req, res) => {
         res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
         console.error("Error sending OTP email:", error);
+        res.status(500).json({ error: "Failed to send email" });
+    }
+};
+
+
+export const sendScholarregSuccessfull = async (req, res) => {
+    console.log(req.body);
+    const { firstName, lastName,email} = req.body;
+    const templatePath = path.join(__dirname, "../views", 'ScholarshipregSuccess.hbs');
+    const templateSource = fs.readFileSync(templatePath, "utf-8");
+    const template = Handlebars.compile(templateSource);
+    let htmlContent = template({  firstName, lastName });
+
+    const mailOptions = {
+        from: `Beacon Tutorail <${process.env.MAIL_USER}>`,
+        to: email,
+        subject: "Congratulation you have Successfully Register For Beacon Tutorial Scholarship Test",
+        html: htmlContent,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        // console.log("OTP email sent successfully.");
+        res.status(200).json({ message: "Email sent successfully" });
+    } catch (error) {
+        // console.error("Error sending OTP email:", error);
         res.status(500).json({ error: "Failed to send email" });
     }
 };

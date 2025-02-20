@@ -17,7 +17,8 @@ import Student from './Routes/Student.js'
 import path from "path";
 import { fileURLToPath } from "url";
 import Testimonial from './Routes/Testimonial.js'
-import Scholarship from './Routes/Scholarship.js'
+import Scholarship from './Routes/Scholarship.js';
+import Inquiry from './Routes/Inquiry.js'
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -44,6 +45,7 @@ app.use('/server/dashadmin', DashAdmin);
 app.use('/server/student',Student)
 app.use('/server/testimonial', Testimonial);
 app.use('/server/scholarship',Scholarship);
+app.use('/server',Inquiry);
 
 app.get('/', (req, res) => {
     res.send('Server is running');
@@ -60,6 +62,9 @@ app.get("/s", (req, res) => {
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+
+export default app;

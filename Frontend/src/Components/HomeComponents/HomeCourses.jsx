@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom" 
 import {
   GraduationCap,
   Book,
@@ -15,7 +16,12 @@ import hsc from "../../../public/images/hsc.jpg"
 
 const HomeCourses = () => {
   const [activeTab, setActiveTab] = useState("10th")
-  const [hoveredCard, setHoveredCard] = useState(null)
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const navigate = useNavigate() 
+
+  const handleInquireNowClick = () => {
+    navigate("/inquiry")  // Navigate to /inquire
+  }
 
   const courses = {
     "10th": [
@@ -194,9 +200,11 @@ const HomeCourses = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
-                    <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 group relative overflow-hidden">
-                      <span className="relative z-10">Enquire Now</span>
+                    <button  onClick={handleInquireNowClick}  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 group relative overflow-hidden">
+                   
+                      <span className="relative z-10">Inquire Now</span>
                       <div className="absolute inset-0 animate-shine"></div>
+                      
                     </button>
                   </div>
                 </div>
@@ -230,8 +238,8 @@ const HomeCourses = () => {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                       </div>
-                      <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 group relative overflow-hidden">
-                        <span className="relative z-10">Enquire Now</span>
+                      <button onClick={handleInquireNowClick} className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 group relative overflow-hidden">
+                        <span className="relative z-10">Inquire Now</span>
                         <div className="absolute inset-0 animate-shine"></div>
                       </button>
                     </div>

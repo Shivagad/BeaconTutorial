@@ -1,8 +1,9 @@
 import express from "express";
 const router = express.Router();
 
-import {sendOTPEmail} from '../Controller/EmailService.js';
+import {sendOTPEmail,sendScholarregSuccessfull} from '../Controller/EmailService.js';
 router.post('/otp-email',sendOTPEmail);
+router.post('/scholarregsuccess',sendScholarregSuccessfull);
 
 import { Signup,Login } from "../Controller/Student.js";
 router.post('/signup-student',Signup);

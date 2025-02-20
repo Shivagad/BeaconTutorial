@@ -14,10 +14,11 @@ const Sidebar = () => {
     { icon: Users, label: 'JEE Results', path: '/dashboard/jee-results' },
     { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
-    { icon: Album, label: 'Event Galary', path: '/dashboard/event-galary' },
+    { icon: Album, label: 'Event Gallery', path: '/dashboard/event-gallery' },
     { icon: Users, label: 'Manage Admins', path: '/dashboard/admin' },
     { icon: Users, label: 'Testimonial', path: '/dashboard/testimonial' },
     { icon: Users, label: 'Scholarship', path: '/dashboard/scholarship' },
+    { icon: Users, label: 'Inquiry', path: '/dashboard/inquiry' },
   ];
 
   return (

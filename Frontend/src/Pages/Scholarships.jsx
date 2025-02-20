@@ -58,8 +58,13 @@ const Scholarships = () => {
       axios
         .post("http://localhost:4000/server/scholarship/create", formData)
         .then((response) => {
-          toast.success("Form submitted successfully!");
-          // Clear the form by resetting formData
+          toast.success("Form submitted successfully.");
+          // Proceed to the next POST request after the first one succeeds
+          return axios.post("http://localhost:4000/server/student/scholarregsuccess", formData);
+        })
+        .then((response) => {
+          toast.success("Check your email for confirmation.");
+          // Clear the form once both requests succeed
           setFormData({
             firstName: "",
             lastName: "",
@@ -80,6 +85,7 @@ const Scholarships = () => {
       console.log("Form validation failed");
     }
   };
+  
   
   
 

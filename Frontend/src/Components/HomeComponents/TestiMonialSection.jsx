@@ -32,7 +32,7 @@ const TestimonialSection = () => {
     }, []);
 
     return (
-        <div className="relative flex justify-center items-center h-screen bg-blue-900 text-white px-6">
+        <div className="relative flex justify-center items-center h-[70vh] bg-blue-900 text-white px-6">
             <div className="absolute inset-0 bg-cover bg-center opacity-40" style={{ backgroundImage: "url('/path-to-texture.png')" }}></div>
 
             <div className="relative z-10 max-w-4xl w-full flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-10">

@@ -9,7 +9,7 @@ import NEETResult from './dashboard/dashboardpages/NEETResult';
 import Poster from './dashboard/dashboardpages/Poster';
 import Results from './Pages/Results';
 import Home from './Pages/Home';
-import EventGalary from './dashboard/dashboardpages/EventGalary';
+import EventGallery from './dashboard/dashboardpages/EventGallery';
 import Contact from './Pages/Contact';
 import Event from './Pages/Event';
 import Admin from './dashboard/dashboardpages/Admin';
@@ -20,6 +20,8 @@ import MainTestimonial from './Pages/Testimonial'
 import About from './Pages/About'
 import Scholarships from './Pages/Scholarships'
 import AdminScholarship from './dashboard/dashboardpages/Scholarship';
+import Inquiry from './Components/Inquiry'
+import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +32,14 @@ function App() {
           element={
             <NonDashboardRoute>
               <Event />
+            </NonDashboardRoute>
+          }
+        />
+         <Route
+          path="/inquiry"
+          element={
+            <NonDashboardRoute>
+              <Inquiry />
             </NonDashboardRoute>
           }
         />
@@ -107,6 +117,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+           <Route
+            path="inquiry"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <DashInquiry />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="admin"
             element={
@@ -119,7 +137,7 @@ function App() {
             path="event-gallery"
             element={
               <ProtectedRoute requiredRole="admin">
-                <EventGalary />
+                <EventGallery />
               </ProtectedRoute>
             }
           />
