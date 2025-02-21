@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthProvider';
-import logo from '/images/beaconlogo.jpg';
 
 const Navbar = ({ logoSrc }) => {
   const { currentUser, logout } = useAuth();
@@ -83,8 +82,8 @@ const Navbar = ({ logoSrc }) => {
         <div className="flex items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 mr-4">
-            {logo ? (
-              <img src={logo} alt="Logo" className="h-14 w-auto" />
+            {logoSrc ? (
+              <img src={logoSrc} alt="Logo" className="h-12 w-auto" />
             ) : (
               <div className="h-12 w-32 bg-gray-200 rounded animate-pulse" />
             )}
