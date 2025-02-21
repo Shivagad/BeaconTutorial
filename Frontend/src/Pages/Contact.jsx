@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Make sure to import the CSS for toast notifications
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -50,7 +49,9 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Contact Us
+            </h1>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               If you have any questions regarding our tuition services, please
               do not hesitate to contact us. Visit us today and we will be more
@@ -97,7 +98,10 @@ export default function ContactPage() {
                 <p className="text-lg text-gray-600 mb-8 text-center">
                   Alternatively, you can fill in the following contact form:
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-6 flex flex-col"
+                >
                   <div className="text-center">
                     <label
                       htmlFor="name"
@@ -184,8 +188,8 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
- {/* Addresses and Maps */}
- <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+          {/* Addresses and Maps */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
             <div className="space-y-8">
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <h2 className="text-2xl font-semibold text-gray-900 mb-6">
@@ -219,17 +223,13 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Google Map - First Branch */}
-              <div className="h-[400px] rounded-lg  shadow-md bg-white">
+              <div className="relative w-full pb-[56.25%] rounded-lg shadow-md bg-white">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15138.172850969771!2d73.82754296064374!3d18.45903780649374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eaca123c59b5%3A0xd7e3e42fdc95b01e!2sBeacon%20Tutorials!5e0!3m2!1sen!2sin!4v1739267453308!5m2!1sen!2sin"
-                  width="600"
-                  height="450"
-                  style={{ border: "0" }}
-                  allowfullscreen=""
+                  className="absolute top-0 left-0 w-full h-full"
+                  allowFullScreen=""
                   loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
+                  referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
             </div>
@@ -269,22 +269,20 @@ export default function ContactPage() {
               </div>
 
               {/* Google Map - Second Branch */}
-              <div className="h-[400px] rounded-lg shadow-md bg-white">
+              <div className="relative w-full pb-[56.25%] rounded-lg shadow-md bg-white">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.760638841412!2d73.83248837465047!3d18.449173971352288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eb2b89376603%3A0x4aeee8283eb0fd05!2sSun%20City%20Ambegaon!5e0!3m2!1sen!2sin!4v1739270616028!5m2!1sen!2sin"
-                  width="600"
-                  height="450"
-                  style={{ border: "0" }}
-                  allowfullscreen=""
+                  className="absolute top-0 left-0 w-full h-full"
+                  allowFullScreen=""
                   loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
+                  referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-       
+
       <Footer />
     </>
   );

@@ -1,7 +1,10 @@
 import React from 'react';
 import { ChevronRight, Users, BookOpen, Clock } from 'lucide-react';
-import Footer from "../Components/Footer";
-import Navbar from "../Components/Navbar";
+import aboutusImage1 from '/images/aboutus_img1.avif'; 
+import aboutusImage2 from '/images/aboutus_img2.avif';
+import aboutusImage3 from '/images/aboutus_img3.avif';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
 
 function AboutUs() {
   return (
@@ -13,9 +16,10 @@ function AboutUs() {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: 'url("https://via.placeholder.com/1500x800")',
+            backgroundImage: `url(${aboutusImage1})`, 
             backgroundPosition: 'center right'
           }}
+          
         >
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -39,7 +43,7 @@ function AboutUs() {
           </div>
           <div className="rounded-lg overflow-hidden shadow-xl">
             <img 
-              src="https://via.placeholder.com/500x300" 
+              src={aboutusImage2} 
               alt="Beacon Tutorials Facility" 
               className="w-full h-full object-cover"
             />
@@ -52,7 +56,7 @@ function AboutUs() {
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="rounded-lg overflow-hidden shadow-xl">
             <img 
-              src="https://via.placeholder.com/500x300" 
+              src={aboutusImage3} 
               alt="Sanjeev Pawar - Director" 
               className="w-full h-full object-cover"
             />
@@ -134,4 +138,4 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default AboutUs;
