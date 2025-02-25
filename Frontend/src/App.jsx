@@ -22,6 +22,7 @@ import Scholarships from './Pages/Scholarships'
 import AdminScholarship from './dashboard/dashboardpages/Scholarship';
 import Inquiry from './Components/Inquiry'
 import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
+import Blog from './dashboard/dashboardpages/Blog.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -189,6 +190,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+                 <Route
+            path="blog"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <Blog />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="neet-results"
             element={
@@ -198,6 +207,7 @@ function App() {
             }
           />
         </Route>
+        
 
         {/* Catch-all: if none of the above routes match, redirect admins to dashboard, else to login */}
         <Route
