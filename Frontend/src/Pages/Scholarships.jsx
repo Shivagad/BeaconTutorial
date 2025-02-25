@@ -19,6 +19,7 @@ const Scholarships = () => {
     educationMode: "",
     marks: "",
     board: "",
+    SchoolName:"",
   });
 
   const [errors, setErrors] = useState({});
@@ -47,6 +48,7 @@ const Scholarships = () => {
     else if (isNaN(formData.marks)) newErrors.marks = "Marks must be a number";
 
     if (!formData.board) newErrors.board = "Board selection is required";
+    if (!formData.SchoolName) newErrors.SchoolName = "School Name selection is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -56,11 +58,11 @@ const Scholarships = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post("https://beacon-tutorial.vercel.app/server/scholarship/create", formData)
+        .post("http://localhost:4000/server/scholarship/create", formData)
         .then((response) => {
           toast.success("Form submitted successfully.");
           // Proceed to the next POST request after the first one succeeds
-          return axios.post("https://beacon-tutorial.vercel.app/server/student/scholarregsuccess", formData);
+          return axios.post("http://localhost:4000/server/student/scholarregsuccess", formData);
         })
         .then((response) => {
           toast.success("Check your email for confirmation.");
@@ -76,6 +78,7 @@ const Scholarships = () => {
             educationMode: "",
             marks: "",
             board: "",
+            SchoolName:"",
           });
         })
         .catch((error) => {
@@ -229,6 +232,18 @@ const Scholarships = () => {
                 onChange={handleInputChange}
               />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-2 text-gray-600 font-medium">School Name</label>
+              <input
+                type="text"
+                name="SchoolName"
+                placeholder="e.g., PICT"
+                className="p-3 border border-gray-300 rounded-lg w-full"
+                value={formData.SchoolName}
+                onChange={handleInputChange}
+              />
+                {errors.SchoolName && <p className="text-red-500 text-sm">{errors.SchoolName}</p>}
             </div>
           </div>
 

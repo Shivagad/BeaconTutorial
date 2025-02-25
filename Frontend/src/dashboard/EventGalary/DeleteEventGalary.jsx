@@ -16,7 +16,7 @@ const DeleteEventGalary = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`https://beacon-tutorial.vercel.app/server/event/deleteevent/${id}`);
+      const response = await axios.delete(`http://localhost:4000/server/event/deleteevent/${id}`);
       response.data.success ? (setToast3({
         success: true,
         message: `JEE Student deleted successfully`,

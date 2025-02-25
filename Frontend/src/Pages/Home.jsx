@@ -61,7 +61,7 @@ function Home() {
     const fetchPosters = async () => {
       try {
         const response = await axios.get(
-          "https://beacon-tutorial.vercel.app/server/poster/getallposter"
+          "http://localhost:4000/server/poster/getallposter"
         );
         setPosters(response.data.data || []);
       } catch (error) {

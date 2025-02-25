@@ -53,7 +53,7 @@ export default function OTPModal({
 
     try {
       const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      await axios.post("https://beacon-tutorial.vercel.app/server/student/otp-email", {
+      await axios.post("http://localhost:4000/server/student/otp-email", {
         email,
         otp: newOtp,
       });

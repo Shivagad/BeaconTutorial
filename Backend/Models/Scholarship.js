@@ -12,6 +12,7 @@ const ScholarshipSchema = new mongoose.Schema(
     educationMode: { type: String, required: true },
     marks: { type: Number, required: true },
     board: { type: String, required: true },
+    SchoolName:{type:String,required:true},
   },
   { timestamps: true }
 );

@@ -29,7 +29,6 @@ const ResultSection = ({ title, students, bgColor }) => {
             </h2>
           </div>
         </div>
-
         <div className="relative">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {currentStudents.map((student) => (

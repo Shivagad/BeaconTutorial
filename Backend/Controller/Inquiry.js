@@ -1,4 +1,5 @@
 import Inquiry from "../Models/Inquiry.js";
+import { Parser } from "json2csv";
 
 
 export const submitInquiry = async (req, res) => {
@@ -33,3 +34,71 @@ export const getAllInquiry = async (req, res) => {
       });
     }
   };
+
+
+
+
+  
+    export const downloadInquiryCSV = async (req, res) => {
+      try {
+        // Query all scholarship entries from the database and return plain JavaScript objects.
+        const inquiry = await Inquiry.find({}).lean();
+        // Define the CSV fields/columns.
+        const fields = [
+          "firstName",
+          "lastName",
+          "phone",
+          "email",
+          "gender",
+          "address",
+          "city",
+          "state",
+          "previousStandard",
+          "previousStandardMarks",
+          "inquiryFor",
+          "message",
+          "createdAt",
+        ];
+        
+        // Convert JSON data to CSV.
+        const json2csvParser = new Parser({ fields });
+        const csvData = json2csvParser.parse(inquiry);
+    
+        // Set the appropriate headers to prompt a file download.
+        res.header("Content-Type", "text/csv");
+        res.attachment("inquiry_entries.csv");
+        res.status(200).send(csvData);
+      } catch (error) {
+        console.error("Error exporting inquiry CSV:", error);
+        res.status(500).json({ error: "Failed to export inquiry CSV" });
+      }
+    };
+  
+  
+  
+    export const deleteInquiry = async (req, res) => {
+      try {
+        const { id } = req.params;
+        const inquiry = await Inquiry.findByIdAndDelete(id);
+        if (!inquiry) {
+          return res.status(404).json({ error: "Inquiry entry not found" });
+        }
+        res.status(200).json({ message: "Inquiry entry deleted successfully" });
+      } catch (error) {
+        console.error("Error deleting Inquiry entry:", error);
+        res.status(500).json({ error: "Failed to delete Inquiry entry" });
+      }
+    };
+    
+  
+    export const deleteAllInquiry = async (req, res) => {
+      try {
+        await Inquiry.deleteMany({});
+        res.status(200).json({ message: "All Inquiry entries deleted successfully" });
+      } catch (error) {
+        console.error("Error deleting all Inquiry entries:", error);
+        res.status(500).json({ error: "Failed to delete all Inquiry entries" });
+      }
+    };
+    
+  
