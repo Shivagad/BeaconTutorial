@@ -19,6 +19,7 @@ const Sidebar = () => {
     { icon: Users, label: 'Testimonial', path: '/dashboard/testimonial' },
     { icon: Users, label: 'Scholarship', path: '/dashboard/scholarship' },
     { icon: Users, label: 'Inquiry', path: '/dashboard/inquiry' },
+    { icon: Users, label: 'Blog', path: '/dashboard/blog' },
   ];
 
   return (

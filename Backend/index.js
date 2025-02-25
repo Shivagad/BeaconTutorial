@@ -19,6 +19,7 @@ import { fileURLToPath } from "url";
 import Testimonial from './Routes/Testimonial.js'
 import Scholarship from './Routes/Scholarship.js';
 import Inquiry from './Routes/Inquiry.js'
+import Blog from './Routes/Blog.js'
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -46,6 +47,7 @@ app.use('/server/student',Student)
 app.use('/server/testimonial', Testimonial);
 app.use('/server/scholarship',Scholarship);
 app.use('/server',Inquiry);
+app.use('/server',Blog);
 
 app.get('/', (req, res) => {
     res.send('Server is running');
