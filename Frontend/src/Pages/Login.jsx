@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [userType, setUserType] = useState('student');
-  const [authMode, setAuthMode] = useState('student-login');
   const navigate = useNavigate();
 
   return (
@@ -27,10 +26,7 @@ function Login() {
           {/* User Type Selection Buttons */}
           <div className="flex justify-center gap-6 mb-8">
             <button
-              onClick={() => {
-                setUserType('student');
-                setAuthMode('student-login');
-              }}
+              onClick={() => setUserType('student')}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                 userType === 'student'
                   ? 'bg-blue-600 text-white'
@@ -42,10 +38,7 @@ function Login() {
             </button>
             
             <button
-              onClick={() => {
-                setUserType('admin');
-                setAuthMode('admin-login');
-              }}
+              onClick={() => setUserType('admin')}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                 userType === 'admin'
                   ? 'bg-indigo-600 text-white'
@@ -70,25 +63,11 @@ function Login() {
 
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-gray-900">
-                {authMode === 'admin-login' ? 'Admin Login' : 
-                 authMode === 'student-login' ? 'Student Login' : 'Student Sign Up'}
+                {userType === 'admin' ? 'Admin Login' : 'Student Login'}
               </h2>
             </div>
 
-            <AuthForm mode={authMode} />
-
-            {userType === 'student' && (
-              <div className="mt-6 text-center">
-                <button
-                  onClick={() => setAuthMode(authMode === 'student-login' ? 'student-signup' : 'student-login')}
-                  className="text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  {authMode === 'student-login' ? 
-                    "Don't have an account? Sign up" : 
-                    "Already have an account? Login"}
-                </button>
-              </div>
-            )}
+            <AuthForm mode={userType === 'admin' ? 'admin-login' : 'student-login'} />
           </div>
 
         </div>

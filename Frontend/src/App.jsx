@@ -22,6 +22,7 @@ import Scholarships from './Pages/Scholarships'
 import AdminScholarship from './dashboard/dashboardpages/Scholarship';
 import Inquiry from './Components/Inquiry'
 import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
+import Blog from './Pages/Blog.jsx';
 function App() {
   return (
     <BrowserRouter>
@@ -92,6 +93,14 @@ function App() {
           }
         />
         <Route
+          path="/student-corner"
+          element={
+            <NonDashboardRoute>
+              <Blog />
+            </NonDashboardRoute>
+          }
+        />
+        <Route
           path="/contact"
           element={
             <NonDashboardRoute>
@@ -141,6 +150,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+        
           <Route
             path="12th-results"
             element={

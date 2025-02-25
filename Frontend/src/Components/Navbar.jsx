@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/AuthProvider';
+import logo from '../../public/images/logo.png'
 
 const Navbar = ({ logoSrc }) => {
   const { currentUser, logout } = useAuth();
@@ -22,7 +23,7 @@ const Navbar = ({ logoSrc }) => {
   ];
 
 
-  
+
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       {/* Top bar with contact info */}
@@ -79,18 +80,29 @@ const Navbar = ({ logoSrc }) => {
 
       {/* Main navbar */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center h-20">
+        <div className="flex flex-col space-y-6 h-20 items-end">
           {/* Logo */}
-          <div className="flex-shrink-0 mr-4">
-            {logoSrc ? (
-              <img src={logoSrc} alt="Logo" className="h-12 w-auto" />
-            ) : (
-              <div className="h-12 w-32 bg-gray-200 rounded animate-pulse" />
-            )}
-          </div>
+          {
+            !isOpen && (
+              <div className="flex-shrink-0 mr-4">
+                {logo ? (
+                  <div className="absolute top-0 left-4 h-full flex items-center">
+                    <img
+                      src={logo}
+                      alt="Logo"
+                      className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-26 w-auto"
+                    />
+                  </div>
+
+                ) : (
+                  <div className="h-12 w-32 bg-gray-200 rounded animate-pulse" />
+                )}
+              </div>
+            )
+          }
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 ml-4">
+          <div className="hidden lg:flex items-center space-x-8 ml-4">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -103,7 +115,7 @@ const Navbar = ({ logoSrc }) => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden ml-auto">
+          <div className="lg:hidden ml-auto">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 hover:text-blue-600 focus:outline-none"

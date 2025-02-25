@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 const images = [
-    "/images/cbse.jpg","images/cbse.jpg", "images/cbse.jpg",
+    "/images/cbse.jpg", "images/cbse.jpg", "images/cbse.jpg",
     "images/cbse.jpg", "images/cbse.jpg", "images/cbse.jpg"
 ];
 
@@ -22,17 +22,17 @@ const ClassGallery = () => {
 
             {/* Image Grid (Moves to left on large screens) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full lg:w-1/2">
-    {images.map((src, index) => (
-        <motion.img
-            key={index}
-            src={src}
-            alt={`Gallery ${index}`}
-            className="w-full h-auto max-w-[300px] rounded-lg shadow-md cursor-pointer mx-auto"
-            whileHover={{ scale: 1.05 }}
-            onClick={() => setSelectedImage(src)}
-        />
-    ))}
-</div>
+                {images.map((src, index) => (
+                    <motion.img
+                        key={index}
+                        src={src}
+                        alt={`Gallery ${index}`}
+                        className="w-full h-auto max-w-[300px] rounded-lg shadow-md cursor-pointer mx-auto"
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => setSelectedImage(src)}
+                    />
+                ))}
+            </div>
 
 
             {/* Modal for Image Preview */}
@@ -49,9 +49,9 @@ const ClassGallery = () => {
                         >
                             <X size={24} />
                         </button>
-                        <img 
-                            src={selectedImage} 
-                            alt="Expanded View" 
+                        <img
+                            src={selectedImage}
+                            alt="Expanded View"
                             className="max-w-full max-h-[80vh] object-contain rounded-md"
                         />
                     </motion.div>
