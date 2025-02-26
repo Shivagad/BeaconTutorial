@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import Student from './Student.js';
+import Exam from './Exam.js';
 
 const ResultSchema = new mongoose.Schema({
   student: { type: mongoose.Schema.Types.ObjectId, ref: "Student", required: true },

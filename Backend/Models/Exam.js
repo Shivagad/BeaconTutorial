@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Course from "./Course.js";
 
 const ExamSchema = new mongoose.Schema({
   name: { type: String, required: true }, 

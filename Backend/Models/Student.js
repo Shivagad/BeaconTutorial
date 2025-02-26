@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+import Course from './Course.js'
+import Result from './ResultSchema.js'
 const studentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },

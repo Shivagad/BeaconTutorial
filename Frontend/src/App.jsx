@@ -26,6 +26,7 @@ import Blog from './Pages/Blog.jsx';
 import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
 import MangeStudent from './dashboard/dashboardpages/ManageStudent.jsx';
 import Courses from './dashboard/dashboardpages/Courses.jsx'
+import AllCourses from './Pages/AllCourses.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +45,15 @@ function App() {
           element={
             <NonDashboardRoute>
               <Inquiry />
+            </NonDashboardRoute>
+          }
+        />
+        
+        <Route
+          path="/all-courses"
+          element={
+            <NonDashboardRoute>
+              <AllCourses />
             </NonDashboardRoute>
           }
         />

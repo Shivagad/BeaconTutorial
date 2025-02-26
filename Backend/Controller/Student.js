@@ -12,17 +12,21 @@ dotenv.config();
 // Get all students
 export const getStudents = async (req, res) => {
   try {
-    const students = await Student.find().populate("course");
+    const students = await Student.find().populate("course", "name"); // Only return course name
     res.status(200).json(students);
   } catch (error) {
     res.status(500).json({ success: false, message: "Failed to fetch students" });
   }
 };
 
+
+
 // Get a single student by ID
 export const getStudentById = async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id).populate("course");
+    // console.log("hii");
+    const student = await Student.findById(req.params.id).populate("course","name");
+    // console.log(student);
     if (!student) return res.status(404).json({ success: false, message: "Student not found" });
     res.status(200).json(student);
   } catch (error) {
@@ -36,27 +40,53 @@ export const createStudent = async (req, res) => {
     const { name, email, password, mobile, course } = req.body;
     console.log(req.body);
 
-    if (!mongoose.Types.ObjectId.isValid(course)) {
-      return res.status(400).json({ success: false, message: "Invalid course ID" });
+    const courseExists = await Course.findOne({ name: course });
+    if (!courseExists) {
+      return res.status(400).json({ success: false, message: "Course does not exist" });
     }
+    // console.log("ho");
+
+    // Use the actual ObjectId of the found course
+    const courseId = courseExists._id;
+    // console.log("Final Course ID:", courseId);
+    const courseCheck = await Course.findById(courseId);
+    // console.log("Course Exists in DB:", courseCheck);
+    
     const hashedPassword = await bcrypt.hash(password, 10);
-    const student = new Student({ name, email, password: hashedPassword, mobile, course });
-    await student.save();
-    console.log("added");
-    res.status(201).json({ success: true, message: "Student created successfully" });
+    const student = new Student({ name, email, password: hashedPassword, mobile, course: courseId });
+
+    try {
+      await student.save();
+      // console.log("saved");
+      res.status(201).json({ success: true, message: "Student created successfully" });
+    } catch (saveError) {
+      // console.error("Error saving student:", saveError);
+      res.status(500).json({ success: false, message: "Student creation failed", error: saveError.message });
+    }
+    
+    
   } catch (error) {
     res.status(500).json({ success: false, message: "Student creation failed" });
   }
 };
 
-// Update student details
+
+
+
+
 export const updateStudent = async (req, res) => {
   try {
     const { name, email, mobile, course, password } = req.body;
-    let updateData = { name, email, mobile, course };
+
+    const courseExists = await Course.findOne({ _id: course }); // Ensure the course exists
+    if (!courseExists) {
+      return res.status(400).json({ success: false, message: "Invalid course ID" });
+    }
+
+    let updateData = { name, email, mobile, course: courseExists._id };
 
     if (password) {
-      updateData.password = await bcrypt.hash(password, 10); 
+      updateData.password = await bcrypt.hash(password, 10);
     }
 
     const student = await Student.findByIdAndUpdate(req.params.id, updateData, { new: true });
@@ -81,39 +111,59 @@ export const deleteStudent = async (req, res) => {
   }
 };
 
-// Upload students via CSV
+
 export const uploadStudentsCSV = async (req, res) => {
   try {
-    if (!req.file) return res.status(400).json({ success: false, message: "CSV file is required" });
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: "CSV file is required" });
+    }
 
     const students = [];
     const filePath = req.file.path;
+    const readStream = fs.createReadStream(filePath).pipe(csv());
 
-    fs.createReadStream(filePath)
-      .pipe(csv())
-      .on("data", (row) => {
-        students.push({
-          name: row.name,
-          email: row.email,
-          password: row.password,
-          mobile: row.mobile,
-          course: row.course,
-        });
-      })
-      .on("end", async () => {
-        fs.unlinkSync(filePath);
+    for await (const row of readStream) {
+      const { name, email, password, mobile, course } = row;
+      console.log("Processing:", row);
 
-        for (let student of students) {
-          student.password = await bcrypt.hash(student.password, 10); // Hash password
-        }
-
-        await Student.insertMany(students);
-        res.status(201).json({ success: true, message: "CSV uploaded successfully" });
+      const existingStudent = await Student.findOne({ 
+        $or: [{ email }, { mobile }]
       });
+
+      if (existingStudent) {
+        console.warn(`Student with email "${email}" or mobile "${mobile}" already exists. Skipping.`);
+        continue;
+      }
+
+      // Find course by name
+      const courseExists = await Course.findOne({ name: course });
+      if (!courseExists) {
+        console.error(`Course "${course}" not found. Skipping.`);
+        continue;
+      }
+
+      const courseId = courseExists._id;
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      students.push({ name, email, password: hashedPassword, mobile, course: courseId });
+    }
+
+    fs.unlinkSync(filePath); 
+
+    if (students.length > 0) {
+      const insertedStudents = await Student.insertMany(students);
+      console.log("Inserted Students:", insertedStudents);
+      res.status(201).json({ success: true, message: "CSV uploaded successfully", students: insertedStudents });
+    } else {
+      res.status(400).json({ success: false, message: "No valid students were added. Check CSV data." });
+    }
   } catch (error) {
-    res.status(500).json({ success: false, message: "CSV upload failed" });
+    console.error("CSV upload failed:", error);
+    res.status(500).json({ success: false, message: "CSV upload failed", error: error.message });
   }
 };
+
+
 
 // Student Login
 export const Login = async (req, res) => {

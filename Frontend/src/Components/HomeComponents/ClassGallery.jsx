@@ -21,7 +21,7 @@ const ClassGallery = () => {
             </div>
 
             {/* Image Grid (Moves to left on large screens) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full lg:w-1/2">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full lg:w-1/2">
                 {images.map((src, index) => (
                     <motion.img
                         key={index}

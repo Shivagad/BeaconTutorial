@@ -8,10 +8,16 @@ const ResultSection = ({ title, students, bgColor }) => {
 
   const handlePrevPage = () => {
     setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
+    // setTimeout(() => {
+    //   window.scrollTo(0, 300); // Scroll 100 pixels below the top
+    // }, 100)
   };
 
   const handleNextPage = () => {
     setCurrentPage((prev) => (prev < totalPages - 1 ? prev + 1 : prev));
+    // setTimeout(() => {
+    //   window.scrollTo(0, 300); // Scroll 100 pixels below the top
+    // }, 100)
   };
 
   const currentStudents = students.slice(
@@ -22,9 +28,9 @@ const ResultSection = ({ title, students, bgColor }) => {
   return (
     <div className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 ${bgColor}`}>
       <div className="max-w-7xl mx-auto px-4">
-      <div className="sticky  z-10  mb-8">
+      <div className="sticky z-10 -mt-20 mb-8">
           <div className="bg-white/95 backdrop-blur-sm py-4 rounded-full shadow-lg">
-            <h2 className="text-3xl font-bold text-center text-indigo-700">
+            <h2 className="text-3xl font-bold text-center text-[#4e77bb]">
               {title}
             </h2>
           </div>

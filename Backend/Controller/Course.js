@@ -4,12 +4,19 @@ import mongoose from "mongoose";
 
 export const getCourses = async (req, res) => {
   try {
+    console.log("Fetching courses..."); // ✅ Debugging step
+
     const courses = await Course.find().populate("students exams");
+    console.log("Courses fetched:", courses); // ✅ Debugging step
+
     res.status(200).json({ success: true, courses });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Failed to fetch courses" });
+    console.error("Error fetching courses:", error); // ✅ Capture backend errors
+
+    res.status(500).json({ success: false, message: "Failed to fetch courses", error: error.message });
   }
 };
+
 
 
 export const getCourseById = async (req, res) => {

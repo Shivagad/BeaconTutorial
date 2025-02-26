@@ -1,33 +1,51 @@
 import express from "express";
-const router = express.Router();
+import fs from "fs";
+import path from "path";
 import multer from "multer";
 
+import {
+  Login,
+  getStudents,
+  createStudent,
+  updateStudent,
+  deleteStudent,
+  getStudentById,
+  uploadStudentsCSV
+} from "../Controller/Student.js";
 
-import {sendOTPEmail,sendScholarregSuccessfull} from '../Controller/EmailService.js';
-router.post('/otp-email',sendOTPEmail);
-router.post('/scholarregsuccess',sendScholarregSuccessfull);
+import { sendOTPEmail, sendScholarregSuccessfull } from "../Controller/EmailService.js";
 
-import { Login,getStudents,
-    createStudent,
-    updateStudent,
-    deleteStudent,
-    uploadStudentsCSV } from "../Controller/Student.js";
+const router = express.Router();
 
-    const storage = multer.diskStorage({
-        destination: (req, file, cb) => {
-          cb(null, "uploads/"); 
-        },
-        filename: (req, file, cb) => {
-          cb(null, `${Date.now()}-${file.originalname}`);
-        }
-      });
-      const upload = multer({ storage });
-// router.post('/signup-student',Signup);
-router.post('/login-student',Login);
+// Ensure "uploads" directory exists
+const uploadDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Multer storage configuration
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
+
+const upload = multer({ storage });
+
+// Email Routes
+router.post('/otp-email', sendOTPEmail);
+router.post('/scholarregsuccess', sendScholarregSuccessfull);
+
+// Student Routes
+router.post('/login-student', Login);
 router.get("/stu/", getStudents);
+router.get("/byid/:id", getStudentById);
 router.post("/createstu/", createStudent);
 router.put("/stu/:id", updateStudent);
 router.delete("/stu/:id", deleteStudent);
-router.post("/upload-csv", upload.single("file"), uploadStudentsCSV);
+router.post("/upload-csv/", upload.single("file"), uploadStudentsCSV);
 
 export default router;

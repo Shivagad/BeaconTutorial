@@ -3,7 +3,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import Navbar from "../Components/Navbar"
 import axios from "axios"
-import Footer from '../Components/Footer'
+import Footer from "../Components/Footer"
+import Skeleton from "react-loading-skeleton"
+import "react-loading-skeleton/dist/skeleton.css"
+
 const FancyDescription = ({ text, maxLength = 70 }) => {
   const [expanded, setExpanded] = useState(false)
   const isLong = text.length > maxLength
@@ -17,7 +20,6 @@ const FancyDescription = ({ text, maxLength = 70 }) => {
       <p className="mb-0 w-full break-words whitespace-normal">
         {displayText}
       </p>
-
       {isLong && (
         <button
           onClick={() => setExpanded(!expanded)}
@@ -30,7 +32,6 @@ const FancyDescription = ({ text, maxLength = 70 }) => {
   )
 }
 
-// Separate ImageModal component with 3D design and updated themed background
 const ImageModal = ({ image, onClose }) => {
   return (
     <AnimatePresence>
@@ -56,7 +57,6 @@ const ImageModal = ({ image, onClose }) => {
             >
               <X className="w-8 h-8" />
             </button>
-
             <img
               src={image}
               alt="Enlarged view"
@@ -72,7 +72,8 @@ const ImageModal = ({ image, onClose }) => {
 const Event = () => {
   const [selectedImage, setSelectedImage] = useState(null)
   const [expandedEvents, setExpandedEvents] = useState(new Set())
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const toggleGallery = (eventId) => {
     setExpandedEvents((prev) => {
@@ -84,26 +85,28 @@ const Event = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/server/event/getevent');
-      console.log(response.data.data);
-      setEvents(response.data.data);
+      const response = await axios.get('http://localhost:4000/server/event/getevent')
+      console.log(response.data.data)
+      setEvents(response.data.data)
     } catch (error) {
       console.log(error)
+    } finally {
+      setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchEvents();
+    fetchEvents()
   }, [])
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         {/* Header with wave */}
-        <div className="bg-white pt-12 pb-24 relative shadow-md">
+        <div className="bg-orange-50 pt-12 pb-24 relative shadow-md">
           <div className="max-w-4xl mx-auto text-center px-4">
-            <h1 className="text-4xl font-bold text-blue-800 mb-4">
+            <h1 className="text-4xl font-bold text-[#4e77bb] mb-4">
               Event Gallery
             </h1>
             <p className="text-gray-700 text-center max-w-2xl mx-auto">
@@ -124,59 +127,77 @@ const Event = () => {
           </div>
         </div>
 
-        {/* Events Grid in two columns */}
-        <div className="max-w-7xl mx-auto px-6 mt-4 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {events.map((event) => (
-              <div key={event._id} className="space-y-4">
-                <div className="flex flex-col">
-                  <h2 className="text-2xl font-bold text-blue-600 mb-2">
-                    {event.eventName}
-                  </h2>
-                  <span className="text-xl text-blue-600">{event.year}</span>
-                </div>
-
-                {/* Images in a 3-column grid */}
-                <div className="grid grid-cols-3 gap-2">
-                  {event.imagesPath && event.imagesPath
-                    .slice(0, expandedEvents.has(event._id) ? undefined : 6)
-                    .map((image, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="relative aspect-[4/3]"
-                      >
-                        <img
-                          src={image}
-                          alt={`${event.title} - Image ${index + 1}`}
-                          className="w-full h-full object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                          onClick={() => setSelectedImage(image)}
-                        />
-                      </motion.div>
-                    ))}
-                </div>
-
-                {/* Load More / Show Less Button */}
-                {event.imagesPath.length > 6 && (
-                  <div className="text-right">
-                    <button
-                      onClick={() => toggleGallery(event._id)}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-500 transition-colors"
-                    >
-                      {expandedEvents.has(event._id) ? "Show Less" : "Load More"}
-                    </button>
+        {/* Events Grid */}
+        <div className=" bg-orange-100 -mb-12 max-w-7xl mx-auto px-6 mt-0 pb-20">
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <div key={index} className="space-y-4">
+                    <Skeleton height={30} width="60%" />
+                    <Skeleton height={20} width="40%" />
+                    <div className="grid grid-cols-3 gap-2">
+                      {Array(6)
+                        .fill(0)
+                        .map((_, idx) => (
+                          <Skeleton key={idx} height={100} />
+                        ))}
+                    </div>
+                    <Skeleton height={30} width="30%" />
+                    <Skeleton height={50} />
                   </div>
-                )}
-
-                {/* Event Description */}
-                {event.description && (
-                  <FancyDescription text={event.description} />
-                )}
-              </div>
-            ))}
-          </div>
+                ))}
+            </div>
+          ) : (
+            <div className=" grid grid-cols-1 md:grid-cols-2 gap-12">
+              {events.map((event) => (
+                <div key={event._id} className="space-y-4">
+                  <div className="flex flex-col">
+                    <h2 className="text-2xl font-bold text-[#4e77bb] mt-10 mb-2">
+                      {event.eventName}
+                    </h2>
+                    <span className="text-xl text-[#4e77bb]">{event.year}</span>
+                  </div>
+                  {/* Images Grid */}
+                  <div className="grid grid-cols-3 gap-2">
+                    {event.imagesPath &&
+                      event.imagesPath
+                        .slice(0, expandedEvents.has(event._id) ? undefined : 6)
+                        .map((image, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="relative aspect-[4/3]"
+                          >
+                            <img
+                              src={image}
+                              alt={`${event.title} - Image ${index + 1}`}
+                              className="w-full h-full object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                              onClick={() => setSelectedImage(image)}
+                            />
+                          </motion.div>
+                        ))}
+                  </div>
+                  {event.imagesPath.length > 6 && (
+                    <div className="text-right">
+                      <button
+                        onClick={() => toggleGallery(event._id)}
+                        className="px-6 py-2 bg-[#4e77bb] text-white rounded-full text-sm font-medium hover:bg-[#91b9fa] hover:text-black transition-colors"
+                      >
+                        {expandedEvents.has(event._id) ? "Show Less" : "Load More"}
+                      </button>
+                    </div>
+                  )}
+                  {event.description && (
+                    <FancyDescription text={event.description} />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Image Modal */}
@@ -187,8 +208,7 @@ const Event = () => {
           />
         )}
       </div>
-      <Footer/>
-    
+      <Footer />
     </>
   )
 }
