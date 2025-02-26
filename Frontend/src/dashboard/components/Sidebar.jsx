@@ -16,10 +16,12 @@ const Sidebar = () => {
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
     { icon: Album, label: 'Event Gallery', path: '/dashboard/event-gallery' },
     { icon: Users, label: 'Manage Admins', path: '/dashboard/admin' },
+    { icon: Users, label: 'Manage Students',path:'/dashboard/managestudent'},
     { icon: Users, label: 'Testimonial', path: '/dashboard/testimonial' },
     { icon: Users, label: 'Scholarship', path: '/dashboard/scholarship' },
     { icon: Users, label: 'Inquiry', path: '/dashboard/inquiry' },
     { icon: Users, label: 'Blog', path: '/dashboard/blog' },
+    { icon: Users, label: ' Manage Course', path: '/dashboard/courses' },
   ];
 
   return (

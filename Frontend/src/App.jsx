@@ -24,6 +24,8 @@ import Inquiry from './Components/Inquiry'
 import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
 import Blog from './Pages/Blog.jsx';
 import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
+import MangeStudent from './dashboard/dashboardpages/ManageStudent.jsx';
+import Courses from './dashboard/dashboardpages/Courses.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -151,6 +153,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="courses"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <Courses />
+              </ProtectedRoute>
+            }
+          />
         
           <Route
             path="12th-results"
@@ -213,6 +223,14 @@ function App() {
             element={
               <ProtectedRoute requiredRole="admin">
                 <NEETResult />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="managestudent"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <MangeStudent />
               </ProtectedRoute>
             }
           />
