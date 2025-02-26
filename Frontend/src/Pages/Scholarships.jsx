@@ -98,7 +98,7 @@ const Scholarships = () => {
       <ToastContainer />
       <div className="flex flex-col items-center bg-gray-50 min-h-screen">
         {/* Header Section */}
-        <div className="w-full bg-blue-500 p-8 text-center">
+        <div className="w-full bg-[#4e77bb] p-8 text-center">
           <h1 className="text-3xl font-bold text-white">BEST - Talent Test</h1>
           <p className="text-lg text-white mt-2">
             Beacon Eligibility Cum Scholarship Test

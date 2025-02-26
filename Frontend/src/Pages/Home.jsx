@@ -92,20 +92,29 @@ function Home() {
     <>
       <Navbar />
       <div className="min-h-screen bg-gray-50">
-        {/* Hero Carousel */}
-        <div className="relative h-[35vh] ">
+        <div className="relative w-full min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] flex items-center justify-center mb-6">
           {posters.length > 0 ? (
             posters.map((poster, index) => (
               <div
                 key={poster.id || `poster-${index}`}
-                className={`absolute inset-0 transition-opacity duration-1000 ${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
               >
                 <img
-                  src={poster.imagePath}
+                  src={`${poster.imagePath}?f_auto,q_auto,w_1200,h_800,c_fill`}
                   alt={`Poster ${index + 1}`}
-                  className="w-full h-full object-contain"
+                  role="presentation"
+                  srcSet={`
+                        ${poster.imagePath}?f_auto,q_auto,w_100,h_80,c_fill 100w,
+                        ${poster.imagePath}?f_auto,q_auto,w_200,h_160,c_fill 200w,
+                        ${poster.imagePath}?f_auto,q_auto,w_400,h_320,c_fill 400w,
+                        ${poster.imagePath}?f_auto,q_auto,w_800,h_640,c_fill 800w 
+                      `}
+                  sizes="(max-width: 800px) 100vw, 50vw"
+                  className="w-full  h-full max-w-full object-contain md:object-fill sm:w-[375px] sm:h-[667px]"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="high"
                 />
               </div>
             ))
@@ -113,7 +122,8 @@ function Home() {
             <div className="flex items-center justify-center h-full">
               <p className="text-gray-500">No posters available</p>
             </div>
-          )}
+          )
+          }
 
           {/* Carousel Buttons */}
           {posters.length > 1 && (
@@ -138,7 +148,7 @@ function Home() {
           {/* Card Container */}
           <div className="bg-white rounded-xl shadow-md p-6 md:p-10">
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-blue-800 mb-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
               15+ Years of Legacy
             </h2>
             <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
@@ -155,23 +165,23 @@ function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Stat 1 */}
               <div className="flex flex-col items-center">
-                <BookOpen className="w-10 h-10 text-blue-500 mb-2" />
-                <p className="text-xl font-bold text-gray-800">300+</p>
-                <p className="text-gray-600">Coaching centers in India</p>
+                <BookOpen className="w-10 h-10 text-[#4E77BB] mb-2" />
+                <p className="text-xl font-bold text-gray-800">2+</p>
+                <p className="text-gray-600">Coaching centers in Pune</p>
               </div>
 
               {/* Stat 2 */}
               <div className="flex flex-col items-center">
-                <Award className="w-10 h-10 text-blue-500 mb-2" />
+                <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
                 <p className="text-xl font-bold text-gray-800">131,700+</p>
                 <p className="text-gray-600">
-                  Aakashians qualified NEET &amp; JEE in 2024
+                  Beaconian qualified NEET &amp; JEE in 2024
                 </p>
               </div>
 
               {/* Stat 3 */}
               <div className="flex flex-col items-center">
-                <UsersRound className="w-10 h-10 text-blue-500 mb-2" />
+                <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
                 <p className="text-xl font-bold text-gray-800">5000+</p>
                 <p className="text-gray-600">Expert Faculty</p>
               </div>
@@ -179,7 +189,7 @@ function Home() {
           </div>
         </div>
 
-        <div className=" w-full overflow-hidden leading-[0]">
+        <div className=" w-full mt-20 overflow-hidden leading-[0]">
           <svg
             id="wave"
             style={{ transform: "rotate(0deg)", transition: "0.3s" }}
@@ -190,11 +200,11 @@ function Home() {
             <defs>
               <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
                 <stop
-                  stop-color="rgba(74.812, 162.276, 229.552, 1)"
+                  stop-color="#4E77BB"
                   offset="0%"
                 ></stop>
                 <stop
-                  stop-color="rgba(11, 255, 253.622, 1)"
+                  stop-color=""
                   offset="100%"
                 ></stop>
               </linearGradient>
@@ -206,7 +216,7 @@ function Home() {
             ></path>
           </svg>
         </div>
-        <div className="relative bg-blue-600 text-white overflow-hidden">
+        <div className="relative bg-[#4E77BB] text-white overflow-hidden">
           {/* Content Container */}
           <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col items-center space-y-4 md:space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold text-center">
@@ -219,6 +229,7 @@ function Home() {
             <button
               onClick={() => {
                 navigate("/scholarship");
+                window.scrollTo(0, 0);
               }}
               className="bg-orange-400 hover:bg-orange-500 px-6 py-2 
                      rounded-full text-white text-lg font-semibold 
@@ -279,8 +290,9 @@ function Home() {
               <button
                 onClick={() => {
                   navigate("/about");
+                  window.scrollTo(0, 0);
                 }}
-                className="bg-blue-600 hover:bg-blue-700 text-white 
+                className="bg-[#4E77BB] hover:bg-[#5786d9] text-white 
                        px-6 py-2 rounded-full transform transition 
                        hover:rotate-3 hover:scale-105"
               >
@@ -319,7 +331,7 @@ function Home() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-white text-blue-500 py-16">
+        <div className="bg-white text-[#4e77bb] py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Start Your Journey Today
@@ -331,34 +343,35 @@ function Home() {
             <button
               onClick={() => {
                 navigate("/inquiry");
+                window.scrollTo(0, 0);
               }}
-              className="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-200 transition-colors"
+              className="bg-[#4e77bb] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#a6d8f7] hover:text-black transition-colors"
             >
               Enroll Now
             </button>
           </div>
         </div>
         {/* Stats Section */}
-        <div className="bg-blue-600 -mb-14 text-white py-12">
-        <div className="flex justify-center">
-  <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-    {[
-      { icon: Users, value: "50,000+", label: "Students" },
-      { icon: Trophy, value: "95%", label: "Success Rate" },
-      { icon: GraduationCap, value: "200+", label: "Expert Faculty" },
-      { icon: Award, value: "15+", label: "Years Experience" },
-    ].map((stat, index) => (
-      <div key={index}>
-        <stat.icon className="w-8 h-8 mx-auto mb-2" />
-        <div className="text-3xl font-bold">{stat.value}</div>
-        <div className="text-sm">{stat.label}</div>
-      </div>
-    ))}
-  </div>
-</div>
+        <div className="bg-[#4e77bb] -mb-14 text-white py-12">
+          <div className="flex justify-center">
+            <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {[
+                { icon: Users, value: "50,000+", label: "Students" },
+                { icon: Trophy, value: "95%", label: "Success Rate" },
+                { icon: GraduationCap, value: "200+", label: "Expert Faculty" },
+                { icon: Award, value: "15+", label: "Years Experience" },
+              ].map((stat, index) => (
+                <div key={index}>
+                  <stat.icon className="w-8 h-8 mx-auto mb-2" />
+                  <div className="text-3xl font-bold">{stat.value}</div>
+                  <div className="text-sm">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
 
         </div>
-      </div>
+      </div >
       <Footer />
     </>
   );

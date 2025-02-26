@@ -73,11 +73,11 @@ export const sendSignUpSuccessfulEmail = async (req, res) => {
 
 export const sendScholarregSuccessfull = async (req, res) => {
     console.log(req.body);
-    const { firstName, lastName,email} = req.body;
+    const { firstName, lastName, email } = req.body;
     const templatePath = path.join(__dirname, "../views", 'ScholarshipregSuccess.hbs');
     const templateSource = fs.readFileSync(templatePath, "utf-8");
     const template = Handlebars.compile(templateSource);
-    let htmlContent = template({  firstName, lastName });
+    let htmlContent = template({ firstName, lastName });
 
     const mailOptions = {
         from: `Beacon Tutorail <${process.env.MAIL_USER}>`,
@@ -93,5 +93,32 @@ export const sendScholarregSuccessfull = async (req, res) => {
     } catch (error) {
         // console.error("Error sending OTP email:", error);
         res.status(500).json({ error: "Failed to send email" });
+    }
+};
+
+export const sendInquiryForm = async (inquiryData) => {
+    console.log(inquiryData);
+    
+    const templatePath = path.join(__dirname, "../views", 'InquiryFormSuccess.hbs');
+    const templateSource = fs.readFileSync(templatePath, "utf-8");
+    const template = Handlebars.compile(templateSource);
+    let htmlContent = template({
+        inquiryData
+    });
+
+    const mailOptions = {
+        from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
+        to: inquiryData.email,
+        subject: "Response of Your Inquiry",
+        html: htmlContent,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        // console.log("OTP email sent successfully.");
+        // res.status(200).json({ message: "Email sent successfully" });
+    } catch (error) {
+        // console.error("Error sending OTP email:", error);
+        // res.status(500).json({ error: "Failed to send email" });
     }
 };

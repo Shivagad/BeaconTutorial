@@ -24,6 +24,7 @@ import Inquiry from './Components/Inquiry'
 import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
 import Blog from './Pages/Blog.jsx';
 import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
+import AllCourses from './Pages/AllCourses.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -42,6 +43,15 @@ function App() {
           element={
             <NonDashboardRoute>
               <Inquiry />
+            </NonDashboardRoute>
+          }
+        />
+        
+        <Route
+          path="/all-courses"
+          element={
+            <NonDashboardRoute>
+              <AllCourses />
             </NonDashboardRoute>
           }
         />

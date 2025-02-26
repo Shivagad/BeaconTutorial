@@ -13,7 +13,7 @@ const Navbar = ({ logoSrc }) => {
   const navItems = [
     { label: "Home", path: "/" },
     { label: "About Us", path: "/about" },
-    { label: "Courses", path: "/courses" },
+    { label: "Courses", path: "/all-courses" },
     { label: "Results", path: "/all-results" },
     { label: "Testimonials", path: "/testimonial" },
     { label: "Student Corner", path: "/student-corner" },
@@ -107,7 +107,7 @@ const Navbar = ({ logoSrc }) => {
               <a
                 key={item.label}
                 href={item.path}
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className="text-gray-700 hover:text-[#4e77bb] transition-colors"
               >
                 {item.label}
               </a>
