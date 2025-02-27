@@ -17,9 +17,11 @@ const CourseManagement = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/courses/");
-      if (response.data) {
-        setCourses(response.data);
+      const response = await axios.get("http://localhost:4000/server/courses/getall");
+
+      console.log(response);
+      if (response.data.courses) {
+        setCourses(response.data.courses);
       } else {
         setCourses([]);
       }

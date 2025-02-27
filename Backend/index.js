@@ -21,6 +21,7 @@ import Scholarship from './Routes/Scholarship.js';
 import Inquiry from './Routes/Inquiry.js'
 import Blog from './Routes/Blog.js';
 import Course from './Routes/Course.js';
+import Faculty from './Routes/Faculty.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -50,6 +51,7 @@ app.use('/server/scholarship',Scholarship);
 app.use('/server',Inquiry);
 app.use('/server',Blog);
 app.use('/server/courses',Course);
+app.use('/server/faculty',Faculty);
 
 app.get('/', (req, res) => {
     res.send('Server is running');

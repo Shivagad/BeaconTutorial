@@ -1,12 +1,18 @@
 import React from 'react';
+import { useState, useEffect } from "react";
 import { ChevronRight, Users, BookOpen, Clock } from 'lucide-react';
 import aboutusImage1 from '/images/aboutus_img1.avif';
 import aboutusImage2 from '/images/aboutus_img2.avif';
 import aboutusImage3 from '/images/aboutus_img3.avif';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function AboutUs() {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -73,7 +79,16 @@ function AboutUs() {
             </div>
           </div>
         </section>
-
+        <div className="flex justify-center mt-10">
+              <button
+                onClick={() => {navigate('/facultymain');
+                  window.scrollTo(0,0);
+                }}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-700 transition duration-300"
+              >
+                Meet Our Faculty
+              </button>
+            </div>
         {/* Why Choose Us */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">

@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef } from 'react';
+
 
 const ResultSection = ({ title, students, bgColor }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const studentsPerPage = 10;
   const totalPages = Math.ceil(students.length / studentsPerPage);
+  const navRef = useRef(null);
 
-  const handlePrevPage = () => {
-    setCurrentPage((prev) => (prev > 0 ? prev - 1 : prev));
-    // setTimeout(() => {
-    //   window.scrollTo(0, 300); // Scroll 100 pixels below the top
-    // }, 100)
-  };
-
-  const handleNextPage = () => {
-    setCurrentPage((prev) => (prev < totalPages - 1 ? prev + 1 : prev));
-    // setTimeout(() => {
-    //   window.scrollTo(0, 300); // Scroll 100 pixels below the top
-    // }, 100)
-  };
+  const handlePrevPage = () => {setCurrentPage((prev) => Math.max(prev - 1, 0));navRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });}
+  const handleNextPage = () => {setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));navRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });}
 
   const currentStudents = students.slice(
     currentPage * studentsPerPage,
@@ -26,180 +18,70 @@ const ResultSection = ({ title, students, bgColor }) => {
   );
 
   return (
-    <div className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 ${bgColor}`}>
+    <div className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 rounded-2xl shadow-lg ${bgColor} mb-6`}>
       <div className="max-w-7xl mx-auto px-4">
-      <div className="sticky z-10 -mt-20 mb-8">
-          <div className="bg-white/95 backdrop-blur-sm py-4 rounded-full shadow-lg">
-            <h2 className="text-3xl font-bold text-center text-[#4e77bb]">
-              {title}
-            </h2>
+        <div className="sticky z-10 -mt-20 mb-8">
+          <div className="bg-white/95 border-b-4 py-4 py-12 rounded-2xl border-[#4E77BB] shadow-lg">
+            <h2 className="text-4xl font-bold text-center text-[#4e77bb]">{title}</h2>
           </div>
         </div>
-        <div className="relative">
+
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {currentStudents.map((student) => (
-              <div
-                key={student.id}
-                className={`bg-${bgColor} rounded-xl overflow-hidden transform hover:scale-105 transition-transform duration-500`}
-              >
-                <div className="mx-auto mt-4 w-40 h-40 overflow-hidden rounded-full flex items-center justify-center">
-                  <img
-                    src={student.imagePath}
-                    alt={student.firstName}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-center">{student.firstName}  {student.lastName}</h3>
-                  <div className={`flex-row justify-between items-center bg-${bgColor}-50 p-0 rounded-lg`}>
-
-                    {student.AIR && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          AIR - {student.AIR}
-                        </span>
-                      </div>
-                    )}
-                    {student.mathMarks && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Maths - {student.mathMarks}
-                        </span>
-                      </div>
-                    )}
-                    {student.scienceMarks && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Science - {student.scienceMarks}
-                        </span>
-                      </div>
-                    )}
-                    {student.chemistryMarks && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Chemistry - {student.chemistryMarks}
-                        </span>
-                      </div>
-                    )}
-                    {student.physicsMarks && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Physics - {student.physicsMarks}
-                        </span>
-                      </div>
-                    )}
-                    {student.biologyMarks && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Biology - {student.biologyMarks}
-                        </span>
-                      </div>
-                    )}
-                    {student.physicsPercentile && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Physics - {student.physicsPercentile}%ile
-                        </span>
-                      </div>
-                    )}
-                    {student.mathematicsPercentile && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Math - {student.mathematicsPercentile}%ile
-                        </span>
-                      </div>
-                    )}
-                    {student.chemistryPercentile && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Chemistry - {student.chemistryPercentile}%ile
-                        </span>
-                      </div>
-                    )}
-                    {student.biologyPercentile && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-small">
-                          Biology - {student.biologoPercentile}%ile
-                        </span>
-                      </div>
-                    )}
-                    {student.totalPercentile && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-medium">
-                          Aggregate - {student.totalPercentile}%ile
-                        </span>
-                      </div>
-                    )}
-                    {student.totalMarks && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 text-sm font-medium">
-                          Aggregate - {student.totalMarks}
-                        </span>
-                      </div>
-                    )}
-                    {student.percentage && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 font-medium">
-                        Aggregate - {student.percentage.toFixed(2)}%
-                        </span>
-                      </div>
-                    )}
-                    {student.boardName && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 font-bold">
-                         Board ({student.boardName})
-                        </span>
-                      </div>
-                    )}
-                    {student.college && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 font-bold">
-                         {student.college} College
-                        </span>
-                      </div>
-                    )}
-                    {student.Tag && (
-                      <div className='p-0 pl-1 flex justify-center'>
-                        <span className="text-gray-600 font-bold text-center">
-                          {student.Tag}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
+          {currentStudents.map((student) => (
+            <div key={student.id} className="bg-white rounded-xl shadowmd transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
+              <div className="mx-auto mt-4 w-40 h-40 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB]">
+                <img src={student.imagePath} alt={student.firstName} className="w-full h-full object-cover" />
               </div>
-            ))}
-          </div>
-
-          {totalPages > 1 && (
-            <div className="sticky bottom-4 z-10 flex justify-center items-center mt-8">
-              <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-4">
-                <button
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 0}
-                  className="p-2 rounded-full bg-indigo-100 text-indigo-700 disabled:opacity-50 hover:bg-indigo-200 transition-colors"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                <span className="text-gray-700 font-medium">
-                  Page {currentPage + 1} of {totalPages}
-                </span>
-                <button
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages - 1}
-                  className="p-2 rounded-full bg-indigo-100 text-indigo-700 disabled:opacity-50 hover:bg-indigo-200 transition-colors"
-                >
-                  <ChevronRight size={24} />
-                </button>
+              <div className="p-4 text-center">
+                <h3 className="font-semibold text-lg mb-2">{student.firstName} {student.lastName}</h3>
+                <div className="space-y-1 text-sm text-gray-600">
+                  {student.AIR && <p>AIR - {student.AIR}</p>}
+                  {student.mathMarks && <p>Maths - {student.mathMarks}</p>}
+                  {student.scienceMarks && <p>Science - {student.scienceMarks}</p>}
+                  {student.chemistryMarks && <p>Chemistry - {student.chemistryMarks}</p>}
+                  {student.physicsMarks && <p>Physics - {student.physicsMarks}</p>}
+                  {student.biologyMarks && <p>Biology - {student.biologyMarks}</p>}
+                  {student.physicsPercentile && <p>Physics - {student.physicsPercentile}%ile</p>}
+                  {student.mathematicsPercentile && <p>Math - {student.mathematicsPercentile}%ile</p>}
+                  {student.chemistryPercentile && <p>Chemistry - {student.chemistryPercentile}%ile</p>}
+                  {student.biologyPercentile && <p>Biology - {student.biologyPercentile}%ile</p>}
+                  {student.totalPercentile && <p>Aggregate - {student.totalPercentile}%ile</p>}
+                  {student.totalMarks && <p>Aggregate - {student.totalMarks}</p>}
+                  {student.percentage && <p>Aggregate - {student.percentage.toFixed(2)}%</p>}
+                  {student.boardName && <p className="font-bold">Board ({student.boardName})</p>}
+                  {student.college && <p className="font-bold">{student.college} College</p>}
+                  {student.Tag && <p className="font-bold">{student.Tag}</p>}
+                </div>
               </div>
             </div>
-          )}
+          ))}
         </div>
+        {totalPages > 1 && (
+          <div ref={navRef} className="sticky bottom-4 z-10 flex justify-center items-center mt-8">
+            <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-4">
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 0}
+                className="p-2 rounded-full bg-indigo-100 text-indigo-700 disabled:opacity-50 hover:bg-indigo-200 transition-colors"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <span className="text-gray-700 font-medium">
+                Page {currentPage + 1} of {totalPages}
+              </span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages - 1}
+                className="p-2 rounded-full bg-indigo-100 text-indigo-700 disabled:opacity-50 hover:bg-indigo-200 transition-colors"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default ResultSection;
-

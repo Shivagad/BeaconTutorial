@@ -4,23 +4,28 @@ import axios from "axios";
 
 const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
   const fileInputRef = useRef(null);
+  const mobileFileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     seqno: "",
     imagePath: "",
+    mobileImage: "",
   });
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(null);
+  const [previewMobileImage, setPreviewMobileImage] = useState(null);
 
-  // Handle image changes: read file as base64 and update state.
-  const handleImageChange = (e) => {
+  const handleImageChange = (e, type) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result;
-        setPreviewImage(result);
-        setFormData((prev) => ({ ...prev, imagePath: result }));
+        if (type === "imagePath") {
+          setPreviewImage(result);
+        } else {
+          setPreviewMobileImage(result);
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -28,15 +33,6 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!previewImage) {
-      setToast({
-        success: false,
-        message: "Please select an image.",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     try {
       const response = await axios.put(
@@ -55,19 +51,20 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
     onClose();
   };
 
-  // Fetch poster details by id when the modal opens.
   const fetchPosterDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/poster/getposter/${id}`);
+      const response = await axios.get(
+        `http://localhost:4000/server/poster/getposter/${id}`
+      );
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",
         name: data.name || "",
         imagePath: data.imagePath || "",
+        mobileImage: data.mobileImagePath || "",
       });
-      if (data.imagePath) {
-        setPreviewImage(data.imagePath);
-      }
+      setPreviewImage(data.imagePath || null);
+      setPreviewMobileImage(data.mobileImagePath || null);
     } catch (error) {
       console.error("Error fetching poster details:", error);
     }
@@ -81,7 +78,7 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
 
   return isEditOpen ? (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 mt-55 w-full max-w-3xl">
+      <div className="bg-white rounded-lg p-6 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Edit Poster</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
@@ -89,83 +86,84 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Poster Information */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-700 mb-4">Poster Information</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Poster Name</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Sequence Number</label>
-                  <input
-                    type="number"
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                    value={formData.seqno}
-                    onChange={(e) => setFormData({ ...formData, seqno: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Poster Image</label>
-                  <div className="flex flex-col items-center space-y-4">
-                    {previewImage ? (
-                      <div className="relative w-40 h-40">
-                        <img
-                          src={previewImage}
-                          alt="Preview"
-                          className="w-full h-full object-cover rounded-lg"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setPreviewImage("");
-                            setFormData({ ...formData, imagePath: "" });
-                          }}
-                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors"
-                      >
-                        <Upload className="w-8 h-8 mb-2" />
-                        <span className="text-sm">Upload Image</span>
-                      </button>
-                    )}
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={handleImageChange}
+          <input
+            type="text"
+            required
+            placeholder="Poster Name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full px-4 py-2 border rounded-lg"
+          />
+          <input
+            type="number"
+            required
+            placeholder="Sequence Number"
+            value={formData.seqno}
+            onChange={(e) => setFormData({ ...formData, seqno: e.target.value })}
+            className="w-full px-4 py-2 border rounded-lg"
+          />
+
+          {["imagePath", "mobileImage"].map((type) => (
+            <div key={type} className="space-y-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {type === "imagePath" ? "Desktop Image" : "Mobile Image"}
+              </label>
+              <div className="flex flex-col items-center space-y-4">
+                {(type === "imagePath" ? previewImage : previewMobileImage) ? (
+                  <div className="relative w-40 h-40">
+                    <img
+                      src={type === "imagePath" ? previewImage : previewMobileImage}
+                      alt="Preview"
+                      className="w-full h-full object-cover rounded-lg"
                     />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (type === "imagePath") {
+                          setPreviewImage(null);
+                          setFormData({ ...formData, imagePath: "" });
+                        } else {
+                          setPreviewMobileImage(null);
+                          setFormData({ ...formData, mobileImage: "" });
+                        }
+                      }}
+                      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
                   </div>
-                </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      type === "imagePath"
+                        ? fileInputRef.current?.click()
+                        : mobileFileInputRef.current?.click()
+                    }
+                    className="w-40 h-40 border-2 border-dashed rounded-lg flex flex-col items-center justify-center text-gray-500 hover:border-blue-500 hover:text-blue-500"
+                  >
+                    <Upload className="w-8 h-8 mb-2" />
+                    <span className="text-sm">Upload Image</span>
+                  </button>
+                )}
+                <input
+                  ref={type === "imagePath" ? fileInputRef : mobileFileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => handleImageChange(e, type)}
+                />
               </div>
             </div>
-          </div>
-          <div className="border-t pt-6">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              {isSubmitting ? "Submitting..." : "Update Poster"}
-            </button>
-          </div>
+          ))}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700"
+          >
+            {isSubmitting ? "Submitting..." : "Update Poster"}
+          </button>
         </form>
       </div>
     </div>

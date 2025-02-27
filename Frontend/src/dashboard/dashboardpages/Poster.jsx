@@ -17,7 +17,6 @@ const Poster = () => {
 
   const [posters, setPosters] = useState([]);
 
-
   const fetchPosters = async () => {
     try {
       const response = await axios.get("http://localhost:4000/server/poster/getallposter");
@@ -68,14 +67,23 @@ const Poster = () => {
             key={poster._id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
-            {poster.imagePath && (
-              <img
-                src={poster.imagePath}
-                alt={poster.name}
-                className="w-full h-40 object-cover rounded-lg mb-4"
-              />
-            )}
-            <div className="flex justify-between items-start">
+            <div className="flex flex-col gap-4">
+              {poster.imagePath && (
+                <img
+                  src={poster.imagePath}
+                  alt={poster.name}
+                  className="w-full h-40 object-cover rounded-lg"
+                />
+              )}
+              {poster.mobileImagePath && (
+                <img
+                  src={poster.mobileImagePath}
+                  alt={`${poster.name} - Mobile`}
+                  className="w-full h-40 object-cover rounded-lg"
+                />
+              )}
+            </div>
+            <div className="flex justify-between items-start mt-4">
               <div>
                 <h3 className="text-lg font-semibold">{poster.name}</h3>
                 <p className="text-blue-600 text-xl">Seq No: {poster.seqno}</p>

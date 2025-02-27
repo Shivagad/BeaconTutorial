@@ -13,7 +13,7 @@ import {
   uploadStudentsCSV
 } from "../Controller/Student.js";
 
-import { sendOTPEmail, sendScholarregSuccessfull } from "../Controller/EmailService.js";
+import { sendOTPEmail, sendScholarregSuccessfull,ContactUsEmail } from "../Controller/EmailService.js";
 
 const router = express.Router();
 
@@ -38,6 +38,7 @@ const upload = multer({ storage });
 // Email Routes
 router.post('/otp-email', sendOTPEmail);
 router.post('/scholarregsuccess', sendScholarregSuccessfull);
+router.post('/contactusemail',ContactUsEmail);
 
 // Student Routes
 router.post('/login-student', Login);

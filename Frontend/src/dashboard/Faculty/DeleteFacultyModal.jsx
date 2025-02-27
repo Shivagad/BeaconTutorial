@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import axios from 'axios';
 
-const DeleteStudentModal = ({
-  isDeleteOpen,
-  onClose,
-  setToast,
-  studentName,
-  id
-}) => {
+const DeleteFacultyModal = ({ isDeleteOpen, onClose, setToast, facultyName, id }) => {
   const [confirmText, setConfirmText] = useState('');
 
   if (!isDeleteOpen) return null;
@@ -16,21 +10,19 @@ const DeleteStudentModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`http://localhost:4000/server/poster/deleteposter/${id}`);
-      response.data.success ? setToast({
-        success: true,
-        message: `Poster deleted successfully`,
-      }) : setToast({
-        success: false,
-        message: `Failed to delete student`,
-      });
+      try {
+        const response = await axios.delete(`http://localhost:4000/server/faculty/delete/${id}`);
+        setToast({
+          success: response.data.success,
+          message: response.data.success ? `Faculty deleted successfully` : `Failed to delete faculty`,
+        });
+      } catch (error) {
+        setToast({ success: false, message: `Error deleting faculty` });
+      }
       setConfirmText('');
       onClose();
     } else {
-      setToast({
-        success: false,
-        message: `Please confirm deletion`,
-      });
+      setToast({ success: false, message: `Please confirm deletion` });
     }
   };
 
@@ -40,7 +32,7 @@ const DeleteStudentModal = ({
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
             <AlertTriangle className="w-6 h-6 text-red-500 mr-2" />
-            <h2 className="text-xl font-bold text-gray-800">Delete Poster</h2>
+            <h2 className="text-xl font-bold text-gray-800">Delete Faculty</h2>
           </div>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
@@ -49,7 +41,7 @@ const DeleteStudentModal = ({
 
         <div className="mb-6">
           <p className="text-gray-600 mb-4">
-            Are you sure you want to delete <span className="font-semibold">{studentName}</span>? This action cannot be undone.
+            Are you sure you want to delete <span className="font-semibold">{facultyName}</span>? This action cannot be undone.
           </p>
           <p className="text-sm text-gray-500">
             Type <span className="font-mono font-semibold">delete</span> to confirm
@@ -87,4 +79,4 @@ const DeleteStudentModal = ({
   );
 };
 
-export default DeleteStudentModal;
+export default DeleteFacultyModal;

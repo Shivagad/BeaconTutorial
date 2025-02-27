@@ -4,25 +4,33 @@ import axios from "axios";
 
 const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const fileInputRef = useRef(null);
+  const mobileFileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     seqno: "",
     imagePath: "",
+    mobileImagePath: "",
   });
 
   const [previewImage, setPreviewImage] = useState("");
+  const [previewMobileImage, setPreviewMobileImage] = useState("");
 
   if (!isOpen) return null;
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e, type) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result;
-        setPreviewImage(result);
-        setFormData({ ...formData, imagePath: result });
+        if (type === "desktop") {
+          setPreviewImage(result);
+          setFormData({ ...formData, imagePath: result });
+        } else {
+          setPreviewMobileImage(result);
+          setFormData({ ...formData, mobileImagePath: result });
+        }
       };
       reader.readAsDataURL(file);
     }
@@ -31,17 +39,16 @@ const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!previewImage) {
+    if (!previewImage || !previewMobileImage) {
       setToast({
         success: false,
-        message: "Please select an image.",
+        message: "Please select both desktop and mobile images.",
       });
       return;
     }
 
     try {
       setIsSubmitting(true);
-      console.log(formData);
       const response = await axios.post("http://localhost:4000/server/poster/addposter", formData);
 
       if (response.data.success) {
@@ -78,7 +85,6 @@ const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Poster Information */}
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-700 mb-4">Poster Information</h3>
               <div className="space-y-4">
@@ -103,7 +109,7 @@ const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Poster Image</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Desktop Image</label>
                   <div className="flex flex-col items-center space-y-4">
                     {previewImage ? (
                       <div className="relative w-40 h-40">
@@ -138,7 +144,47 @@ const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      onChange={handleImageChange}
+                      onChange={(e) => handleImageChange(e, "desktop")}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Image</label>
+                  <div className="flex flex-col items-center space-y-4">
+                    {previewMobileImage ? (
+                      <div className="relative w-40 h-40">
+                        <img
+                          src={previewMobileImage}
+                          alt="Preview"
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPreviewMobileImage("");
+                            setFormData({ ...formData, mobileImagePath: "" });
+                          }}
+                          className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => mobileFileInputRef.current?.click()}
+                        className="w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-500 hover:border-blue-500 hover:text-blue-500 transition-colors"
+                      >
+                        <Upload className="w-8 h-8 mb-2" />
+                        <span className="text-sm">Upload Mobile Image</span>
+                      </button>
+                    )}
+                    <input
+                      ref={mobileFileInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => handleImageChange(e, "mobile")}
                     />
                   </div>
                 </div>
@@ -158,7 +204,6 @@ const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
         </form>
       </div>
     </div>
-
   );
 };
 

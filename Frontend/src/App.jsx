@@ -24,19 +24,43 @@ import Inquiry from './Components/Inquiry'
 import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
 import Blog from './Pages/Blog.jsx';
 import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
-import MangeStudent from './dashboard/dashboardpages/ManageStudent.jsx';
+// import ManageStudent from './dashboard/dashboardpages/ManageStudent.jsx';
 import Courses from './dashboard/dashboardpages/Courses.jsx'
 import AllCourses from './Pages/AllCourses.jsx'
+import CourseCards from './dashboard/dashboardpages/coursescard.jsx';
+import CET from './dashboard/StudentManagement/CET11.jsx';
+import JEE from './dashboard/StudentManagement/JEE11.jsx';
+import NEET from './dashboard/StudentManagement/NEET11.jsx';
+import Studentdash from './Pages/Studentdash.jsx';
+import Faculty from './dashboard/dashboardpages/Faculty.jsx';
+import Facultymain from './Components/Facultymain.jsx';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes: wrapped with NonDashboardRoute */}
+
+      <Route
+  path="/student-dashboard"
+  element={
+    <ProtectedRoute>
+      <Studentdash />
+    </ProtectedRoute>
+  }
+/>
+
         <Route
           path="/event-gallery"
           element={
             <NonDashboardRoute>
               <Event />
+            </NonDashboardRoute>
+          }
+        />
+        <Route
+          path="/facultymain"
+          element={
+            <NonDashboardRoute>
+              <Facultymain />
             </NonDashboardRoute>
           }
         />
@@ -171,6 +195,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+           <Route
+            path="faculty"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <Faculty />
+              </ProtectedRoute>
+            }
+          />
         
           <Route
             path="12th-results"
@@ -193,6 +225,14 @@ function App() {
             element={
               <ProtectedRoute requiredRole="admin">
                 <Testimonial />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="coursescard"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <CourseCards />
               </ProtectedRoute>
             }
           />
@@ -236,14 +276,40 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+           {/* <Route
             path="managestudent"
             element={
               <ProtectedRoute requiredRole="admin">
-                <MangeStudent />
+                <ManageStudent />
+              </ProtectedRoute>
+            }
+          /> */}
+            <Route
+            path="cet-student"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <CET />
               </ProtectedRoute>
             }
           />
+           <Route
+            path="neet-student"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <NEET />
+              </ProtectedRoute>
+            }
+          />
+
+           <Route
+            path="jee-student"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <JEE />
+              </ProtectedRoute>
+            }
+          />
+
         </Route>
         
 

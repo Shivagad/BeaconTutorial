@@ -122,3 +122,34 @@ export const sendInquiryForm = async (inquiryData) => {
         // res.status(500).json({ error: "Failed to send email" });
     }
 };
+
+
+
+
+export const ContactUsEmail = async (req, res) => {
+    try {
+      const { name, phone, email, subject } = req.body;
+      console.log(req.body);
+      if (!name || !phone || !email || !subject) {
+        return res.status(400).json({ message: "All fields are required." });
+      }
+      const templatePath = path.join(__dirname, "../views", "ContactUsEmail.hbs");
+      const templateSource = fs.readFileSync(templatePath, "utf-8");
+      const template = Handlebars.compile(templateSource);
+      const htmlContent = template({ name, phone, email, subject });
+  
+      const mailOptions = {
+        from: `Beacon Tutorials <${email}>`,
+        to: process.env.MAIL_USER, 
+        subject:subject,
+        html: htmlContent,
+      };
+      console.log(mailOptions);
+      await transporter.sendMail(mailOptions);
+      console.log("Contact email sent successfully.");
+      res.status(200).json({ message: "Email sent successfully",success:true });
+    } catch (error) {
+      console.error("Error sending Contact Us email:", error);
+      res.status(500).json({ message: "Failed to send email",success:false });
+    }
+  };
