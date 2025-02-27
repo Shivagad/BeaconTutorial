@@ -51,6 +51,7 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
     onClose();
   };
 
+  
   const fetchPosterDetails = async () => {
     try {
       const response = await axios.get(
