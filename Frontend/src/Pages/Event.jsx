@@ -14,7 +14,7 @@ const FancyDescription = ({ text, maxLength = 70 }) => {
 
   return (
     <div
-      className="mt-4 p-4 bg-gray-50 bg-opacity-50 rounded-lg shadow-lg text-gray-700 italic"
+      className="mt-4 p-4 bg-blue-100 bg-opacity-100 rounded-lg shadow-lg text-gray-700 italic"
       style={{ fontFamily: "cursive" }}
     >
       <p className="mb-0 w-full break-words whitespace-normal">
@@ -104,12 +104,12 @@ const Event = () => {
       <Navbar />
       <div className="min-h-screen">
         {/* Header with wave */}
-        <div className="bg-orange-50 pt-12 pb-24 relative shadow-md">
+        <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
           <div className="max-w-4xl mx-auto text-center px-4">
-            <h1 className="text-4xl font-bold text-[#4e77bb] mb-4">
+            <h1 className="text-4xl font-bold text-white mb-4">
               Event Gallery
             </h1>
-            <p className="text-gray-700 text-center max-w-2xl mx-auto">
+            <p className="text-white text-center max-w-2xl mx-auto">
               At Beacon Tutorials, we are committed to the all-around development
               of our students, which is why we organize trips around Pune to
               enhance their learning experience.
@@ -128,7 +128,7 @@ const Event = () => {
         </div>
 
         {/* Events Grid */}
-        <div className=" bg-orange-100 -mb-12 max-w-7xl mx-auto px-6 mt-0 pb-20">
+        <div className="bg-white -mb-12 max-w-7xl mx-auto px-6 mt-0 pb-20">
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {Array(4)
@@ -150,14 +150,14 @@ const Event = () => {
                 ))}
             </div>
           ) : (
-            <div className=" grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               {events.map((event) => (
-                <div key={event._id} className="space-y-4">
+                <div key={event._id} className="space-y-4 bg-blue-100 rounded-xl p-3">
                   <div className="flex flex-col">
-                    <h2 className="text-2xl font-bold text-[#4e77bb] mt-10 mb-2">
+                    <h2 className="text-2xl font-bold text-orange-500 mt-5 mb-1">
                       {event.eventName}
                     </h2>
-                    <span className="text-xl text-[#4e77bb]">{event.year}</span>
+                    <span className="text-xl text-orange-500">{event.year}</span>
                   </div>
                   {/* Images Grid */}
                   <div className="grid grid-cols-3 gap-2">

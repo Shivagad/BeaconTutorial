@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { useAuth } from '../Context/AuthProvider';
 import logo from '../../public/images/logo.png'
 
@@ -86,13 +86,15 @@ const Navbar = ({ logoSrc }) => {
             !isOpen && (
               <div className="flex-shrink-0 mr-4">
                 {logo ? (
-                  <div className="absolute top-0 left-4 h-full flex items-center">
+                 <Link to='/'>
+                  <div className="absolute top-0 left-4 h-full flex items-center hover:cursor-pointer">
                     <img
                       src={logo}
                       alt="Logo"
                       className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-26 w-auto"
                     />
                   </div>
+                 </Link>
 
                 ) : (
                   <div className="h-12 w-32 bg-gray-200 rounded animate-pulse" />

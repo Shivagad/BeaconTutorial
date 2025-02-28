@@ -32,16 +32,16 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold text-orange-500 mb-4">Connect with Us</h3>
           <div className="flex justify-center sm:justify-start space-x-4">
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/beacontutorialspune" target="_blank" rel="noopener noreferrer">
               <FaInstagram className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
             </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/company/beacon-tutorials/" target="_blank" rel="noopener noreferrer">
               <FaLinkedin className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
             </a>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.facebook.com/BeaconTutorialsPune" target="_blank" rel="noopener noreferrer">
               <FaFacebook className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
             </a>
-            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://youtube.com/@beacontutorialspune8750?si=RP78K2qNM22wySJm" target="_blank" rel="noopener noreferrer">
               <FaYoutube className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
             </a>
           </div>
