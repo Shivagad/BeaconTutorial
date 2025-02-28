@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import DashboardLayout from './dashboard/Layout';
 import TenthResults from './dashboard/dashboardpages/TenthResults';
 import TwelthResult from './dashboard/dashboardpages/TwelthResults';
@@ -15,18 +15,17 @@ import Event from './Pages/Event';
 import Admin from './dashboard/dashboardpages/Admin';
 import Testimonial from './dashboard/dashboardpages/Testimonial';
 import Login from './Pages/Login';
-import { NonDashboardRoute, ProtectedRoute } from './Context/ProtectedRoute.jsx'
-import MainTestimonial from './Pages/Testimonial'
-import About from './Pages/About'
-import Scholarships from './Pages/Scholarships'
+import { NonDashboardRoute, ProtectedRoute } from './Context/ProtectedRoute.jsx';
+import MainTestimonial from './Pages/Testimonial';
+import About from './Pages/About';
+import Scholarships from './Pages/Scholarships';
 import AdminScholarship from './dashboard/dashboardpages/Scholarship';
-import Inquiry from './Components/Inquiry'
-import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx'
+import Inquiry from './Components/Inquiry';
+import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx';
 import Blog from './Pages/Blog.jsx';
 import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
-// import ManageStudent from './dashboard/dashboardpages/ManageStudent.jsx';
-import Courses from './dashboard/dashboardpages/Courses.jsx'
-import AllCourses from './Pages/AllCourses.jsx'
+import Courses from './dashboard/dashboardpages/Courses.jsx';
+import AllCourses from './Pages/AllCourses.jsx';
 import CourseCards from './dashboard/dashboardpages/coursescard.jsx';
 import CET from './dashboard/StudentManagement/CET11.jsx';
 import JEE from './dashboard/StudentManagement/JEE11.jsx';
@@ -34,20 +33,49 @@ import NEET from './dashboard/StudentManagement/NEET11.jsx';
 import Studentdash from './Pages/Studentdash.jsx';
 import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
-function App() {
+
+
+
+function AppRoutes() {
+  const location = useLocation();
+  const protectedPaths = [
+    "/dashboard",
+    "/dashboard/10th-results",
+    "/dashboard/12th-results",
+    "/dashboard/cet-results",
+    "/dashboard/jee-results",
+    "/dashboard/neet-results",
+    "/dashboard/courses",
+    "/dashboard/coursescard",
+    "/dashboard/scholarship",
+    "/dashboard/faculty",
+    "/dashboard/poster",
+    "/dashboard/event-gallery",
+    "/dashboard/inquiry",
+    "/dashboard/admin",
+    "/dashboard/testimonial",
+    "/dashboard/blog",
+    "/dashboard/cet-student",
+    "/dashboard/jee-student",
+    "/dashboard/neet-student",
+    "/student-dashboard",
+  ];
+
+  const isProtectedRoute = protectedPaths.some((path) =>
+    location.pathname.startsWith(path)
+  );
+
   return (
-    <BrowserRouter>
+    <>
       <Routes>
-
-      <Route
-  path="/student-dashboard"
-  element={
-    <ProtectedRoute>
-      <Studentdash />
-    </ProtectedRoute>
-  }
-/>
-
+        <Route
+          path="/student-dashboard"
+          element={
+            <ProtectedRoute>
+              <Studentdash />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/event-gallery"
           element={
@@ -64,7 +92,7 @@ function App() {
             </NonDashboardRoute>
           }
         />
-         <Route
+        <Route
           path="/inquiry"
           element={
             <NonDashboardRoute>
@@ -72,7 +100,6 @@ function App() {
             </NonDashboardRoute>
           }
         />
-        
         <Route
           path="/all-courses"
           element={
@@ -163,7 +190,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path="inquiry"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -195,7 +222,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path="faculty"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -203,7 +230,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-        
           <Route
             path="12th-results"
             element={
@@ -228,7 +254,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path="coursescard"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -260,7 +286,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-                 <Route
+          <Route
             path="blog"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -276,15 +302,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           {/* <Route
-            path="managestudent"
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <ManageStudent />
-              </ProtectedRoute>
-            }
-          /> */}
-            <Route
+          <Route
             path="cet-student"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -292,7 +310,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path="neet-student"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -300,8 +318,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-           <Route
+          <Route
             path="jee-student"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -309,11 +326,9 @@ function App() {
               </ProtectedRoute>
             }
           />
-
         </Route>
-        
 
-        {/* Catch-all: if none of the above routes match, redirect admins to dashboard, else to login */}
+        {/* Catch-all Route */}
         <Route
           path="*"
           element={
@@ -322,29 +337,60 @@ function App() {
             </NonDashboardRoute>
           }
         />
-        {/* <Route path="/event-gallery" element={<Event/>}/>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/scholarship" element={<Scholarships/>} />
-        <Route path="/about" element={<About />} />
-         <Route path="/testimonial" element={<MainTestimonial />} />
-        <Route path="/all-results" element={<Results/>}/>
-        <Route path="/contact" element={<Contact/>}/>
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route path="10th-results" element={<TenthResults />} />
-          <Route path="admin" element={<Admin />} />
-          <Route path="testimonial" element={<Testimonial />} />
-          <Route path="event-galary" element={<EventGalary/>} />
-          <Route path="12th-results" element={<TwelthResult/>} />
-          <Route path="poster" element={<Poster/>} />
-          <Route path="cet-results" element={<CETResult/>}/>
-          <Route path="jee-results" element={<JEEResult/>}/>
-          <Route path="scholarship" element={<AdminScholarship/>}/>
-          <Route path="neet-results" element={<NEETResult/>}/>
-        </Route> */}
       </Routes>
+      {!isProtectedRoute && <WhatsAppButton />}
+    </>
+  );
+}
+
+
+
+const WhatsAppButton = () => (
+<div className="fixed bottom-5 right-5 flex flex-col gap-2">
+  <a
+    href="https://wa.me/918767729499"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-green-500 text-white p-3 rounded-full shadow-lg flex items-center gap-2"
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+      alt="WhatsApp"
+      className="w-6 h-6"
+    />
+    Chat with Us
+  </a>
+  <a
+    href="tel:+918767729499"
+    className="bg-blue-500 text-white p-3 rounded-full shadow-lg flex items-center gap-2"
+  >
+    {/* Call Icon (using an SVG) */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.11l-2.42 2.42a16 16 0 007.36 7.36l2.42-2.42a1 1 0 011.11-.21L19 19v2a1 1 0 01-1 1C9.94 22 2 14.06 2 4a1 1 0 011-1h2a1 1 0 011 1z"
+      />
+    </svg>
+    Call Us
+  </a>
+</div>
+
+);
+
+function AppWrapper() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
 
-export default App;
+export default AppWrapper;

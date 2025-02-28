@@ -22,14 +22,17 @@ const Scholarships = () => {
     SchoolName:"",
   });
 
-  const [errors, setErrors] = useState({});
+
+const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData,[name]: value.trim()});
   };
 
   const validateForm = () => {
+    const phonePattern = /^[6-9]\d{9}$/;
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     let newErrors = {};
 
     if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
@@ -37,23 +40,17 @@ const Scholarships = () => {
     if (!formData.birthday) newErrors.birthday = "Birthday is required";
     if (!formData.gender) newErrors.gender = "Gender is required";
     if (!formData.email) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email format";
-    
-    if (!formData.phone) newErrors.phone = "Phone is required";
-    else if (!/^\d{10}$/.test(formData.phone)) newErrors.phone = "Phone number must be 10 digits";
-
-    if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.educationMode) newErrors.educationMode = "Education mode is required";
+   else if (!emailPattern.test(formData.email)) newErrors.email = "Invalid email format";
+   if (!formData.phone) newErrors.phone = "Phone is required";
+   else if (!phonePattern.test(formData.phone)) newErrors.phone = "Phone number must start with 6-9 and be 10 digits long";
     if (!formData.marks) newErrors.marks = "Marks are required";
     else if (isNaN(formData.marks)) newErrors.marks = "Marks must be a number";
-
     if (!formData.board) newErrors.board = "Board selection is required";
     if (!formData.SchoolName) newErrors.SchoolName = "School Name selection is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -75,7 +72,7 @@ const Scholarships = () => {
             email: "",
             address: "",
             phone: "",
-            educationMode: "",
+            educationMode: "offline",
             marks: "",
             board: "",
             SchoolName:"",
@@ -121,7 +118,7 @@ const Scholarships = () => {
           {/* Name Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">First Name</label>
+              <label className="mb-2 text-gray-600 font-medium">First Name*</label>
               <input
                 type="text"
                 name="firstName"
@@ -133,7 +130,7 @@ const Scholarships = () => {
               {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
             </div>
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Last Name</label>
+              <label className="mb-2 text-gray-600 font-medium">Last Name*</label>
               <input
                 type="text"
                 name="lastName"
@@ -147,7 +144,7 @@ const Scholarships = () => {
           </div>
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Birthday</label>
+              <label className="mb-2 text-gray-600 font-medium">Birthday*</label>
               <input
                 type="date"
                 name="birthday"
@@ -158,7 +155,7 @@ const Scholarships = () => {
                {errors.birthday && <p className="text-red-500 text-sm">{errors.birthday}</p>}
             </div>
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Gender</label>
+              <label className="mb-2 text-gray-600 font-medium">Gender*</label>
               <select
                 name="gender"
                 className="p-3 border border-gray-300 rounded-lg w-full"
@@ -178,7 +175,7 @@ const Scholarships = () => {
           {/* Email and Education Mode */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Email</label>
+              <label className="mb-2 text-gray-600 font-medium">Email*</label>
               <input
                 type="email"
                 name="email"
@@ -203,7 +200,6 @@ const Scholarships = () => {
                 <option value="online">Online</option>
                 <option value="offline">Offline</option>
               </select>
-              {errors.educationMode && <p className="text-red-500 text-sm">{errors.educationMode}</p>}
             </div>
           </div>
 
@@ -219,10 +215,10 @@ const Scholarships = () => {
                 value={formData.address}
                 onChange={handleInputChange}
               />
-              {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+
             </div>
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Phone</label>
+              <label className="mb-2 text-gray-600 font-medium">Phone*</label>
               <input
                 type="text"
                 name="phone"
@@ -234,7 +230,7 @@ const Scholarships = () => {
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
             </div>
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">School Name</label>
+              <label className="mb-2 text-gray-600 font-medium">School Name*</label>
               <input
                 type="text"
                 name="SchoolName"
@@ -250,7 +246,7 @@ const Scholarships = () => {
           {/* Marks and Board */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Marks</label>
+              <label className="mb-2 text-gray-600 font-medium">Marks*</label>
               <input
                 type="text"
                 name="marks"
@@ -262,7 +258,7 @@ const Scholarships = () => {
                 {errors.marks && <p className="text-red-500 text-sm">{errors.marks}</p>}
             </div>
             <div className="flex flex-col">
-              <label className="mb-2 text-gray-600 font-medium">Board</label>
+              <label className="mb-2 text-gray-600 font-medium">Board*</label>
               <select
                 name="board"
                 className="p-3 border border-gray-300 rounded-lg w-full"

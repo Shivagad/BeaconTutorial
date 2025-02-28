@@ -22,19 +22,33 @@ const InquiryForm = () => {
     inquiryFor: "CET",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value.trim() });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const phonePattern = /^[6-9]\d{9}$/; 
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
+  if (!phonePattern.test(formData.phone)) {
+    toast.error("Please enter a valid 10-digit phone number.");
+    return;
+  }
+
+  // Email validation
+  if (!emailPattern.test(formData.email)) {
+    toast.error("Please enter a valid email address.");
+    return;
+  }
     setIsSubmitting(true);
     try {
-      const response = await axios.post("http://localhost:4000/server/inquiry", formData);
+      const response = await axios.post(
+        "http://localhost:4000/server/inquiry",
+        formData
+      );
       if (response.status === 200) {
         setIsSubmitting(false);
         toast.success("Form submitted successfully!");
@@ -67,32 +81,21 @@ const InquiryForm = () => {
       <Navbar />
       <div className="min-h-screen flex items-center justify-center p-4 bg-gray-100">
         <div className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg">
-          {isSubmitting ? (
-            <div className="space-y-4">
-              <Skeleton height={40} width={`100%`} />
-              <div className="flex space-x-4">
-                <Skeleton height={40} width="48%" />
-                <Skeleton height={40} width="48%" />
-              </div>
-              <Skeleton height={40} width={`100%`} />
-              <Skeleton height={40} width={`100%`} />
-              <div className="flex space-x-4">
-                <Skeleton height={40} width="48%" />
-                <Skeleton height={40} width="48%" />
-              </div>
-              <Skeleton height={40} width={`100%`} />
-              <Skeleton height={60} width={`100%`} />
-            </div>
-          ) : (
             <>
-              <h1 className="text-2xl font-bold text-center mb-4">Inquiry Form</h1>
+              <h1 className="text-2xl font-bold text-center mb-4">
+                Inquiry Form
+              </h1>
               <p className="text-center mb-6 text-gray-600">
-                Fill out our contact form to get in touch with Beacon Tutorials, one of the best coaching classes for JEE, NEET and CET exams in Pune.
+                Fill out our contact form to get in touch with Beacon Tutorials,
+                one of the best coaching classes for JEE, NEET and CET exams in
+                Pune.
               </p>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex space-x-4">
                   <div className="w-1/2">
-                    <label className="block font-medium mb-1">First Name *</label>
+                    <label className="block font-medium mb-1">
+                      First Name *
+                    </label>
                     <input
                       type="text"
                       name="firstName"
@@ -104,7 +107,9 @@ const InquiryForm = () => {
                     />
                   </div>
                   <div className="w-1/2">
-                    <label className="block font-medium mb-1">Last Name *</label>
+                    <label className="block font-medium mb-1">
+                      Last Name *
+                    </label>
                     <input
                       type="text"
                       name="lastName"
@@ -117,7 +122,9 @@ const InquiryForm = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block font-medium mb-1">Phone Number *</label>
+                  <label className="block font-medium mb-1">
+                    Phone Number *
+                  </label>
                   <input
                     type="text"
                     name="phone"
@@ -141,7 +148,7 @@ const InquiryForm = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-medium mb-1">Gender</label>
+                  <label className="block font-medium mb-1">Gender*</label>
                   <div className="flex space-x-4">
                     <label className="flex items-center">
                       <input
@@ -165,59 +172,75 @@ const InquiryForm = () => {
                       />
                       Female
                     </label>
+                    <label className="flex items-center">
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Other"
+                        checked={formData.gender === "Other"}
+                        onChange={handleInputChange}
+                        className="mr-2"
+                      />
+                      Other
+                    </label>
                   </div>
                 </div>
                 <div>
-                  <label className="block font-medium mb-1">Address *</label>
+                  <label className="block font-medium mb-1">Address </label>
                   <input
                     type="text"
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
                     placeholder="Enter your address"
-                    required
+                    
                     className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div className="flex space-x-4">
                   <div className="w-1/2">
-                    <label className="block font-medium mb-1">City *</label>
+                    <label className="block font-medium mb-1">City </label>
                     <input
                       type="text"
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="Enter your city"
-                      required
+                    
                       className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                   <div className="w-1/2">
-                    <label className="block font-medium mb-1">State *</label>
+                    <label className="block font-medium mb-1">State </label>
                     <input
                       type="text"
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
                       placeholder="Enter your state"
-                      required
+                     
                       className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block font-medium mb-1">Previous Standard</label>
+                  <label className="block font-medium mb-1">
+                    Previous Standard*
+                  </label>
                   <input
                     type="text"
                     name="previousStandard"
                     value={formData.previousStandard}
                     onChange={handleInputChange}
                     placeholder="Enter your previous standard"
+                    required
                     className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block font-medium mb-1">Previous Standard Marks</label>
+                  <label className="block font-medium mb-1">
+                    Previous Standard Marks
+                  </label>
                   <input
                     type="text"
                     name="previousStandardMarks"
@@ -228,18 +251,41 @@ const InquiryForm = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-medium mb-1">Inquiry For</label>
+                  <label className="block font-medium mb-1">Inquiry For*</label>
                   <select
                     name="inquiryFor"
                     value={formData.inquiryFor}
                     onChange={handleInputChange}
+                    required
                     className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="CET">CET</option>
-                    <option value="JEE Main/JEE Advance">JEE Main/JEE Advance</option>
+                    <option value="8th,9th,10th Regular">
+                      8th, 9th, 10th Regular
+                    </option>
+                    <option value="8th,9th,10th Foundation">
+                      8th, 9th, 10th Foundation
+                    </option>
+                    <option value="CBSE, SSC, ICSE">CBSE, SSC, ICSE</option>
+                    <option value="JEE (Mains + Advance)">
+                      JEE (Mains + Advance)
+                    </option>
                     <option value="NEET">NEET</option>
-                    <option value="Foundations">Foundations</option>
-                    <option value="HSC/CBSE/ICSE">HSC/CBSE/ICSE</option>
+                    <option value="NDA">NDA</option>
+                    <option value="MHTCET">MHTCET</option>
+                    <option value="ISSER">ISSER</option>
+                    <option value="CUET">CUET</option>
+                    <option value="11th+12th Board Classes">
+                      11th + 12th Board Classes
+                    </option>
+                    <option value="11th+12th JEE Mains + Advance">
+                      11th + 12th JEE Mains + Advance
+                    </option>
+                    <option value="11th+12th NEET">11th + 12th NEET</option>
+                    <option value="11th+12th ISSER">11th + 12th ISSER</option>
+                    <option value="11th+12th MHTCET">11th + 12th MHTCET</option>
+                    <option value="11th+12th NDA">11th + 12th NDA</option>
+                    <option value="11th+12th CUET">11th + 12th CUET</option>
+                    <option value="NEET Repeaters">NEET Repeaters</option>
                   </select>
                 </div>
                 <div>
@@ -253,16 +299,23 @@ const InquiryForm = () => {
                   />
                 </div>
                 <div className="flex justify-center">
-                  <button
-                    type="submit"
-                    className="bg-[#4e77bb] text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                  >
-                    Send
-                  </button>
-                </div>
+              <button
+                type="submit"
+                className="bg-[#4e77bb] text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center justify-center"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2 border-t-2 border-white rounded-full"
+                    viewBox="0 0 24 24"
+                  ></svg>
+                ) : (
+                  "Send"
+                )}
+              </button>
+            </div>
               </form>
             </>
-          )}
         </div>
       </div>
       <Footer />
