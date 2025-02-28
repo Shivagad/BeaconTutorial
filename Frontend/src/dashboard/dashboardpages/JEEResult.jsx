@@ -19,7 +19,7 @@ const JEEResult = () => {
   const [students, setStudents] = useState([]);
   const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/jee/students");
+      const response = await axios.get("https://beacon-tutorial.vercel.app/server/jee/students");
       console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {

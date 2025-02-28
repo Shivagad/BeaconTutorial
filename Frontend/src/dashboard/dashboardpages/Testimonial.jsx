@@ -19,7 +19,7 @@ const Testimonials = () => {
 
   const fetchTestimonials = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/testimonial");
+      const response = await axios.get("https://beacon-tutorial.vercel.app/server/testimonial");
       setTestimonials(response.data.data || []);
     } catch (error) {
       console.error("Error fetching testimonials:", error);

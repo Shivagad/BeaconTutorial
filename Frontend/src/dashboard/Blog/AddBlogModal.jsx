@@ -42,7 +42,7 @@ const AddBlogModal = ({ isOpen, onClose, setToast, onSubmit }) => {
   
     try {
       setIsSubmitting(true);
-      const response = await axios.post("http://localhost:4000/server/blog/create", formData);
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/blog/create", formData);
       
       if (response.data.success) {
         setToast({ success: true, message: "Blog added successfully" });

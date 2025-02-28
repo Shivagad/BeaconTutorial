@@ -26,7 +26,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
   // Fetch available courses
   useEffect(() => {
     axios
-      .get("http://localhost:4000/server/courses/getall/")
+      .get("https://beacon-tutorial.vercel.app/server/courses/getall/")
       .then((response) => {
         console.log("Courses API Response:", response.data.courses);
         setCourses(response.data.courses);
@@ -38,7 +38,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
   useEffect(() => {
     if (studentId) {
       axios
-        .get(`http://localhost:4000/server/student/byid/${studentId}`)
+        .get(`https://beacon-tutorial.vercel.app/server/student/byid/${studentId}`)
         .then((response) => {
           console.log("Student API Response:", response.data);
           const student = response.data;
@@ -81,7 +81,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/server/student/stu/${studentId}`,
+        `https://beacon-tutorial.vercel.app/server/student/stu/${studentId}`,
         payload
       );
 

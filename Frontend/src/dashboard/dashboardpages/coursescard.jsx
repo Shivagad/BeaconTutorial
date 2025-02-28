@@ -12,7 +12,7 @@ const CourseCards = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/server/courses/getall/");
+        const response = await axios.get("https://beacon-tutorial.vercel.app/server/courses/getall/");
         setCourses(response.data.courses || []);
       } catch (error) {
         console.error("Error fetching courses:", error);
