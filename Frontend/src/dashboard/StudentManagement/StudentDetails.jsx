@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PlusCircle, Upload, Edit, Trash2 } from "lucide-react";
+import { PlusCircle, Upload, Edit, Trash2, Download, } from "lucide-react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,8 +28,9 @@ const StudentTable = () => {
       // Filter only CET students (based on course name)
       const cetStudents = allStudents.filter(
         (student) =>
-          student.course?.name?.toLowerCase() === course
+          student.course?.name?.toLowerCase() === course.toLowerCase()
       );
+      
 
       setStudents(cetStudents);
       setFilteredStudents(cetStudents);
@@ -101,13 +102,55 @@ const StudentTable = () => {
     }
   }, [csvFile]);
 
+  const handleDownloadCsv = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/server/student/download-csv/${course}`,
+        { responseType: "blob" }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${course}_students.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      toast.error("Failed to download CSV.");
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    const isConfirmed = window.confirm(`Are you sure you want to delete all students from ${course.toUpperCase()}?`);
+    
+    if (!isConfirmed) return;
+  
+    try {
+      await axios.delete(`http://localhost:4000/server/student/delete-all/${course}`);
+      toast.success("All students deleted successfully.");
+      fetchStudents();
+    } catch (error) {
+      toast.error("Failed to delete students.");
+    }
+  };
+  
+
   return (
     <div className="p-6 ml-64">
       <ToastContainer position="top-right" autoClose={3000} />
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-gray-800">{course.toUpperCase()} Students</h1>
+        
+        <div className="flex space-x-4">
+          <button onClick={handleDownloadCsv} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            <Download className="w-5 h-5 mr-2" /> Download CSV
+          </button>
 
+          <button onClick={handleDeleteAll} className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+            <Trash2 className="w-5 h-5 mr-2" /> Delete All
+          </button>
+        </div>
         <div className="flex space-x-4">
           <button
             onClick={() => setIsAddModalOpen(true)}
@@ -166,7 +209,7 @@ const StudentTable = () => {
                 <th className="py-3 px-2 border border-gray-300 text-left">Gender</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">DOB</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">Admission Year</th>
-                <th className="py-3 px-2 border border-gray-300 text-left">Course</th>
+               
                 <th className="py-3 px-2 border border-gray-300 text-center">Actions</th>
               </tr>
             </thead>
@@ -188,7 +231,7 @@ const StudentTable = () => {
                     {student.dob ? new Date(student.dob).toLocaleDateString() : ""}
                   </td>
                   <td className="py-3 px-2 border border-gray-300">{student.admissionYear}</td>
-                  <td className="py-3 px-2 border border-gray-300">{student.course?.name || ""}</td>
+                 
                   <td className="py-3 px-2 border border-gray-300 text-center">
                     <button
                       onClick={() => setEditStudentId(student._id)}

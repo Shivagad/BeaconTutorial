@@ -5,6 +5,7 @@ import fs from "fs";
 import csv from "csv-parser";
 import Student from "../Models/Student.js";
 import Course from "../Models/Course.js";
+import { Parser } from "json2csv";
 
 dotenv.config();
 
@@ -150,6 +151,37 @@ export const deleteStudent = async (req, res) => {
   }
 };
 
+
+
+export const deleteAllCourseStudent = async (req, res) => {
+  try {
+    const { course } = req.params;
+
+    if (!course) {
+      return res.status(400).json({ message: "Course parameter is required." });
+    }
+
+    // Find the course by name (case-insensitive search)
+    const courseData = await Course.findOne({ name: { $regex: new RegExp(`^${course}$`, "i") } });
+
+    if (!courseData) {
+      return res.status(404).json({ message: "Course not found." });
+    }
+
+    // Delete all students linked to this course
+    const deletedStudents = await Student.deleteMany({ course: courseData._id });
+
+    if (deletedStudents.deletedCount === 0) {
+      return res.status(404).json({ message: "No students found for this course." });
+    }
+
+    res.status(200).json({ message: "All students deleted successfully." });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting students", error: error.message });
+  }
+};
+
+
 // Upload students via CSV
 export const uploadStudentsCSV = async (req, res) => {
   try {
@@ -246,6 +278,59 @@ export const Login = async (req, res) => {
     res.status(500).json({ success: false, message: "Login failed" });
   }
 };
+
+
+export const downloadCourseCSV = async (req, res) => {
+  try {
+    const { course } = req.params;
+
+    if (!course) {
+      return res.status(400).json({ message: "Course parameter is required." });
+    }
+
+    // Find the course by name (case-insensitive search)
+    const courseData = await Course.findOne({ name: { $regex: new RegExp(`^${course}$`, "i") } });
+
+    if (!courseData) {
+      return res.status(404).json({ message: "Course not found." });
+    }
+
+    // Query students for this course and convert to plain JavaScript objects
+    const students = await Student.find({ course: courseData._id }).lean();
+
+    if (students.length === 0) {
+      return res.status(404).json({ message: "No students found for this course." });
+    }
+
+    // Define the CSV fields/columns
+    const fields = [
+      "name",
+      "fatherName",
+      "motherName",
+      "parentEmail",
+      "email",
+      "mobile",
+      "fatherMobile",
+      "address",
+      "state",
+      "city",
+      "gender",
+      "dob",
+      "admissionYear"
+    ];
+
+    // Convert JSON data to CSV
+    const json2csvParser = new Parser({ fields });
+    const csvData = json2csvParser.parse(students);
+    res.header("Content-Type", "text/csv");
+    res.attachment(`${course}_students.csv`);
+    res.status(200).send(csvData);
+  } catch (error) {
+    console.error("Error exporting course student CSV:", error);
+    res.status(500).json({ error: "Failed to export course student CSV" });
+  }
+};
+
 
 
 

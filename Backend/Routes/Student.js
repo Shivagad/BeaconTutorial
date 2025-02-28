@@ -10,7 +10,9 @@ import {
   updateStudent,
   deleteStudent,
   getStudentById,
-  uploadStudentsCSV
+  uploadStudentsCSV,
+  deleteAllCourseStudent,
+  downloadCourseCSV
 } from "../Controller/Student.js";
 
 import { sendOTPEmail, sendScholarregSuccessfull,ContactUsEmail } from "../Controller/EmailService.js";
@@ -48,5 +50,7 @@ router.post("/createstu/", createStudent);
 router.put("/stu/:id", updateStudent);
 router.delete("/stu/:id", deleteStudent);
 router.post("/upload-csv/", upload.single("file"), uploadStudentsCSV);
+router.delete("/delete-all/:course", deleteAllCourseStudent);
+router.get("/download-csv/:course", downloadCourseCSV);
 
 export default router;
