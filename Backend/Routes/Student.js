@@ -12,17 +12,14 @@ import {
   getStudentById,
   uploadStudentsCSV,
   deleteAllCourseStudent,
-  downloadCourseCSV,
-  checkStudentEmail,
-  resetStudentPassword
+  downloadCourseCSV
 } from "../Controller/Student.js";
 
 import { sendOTPEmail, sendScholarregSuccessfull,ContactUsEmail } from "../Controller/EmailService.js";
 
 const router = express.Router();
 
-// Ensure "uploads" directory exists
-const uploadDir = path.join(process.cwd(), "uploads");
+const uploadDir = "/tmp/uploads";
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -54,6 +51,5 @@ router.delete("/stu/:id", deleteStudent);
 router.post("/upload-csv/", upload.single("file"), uploadStudentsCSV);
 router.delete("/delete-all/:course", deleteAllCourseStudent);
 router.get("/download-csv/:course", downloadCourseCSV);
-router.post("/check/email",checkStudentEmail)
-router.post("/reset-password",resetStudentPassword)
+
 export default router;
