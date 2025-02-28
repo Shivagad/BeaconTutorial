@@ -99,6 +99,11 @@ function Home() {
     }
   }, [posters.length]);
 
+  const placeholderPosters = [
+    { desktop: "/images/aboutus_img1.avif", mobile: "/images/cbse.jpg" },
+  ];
+  
+
   return (
     <>
       <Navbar />
@@ -217,9 +222,25 @@ function Home() {
       </div>
     ))
   ) : (
-    <div className="flex items-center justify-center h-full">
-      <p className="text-gray-500">No posters available</p>
-    </div>
+    placeholderPosters.map((placeholder, index) => (
+      <div
+        key={`placeholder-${index}`}
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
+          index === 0 ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <picture className="w-full h-full">
+          {/* Mobile Image */}
+          <source media="(max-width: 768px)" srcSet={placeholder.mobile} />
+          {/* Desktop Image */}
+          <img
+            src={placeholder.desktop}
+            alt="Placeholder Poster"
+            className="w-full h-full object-contain md:object-fill"
+          />
+        </picture>
+      </div>
+    ))
   )}
 
   {/* Carousel Buttons */}
