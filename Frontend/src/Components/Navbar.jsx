@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Menu, X, Phone, Mail } from 'lucide-react';
-import { useNavigate,Link } from 'react-router-dom';
-import { useAuth } from '../Context/AuthProvider';
-import logo from '../../public/images/logo.png'
+import React, { useState } from "react";
+import { Menu, X, Phone, Mail } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthProvider";
+import logoSrc from "../../public/images/logo.png"; // Ensure correct logo import
 
-const Navbar = ({ logoSrc }) => {
+const Navbar = () => {
   const { currentUser, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,11 +22,9 @@ const Navbar = ({ logoSrc }) => {
     { label: "Contact Us", path: "/contact" },
   ];
 
-
-
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
-      {/* Top bar with contact info */}
+      {/* Top Bar (Contact Info) - Visible on md and larger */}
       <div className="hidden md:block bg-gray-100 py-2">
         <div className="container mx-auto px-4 flex justify-end items-center space-x-6">
           <div className="flex items-center space-x-2">
@@ -37,20 +35,20 @@ const Navbar = ({ logoSrc }) => {
             <Mail size={16} className="text-gray-600" />
             <span className="text-sm text-gray-600">info@example.com</span>
           </div>
+
+          {/* Profile Dropdown */}
           {currentUser ? (
             <div className="relative">
-              {/* Profile Icon with Dropdown */}
               <img
                 className="h-7 w-7 cursor-pointer rounded-full"
                 src={currentUser.profilePicture}
                 alt="Profile"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />
-              {/* Dropdown Menu */}
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 bg-white shadow-md rounded-md w-40">
                   <button
-                    onClick={() => navigate('/dashboard')}
+                    onClick={() => navigate("/dashboard")}
                     className="w-full text-gray-700 px-4 py-2 text-left hover:bg-gray-100"
                   >
                     Dashboard
@@ -58,7 +56,7 @@ const Navbar = ({ logoSrc }) => {
                   <button
                     onClick={() => {
                       logout();
-                      navigate('/');
+                      navigate("/");
                     }}
                     className="w-full text-gray-700 px-4 py-2 text-left hover:bg-gray-100"
                   >
@@ -69,9 +67,8 @@ const Navbar = ({ logoSrc }) => {
             </div>
           ) : (
             <button
-              onClick={() => { navigate(`/login`) }}
-              className="bg-[#4E77BB] text-white px-4 py-1 rounded-md hover:bg-[#6ea3fa]
-              hover:text-black transition-colors"
+              onClick={() => navigate("/login")}
+              className="bg-[#4E77BB] text-white px-4 py-1 rounded-md hover:bg-[#6ea3fa] hover:text-black transition-colors"
             >
               Login
             </button>
@@ -79,108 +76,112 @@ const Navbar = ({ logoSrc }) => {
         </div>
       </div>
 
-      {/* Main navbar */}
+      {/* Main Navbar */}
       <div className="container mx-auto px-4">
-        <div className="flex flex-col space-y-6 h-20 items-end">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          {
-            !isOpen && (
-              <div className="flex-shrink-0 mr-4">
-                {logo ? (
-                 <Link to='/'>
-                  <div className="absolute top-0 left-4 h-full flex items-center hover:cursor-pointer">
-                    <img
-                      src={logo}
-                      alt="Logo"
-                      className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-26 w-auto"
-                    />
-                  </div>
-                 </Link>
+          <div className="flex-shrink-0">
+            <Link to="/">
+              <img
+                src={logoSrc}
+                alt="Logo"
+                className="h-12 sm:h-16 md:h-20 lg:h-24 xl:h-26 w-auto"
+              />
+            </Link>
+          </div>
 
-                ) : (
-                  <div className="h-12 w-32 bg-gray-200 rounded animate-pulse" />
-                )}
-              </div>
-            )
-          }
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8 ml-4">
+          {/* Desktop Navigation (Visible on lg and larger) */}
+          <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
-                href={item.path}
+                to={item.path}
                 className="text-gray-700 hover:text-[#4e77bb] transition-colors"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden ml-auto">
+          {/* Mobile & Tablet Menu Button (md and smaller) */}
+          <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 hover:text-blue-600 focus:outline-none"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              <Menu size={24} />
+
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Sidebar (Visible on md and below) */}
         {isOpen && (
-          <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-3">
-              {/* Mobile contact info */}
-              <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">
-                <Phone size={16} className="text-gray-600" />
-                <span className="text-sm text-gray-600">+1 234 567 8900</span>
-              </div>
-              <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">
-                <Mail size={16} className="text-gray-600" />
-                <span className="text-sm text-gray-600">info@example.com</span>
-              </div>
-              {currentUser ? (
-                <div className="flex items-center space-x-4 px-4 py-2 bg-gray-50 rounded">
-                  <img className="h-7 w-7" src={currentUser.profilePicture} alt="Profile" />
-                  <div className="flex flex-col">
-                    <button
-                      onClick={() => navigate('/dashboard')}
-                      className="text-gray-700 hover:text-blue-600"
-                    >
-                      Dashboard
-                    </button>
-                    <button
-                      onClick={() => {
-                        logout();
-                        navigate('/');
-                      }}
-                      className="text-gray-700 hover:text-blue-600"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <button
-                  onClick={() => { navigate(`/login`) }}
-                  className="bg-[#4E77BB] text-white px-4 py-1 rounded-md hover:bg-[#6ea3fa]
-              hover:text-black transition-colors"
-                >
-                  Login
-                </button>
-              )}
+          <div className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col w-3/4 md:w-1/2 h-full p-4">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="self-end text-gray-700 hover:text-red-600"
+            >
+              <X size={24} />
+            </button>
 
-              {/* Mobile nav items */}
+            {/* Mobile Contact Info */}
+            <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">
+              <Phone size={16} className="text-gray-600" />
+              <span className="text-sm text-gray-600">+1 234 567 8900</span>
+            </div>
+            <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">
+              <Mail size={16} className="text-gray-600" />
+              <span className="text-sm text-gray-600">info@example.com</span>
+            </div>
+
+            {/* Mobile Profile/Login */}
+            {currentUser ? (
+              <div className="flex items-center space-x-4 px-4 py-2 bg-gray-50 rounded">
+                <img
+                  className="h-7 w-7 rounded-full"
+                  src={currentUser.profilePicture}
+                  alt="Profile"
+                />
+                <div className="flex flex-col">
+                  <button
+                    onClick={() => navigate("/dashboard")}
+                    className="text-gray-700 hover:text-blue-600"
+                  >
+                    Dashboard
+                  </button>
+                  <button
+                    onClick={() => {
+                      logout();
+                      navigate("/");
+                    }}
+                    className="text-gray-700 hover:text-blue-600"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="bg-[#4E77BB] text-white px-4 py-1 rounded-md hover:bg-[#6ea3fa] hover:text-black transition-colors"
+              >
+                Login
+              </button>
+            )}
+
+            {/* Mobile Navigation Links */}
+            <div className="flex flex-col space-y-2 mt-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href={item.path}
+                  to={item.path}
                   className="text-gray-700 hover:text-blue-600 transition-colors px-4 py-2 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)} // Close menu on click
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
