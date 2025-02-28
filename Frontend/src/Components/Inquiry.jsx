@@ -79,8 +79,28 @@ const InquiryForm = () => {
     <>
       <ToastContainer />
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gray-100">
-        <div className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg">
+      <div className="min-h-screen">
+      <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Inquiry
+            </h1>
+            <p className="text-white text-center max-w-2xl mx-auto">
+            At Beacon Tutorials, we are committed to our students' all-around development, which is why we invite you to fill our inquiry form and start your journey.
+            </p>
+          </div>
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div className="w-full flex flex-col items-center justify-center mx-auto max-w-2xl bg-white p-8 rounded-2xl shadow-lg">
             <>
               <h1 className="text-2xl font-bold text-center mb-4">
                 Inquiry Form
@@ -301,7 +321,7 @@ const InquiryForm = () => {
                 <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-[#4e77bb] text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center justify-center"
+                className="bg-[#4e77bb] text-white px-4 py-2 rounded-lg hover:bg-[#6ea3fa] hover:text-black flex items-center justify-center"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -310,7 +330,7 @@ const InquiryForm = () => {
                     viewBox="0 0 24 24"
                   ></svg>
                 ) : (
-                  "Send"
+                  "Submit"
                 )}
               </button>
             </div>

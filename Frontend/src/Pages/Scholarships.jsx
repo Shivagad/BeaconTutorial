@@ -93,23 +93,33 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     <>
       <Navbar />
       <ToastContainer />
-      <div className="flex flex-col items-center bg-gray-50 min-h-screen">
-        {/* Header Section */}
-        <div className="w-full bg-[#4e77bb] p-8 text-center">
-          <h1 className="text-3xl font-bold text-white">BEST - Talent Test</h1>
-          <p className="text-lg text-white mt-2">
+      <div className=" min-h-screen">
+        <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h1 className="text-4xl font-bold text-white mb-4">
             Beacon Eligibility Cum Scholarship Test
-          </p>
-          <p className="text-white mt-1">
+            </h1>
+            <p className="text-white text-center max-w-2xl mx-auto">
             Upto 90% Scholarship for qualifying students from 6th to 10th SSC |
             CBSE | ICSE
-          </p>
+            </p>
+          </div>
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
         </div>
 
         {/* Form Section */}
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-4xl p-8 bg-white rounded-xl shadow-lg my-10 space-y-4"
+          className="w-full flex flex-col justify-center mx-auto max-w-2xl bg-white p-8 rounded-2xl shadow-lg"
         >
           <h2 className="text-2xl font-bold text-gray-800 text-center">
             Beacon Eligibility Cum Scholarship Test
@@ -276,7 +286,7 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
           <button
             type="submit"
-            className="w-full p-3 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition duration-300"
+            className="w-full p-3 bg-orange-500 text-white font-bold mt-5 rounded-lg hover:bg-orange-600 transition duration-300"
           >
             Apply
           </button>

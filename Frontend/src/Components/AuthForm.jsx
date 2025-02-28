@@ -123,7 +123,7 @@ export function AuthForm({ mode }) {
           type="submit"
           disabled={loading}
           className={clsx(
-            "w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors",
+            "w-full bg-[#4E77BB] text-white py-2 px-4 rounded-lg hover:bg-[#6ea3fa] hover:text-black transition-colors",
             "disabled:opacity-50 disabled:cursor-not-allowed"
           )}
         >

@@ -84,7 +84,7 @@ function AboutUs() {
                 onClick={() => {navigate('/facultymain');
                   window.scrollTo(0,0);
                 }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-blue-700 transition duration-300"
+                className="bg-[#4E77BB] text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-[#6ea3fa] hover:text-black transition duration-300"
               >
                 Meet Our Faculty
               </button>

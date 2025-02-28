@@ -34,7 +34,7 @@ const Faculty = () => {
           initialPages[subject] = 0;
           subjectRefs.current[subject] = React.createRef(); // Initialize ref
         });
-        setCurrentPage(initialPages);
+        setCurrentPage(initialPages);      
       } catch (error) {
         console.error('Error fetching faculty:', error);
       }

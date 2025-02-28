@@ -30,7 +30,7 @@ function Login() {
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                 userType === 'student'
                   ? 'bg-[#4E77BB] text-white'
-                  : 'bg-white text-blue-600 hover:bg-blue-50'
+                  : 'bg-white text-[#4E77BB] hover:bg-blue-50'
               }`}
             >
               <GraduationCap className="h-5 w-5" />
@@ -42,7 +42,7 @@ function Login() {
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                 userType === 'admin'
                   ? 'bg-[#4E77BB] text-white'
-                  : 'bg-white text-indigo-600 hover:bg-indigo-50'
+                  : 'bg-white text-[#4E77BB] hover:bg-indigo-50'
               }`}
             >
               <UserCog className="h-5 w-5" />
