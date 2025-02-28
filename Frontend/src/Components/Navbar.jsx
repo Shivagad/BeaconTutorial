@@ -70,7 +70,8 @@ const Navbar = ({ logoSrc }) => {
           ) : (
             <button
               onClick={() => { navigate(`/login`) }}
-              className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors"
+              className="bg-[#4E77BB] text-white px-4 py-1 rounded-md hover:bg-[#6ea3fa]
+              hover:text-black transition-colors"
             >
               Login
             </button>
@@ -164,7 +165,8 @@ const Navbar = ({ logoSrc }) => {
               ) : (
                 <button
                   onClick={() => { navigate(`/login`) }}
-                  className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors"
+                  className="bg-[#4E77BB] text-white px-4 py-1 rounded-md hover:bg-[#6ea3fa]
+              hover:text-black transition-colors"
                 >
                   Login
                 </button>

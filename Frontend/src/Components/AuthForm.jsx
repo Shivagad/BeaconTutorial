@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInFailure, signInStart, signInSuccess } from "../../Redux/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthProvider";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export function AuthForm({ mode }) {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ export function AuthForm({ mode }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
 
   // Toast helper for OTP modal
   const setToast = (obj) => {
@@ -43,7 +46,7 @@ export function AuthForm({ mode }) {
       let apiEndpoint = "";
       let requestData = {};
 
-     if (isStudentLogin || isAdminLogin) {
+      if (isStudentLogin || isAdminLogin) {
         if (!email || !password) {
           throw new Error("Email and password are required!");
         }
@@ -76,13 +79,23 @@ export function AuthForm({ mode }) {
       setLoading(false);
     }
   }
-  
+
+  const handleCaptchaChange = (value) => {
+    if (value) {
+      setCaptchaVerified(true);
+    } else {
+      setCaptchaVerified(false);
+    }
+  };
+
+
   return (
     <>
       <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-md">
 
         <div className="mt-1 relative">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+        <label className="block text-sm font-medium text-gray-700">Email</label>
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/5 text-gray-400 h-5 w-5" />
           <input
             type="email"
             required
@@ -119,20 +132,34 @@ export function AuthForm({ mode }) {
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className={clsx(
-            "w-full bg-[#4E77BB] text-white py-2 px-4 rounded-lg hover:bg-[#6ea3fa] hover:text-black transition-colors",
-            "disabled:opacity-50 disabled:cursor-not-allowed"
-          )}
-        >
-          {loading
-            ? "Please wait..."
-              : isStudentLogin
-                ? "Student Login"
-                : "Admin Login"}
-        </button>
+        <div className="flex justify-center">
+        <ReCAPTCHA
+          sitekey="6LdRWeUqAAAAAAazcvSCXbLru5yhdHPEtWd1HEQH"
+          onChange={handleCaptchaChange}
+        />
+      </div>
+
+      <div className="mt-2 px-1">
+            <a href="/forgot-password" className="text-sm text-right text-[#4E77BB] hover:underline">
+              Forgot Password?
+            </a>
+          </div>
+
+
+          <button
+        type="submit"
+        disabled={loading || !captchaVerified}
+        className={clsx(
+          "w-full bg-[#4E77BB] text-white py-2 px-4 rounded-lg hover:bg-[#6ea3fa] hover:text-black transition-colors",
+          "disabled:opacity-50 disabled:cursor-not-allowed"
+        )}
+      >
+        {loading
+          ? "Please wait..."
+          : isStudentLogin
+          ? "Student Login"
+          : "Admin Login"}
+      </button>
       </form>
     </>
   );

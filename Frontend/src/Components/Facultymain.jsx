@@ -71,22 +71,30 @@ const Faculty = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100">
-        <section 
-          className="relative h-[40vh] flex flex-col items-center justify-center bg-cover bg-center text-center px-4"
-          style={{ backgroundImage: 'url(/images/faculty_bg.avif)' }}
-        >
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative z-10">
-            <h1 className="text-4xl font-bold text-white drop-shadow-lg">Meet Our Faculty</h1>
-            <p className="mt-2 text-lg text-gray-200 max-w-2xl">
-              Get to know the passionate and experienced educators dedicated to shaping the future of our students. 
-              Our faculty members bring expertise, innovation, and commitment to excellence in education.
+      <div className="min-h-screen">
+          <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Our Faculty Members
+            </h1>
+            <p className="text-white text-center max-w-2xl mx-auto">
+            Get to know the passionate and experienced educators dedicated to shaping the future of our students. 
+            Our faculty members bring expertise, innovation, and commitment to excellence in education.
             </p>
           </div>
-        </section>
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="max-w-7xl mx-auto px-4 py-8 -mt-3">
           {Object.keys(filteredFaculty).map((subject) => {
             const facultyList = filteredFaculty[subject];
             const totalPages = Math.ceil(facultyList.length / facultyPerPage);

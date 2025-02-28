@@ -59,6 +59,7 @@ function AppRoutes() {
     "/dashboard/jee-student",
     "/dashboard/neet-student",
     "/student-dashboard",
+    "/login"
   ];
 
   const isProtectedRoute = protectedPaths.some((path) =>
