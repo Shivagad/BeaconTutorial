@@ -12,5 +12,6 @@ const ResultSchema = new mongoose.Schema({
   remarks: { type: String, required: true }
 });
 
+
 const Result = mongoose.model("Result", ResultSchema);
 export default Result;

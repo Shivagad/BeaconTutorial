@@ -10,7 +10,7 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
     name: "",
     seqno: "",
     imagePath: "",
-    mobileImage: "",
+    mobileImagePath: "",
   });
   const [previewImage, setPreviewImage] = useState(null);
   const [previewMobileImage, setPreviewMobileImage] = useState(null);
@@ -20,11 +20,13 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const result = reader.result;
+        const base64Image = reader.result;
         if (type === "imagePath") {
-          setPreviewImage(result);
+          setPreviewImage(base64Image);
+          setFormData((prev) => ({ ...prev, imagePath: base64Image }));
         } else {
-          setPreviewMobileImage(result);
+          setPreviewMobileImage(base64Image);
+          setFormData((prev) => ({ ...prev, mobileImagePath: base64Image }));
         }
       };
       reader.readAsDataURL(file);
@@ -51,7 +53,6 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
     onClose();
   };
 
-  
   const fetchPosterDetails = async () => {
     try {
       const response = await axios.get(
@@ -62,7 +63,7 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
         seqno: data.seqno || "",
         name: data.name || "",
         imagePath: data.imagePath || "",
-        mobileImage: data.mobileImagePath || "",
+        mobileImagePath: data.mobileImagePath || "",
       });
       setPreviewImage(data.imagePath || null);
       setPreviewMobileImage(data.mobileImagePath || null);
@@ -82,38 +83,66 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
       <div className="bg-white rounded-lg p-6 w-full max-w-3xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Edit Poster</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <input
-            type="text"
-            required
-            placeholder="Poster Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-2 border rounded-lg"
-          />
-          <input
-            type="number"
-            required
-            placeholder="Sequence Number"
-            value={formData.seqno}
-            onChange={(e) => setFormData({ ...formData, seqno: e.target.value })}
-            className="w-full px-4 py-2 border rounded-lg"
-          />
+          <div>
+            <label
+              htmlFor="posterName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Poster Name
+            </label>
+            <input
+              id="posterName"
+              type="text"
+              required
+              placeholder="Enter Poster Name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+          </div>
 
-          {["imagePath", "mobileImage"].map((type) => (
+          <div>
+            <label
+              htmlFor="seqno"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Sequence Number
+            </label>
+            <input
+              id="seqno"
+              type="number"
+              required
+              placeholder="Enter Sequence Number"
+              value={formData.seqno}
+              onChange={(e) =>
+                setFormData({ ...formData, seqno: e.target.value })
+              }
+              className="w-full px-4 py-2 border rounded-lg"
+            />
+          </div>
+
+          {["imagePath", "mobileImagePath"].map((type) => (
             <div key={type} className="space-y-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700">
                 {type === "imagePath" ? "Desktop Image" : "Mobile Image"}
               </label>
               <div className="flex flex-col items-center space-y-4">
                 {(type === "imagePath" ? previewImage : previewMobileImage) ? (
                   <div className="relative w-40 h-40">
                     <img
-                      src={type === "imagePath" ? previewImage : previewMobileImage}
+                      src={
+                        type === "imagePath" ? previewImage : previewMobileImage
+                      }
                       alt="Preview"
                       className="w-full h-full object-cover rounded-lg"
                     />
@@ -122,10 +151,13 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
                       onClick={() => {
                         if (type === "imagePath") {
                           setPreviewImage(null);
-                          setFormData({ ...formData, imagePath: "" });
+                          setFormData((prev) => ({ ...prev, imagePath: "" }));
                         } else {
                           setPreviewMobileImage(null);
-                          setFormData({ ...formData, mobileImage: "" });
+                          setFormData((prev) => ({
+                            ...prev,
+                            mobileImagePath: "",
+                          }));
                         }
                       }}
                       className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"

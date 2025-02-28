@@ -10,7 +10,7 @@ const facultySchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    phone: {
+    phone:{
         type: String,
         required: true
     },

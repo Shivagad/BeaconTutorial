@@ -60,6 +60,39 @@ export const getAllPosters = async (req, res) => {
     }
 };
 
+// Delete a poster
+export const deletePoster = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const poster = await Poster.findByIdAndDelete(id);
+
+        if (!poster) {
+            return res.status(404).json({ message: "Poster not found", success: false });
+        }
+
+        res.status(200).json({ message: "Poster deleted successfully", success: true });
+    } catch (error) {
+        res.status(500).json({ message: error.message, success: false });
+    }
+};
+
+// Get a poster by ID
+export const getPosterById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const poster = await Poster.findById(id);
+
+        if (!poster) {
+            return res.status(404).json({ message: "Poster not found", success: false });
+        }
+
+        res.status(200).json({ message: "Poster fetched successfully", success: true, data: poster });
+    } catch (error) {
+        res.status(500).json({ message: error.message, success: false });
+    }
+};
+
+
 // Edit a poster
 export const editPoster = async (req, res) => {
     try {
@@ -136,34 +169,3 @@ export const editPoster = async (req, res) => {
 };
 
 
-// Delete a poster
-export const deletePoster = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const poster = await Poster.findByIdAndDelete(id);
-
-        if (!poster) {
-            return res.status(404).json({ message: "Poster not found", success: false });
-        }
-
-        res.status(200).json({ message: "Poster deleted successfully", success: true });
-    } catch (error) {
-        res.status(500).json({ message: error.message, success: false });
-    }
-};
-
-// Get a poster by ID
-export const getPosterById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const poster = await Poster.findById(id);
-
-        if (!poster) {
-            return res.status(404).json({ message: "Poster not found", success: false });
-        }
-
-        res.status(200).json({ message: "Poster fetched successfully", success: true, data: poster });
-    } catch (error) {
-        res.status(500).json({ message: error.message, success: false });
-    }
-};

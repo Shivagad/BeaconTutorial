@@ -8,7 +8,6 @@ import Edit10StudentModal from '../10thResult/Edit10Student';
 import Delete10StudentModal from '../10thResult/Delete10StudentModal';
 
 const TenthResults = () => {
-  // Modal control states
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -20,7 +19,7 @@ const TenthResults = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("http://localhost:4000/server/tenth/students");
-     console.log(response.data.data);
+    //  console.log(response.data.data);
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
       setStudents([])

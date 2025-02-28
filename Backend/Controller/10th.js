@@ -25,7 +25,7 @@ export const addStudentResult = async (req, res) => {
           crop: "fit", 
         }
       );
-        console.log(uploadResponse)
+        // console.log(uploadResponse)
         const newResult = new tenthResult({
             firstName,
             lastName,
@@ -38,7 +38,7 @@ export const addStudentResult = async (req, res) => {
             seqno:seqno,
         });
         const savedResult = await newResult.save();
-        console.log("HII")
+        // console.log("HII")
         res.status(201).json({ message: "Student result added successfully", success: true, data: savedResult });
     } catch (error) {
         console.error(error);
@@ -47,10 +47,10 @@ export const addStudentResult = async (req, res) => {
 };
 
 
+
 export const getAllStudentResults = async (req, res) => {
     try {
         const results = await tenthResult.find();
-
         if (!results || results.length === 0) {
             return res.status(404).json({ message: "No student results found", success: false });
         }
@@ -59,6 +59,7 @@ export const getAllStudentResults = async (req, res) => {
         res.status(500).json({ message: error.message, success: false });
     }
 };
+
 
 
 export const editStudentResult = async (req, res) => {
@@ -134,22 +135,18 @@ export const deleteStudentResult = async (req, res) => {
 export const getResultById = async (req, res) => {
     try {
         const { id } = req.params;
-        console.log(id)
+        // console.log(id)
         const results = await tenthResult.findById(id);
 
         if (!results) {
             return res.status(404).json({ message: "No student results found", success: false });
         }
-        console.log(results)
+        // console.log(results)
         res.status(200).json({ message: "Student results fetched successfully", success: true, data: results });
     } catch (error) {
         res.status(500).json({ message: error.message, success: false });
     }
 };
-
-
-
-
 
 
 export const getAllExamResults = async (req, res) => {
@@ -170,9 +167,7 @@ export const getAllExamResults = async (req, res) => {
       { title: "JEE Champions", students: jeeResults },
       { title: "NEET Achievers", students: neetResults }
     ];
-    
     res.status(200).json({ success: true, secondSuccess: true, data: examData });
-
   } catch (error) {
     res.status(500).json({ success: false, secondSuccess: false, message: 'Error fetching results', error });
   }

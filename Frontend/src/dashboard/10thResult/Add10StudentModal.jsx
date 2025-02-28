@@ -190,7 +190,6 @@ const Add10StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
                 </div>
               </div>
             </div>
-
             {/* Marks & Tags */}
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-700 mb-4">

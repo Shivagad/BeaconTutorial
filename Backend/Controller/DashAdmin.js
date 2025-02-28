@@ -83,10 +83,12 @@ export const deleteAdmin = async (req, res) => {
   }
 };
 
+
+
 // Login
 export const loginAdmin = async (req, res) => {
   try {
-      console.log(req.body)
+      // console.log(req.body)
       const { email, password } = req.body;
       if (!email || !password) {
           return res.status(400).json({
