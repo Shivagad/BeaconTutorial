@@ -181,7 +181,6 @@ export const deleteAllCourseStudent = async (req, res) => {
   }
 };
 
-
 // Upload students via CSV
 export const uploadStudentsCSV = async (req, res) => {
   try {
@@ -214,17 +213,21 @@ export const uploadStudentsCSV = async (req, res) => {
       } = row;
       console.log("Processing:", row);
 
+      // Check if student already exists
       const existingStudent = await Student.findOne({ $or: [{ email }, { mobile }] });
       if (existingStudent) {
         console.warn(`Student with email "${email}" or mobile "${mobile}" already exists. Skipping.`);
         continue;
       }
 
-      const courseExists = await Course.findOne({ name: course });
+      // Find course with case-insensitive search
+      const courseExists = await Course.findOne({ name: { $regex: new RegExp(`^${course}$`, "i") } });
+
       if (!courseExists) {
         console.error(`Course "${course}" not found. Skipping.`);
         continue;
       }
+
       const courseId = courseExists._id;
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -261,6 +264,7 @@ export const uploadStudentsCSV = async (req, res) => {
     res.status(500).json({ success: false, message: "CSV upload failed", error: error.message });
   }
 };
+
 
 // Student Login
 export const Login = async (req, res) => {
