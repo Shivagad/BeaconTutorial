@@ -30,25 +30,74 @@ export const getStudentById = async (req, res) => {
   }
 };
 
+export const checkStudentEmail = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { email, dob } = req.body;
+
+    // Find student by email
+    const student = await Student.findOne({ email });
+
+    if (!student) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+
+    // Convert stored DOB to YYYY-MM-DD format if needed
+    const storedDOB = new Date(student.dob).toISOString().split("T")[0];
+
+    if (storedDOB === dob) {
+      return res.status(200).json({ name:student.name,success: true, message: "Student found" });
+    } else {
+      return res.status(401).json({ success: false, message: "Unauthorized: Incorrect Date of Birth" });
+    }
+  } catch (error) {
+    console.error("Error checking student email:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch student", error: error.message });
+  }
+};
+
+export const resetStudentPassword = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { email, password } = req.body;
+
+    // Find student by email
+    const student = await Student.findOne({ email });
+
+    if (!student) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    student.password = hashedPassword;
+    await student.save();
+    return res.status(200).json({ success: true, message: "Student found" });
+  } catch (error) {
+    console.error("Error checking student email:", error);
+    res.status(500).json({ success: false, message: "Failed to fetch student", error: error.message });
+  }
+};
+
 // Create a new student
 export const createStudent = async (req, res) => {
   try {
-    const { 
-      name, 
-      fatherName, 
-      motherName, 
-      parentEmail, 
-      email, 
-      password, 
-      mobile, 
-      fatherMobile, 
-      address, 
-      state, 
-      city, 
-      gender, 
-      dob, 
-      admissionYear, 
-      course 
+    const {
+      name,
+      fatherName,
+      motherName,
+      parentEmail,
+      email,
+      password,
+      mobile,
+      fatherMobile,
+      address,
+      state,
+      city,
+      gender,
+      dob,
+      admissionYear,
+      course
     } = req.body;
     console.log(req.body);
 
@@ -59,22 +108,22 @@ export const createStudent = async (req, res) => {
     const courseId = courseExists._id;
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const student = new Student({ 
-      name, 
-      fatherName, 
-      motherName, 
-      parentEmail, 
-      email, 
-      password: hashedPassword, 
-      mobile, 
-      fatherMobile, 
-      address, 
-      state, 
-      city, 
-      gender, 
-      dob, 
-      admissionYear, 
-      course: courseId 
+    const student = new Student({
+      name,
+      fatherName,
+      motherName,
+      parentEmail,
+      email,
+      password: hashedPassword,
+      mobile,
+      fatherMobile,
+      address,
+      state,
+      city,
+      gender,
+      dob,
+      admissionYear,
+      course: courseId
     });
 
     await student.save();
@@ -87,22 +136,22 @@ export const createStudent = async (req, res) => {
 // Update a student
 export const updateStudent = async (req, res) => {
   try {
-    const { 
-      name, 
-      fatherName, 
-      motherName, 
-      parentEmail, 
-      email, 
-      mobile, 
-      fatherMobile, 
-      address, 
-      state, 
-      city, 
-      gender, 
-      dob, 
-      admissionYear, 
-      course, 
-      password 
+    const {
+      name,
+      fatherName,
+      motherName,
+      parentEmail,
+      email,
+      mobile,
+      fatherMobile,
+      address,
+      state,
+      city,
+      gender,
+      dob,
+      admissionYear,
+      course,
+      password
     } = req.body;
 
     const courseExists = await Course.findById(course);
@@ -181,7 +230,6 @@ export const deleteAllCourseStudent = async (req, res) => {
   }
 };
 
-
 // Upload students via CSV
 export const uploadStudentsCSV = async (req, res) => {
   try {
@@ -195,36 +243,40 @@ export const uploadStudentsCSV = async (req, res) => {
 
     for await (const row of readStream) {
       // Expect CSV headers to match field names (adjust as needed)
-      const { 
-        name, 
-        fatherName, 
-        motherName, 
-        parentEmail, 
-        email, 
-        password, 
-        mobile, 
-        fatherMobile, 
-        address, 
-        state, 
-        city, 
-        gender, 
-        dob, 
-        admissionYear, 
-        course 
+      const {
+        name,
+        fatherName,
+        motherName,
+        parentEmail,
+        email,
+        password,
+        mobile,
+        fatherMobile,
+        address,
+        state,
+        city,
+        gender,
+        dob,
+        admissionYear,
+        course
       } = row;
       console.log("Processing:", row);
 
+      // Check if student already exists
       const existingStudent = await Student.findOne({ $or: [{ email }, { mobile }] });
       if (existingStudent) {
         console.warn(`Student with email "${email}" or mobile "${mobile}" already exists. Skipping.`);
         continue;
       }
 
-      const courseExists = await Course.findOne({ name: course });
+      // Find course with case-insensitive search
+      const courseExists = await Course.findOne({ name: { $regex: new RegExp(`^${course}$`, "i") } });
+
       if (!courseExists) {
         console.error(`Course "${course}" not found. Skipping.`);
         continue;
       }
+
       const courseId = courseExists._id;
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -261,6 +313,7 @@ export const uploadStudentsCSV = async (req, res) => {
     res.status(500).json({ success: false, message: "CSV upload failed", error: error.message });
   }
 };
+
 
 // Student Login
 export const Login = async (req, res) => {
