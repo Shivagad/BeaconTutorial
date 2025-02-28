@@ -31,8 +31,7 @@ import StudentDetails from './dashboard/StudentManagement/StudentDetails.jsx';
 import Studentdash from './Pages/Studentdash.jsx';
 import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
-
-
+import ForgotPassword from './Pages/ForgotPassword.jsx';
 
 function AppRoutes() {
   const location = useLocation();
@@ -57,7 +56,8 @@ function AppRoutes() {
     "/dashboard/jee-student",
     "/dashboard/neet-student",
     "/student-dashboard",
-    "/login"
+    "/login",
+    "/forgot-password",
   ];
 
   const isProtectedRoute = protectedPaths.some((path) =>
@@ -104,6 +104,14 @@ function AppRoutes() {
           element={
             <NonDashboardRoute>
               <AllCourses />
+            </NonDashboardRoute>
+          }
+        />
+         <Route
+          path="/forgot-password"
+          element={
+            <NonDashboardRoute>
+              <ForgotPassword />
             </NonDashboardRoute>
           }
         />
