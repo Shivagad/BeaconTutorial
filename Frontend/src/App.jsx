@@ -27,9 +27,7 @@ import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
 import Courses from './dashboard/dashboardpages/Courses.jsx';
 import AllCourses from './Pages/AllCourses.jsx';
 import CourseCards from './dashboard/dashboardpages/coursescard.jsx';
-import CET from './dashboard/StudentManagement/CET11.jsx';
-import JEE from './dashboard/StudentManagement/JEE11.jsx';
-import NEET from './dashboard/StudentManagement/NEET11.jsx';
+import StudentDetails from './dashboard/StudentManagement/StudentDetails.jsx';
 import Studentdash from './Pages/Studentdash.jsx';
 import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
@@ -303,27 +301,12 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
+        
           <Route
-            path="cet-student"
+            path="all-student/:course"
             element={
               <ProtectedRoute requiredRole="admin">
-                <CET />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="neet-student"
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <NEET />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="jee-student"
-            element={
-              <ProtectedRoute requiredRole="admin">
-                <JEE />
+                <StudentDetails />
               </ProtectedRoute>
             }
           />

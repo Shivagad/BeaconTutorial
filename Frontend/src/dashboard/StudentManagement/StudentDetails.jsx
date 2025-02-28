@@ -6,8 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import AddStudentModal from "../Student/AddStudent";
 import EditStudentModal from "../Student/EditStudent";
 import DeleteStudentModal from "../Student/DeleteStudent";
+import { useParams } from "react-router-dom";
 
 const StudentTable = () => {
+  const {course}=useParams()
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,7 +28,7 @@ const StudentTable = () => {
       // Filter only CET students (based on course name)
       const cetStudents = allStudents.filter(
         (student) =>
-          student.course?.name?.toLowerCase() === "neet"
+          student.course?.name?.toLowerCase() === course
       );
 
       setStudents(cetStudents);
@@ -104,7 +106,7 @@ const StudentTable = () => {
       <ToastContainer position="top-right" autoClose={3000} />
 
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">CET Students</h1>
+        <h1 className="text-2xl font-bold text-gray-800">{course.toUpperCase()} Students</h1>
 
         <div className="flex space-x-4">
           <button
@@ -209,7 +211,7 @@ const StudentTable = () => {
             </tbody>
           </table>
         ) : (
-          <p className="text-center text-gray-500">No CET students found.</p>
+          <p className="text-center text-gray-500">No {course} students found.</p>
         )}
       </div>
 

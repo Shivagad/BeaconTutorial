@@ -25,8 +25,8 @@ const CourseCards = () => {
 
   const handleNavigate = (courseName) => {
     // Convert course name to lowercase and replace spaces with dashes if needed
-    const formattedCourse = courseName.toLowerCase().replace(/\s+/g, "-");
-    navigate(`/dashboard/${formattedCourse}-student`);
+    const course = courseName.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/dashboard/all-student/${course}`);
   };
 
   return (
