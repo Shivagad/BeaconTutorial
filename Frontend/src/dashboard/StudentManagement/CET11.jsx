@@ -23,8 +23,11 @@ const StudentTable = () => {
       const response = await axios.get("http://localhost:4000/server/student/stu/");
       const allStudents = response.data || [];
 
-      // Filter only CET students
-      const cetStudents = allStudents.filter(student => student.course?.name?.toLowerCase() === "cet");
+      // Filter only CET students (based on course name)
+      const cetStudents = allStudents.filter(
+        (student) =>
+          student.course?.name?.toLowerCase() === "cet"
+      );
 
       setStudents(cetStudents);
       setFilteredStudents(cetStudents);
@@ -65,38 +68,36 @@ const StudentTable = () => {
   };
 
   // Handle CSV file upload
-  // Handle CSV file upload
-const handleCsvUpload = async () => {
-  if (!csvFile) {
-    toast.error("Please select a CSV file.");
-    return;
-  }
+  const handleCsvUpload = async () => {
+    if (!csvFile) {
+      toast.error("Please select a CSV file.");
+      return;
+    }
 
-  const formData = new FormData();
-  formData.append("file", csvFile);
+    const formData = new FormData();
+    formData.append("file", csvFile);
 
-  try {
-    const response = await axios.post("http://localhost:4000/server/student/upload-csv/", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    try {
+      const response = await axios.post("http://localhost:4000/server/student/upload-csv/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    toast.success(response.data.message);
-    fetchStudents(); // Refresh students list
+      toast.success(response.data.message);
+      fetchStudents(); // Refresh students list
 
-    // ✅ Clear the file input field after successful upload
-    setCsvFile(null);
-  } catch (error) {
-    toast.error(error.response?.data?.message || "CSV upload failed.");
-  }
-};
+      // Clear file input
+      setCsvFile(null);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "CSV upload failed.");
+    }
+  };
 
-// Reset file input visually after uploading
-useEffect(() => {
-  if (!csvFile) {
-    document.querySelector("#csvInput").value = "";
-  }
-}, [csvFile]);
-
+  // Reset file input after uploading
+  useEffect(() => {
+    if (!csvFile) {
+      document.querySelector("#csvInput").value = "";
+    }
+  }, [csvFile]);
 
   return (
     <div className="p-6 ml-64">
@@ -114,30 +115,26 @@ useEffect(() => {
             Add Student
           </button>
 
-          {/* CSV Upload */}
-   {/* CSV Upload */}
-<label className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center">
-  <Upload className="w-5 h-5 mr-2" />
-  Upload CSV
-  <input
-    id="csvInput"
-    type="file"
-    accept=".csv"
-    className="hidden"
-    onChange={(e) => setCsvFile(e.target.files[0])}
-  />
-</label>
+          <label className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center">
+            <Upload className="w-5 h-5 mr-2" />
+            Upload CSV
+            <input
+              id="csvInput"
+              type="file"
+              accept=".csv"
+              className="hidden"
+              onChange={(e) => setCsvFile(e.target.files[0])}
+            />
+          </label>
 
-{/* Show "Upload Now" only when a file is selected */}
-{csvFile && (
-  <button
-    onClick={handleCsvUpload}
-    className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
-  >
-    Upload Now
-  </button>
-)}
-
+          {csvFile && (
+            <button
+              onClick={handleCsvUpload}
+              className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              Upload Now
+            </button>
+          )}
         </div>
       </div>
 
@@ -151,25 +148,49 @@ useEffect(() => {
 
       <div className="overflow-x-auto">
         {filteredStudents.length > 0 ? (
-          <table className="min-w-full bg-white shadow-md rounded-lg mb-6">
+          <table className="min-w-full bg-white shadow-md rounded-lg mb-6 border">
             <thead>
-              <tr className="bg-gray-100 border-b">
-                <th className="py-3 px-6 text-left">Name</th>
-                <th className="py-3 px-6 text-left">Email</th>
-                <th className="py-3 px-6 text-left">Mobile</th>
-                <th className="py-3 px-6 text-center">Actions</th>
+              <tr className="bg-gray-100">
+                <th className="py-3 px-2 border border-gray-300 text-left">Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Father's Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Mother's Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Parent Email</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Email</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Mobile</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Father's Mobile</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Address</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">State</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">City</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Gender</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">DOB</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Admission Year</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Course</th>
+                <th className="py-3 px-2 border border-gray-300 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredStudents.map((student) => (
-                <tr key={student._id} className="border-b hover:bg-gray-50">
-                  <td className="py-3 px-6">{student.name}</td>
-                  <td className="py-3 px-6">{student.email}</td>
-                  <td className="py-3 px-6">{student.mobile}</td>
-                  <td className="py-3 px-6 text-center">
+                <tr key={student._id} className="hover:bg-gray-50">
+                  <td className="py-3 px-2 border border-gray-300">{student.name}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.fatherName}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.motherName}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.parentEmail}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.email}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.mobile}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.fatherMobile}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.address}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.state}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.city}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.gender}</td>
+                  <td className="py-3 px-2 border border-gray-300">
+                    {student.dob ? new Date(student.dob).toLocaleDateString() : ""}
+                  </td>
+                  <td className="py-3 px-2 border border-gray-300">{student.admissionYear}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.course?.name || ""}</td>
+                  <td className="py-3 px-2 border border-gray-300 text-center">
                     <button
                       onClick={() => setEditStudentId(student._id)}
-                      className="text-blue-600 hover:text-blue-800 mr-4"
+                      className="text-blue-600 hover:text-blue-800 mr-2"
                     >
                       <Edit className="w-5 h-5 inline-block" />
                     </button>

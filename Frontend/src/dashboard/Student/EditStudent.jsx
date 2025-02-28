@@ -4,12 +4,23 @@ import axios from "axios";
 
 const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [courses, setCourses] = useState([]); // Store available courses
+  const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
+    fatherName: "",
+    motherName: "",
+    parentEmail: "",
     email: "",
     mobile: "",
-    course: "", // Store the course ID
+    fatherMobile: "",
+    address: "",
+    state: "",
+    city: "",
+    gender: "",
+    dob: "",
+    admissionYear: "",
+    course: "",
+    password: "",
   });
 
   // Fetch available courses
@@ -30,11 +41,24 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
         .get(`http://localhost:4000/server/student/byid/${studentId}`)
         .then((response) => {
           console.log("Student API Response:", response.data);
+          const student = response.data;
           setFormData({
-            name: response.data.name,
-            email: response.data.email,
-            mobile: response.data.mobile,
-            course: response.data.course._id, // Use course ID
+            name: student.name || "",
+            fatherName: student.fatherName || "",
+            motherName: student.motherName || "",
+            parentEmail: student.parentEmail || "",
+            email: student.email || "",
+            mobile: student.mobile || "",
+            fatherMobile: student.fatherMobile || "",
+            address: student.address || "",
+            state: student.state || "",
+            city: student.city || "",
+            gender: student.gender || "",
+            // Convert date to YYYY-MM-DD format for date input
+            dob: student.dob ? new Date(student.dob).toISOString().slice(0, 10) : "",
+            admissionYear: student.admissionYear || "",
+            course: student.course?._id || "",
+            password: "", // leave empty so that password is updated only if provided
           });
         })
         .catch((error) => {
@@ -49,10 +73,16 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Prepare update payload. If password is blank, remove it from payload.
+    const payload = { ...formData };
+    if (!payload.password.trim()) {
+      delete payload.password;
+    }
+
     try {
       const response = await axios.put(
         `http://localhost:4000/server/student/stu/${studentId}`,
-        formData
+        payload
       );
 
       if (response.data.success) {
@@ -70,8 +100,8 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 w-full max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
+    <div className="bg-white rounded-lg p-6 w-full max-w-3xl border border-gray-200 max-h-screen overflow-y-auto animate-slideDown">
+      <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Edit Student</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
@@ -79,6 +109,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
@@ -90,6 +121,43 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
             />
           </div>
 
+          {/* Father's Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Father's Name</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.fatherName}
+              onChange={(e) => setFormData({ ...formData, fatherName: e.target.value })}
+            />
+          </div>
+
+          {/* Mother's Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Mother's Name</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.motherName}
+              onChange={(e) => setFormData({ ...formData, motherName: e.target.value })}
+            />
+          </div>
+
+          {/* Parent Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Parent Email</label>
+            <input
+              type="email"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.parentEmail}
+              onChange={(e) => setFormData({ ...formData, parentEmail: e.target.value })}
+            />
+          </div>
+
+          {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -101,6 +169,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
             />
           </div>
 
+          {/* Mobile */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Mobile</label>
             <input
@@ -112,6 +181,95 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
             />
           </div>
 
+          {/* Father's Mobile */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Father's Mobile</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.fatherMobile}
+              onChange={(e) => setFormData({ ...formData, fatherMobile: e.target.value })}
+            />
+          </div>
+
+          {/* Address */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Address</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+            />
+          </div>
+
+          {/* State */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">State</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.state}
+              onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+            />
+          </div>
+
+          {/* City */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">City</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.city}
+              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+            />
+          </div>
+
+          {/* Gender */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Gender</label>
+            <select
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.gender}
+              onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          {/* Date of Birth */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+            <input
+              type="date"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.dob}
+              onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+            />
+          </div>
+
+          {/* Admission Year */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Admission Year</label>
+            <input
+              type="number"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.admissionYear}
+              onChange={(e) => setFormData({ ...formData, admissionYear: e.target.value })}
+            />
+          </div>
+
+          {/* Course */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Course</label>
             <select
@@ -127,6 +285,19 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Password (optional - only update if provided) */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Password (leave blank to keep unchanged)
+            </label>
+            <input
+              type="password"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            />
           </div>
 
           <div className="border-t pt-6">

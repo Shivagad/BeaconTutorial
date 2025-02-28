@@ -7,8 +7,18 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
   const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
+    fatherName: "",
+    motherName: "",
+    parentEmail: "",
     email: "",
     mobile: "",
+    fatherMobile: "",
+    address: "",
+    state: "",
+    city: "",
+    gender: "",
+    dob: "",
+    admissionYear: "",
     course: "",
     password: "",
   });
@@ -16,7 +26,23 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
 
   useEffect(() => {
     if (isOpen) {
-      setFormData({ name: "", email: "", mobile: "", course: "", password: "" });
+      setFormData({
+        name: "",
+        fatherName: "",
+        motherName: "",
+        parentEmail: "",
+        email: "",
+        mobile: "",
+        fatherMobile: "",
+        address: "",
+        state: "",
+        city: "",
+        gender: "",
+        dob: "",
+        admissionYear: "",
+        course: "",
+        password: "",
+      });
       setErrors({}); // Reset errors when modal opens
 
       axios
@@ -37,16 +63,46 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     }
+    if (!formData.fatherName.trim()) {
+      newErrors.fatherName = "Father's name is required";
+    }
+    if (!formData.motherName.trim()) {
+      newErrors.motherName = "Mother's name is required";
+    }
+    if (!formData.parentEmail.trim() || !/\S+@\S+\.\S+/.test(formData.parentEmail)) {
+      newErrors.parentEmail = "Valid parent email is required";
+    }
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
+      newErrors.email = "Valid email is required";
     }
     if (!formData.mobile.trim() || !/^\d{10}$/.test(formData.mobile)) {
       newErrors.mobile = "Mobile number must be exactly 10 digits";
     }
+    if (!formData.fatherMobile.trim() || !/^\d{10}$/.test(formData.fatherMobile)) {
+      newErrors.fatherMobile = "Father's mobile must be exactly 10 digits";
+    }
+    if (!formData.address.trim()) {
+      newErrors.address = "Address is required";
+    }
+    if (!formData.state.trim()) {
+      newErrors.state = "State is required";
+    }
+    if (!formData.city.trim()) {
+      newErrors.city = "City is required";
+    }
+    if (!formData.gender.trim()) {
+      newErrors.gender = "Gender is required";
+    }
+    if (!formData.dob) {
+      newErrors.dob = "Date of birth is required";
+    }
+    if (!formData.admissionYear.toString().trim() || isNaN(formData.admissionYear)) {
+      newErrors.admissionYear = "Admission year is required and must be a number";
+    }
     if (!formData.course) {
       newErrors.course = "Please select a course";
     }
-    if (!formData.password.trim() || formData.password.length < 3) {
+    if (!formData.password.trim() || formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters long";
     }
 
@@ -69,7 +125,23 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
 
       if (response.data.success) {
         setToast({ success: true, message: "Student added successfully" });
-        setFormData({ name: "", email: "", mobile: "", course: "", password: "" });
+        setFormData({
+          name: "",
+          fatherName: "",
+          motherName: "",
+          parentEmail: "",
+          email: "",
+          mobile: "",
+          fatherMobile: "",
+          address: "",
+          state: "",
+          city: "",
+          gender: "",
+          dob: "",
+          admissionYear: "",
+          course: "",
+          password: "",
+        });
         setErrors({});
         onClose();
       } else {
@@ -84,8 +156,8 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 w-full max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
+    <div className="bg-white rounded-lg p-6 w-full max-w-3xl border border-gray-200 max-h-screen overflow-y-auto animate-slideDown">
+      <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Add New Student</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
@@ -104,6 +176,45 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
             {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+          </div>
+
+          {/* Father's Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Father's Name</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.fatherName}
+              onChange={(e) => setFormData({ ...formData, fatherName: e.target.value })}
+            />
+            {errors.fatherName && <p className="text-red-500 text-sm">{errors.fatherName}</p>}
+          </div>
+
+          {/* Mother's Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Mother's Name</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.motherName}
+              onChange={(e) => setFormData({ ...formData, motherName: e.target.value })}
+            />
+            {errors.motherName && <p className="text-red-500 text-sm">{errors.motherName}</p>}
+          </div>
+
+          {/* Parent Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Parent Email</label>
+            <input
+              type="email"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.parentEmail}
+              onChange={(e) => setFormData({ ...formData, parentEmail: e.target.value })}
+            />
+            {errors.parentEmail && <p className="text-red-500 text-sm">{errors.parentEmail}</p>}
           </div>
 
           {/* Email */}
@@ -130,6 +241,100 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
               onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
             />
             {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
+          </div>
+
+          {/* Father's Mobile */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Father's Mobile</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.fatherMobile}
+              onChange={(e) => setFormData({ ...formData, fatherMobile: e.target.value })}
+            />
+            {errors.fatherMobile && <p className="text-red-500 text-sm">{errors.fatherMobile}</p>}
+          </div>
+
+          {/* Address */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Address</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+            />
+            {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+          </div>
+          {/* State */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">State</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.state}
+              onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+            />
+            {errors.state && <p className="text-red-500 text-sm">{errors.state}</p>}
+          </div>
+
+          {/* City */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">City</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.city}
+              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+            />
+            {errors.city && <p className="text-red-500 text-sm">{errors.city}</p>}
+          </div>
+
+          {/* Gender */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Gender</label>
+            <select
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.gender}
+              onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
+          </div>
+
+          {/* Date of Birth */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+            <input
+              type="date"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.dob}
+              onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+            />
+            {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
+          </div>
+
+          {/* Admission Year */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Admission Year</label>
+            <input
+              type="number"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.admissionYear}
+              onChange={(e) => setFormData({ ...formData, admissionYear: e.target.value })}
+            />
+            {errors.admissionYear && <p className="text-red-500 text-sm">{errors.admissionYear}</p>}
           </div>
 
           {/* Course */}

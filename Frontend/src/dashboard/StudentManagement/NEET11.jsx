@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PlusCircle, Edit, Trash2 } from "lucide-react";
+import { PlusCircle, Upload, Edit, Trash2 } from "lucide-react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,25 +16,31 @@ const StudentTable = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [editStudentId, setEditStudentId] = useState(null);
   const [deleteStudentId, setDeleteStudentId] = useState(null);
+  const [csvFile, setCsvFile] = useState(null);
 
   const fetchStudents = async () => {
     try {
       const response = await axios.get("http://localhost:4000/server/student/stu/");
       const allStudents = response.data || [];
-      const jeeStudents = allStudents.filter(student => student.course?.name === "NEET");
-  
-      setStudents(jeeStudents);
-      setFilteredStudents(jeeStudents);
+
+      // Filter only CET students (based on course name)
+      const cetStudents = allStudents.filter(
+        (student) =>
+          student.course?.name?.toLowerCase() === "neet"
+      );
+
+      setStudents(cetStudents);
+      setFilteredStudents(cetStudents);
     } catch (error) {
       setStudents([]);
       setFilteredStudents([]);
     }
   };
-  
+
   useEffect(() => {
     fetchStudents();
   }, []);
-  
+
   useEffect(() => {
     if (!searchQuery.trim()) {
       setFilteredStudents(students);
@@ -42,14 +48,10 @@ const StudentTable = () => {
     }
 
     const query = searchQuery.toLowerCase().trim();
-
-    const filtered = students.filter((student) => {
-      return (
-        (student.name && student.name.toLowerCase().includes(query)) ||
-        (student.email && student.email.toLowerCase().includes(query)) ||
-        (student.course?.name && student.course.name.toLowerCase().includes(query))
-      );
-    });
+    const filtered = students.filter((student) =>
+      (student.name && student.name.toLowerCase().includes(query)) ||
+      (student.email && student.email.toLowerCase().includes(query))
+    );
 
     setFilteredStudents(filtered);
   }, [searchQuery, students]);
@@ -65,29 +67,75 @@ const StudentTable = () => {
     fetchStudents();
   };
 
-  // Group students by course
-  const groupedStudents = filteredStudents.reduce((acc, student) => {
-    const courseName = student.course?.name || "Unassigned";
-    if (!acc[courseName]) {
-      acc[courseName] = [];
+  // Handle CSV file upload
+  const handleCsvUpload = async () => {
+    if (!csvFile) {
+      toast.error("Please select a CSV file.");
+      return;
     }
-    acc[courseName].push(student);
-    return acc;
-  }, {});
+
+    const formData = new FormData();
+    formData.append("file", csvFile);
+
+    try {
+      const response = await axios.post("http://localhost:4000/server/student/upload-csv/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      toast.success(response.data.message);
+      fetchStudents(); // Refresh students list
+
+      // Clear file input
+      setCsvFile(null);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "CSV upload failed.");
+    }
+  };
+
+  // Reset file input after uploading
+  useEffect(() => {
+    if (!csvFile) {
+      document.querySelector("#csvInput").value = "";
+    }
+  }, [csvFile]);
 
   return (
     <div className="p-6 ml-64">
       <ToastContainer position="top-right" autoClose={3000} />
 
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Student List</h1>
-        <button
-          onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <PlusCircle className="w-5 h-5 mr-2" />
-          Add Student
-        </button>
+        <h1 className="text-2xl font-bold text-gray-800">CET Students</h1>
+
+        <div className="flex space-x-4">
+          <button
+            onClick={() => setIsAddModalOpen(true)}
+            className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <PlusCircle className="w-5 h-5 mr-2" />
+            Add Student
+          </button>
+
+          <label className="cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center">
+            <Upload className="w-5 h-5 mr-2" />
+            Upload CSV
+            <input
+              id="csvInput"
+              type="file"
+              accept=".csv"
+              className="hidden"
+              onChange={(e) => setCsvFile(e.target.files[0])}
+            />
+          </label>
+
+          {csvFile && (
+            <button
+              onClick={handleCsvUpload}
+              className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+            >
+              Upload Now
+            </button>
+          )}
+        </div>
       </div>
 
       <input
@@ -99,52 +147,69 @@ const StudentTable = () => {
       />
 
       <div className="overflow-x-auto">
-        {Object.keys(groupedStudents).length > 0 ? (
-          Object.entries(groupedStudents).map(([courseName, students]) => (
-            <div key={courseName} className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-700 mb-4 bg-gray-200 px-4 py-2 rounded">
-                {courseName}
-              </h2>
-              <table className="min-w-full bg-white shadow-md rounded-lg mb-6">
-                <thead>
-                  <tr className="bg-gray-100 border-b">
-                    <th className="py-3 px-6 text-left">Name</th>
-                    <th className="py-3 px-6 text-left">Email</th>
-                    <th className="py-3 px-6 text-left">Mobile</th>
-                    <th className="py-3 px-6 text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {students.map((student) => (
-                    <tr key={student._id} className="border-b hover:bg-gray-50">
-                      <td className="py-3 px-6">{student.name}</td>
-                      <td className="py-3 px-6">{student.email}</td>
-                      <td className="py-3 px-6">{student.mobile}</td>
-                      <td className="py-3 px-6 text-center">
-                        <button
-                          onClick={() => setEditStudentId(student._id)}
-                          className="text-blue-600 hover:text-blue-800 mr-4"
-                        >
-                          <Edit className="w-5 h-5 inline-block" />
-                        </button>
-                        <button
-                          onClick={() => {
-                            setDeleteStudentId(student._id);
-                            setIsDeleteModalOpen(true);
-                          }}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <Trash2 className="w-5 h-5 inline-block" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ))
+        {filteredStudents.length > 0 ? (
+          <table className="min-w-full bg-white shadow-md rounded-lg mb-6 border">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="py-3 px-2 border border-gray-300 text-left">Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Father's Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Mother's Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Parent Email</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Email</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Mobile</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Father's Mobile</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Address</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">State</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">City</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Gender</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">DOB</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Admission Year</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Course</th>
+                <th className="py-3 px-2 border border-gray-300 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredStudents.map((student) => (
+                <tr key={student._id} className="hover:bg-gray-50">
+                  <td className="py-3 px-2 border border-gray-300">{student.name}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.fatherName}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.motherName}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.parentEmail}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.email}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.mobile}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.fatherMobile}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.address}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.state}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.city}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.gender}</td>
+                  <td className="py-3 px-2 border border-gray-300">
+                    {student.dob ? new Date(student.dob).toLocaleDateString() : ""}
+                  </td>
+                  <td className="py-3 px-2 border border-gray-300">{student.admissionYear}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.course?.name || ""}</td>
+                  <td className="py-3 px-2 border border-gray-300 text-center">
+                    <button
+                      onClick={() => setEditStudentId(student._id)}
+                      className="text-blue-600 hover:text-blue-800 mr-2"
+                    >
+                      <Edit className="w-5 h-5 inline-block" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        setDeleteStudentId(student._id);
+                        setIsDeleteModalOpen(true);
+                      }}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      <Trash2 className="w-5 h-5 inline-block" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
-          <p className="text-center text-gray-500">No students found.</p>
+          <p className="text-center text-gray-500">No CET students found.</p>
         )}
       </div>
 

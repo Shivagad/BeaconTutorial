@@ -344,46 +344,43 @@ function AppRoutes() {
 }
 
 
-
 const WhatsAppButton = () => (
-<div className="fixed bottom-5 right-5 flex flex-col gap-2">
-  <a
-    href="https://wa.me/918767729499"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="bg-green-500 text-white p-3 rounded-full shadow-lg flex items-center gap-2"
-  >
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-      alt="WhatsApp"
-      className="w-6 h-6"
-    />
-    Chat with Us
-  </a>
-  <a
-    href="tel:+918767729499"
-    className="bg-blue-500 text-white p-3 rounded-full shadow-lg flex items-center gap-2"
-  >
-    {/* Call Icon (using an SVG) */}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
+  <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2">
+    <a
+      href="https://wa.me/918767729499"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-green-500 p-3 rounded-full shadow-lg flex items-center justify-center"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.11l-2.42 2.42a16 16 0 007.36 7.36l2.42-2.42a1 1 0 011.11-.21L19 19v2a1 1 0 01-1 1C9.94 22 2 14.06 2 4a1 1 0 011-1h2a1 1 0 011 1z"
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+        className="w-6 h-6"
       />
-    </svg>
-    Call Us
-  </a>
-</div>
+    </a>
+    <a
+  href="tel:+918767729499"
+  className="bg-blue-500 p-3 rounded-full shadow-lg flex items-center justify-center"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6 text-white"  // <-- Added text-white here
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.11l-2.42 2.42a16 16 0 007.36 7.36l2.42-2.42a1 1 0 011.11-.21L19 19v2a1 1 0 01-1 1C9.94 22 2 14.06 2 4a1 1 0 011-1h2a1 1 0 011 1z"
+    />
+  </svg>
+</a>
 
+  </div>
 );
+
 
 function AppWrapper() {
   return (
