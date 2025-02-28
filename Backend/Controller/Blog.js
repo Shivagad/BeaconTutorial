@@ -41,6 +41,26 @@ export const createBlog = async (req, res) => {
   }
 };
 
+
+export const updateBlogRating = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rating } = req.body;
+
+    if (!rating) return res.status(400).json({ message: 'Rating is required' });
+
+    const updatedBlog = await Blog.findByIdAndUpdate(id, { rating }, { new: true });
+
+    if (!updatedBlog) return res.status(404).json({ message: 'Blog not found' });
+
+    res.status(200).json({ message: 'Rating updated', data: updatedBlog });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 export const getAllBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find();

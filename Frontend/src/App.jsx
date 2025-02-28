@@ -31,6 +31,7 @@ import StudentDetails from './dashboard/StudentManagement/StudentDetails.jsx';
 import Studentdash from './Pages/Studentdash.jsx';
 import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
+import StudentBlog from './Components/Studentblog.jsx';
 
 
 
@@ -57,6 +58,7 @@ function AppRoutes() {
     "/dashboard/jee-student",
     "/dashboard/neet-student",
     "/student-dashboard",
+    "/student-dashboard/blog",
     "/login"
   ];
 
@@ -72,6 +74,14 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Studentdash />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-dashboard/blog"
+          element={
+            <ProtectedRoute>
+              <StudentBlog />
             </ProtectedRoute>
           }
         />

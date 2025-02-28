@@ -7,7 +7,6 @@ const BlogSchema = new mongoose.Schema(
     author: { type: String, required: true },
     imagepath: { type: String, required: true },
     rating: { type: Number, default: 0 },
-    // date: { type: Date, default: Date.now() }
   },
   { timestamps: true }
 );
