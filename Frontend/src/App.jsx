@@ -32,6 +32,7 @@ import Studentdash from './Pages/Studentdash.jsx';
 import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
 import ForgotPassword from './Pages/ForgotPassword.jsx';
+import StudentBlog from './Components/Studentblog.jsx'
 
 function AppRoutes() {
   const location = useLocation();
@@ -56,8 +57,8 @@ function AppRoutes() {
     "/dashboard/jee-student",
     "/dashboard/neet-student",
     "/student-dashboard",
-    "/login",
     "/forgot-password",
+    "/login"
   ];
 
   const isProtectedRoute = protectedPaths.some((path) =>
@@ -72,6 +73,14 @@ function AppRoutes() {
           element={
             <ProtectedRoute>
               <Studentdash />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-dashboard/blog"
+          element={
+            <ProtectedRoute>
+              <StudentBlog />
             </ProtectedRoute>
           }
         />

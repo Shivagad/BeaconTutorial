@@ -139,11 +139,15 @@ export function AuthForm({ mode }) {
         />
       </div>
 
-      <div className="mt-2 px-1">
-            <a href="/forgot-password" className="text-sm text-right text-[#4E77BB] hover:underline">
-              Forgot Password?
-            </a>
-          </div>
+     {
+       isStudentLogin && (
+        <div className="mt-2 px-1">
+        <a href="/forgot-password" className="text-sm text-right text-[#4E77BB] hover:underline">
+          Forgot Password?
+        </a>
+      </div>
+       )
+     }
 
 
           <button

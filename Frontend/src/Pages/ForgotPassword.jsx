@@ -14,7 +14,7 @@ function ForgotPassword() {
     const [gotp, setgOtp] = useState("");
     const [otpVerified, setOtpVerified] = useState(false);
     const [otpAttempt, setOtpAttempt] = useState(0);
-    const [otpTimer, setOtpTimer] = useState(120); // seconds countdown
+    const [otpTimer, setOtpTimer] = useState(10); // seconds countdown
     const [otpExpired, setOtpExpired] = useState(false);
     // New password state
     const [newPassword, setNewPassword] = useState("");
@@ -86,6 +86,7 @@ function ForgotPassword() {
     const handleValidateOTP = () => {
         if (otpExpired) {
             toast.error("OTP has expired. Please try again.");
+            window.location.href = "/";
             return;
         }
         // For demonstration, assume correct OTP is "123456"

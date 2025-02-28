@@ -27,8 +27,18 @@ const StudentDashboard = () => {
 
   return (
     <div className="h-screen flex flex-col bg-gray-100 p-4">
-      <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">Student Dashboard</h1>
       
+      {/* Top Section - Buttons */}
+      <div className="flex justify-between items-center mb-4">
+        <button
+          onClick={() => navigate('/student-dashboard/blog')}
+          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+        >
+          View Blog
+        </button>
+        <h1 className="text-4xl font-bold text-center text-blue-600 flex-1">Student Dashboard</h1>
+      </div>
+
       <div className="flex gap-6">
         {/* Left Section - Profile */}
         <div className="w-1/3 bg-white shadow-lg p-6 rounded-lg">
