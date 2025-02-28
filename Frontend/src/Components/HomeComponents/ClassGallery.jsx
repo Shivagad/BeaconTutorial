@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 const images = [
-    "/images/cbse.jpg", "images/cbse.jpg", "images/cbse.jpg",
+    "/images/beacon_class1.jpg", "images/cbse.jpg", "images/cbse.jpg",
     "images/cbse.jpg", "images/cbse.jpg", "images/cbse.jpg"
 ];
 

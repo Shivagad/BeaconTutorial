@@ -53,6 +53,91 @@ const HomeCourses = () => {
          slug: '/all-courses'
       }
     ],
+    "8th": [
+      {
+        value:250,
+        title: "8th, 9th, 10th Foundation",
+        description:
+          "The aim of the course is to help students develop a strong foundation, so that they are well-prepared for the SSC Board exam",
+        icon: <GraduationCap className="w-8 h-8 text-indigo-500" />,
+        image: ssc,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "8th, 9th, 10th Regular Board Batches",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      }
+    ],
+    "11th": [
+      {
+        value:250,
+        title: "11th + 12th Board Classes",
+        description:
+          "The aim of the course is to help students develop a strong foundation, so that they are well-prepared for the SSC Board exam",
+        icon: <GraduationCap className="w-8 h-8 text-indigo-500" />,
+        image: ssc,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "11th + 12th JEE Mains + Advance",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "11th + 12th NEET",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "11th + 12th IISER",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "11th + 12th MHTCET",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "11th + 12th NDA",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      },
+      {
+        value:500,
+        title: "11th + 12th CUET",
+        description:
+          "We provide students with a strong foundation in these subjects and help them develop critical thinking and problem-solving skills.",
+        icon: <Brain className="w-8 h-8 text-purple-500" />,
+        image: cbse,
+         slug: '/all-courses'
+      }
+    ],
     "12th": [
       {
         value:1100,
@@ -102,7 +187,16 @@ const HomeCourses = () => {
         icon: <Calculator className="w-8 h-8 text-blue-500" />,
         image: hsc,
          slug: '/all-courses'
-      }
+      },
+      {
+        value:2000,
+        title: "JEE (Mains + Advance)",
+        description:
+          "This course builds on the foundational knowledge and skills covered in the JEE Mains course and focuses on developing more advanced analytical and subjective problem-solving abilities.",
+        icon: <Calculator className="w-8 h-8 text-blue-500" />,
+        image: hsc,
+         slug: '/all-courses'
+      },
     ],
     "neet": [
       {
@@ -122,6 +216,15 @@ const HomeCourses = () => {
         icon: <Calculator className="w-8 h-8 text-blue-500" />,
         image: hsc,
          slug: '/all-courses'
+      },
+      {
+        value:2500,
+        title: "NEET Repeaters",
+        description:
+          "Our Foundation course for NEET and JEE is designed to help students build a firm foundation in the core subjects of Mathematics, Physics, Chemistry, and Biology.",
+        icon: <Calculator className="w-8 h-8 text-blue-500" />,
+        image: hsc,
+         slug: '/all-courses'
       }
     ],
     "mhtcet": [
@@ -134,13 +237,39 @@ const HomeCourses = () => {
         image: hsc,
          slug: '/all-courses'
       }
+    ],
+    "iiser": [
+      {
+        value:2750,
+        title: "IISER",
+        description:
+          "Our experienced teachers cover all important topics and concepts in the MH-CET syllabus through in-depth coaching. We use various effective teaching methods and resources, and provide well-structured study materials, mock tests, and regular assessments to track students' progress and identify areas for improvement.",
+        icon: <Calculator className="w-8 h-8 text-blue-500" />,
+        image: hsc,
+         slug: '/all-courses'
+      }
+    ],
+    "cuet": [
+      {
+        value:2750,
+        title: "CUET",
+        description:
+          "Our experienced teachers cover all important topics and concepts in the MH-CET syllabus through in-depth coaching. We use various effective teaching methods and resources, and provide well-structured study materials, mock tests, and regular assessments to track students' progress and identify areas for improvement.",
+        icon: <Calculator className="w-8 h-8 text-blue-500" />,
+        image: hsc,
+         slug: '/all-courses'
+      }
     ]
   }
 
   const tabs = [
+    { id: "8th", label: "8th,9th,10th", icon: <Book className="w-4 h-4" /> },
     { id: "10th", label: "10th Boards", icon: <Book className="w-4 h-4" /> },
+    { id: "11th", label: "11th + 12th", icon: <Book className="w-4 h-4" /> },
     { id: "12th", label: "12th Boards", icon: <GraduationCap className="w-4 h-4" /> },
     { id: "nda", label: "NDA/NTSE", icon: <Brain className="w-4 h-4" /> },
+    { id: "iiser", label: "IISER", icon: <Brain className="w-4 h-4" /> },
+    { id: "cuet", label: "CUET", icon: <Brain className="w-4 h-4" /> },
     { id: "iitjee", label: "IIT-JEE", icon: <Calculator className="w-4 h-4" /> },
     { id: "neet", label: "NEET", icon: <TestTube2 className="w-4 h-4" /> },
     { id: "mhtcet", label: "MHT-CET", icon: <Microscope className="w-4 h-4" /> }
@@ -228,10 +357,8 @@ const HomeCourses = () => {
                         }}
                         className="w-full bg-[#d68b5c] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
                       >
-
-                      <span className="relative z-10">Register</span>
+                      <span className="relative z-10">Inquire Now</span>
                       <div className="absolute inset-0 animate-shine"></div>
-
                     </button>
                   </div>
                 </div>
@@ -272,7 +399,7 @@ const HomeCourses = () => {
                         }}
                         className="w-full bg-[#d68b5c] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
                       >
-                        <span className="relative z-10">Register</span>
+                        <span className="relative z-10">Inquire Now</span>
                         <div className="absolute inset-0 animate-shine"></div>
                       </button>
                     </div>

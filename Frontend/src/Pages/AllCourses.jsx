@@ -1,51 +1,177 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 import { BookOpen, Clock, Users, Award, ChevronDown } from "lucide-react"
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import { useNavigate } from "react-router-dom"
 const courses = [
-    {
-        title: "SSC",
-        description:
-          "Master modern web development with this comprehensive bootcamp. Learn React, Node.js, and cutting-edge web technologies. Build real-world projects and develop a strong portfolio.",
-        duration: "12 weeks",
-        students: "250+",
-        level: "Intermediate to Advanced",
-        highlights: [
-          "Full-stack JavaScript development",
-          "Modern frameworks and tools",
-          "Real-world project experience",
-          "Industry-standard best practices"
-        ]
-      },
-      {
-        title: "CBSE",
-        description:
-          "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-        duration: "16 weeks",
-        students: "180+",
-        level: "Advanced",
-        highlights: [
-          "Statistical analysis and visualization",
-          "Machine learning algorithms",
-          "Deep learning fundamentals",
-          "Big data processing"
-        ]
-      },
-      {
-        title: "ICSE",
-        description:
-          "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-        duration: "10 weeks",
-        students: "150+",
-        level: "Beginner to Intermediate",
-        highlights: [
-          "Design thinking methodology",
-          "User research techniques",
-          "Interactive prototyping",
-          "Portfolio development"
-        ]
-      },
+  {
+    title: "8th, 9th, 10th Foundation",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "8th, 9th, 10th Regular Board Batches",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "SSC",
+    description:
+      "Master modern web development with this comprehensive bootcamp. Learn React, Node.js, and cutting-edge web technologies. Build real-world projects and develop a strong portfolio.",
+    duration: "12 weeks",
+    students: "250+",
+    level: "Intermediate to Advanced",
+    highlights: [
+      "Full-stack JavaScript development",
+      "Modern frameworks and tools",
+      "Real-world project experience",
+      "Industry-standard best practices"
+    ]
+  },
+  {
+    title: "CBSE",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "ICSE",
+    description:
+      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
+    duration: "10 weeks",
+    students: "150+",
+    level: "Beginner to Intermediate",
+    highlights: [
+      "Design thinking methodology",
+      "User research techniques",
+      "Interactive prototyping",
+      "Portfolio development"
+    ]
+  },
+  {
+    title: "11th + 12th Board Classes",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "11th + 12th JEE Mains + Advance",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "11th + 12th NEET",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "11th + 12th IISER",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "11th + 12th MHTCET",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "11th + 12th NDA",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
+  {
+    title: "11th + 12th CUET",
+    description:
+      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+    duration: "16 weeks",
+    students: "180+",
+    level: "Advanced",
+    highlights: [
+      "Statistical analysis and visualization",
+      "Machine learning algorithms",
+      "Deep learning fundamentals",
+      "Big data processing"
+    ]
+  },
   {
     title: "HSC",
     description:
@@ -89,7 +215,49 @@ const courses = [
     ]
   },
   {
+    title: "JEE (Mains + Advance)",
+    description:
+      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
+    duration: "10 weeks",
+    students: "150+",
+    level: "Beginner to Intermediate",
+    highlights: [
+      "Design thinking methodology",
+      "User research techniques",
+      "Interactive prototyping",
+      "Portfolio development"
+    ]
+  },
+  {
     title: "NEET",
+    description:
+      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
+    duration: "10 weeks",
+    students: "150+",
+    level: "Beginner to Intermediate",
+    highlights: [
+      "Design thinking methodology",
+      "User research techniques",
+      "Interactive prototyping",
+      "Portfolio development"
+    ]
+  },
+  {
+    title: "NEET Foundation",
+    description:
+      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
+    duration: "10 weeks",
+    students: "150+",
+    level: "Beginner to Intermediate",
+    highlights: [
+      "Design thinking methodology",
+      "User research techniques",
+      "Interactive prototyping",
+      "Portfolio development"
+    ]
+  },
+  {
+    title: "NEET Repeaters",
     description:
       "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
     duration: "10 weeks",
@@ -145,7 +313,21 @@ const courses = [
     ]
   },
   {
-    title: "NEET Foundation",
+    title: "IISER",
+    description:
+      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
+    duration: "10 weeks",
+    students: "150+",
+    level: "Beginner to Intermediate",
+    highlights: [
+      "Design thinking methodology",
+      "User research techniques",
+      "Interactive prototyping",
+      "Portfolio development"
+    ]
+  },
+  {
+    title: "CUET",
     description:
       "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
     duration: "10 weeks",
@@ -161,11 +343,12 @@ const courses = [
 ]
 
 const CourseSection = ({ course }) => {
+  const navigate=useNavigate()
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <div
-    className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 
+      className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 
     transform transition-all duration-500 bg-white"
     >
       <div className="max-w-7xl mx-auto">
@@ -180,9 +363,8 @@ const CourseSection = ({ course }) => {
           >
             Learn More
             <ChevronDown
-              className={`transform transition-transform duration-300 ${
-                isExpanded ? "rotate-180" : ""
-              }`}
+              className={`transform transition-transform duration-300 ${isExpanded ? "rotate-180" : ""
+                }`}
             />
           </button>
         </div>
@@ -193,11 +375,10 @@ const CourseSection = ({ course }) => {
 
         <div
           className={`grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 overflow-hidden transition-all duration-500 ease-in-out
-                     ${
-                       isExpanded
-                         ? "max-h-[500px] opacity-100"
-                         : "max-h-0 opacity-0"
-                     }`}
+                     ${isExpanded
+              ? "max-h-[500px] opacity-100"
+              : "max-h-0 opacity-0"
+            }`}
         >
           <div className="flex items-center gap-3">
             <Clock className="w-6 h-6 text-[#4e77bb]" />
@@ -240,6 +421,17 @@ const CourseSection = ({ course }) => {
               ))}
             </ul>
           </div>
+          <div className="flex items-center justify-center">
+          <button
+            onClick={() => {
+              navigate("/inquiry");
+              window.scrollTo(0, 0);
+            }}
+            className="bg-[#E85900] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#faa975] hover:text-black transition-colors"
+          >
+            Enroll Now
+          </button>
+        </div>
         </div>
       </div>
     </div>
@@ -247,28 +439,28 @@ const CourseSection = ({ course }) => {
 }
 
 const AllCourses = () => {
-    const navigate=useNavigate()
+  const navigate = useNavigate()
   return (
-    <><Navbar/>
-    <div className="min-h-screen bg-orange-50">
-      <div className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Featured Courses
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our carefully curated selection of courses designed to help
-            you master the skills you need for success in today's digital world.
-          </p>
+    <><Navbar />
+      <div className="min-h-screen bg-orange-50">
+        <div className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Our Featured Courses
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover our carefully curated selection of courses designed to help
+              you master the skills you need for success in today's digital world.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="divide-y">
-        {courses.map((course, index) => (
-          <CourseSection key={index} course={course} />
-        ))}
-      </div>
-      <div className="bg-white text-[#E85900] py-16">
+        <div className="divide-y">
+          {courses.map((course, index) => (
+            <CourseSection key={index} course={course} />
+          ))}
+        </div>
+        <div className="bg-white text-[#E85900] py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Start Your Journey Today
@@ -288,8 +480,8 @@ const AllCourses = () => {
             </button>
           </div>
         </div>
-    </div>
-    <Footer/>
+      </div>
+      <Footer />
     </>
   )
 }

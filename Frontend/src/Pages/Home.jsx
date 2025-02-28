@@ -77,14 +77,12 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    // const hasPopupBeenShown = sessionStorage.getItem("popupShown");
-    // if (!hasPopupBeenShown) {
-    //   setIsPopupOpen(true);
-    //   sessionStorage.setItem("popupShown", "true"); // Store in sessionStorage
-    // }
-
-    setIsPopupOpen(true);
+    const timeout = setTimeout(() => {
+      setIsPopupOpen(true);
+    }, 5000);
+  return () => clearTimeout(timeout);
   }, []);
+  
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % posters.length);
@@ -445,6 +443,9 @@ function Home() {
               </button>
             </div>
           </div>
+
+ 
+
           {/* Stats Section */}
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">
             <div className="flex justify-center">

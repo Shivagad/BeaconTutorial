@@ -33,7 +33,6 @@ export const submitInquiry = async (req, res) => {
 };
 
 
-
 export const getAllInquiry = async (req, res) => {
   try {
     const inquiries = await Inquiry.find();

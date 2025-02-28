@@ -9,7 +9,7 @@ function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 relative">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-[#4E77BB] relative">
       <Toaster position="top-right" />
 
       {/* Close Button (for larger screens) */}
@@ -29,7 +29,7 @@ function Login() {
               onClick={() => setUserType('student')}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                 userType === 'student'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-[#4E77BB] text-white'
                   : 'bg-white text-blue-600 hover:bg-blue-50'
               }`}
             >
@@ -41,7 +41,7 @@ function Login() {
               onClick={() => setUserType('admin')}
               className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                 userType === 'admin'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-[#4E77BB] text-white'
                   : 'bg-white text-indigo-600 hover:bg-indigo-50'
               }`}
             >
