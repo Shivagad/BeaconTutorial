@@ -33,6 +33,7 @@ import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
 import ForgotPassword from './Pages/ForgotPassword.jsx';
 import StudentBlog from './Components/Studentblog.jsx'
+import BlogDetailPage from './Components/BlogComponent/BlogDetailPage.jsx';
 
 function AppRoutes() {
   const location = useLocation();
@@ -177,6 +178,14 @@ function AppRoutes() {
           element={
             <NonDashboardRoute>
               <Blog />
+            </NonDashboardRoute>
+          }
+        />
+        <Route
+          path="/student-corner/:id"
+          element={
+            <NonDashboardRoute>
+              <BlogDetailPage />
             </NonDashboardRoute>
           }
         />

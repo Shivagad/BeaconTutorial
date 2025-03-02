@@ -7,31 +7,32 @@ const courses = [
   {
     title: "8th, 9th, 10th Foundation",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
+      "Build a strong foundation in Science, Mathematics, and Logical Reasoning to excel in competitive exams like NEET, JEE, and Olympiads. This course is designed to strengthen conceptual understanding and problem-solving skills for students in grades 8, 9, and 10.",
     duration: "16 weeks",
     students: "180+",
     level: "Advanced",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Conceptual clarity in Mathematics and Science",
+      " Problem-solving techniques for competitive exams",
+      "Logical reasoning and aptitude development",
+      "Hands-on practice with real-world applications",
+      "Regular assessments and doubt-solving sessions",
     ]
   },
   {
-    title: "8th, 9th, 10th Regular Board Batches",
-    description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
-    highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+    "title": "8th, 9th, 10th Regular Board Batches",
+    "description": "Strengthen your foundational knowledge in Science, Mathematics, and other core subjects. Designed for students aiming to excel in their board examinations and build a robust base for future competitive exams.",
+    "duration": "16 weeks",
+    "students": "180+",
+    "level": "Intermediate",
+    "highlights": [
+      "Comprehensive coverage of CBSE, ICSE, and SSC syllabi",
+      "Experienced faculty with personalized attention",
+      "Regular assessments and feedback sessions",
+      "Focus on conceptual clarity and problem-solving skills"
     ]
   },
+  
   {
     title: "SSC",
     description:
@@ -343,7 +344,7 @@ const courses = [
 ]
 
 const CourseSection = ({ course }) => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -422,16 +423,16 @@ const CourseSection = ({ course }) => {
             </ul>
           </div>
           <div className="flex items-center justify-center">
-          <button
-            onClick={() => {
-              navigate("/inquiry");
-              window.scrollTo(0, 0);
-            }}
-            className="bg-[#E85900] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#faa975] hover:text-black transition-colors"
-          >
-            Enroll Now
-          </button>
-        </div>
+            <button
+              onClick={() => {
+                navigate("/inquiry");
+                window.scrollTo(0, 0);
+              }}
+              className="bg-[#E85900] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#faa975] hover:text-black transition-colors"
+            >
+              Enroll Now
+            </button>
+          </div>
         </div>
       </div>
     </div>
