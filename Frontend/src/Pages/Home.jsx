@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   ChevronLeft,
@@ -54,7 +53,6 @@ function Home() {
     return () => clearTimeout(timeout);
   }, []);
 
-
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % posters.length);
   };
@@ -73,7 +71,6 @@ function Home() {
   const placeholderPosters = [
     { desktop: "/images/aboutus_img1.avif", mobile: "/images/cbse.jpg" },
   ];
-  
 
   return (
     <>
@@ -158,18 +155,29 @@ function Home() {
 
       {/* Blur effect when popup is open */}
       <div
-        className={`min-h-screen ${isPopupOpen ? "blur-sm" : ""
-          } transition-all duration-300`}
+        className={`min-h-screen ${
+          isPopupOpen ? "blur-sm" : ""
+        } transition-all duration-300`}
       >
         {/* Page Content */}
         <div className="min-h-screen bg-gray-50">
+        <div className="flex items-center justify-center bg-white px-4 py-1 rounded-t-lg shadow text-center gap-2">
+  <p className="text-gray-900 font-medium text-sm">JEE Main 2025: Results Out!</p>
+  <a href="/all-results" className="text-blue-600 font-medium text-sm flex items-center">
+    View Results →
+  </a>
+</div>
+
+
+
           <div className="relative w-full aspect-square md:aspect-auto md:min-h-[50vh] flex items-center justify-center mb-6">
             {posters.length > 0 ? (
               posters.map((poster, index) => (
                 <div
                   key={`poster-${index}`}
-                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
                 >
                   <picture className="w-full h-full">
                     {/* Mobile Image */}
@@ -192,20 +200,22 @@ function Home() {
               ))
             ) : (
               <div className="flex items-center justify-center h-full">
-  {placeholderPosters.length > 0 ? (
-    <picture>
-      <source srcSet={placeholderPosters[0].mobile} media="(max-width: 768px)" />
-      <img
-        src={placeholderPosters[0].desktop}
-        alt="Poster"
-        className="w-full h-[350px] object-cover"
-      />
-    </picture>
-  ) : (
-    <p className="text-gray-500">No posters available</p>
-  )}
-</div>
-
+                {placeholderPosters.length > 0 ? (
+                  <picture>
+                    <source
+                      srcSet={placeholderPosters[0].mobile}
+                      media="(max-width: 768px)"
+                    />
+                    <img
+                      src={placeholderPosters[0].desktop}
+                      alt="Poster"
+                      className="w-full h-[350px] object-cover"
+                    />
+                  </picture>
+                ) : (
+                  <p className="text-gray-500">No posters available</p>
+                )}
+              </div>
             )}
 
             {/* Carousel Buttons */}
@@ -228,7 +238,7 @@ function Home() {
           </div>
 
           <div>
-            <BranchCards/>
+            <BranchCards />
           </div>
 
           <div className="max-w-7xl mx-auto -mt-3">
@@ -253,7 +263,9 @@ function Home() {
                 <div className="flex flex-col items-center">
                   <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
                   <p className="text-xl font-bold text-gray-800">131,700+</p>
-                  <p className="text-gray-600">Beaconian qualified NEET &amp; JEE in 2024</p>
+                  <p className="text-gray-600">
+                    Beaconian qualified NEET &amp; JEE in 2024
+                  </p>
                 </div>
 
                 {/* Stat 3 */}
@@ -263,7 +275,6 @@ function Home() {
                   <p className="text-gray-600">Expert Faculty</p>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -423,8 +434,6 @@ function Home() {
               </button>
             </div>
           </div>
-
-
 
           {/* Stats Section */}
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">

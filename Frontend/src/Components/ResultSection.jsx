@@ -29,9 +29,14 @@ const ResultSection = ({ title, students, bgColor }) => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {currentStudents.map((student) => (
             <div key={student.id} className="bg-white rounded-xl shadowmd transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
-              <div className="mx-auto mt-4 w-40 h-40 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB]">
-                <img src={student.imagePath} alt={student.firstName} className="w-full h-full object-cover" />
-              </div>
+              <div className="mx-auto mt-4 w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB] bg-white flex-shrink-0">
+  <img 
+    src={student.imagePath} 
+    alt={student.firstName} 
+    className="w-full h-full object-cover max-w-full max-h-full"
+  />
+</div>
+
               <div className="p-4 text-center">
                 <h3 className="font-semibold text-lg mb-2">{student.firstName} {student.lastName}</h3>
                 <div className="space-y-1 text-sm text-gray-600">
