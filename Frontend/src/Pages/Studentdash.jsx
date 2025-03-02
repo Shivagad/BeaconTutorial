@@ -11,7 +11,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     if (currentUser?.course) {
-      axios.get(`http://localhost:4000/server/courses/getid/${currentUser.course}`)
+      axios.get(`https://beacon-tutorial.vercel.app/server/courses/getid/${currentUser.course}`)
         .then(response => setCourseDetails(response.data.course))
         .catch(error => console.error("Error fetching course details:", error));
     }
@@ -19,7 +19,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     if (currentUser?._id) {
-      axios.get(`http://localhost:4000/server/results/${currentUser._id}`)
+      axios.get(`https://beacon-tutorial.vercel.app/server/results/${currentUser._id}`)
         .then(response => setResults(response.data.results))
         .catch(error => console.error("Error fetching results:", error));
     }

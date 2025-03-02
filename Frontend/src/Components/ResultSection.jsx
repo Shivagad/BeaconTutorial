@@ -51,6 +51,7 @@ const ResultSection = ({ title, students, bgColor }) => {
                   {student.boardName && <p className="font-bold">Board ({student.boardName})</p>}
                   {student.college && <p className="font-bold">{student.college} College</p>}
                   {student.Tag && <p className="font-bold">{student.Tag}</p>}
+                  {student.ExamName && <p className="font-bold">{student.ExamName}</p>}
                 </div>
               </div>
             </div>

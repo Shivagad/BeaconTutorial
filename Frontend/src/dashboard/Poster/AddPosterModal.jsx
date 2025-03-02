@@ -49,7 +49,7 @@ const AddPosterModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post("http://localhost:4000/server/poster/addposter", formData);
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/poster/addposter", formData);
 
       if (response.data.success) {
         setToast({

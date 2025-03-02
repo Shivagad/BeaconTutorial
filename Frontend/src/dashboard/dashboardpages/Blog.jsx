@@ -18,8 +18,10 @@ const BlogManagement = () => {
   const fetchBlogs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/server/blog/getall"
+        "https://beacon-tutorial.vercel.app/server/blog/getall"
       );
+      console.log(response.data);
+      
       response.data ? setBlogs(response.data) : setBlogs([]);
     } catch (error) {
       setBlogs([]);
@@ -66,9 +68,9 @@ const BlogManagement = () => {
               key={blog._id}
               className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
             >
-              {blog.imagepath && (
+              {blog.imagePath.length>0 && (
                 <img
-                  src={blog.imagepath}
+                  src={blog.imagePath[0]}
                   alt={blog.title}
                   className="w-full h-40 object-cover rounded-lg mb-4"
                 />

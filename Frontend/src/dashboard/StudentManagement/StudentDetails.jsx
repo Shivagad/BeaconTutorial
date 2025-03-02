@@ -22,7 +22,7 @@ const StudentTable = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/student/stu/");
+      const response = await axios.get("https://beacon-tutorial.vercel.app/server/student/stu/");
       const allStudents = response.data || [];
 
       // Filter only CET students (based on course name)
@@ -81,7 +81,7 @@ const StudentTable = () => {
     formData.append("file", csvFile);
 
     try {
-      const response = await axios.post("http://localhost:4000/server/student/upload-csv/", formData, {
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/upload-csv/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -105,7 +105,7 @@ const StudentTable = () => {
   const handleDownloadCsv = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/server/student/download-csv/${course}`,
+        `https://beacon-tutorial.vercel.app/server/student/download-csv/${course}`,
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -126,7 +126,7 @@ const StudentTable = () => {
     if (!isConfirmed) return;
   
     try {
-      await axios.delete(`http://localhost:4000/server/student/delete-all/${course}`);
+      await axios.delete(`https://beacon-tutorial.vercel.app/server/student/delete-all/${course}`);
       toast.success("All students deleted successfully.");
       fetchStudents();
     } catch (error) {

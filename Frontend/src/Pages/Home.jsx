@@ -22,36 +22,7 @@ import HomeWhyChooseUse from "../Components/HomeComponents/HomeWhyChooseUs";
 import TestimonialSection from "../Components/HomeComponents/TestiMonialSection";
 import ClassGallery from "../Components/HomeComponents/ClassGallery";
 import { useNavigate } from "react-router-dom";
-const courses = [
-  {
-    id: 1,
-    title: "JEE Main & Advanced",
-    icon: Calculator,
-    description: "Comprehensive preparation for IIT entrance",
-    students: "10,000+",
-  },
-  {
-    id: 2,
-    title: "NEET Preparation",
-    icon: BrainCircuit,
-    description: "Complete medical entrance preparation",
-    students: "8,000+",
-  },
-  {
-    id: 3,
-    title: "CET Coaching",
-    icon: BookOpen,
-    description: "State-level engineering entrance",
-    students: "15,000+",
-  },
-  {
-    id: 4,
-    title: "Class 12th Excellence",
-    icon: GraduationCap,
-    description: "Board exam preparation",
-    students: "12,000+",
-  },
-];
+import BranchCards from "../Components/HomeComponents/BranchCards";
 
 function Home() {
   const navigate = useNavigate();
@@ -64,7 +35,7 @@ function Home() {
     const fetchPosters = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/server/poster/getallposter"
+          "https://beacon-tutorial.vercel.app/server/poster/getallposter"
         );
         setPosters(response.data.data || []);
       } catch (error) {
@@ -80,9 +51,9 @@ function Home() {
     const timeout = setTimeout(() => {
       setIsPopupOpen(true);
     }, 5000);
-  return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout);
   }, []);
-  
+
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % posters.length);
@@ -187,85 +158,82 @@ function Home() {
 
       {/* Blur effect when popup is open */}
       <div
-        className={`min-h-screen ${
-          isPopupOpen ? "blur-sm" : ""
-        } transition-all duration-300`}
+        className={`min-h-screen ${isPopupOpen ? "blur-sm" : ""
+          } transition-all duration-300`}
       >
         {/* Page Content */}
         <div className="min-h-screen bg-gray-50">
-        <div className="relative w-full aspect-square md:aspect-auto md:min-h-[50vh] flex items-center justify-center mb-6">
-  {posters.length > 0 ? (
-    posters.map((poster, index) => (
-      <div
-        key={`poster-${index}`}
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
-          index === currentSlide ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <picture className="w-full h-full">
-          {/* Mobile Image */}
-          <source
-            media="(max-width: 768px)"
-            srcSet={`${poster.mobileImagePath}?f_auto,q_auto,w_600,h_600,c_fill`}
-          />
-          {/* Default (Desktop) Image */}
-          <img
-            src={`${poster.imagePath}?f_auto,q_auto,w_1200,h_800,c_fill`}
-            alt={`Poster ${index + 1}`}
-            role="presentation"
-            className="w-full h-full object-contain md:object-fill"
-            loading="lazy"
-            decoding="async"
-            fetchPriority="high"
-          />
-        </picture>
-      </div>
-    ))
+          <div className="relative w-full aspect-square md:aspect-auto md:min-h-[50vh] flex items-center justify-center mb-6">
+            {posters.length > 0 ? (
+              posters.map((poster, index) => (
+                <div
+                  key={`poster-${index}`}
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                >
+                  <picture className="w-full h-full">
+                    {/* Mobile Image */}
+                    <source
+                      media="(max-width: 768px)"
+                      srcSet={`${poster.mobileImagePath}?f_auto,q_auto,w_600,h_600,c_fill`}
+                    />
+                    {/* Default (Desktop) Image */}
+                    <img
+                      src={`${poster.imagePath}?f_auto,q_auto,w_1200,h_800,c_fill`}
+                      alt={`Poster ${index + 1}`}
+                      role="presentation"
+                      className="w-full h-full object-contain md:object-fill"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="high"
+                    />
+                  </picture>
+                </div>
+              ))
+            ) : (
+              <div className="flex items-center justify-center h-full">
+  {placeholderPosters.length > 0 ? (
+    <picture>
+      <source srcSet={placeholderPosters[0].mobile} media="(max-width: 768px)" />
+      <img
+        src={placeholderPosters[0].desktop}
+        alt="Poster"
+        className="w-full h-[350px] object-cover"
+      />
+    </picture>
   ) : (
-    placeholderPosters.map((placeholder, index) => (
-      <div
-        key={`placeholder-${index}`}
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
-          index === 0 ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <picture className="w-full h-full">
-          {/* Mobile Image */}
-          <source media="(max-width: 768px)" srcSet={placeholder.mobile} />
-          {/* Desktop Image */}
-          <img
-            src={placeholder.desktop}
-            alt="Placeholder Poster"
-            className="w-full h-full object-contain md:object-fill"
-          />
-        </picture>
-      </div>
-    ))
-  )}
-
-  {/* Carousel Buttons */}
-  {posters.length > 1 && (
-    <>
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
-      >
-        <ChevronRight size={24} />
-      </button>
-    </>
+    <p className="text-gray-500">No posters available</p>
   )}
 </div>
 
+            )}
 
-          <div className="max-w-7xl mx-auto">
+            {/* Carousel Buttons */}
+            {posters.length > 1 && (
+              <>
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </>
+            )}
+          </div>
+
+          <div>
+            <BranchCards/>
+          </div>
+
+          <div className="max-w-7xl mx-auto -mt-3">
             {/* Card Container */}
-            <div className="bg-white rounded-xl shadow-md p-6 md:p-10">
+            <div className="justify-center place-items-center bg-white rounded-xl shadow-md p-6 md:p-10">
               {/* Heading */}
               <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
                 15+ Years of Legacy
@@ -280,22 +248,12 @@ function Home() {
                 be a part of our legacy. Find your course now.
               </p>
 
-              {/* Stats Row */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Stat 1 */}
-                <div className="flex flex-col items-center">
-                  <BookOpen className="w-10 h-10 text-[#4E77BB] mb-2" />
-                  <p className="text-xl font-bold text-gray-800">2+</p>
-                  <p className="text-gray-600">Coaching centers in Pune</p>
-                </div>
-
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center place-items-center">
                 {/* Stat 2 */}
                 <div className="flex flex-col items-center">
                   <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
                   <p className="text-xl font-bold text-gray-800">131,700+</p>
-                  <p className="text-gray-600">
-                    Beaconian qualified NEET &amp; JEE in 2024
-                  </p>
+                  <p className="text-gray-600">Beaconian qualified NEET &amp; JEE in 2024</p>
                 </div>
 
                 {/* Stat 3 */}
@@ -305,10 +263,11 @@ function Home() {
                   <p className="text-gray-600">Expert Faculty</p>
                 </div>
               </div>
+
             </div>
           </div>
 
-          <div className=" w-full mt-20 overflow-hidden leading-[0]">
+          <div className="w-full mt-20 overflow-hidden leading-[0]">
             <svg
               id="wave"
               style={{ transform: "rotate(0deg)", transition: "0.3s" }}
@@ -465,7 +424,7 @@ function Home() {
             </div>
           </div>
 
- 
+
 
           {/* Stats Section */}
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">

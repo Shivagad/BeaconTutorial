@@ -50,7 +50,7 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     setIsSubmitting(true);
     try {
       const response = await axios.put(
-        `http://localhost:4000/server/twelve/students/${id}`,
+        `https://beacon-tutorial.vercel.app/server/twelve/students/${id}`,
         formData
       );
 
@@ -85,7 +85,7 @@ const Edit12StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   // Fetch student details by id when the modal opens.
   const fetchAllDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/twelve/students/${id}`);
+      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/twelve/students/${id}`);
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",
