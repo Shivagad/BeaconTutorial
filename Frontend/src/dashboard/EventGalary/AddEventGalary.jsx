@@ -75,7 +75,7 @@ const AddEventGallery = ({ isOpen, onClose, setToast }) => {
     console.log(dataToSend)
 
     try {
-      const response = await axios.post("http://localhost:4000/server/event/addevent", dataToSend);
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/event/addevent", dataToSend);
 
       if (response.data.success) {
         setToast({ success: true, message: "Event added successfully!" });

@@ -130,7 +130,7 @@ const Navbar = ({ logoSrc }) => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4">
+          <div className=" pb-4">
             <div className="flex flex-col space-y-3">
               {/* Mobile contact info */}
               <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">

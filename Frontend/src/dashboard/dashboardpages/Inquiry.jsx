@@ -6,7 +6,7 @@ const AdminInquiryTable = () => {
 
   const fetchInquiries = () => {
     axios
-      .get("http://localhost:4000/server/getinquiries")
+      .get("https://beacon-tutorial.vercel.app/server/getinquiries")
       .then((response) => {
         setInquiries(response.data.data);
       })
@@ -20,7 +20,7 @@ const AdminInquiryTable = () => {
   }, []);
 
   const handleDownloadCSV = () => {
-    window.open("http://localhost:4000/server/inquiry/export", "_blank");
+    window.open("https://beacon-tutorial.vercel.app/server/inquiry/export", "_blank");
   };
 
   const handleDeleteEntry = async (id) => {
@@ -28,7 +28,7 @@ const AdminInquiryTable = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:4000/server/inquiry/${id}`);
+      await axios.delete(`https://beacon-tutorial.vercel.app/server/inquiry/${id}`);
       setInquiries(inquiries.filter((inquiry) => inquiry._id !== id));
     } catch (error) {
       console.error("Error deleting inquiry entry:", error);
@@ -40,7 +40,7 @@ const AdminInquiryTable = () => {
     if (!confirmDeleteAll) return;
 
     try {
-      await axios.delete("http://localhost:4000/server/inquiry/deleteAll");
+      await axios.delete("https://beacon-tutorial.vercel.app/server/inquiry/deleteAll");
       setInquiries([]);
     } catch (error) {
       console.error("Error deleting all inquiries:", error);
