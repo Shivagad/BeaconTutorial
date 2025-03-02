@@ -64,7 +64,11 @@ const BranchCard = ({ name, address, email, phone, image }) => {
         {/* Buttons */}
         <div className="mt-auto pt-6 flex flex-col sm:flex-row gap-4 transition-all duration-500">
         <button
-            onClick={() => navigate("/contact")}
+           onClick={() => {
+            navigate("/contact");
+            scrollTo(0, 0);
+          }}
+          
             className="px-5 py-2 sm:px-6 sm:py-3 bg-white text-[#4E77BB] font-semibold rounded-lg shadow-lg hover:bg-blue-50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2 text-sm sm:text-base"
           >
             <Phone className="w-4 h-4" />
@@ -72,7 +76,11 @@ const BranchCard = ({ name, address, email, phone, image }) => {
           </button>
           {/* Navigate to Inquiry Page */}
           <button
-            onClick={() => navigate("/inquiry")}
+            onClick={() => {
+              navigate("/inquiry");
+              scrollTo(0, 0);
+            }}
+            
             className="px-5 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transform transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
           >
             <ExternalLink className="w-4 h-4" />
