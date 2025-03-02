@@ -8,8 +8,6 @@ import Course from "../Models/Course.js";
 import { Parser } from "json2csv";
 
 dotenv.config();
-
-// Get all students
 export const getStudents = async (req, res) => {
   try {
     const students = await Student.find().populate("course", "name");

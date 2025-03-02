@@ -1,58 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { PlusCircle, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Add10StudentModal from '../10thResult/Add10StudentModal';
-import Edit10StudentModal from '../10thResult/Edit10Student';
-import Delete10StudentModal from '../10thResult/Delete10StudentModal';
+import AddOtherExamStudentModal from '../OtherExamResults/AddOtherExamStudentModal';
+import EditOtherExamStudentModal from '../OtherExamResults/EditOtherExamStudentModal';
+import DeleteOtherExamStudentModal from '../OtherExamResults/DeleteOtherExamStudentModal';
 
-const TenthResults = () => {
+const OtherExamResults = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   const [editStudentId, setEditStudentId] = useState(null);
   const [deleteStudentId, setDeleteStudentId] = useState(null);
-
   const [students, setStudents] = useState([]);
-  const fetchStudents = async () => {
+
+  const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/tenth/students");
-    //  console.log(response.data.data);
+      const response = await axios.get("http://localhost:4000/server/other-exam-results");
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
-      setStudents([])
-      
+      setStudents([]);
       console.error("Error fetching student data:", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchStudents();
-  }, []);
+  }, [fetchStudents]);
 
   const setToast = (msg) => {
     msg.success ? toast.success(msg.message) : toast.error(msg.message);
     fetchStudents();
-  }
+  };
 
-  const setToast2 = (msg) => {
-    msg.success ? toast.success(msg.message) : toast.error(msg.message);
-    fetchStudents();
-  }
-  const setToast3 = (msg) => {
-    msg.success ? toast.success(msg.message) : toast.error(msg.message);
-    fetchStudents();
-  }
-
-  // When the Edit button is clicked, store the selected student ID and open the Edit modal.
   const openEditModal = (id) => {
     setEditStudentId(id);
     setIsEditModalOpen(true);
   };
 
-  // When the Delete button is clicked, store the selected student ID and open the Delete modal.
   const openDeleteModal = (id) => {
     setDeleteStudentId(id);
     setIsDeleteModalOpen(true);
@@ -60,12 +46,10 @@ const TenthResults = () => {
 
   return (
     <div className="p-6 ml-64">
-      {/* Toast Notifications */}
       <ToastContainer position="top-right" autoClose={3000} />
-
-      {/* Header */}
+      
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">10th Class Toppers</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Other Exam Toppers</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -75,14 +59,12 @@ const TenthResults = () => {
         </button>
       </div>
 
-      {/* Student Cards Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {students.map((student) => (
           <div
-            key={student.id}
+            key={student._id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
           >
-            {/* Display student's image if available */}
             {student.imagePath && (
               <img
                 src={student.imagePath}
@@ -95,21 +77,9 @@ const TenthResults = () => {
                 <h3 className="text-lg font-semibold">
                   {student.firstName} {student.lastName}
                 </h3>
-                <p className="text-blue-600 text-xl">
-                 Percentage : {(student.percentage)}%
-                </p>
-                <p className="text-blue-600  text-xl">
-                 Science Mark : {parseFloat(student.scienceMarks)}%
-                </p>
-                <p className="text-blue-600  text-xl">
-                 Math Marks : {parseFloat(student.mathMarks)}%
-                </p>
-                <p className="text-blue-600  text-xl">
-                 Board : {(student.boardName)}
-                </p>
-                <p className="text-blue-600 text-xl">
-                 Tag : {(student.Tag)}
-                </p>
+                <p className="text-blue-600 text-lg">Exam: {student.ExamName}</p>
+                <p className="text-gray-600 text-sm">Tag: {student.Tag}</p>
+                <p className="text-gray-600 text-sm">Sequence No: {student.seqno}</p>
               </div>
               <div className="flex space-x-2">
                 <button
@@ -130,32 +100,27 @@ const TenthResults = () => {
         ))}
       </div>
 
-      {/* Add Student Modal */}
-      <Add10StudentModal
+      <AddOtherExamStudentModal
         setToast={setToast}
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
       />
 
-      {/* Edit Student Modal: Pass the selected student's ID and onSubmit callback */}
-      <Edit10StudentModal
+      <EditOtherExamStudentModal
         setToast={setToast}
         isEditOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         id={editStudentId}
-        setToast2={setToast2}
       />
 
-      {/* Delete Student Modal: Pass the selected student's ID and onDelete callback */}
-      <Delete10StudentModal
+      <DeleteOtherExamStudentModal
         setToast={setToast}
         isDeleteOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         id={deleteStudentId}
-        setToast3={setToast3}
       />
     </div>
   );
 };
 
-export default TenthResults;
+export default OtherExamResults;

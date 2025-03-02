@@ -32,7 +32,8 @@ import Studentdash from './Pages/Studentdash.jsx';
 import Faculty from './dashboard/dashboardpages/Faculty.jsx';
 import Facultymain from './Components/Facultymain.jsx';
 import ForgotPassword from './Pages/ForgotPassword.jsx';
-import StudentBlog from './Components/Studentblog.jsx'
+import StudentBlog from './Components/Studentblog.jsx';
+import OtherExamsResults from './dashboard/dashboardpages/OtherExamResults.jsx'
 
 function AppRoutes() {
   const location = useLocation();
@@ -237,6 +238,14 @@ function AppRoutes() {
                 <Courses />
               </ProtectedRoute>
             }
+          />
+          <Route
+          path="otherexams"
+          element={
+            <ProtectedRoute requiredRole="admin">
+            <OtherExamsResults />
+          </ProtectedRoute>
+          }
           />
           <Route
             path="faculty"

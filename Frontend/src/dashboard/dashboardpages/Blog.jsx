@@ -18,7 +18,7 @@ const BlogManagement = () => {
   const fetchBlogs = async () => {
     try {
       const response = await axios.get(
-        "https://beacon-tutorial.vercel.app/server/blog/getall"
+        "http://localhost:4000/server/blog/getall"
       );
       response.data ? setBlogs(response.data) : setBlogs([]);
     } catch (error) {

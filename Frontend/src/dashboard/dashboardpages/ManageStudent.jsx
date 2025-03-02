@@ -19,7 +19,7 @@
 
 //   const fetchStudents = async () => {
 //     try {
-//       const response = await axios.get("https://beacon-tutorial.vercel.app/server/student/stu/");
+//       const response = await axios.get("http://localhost:4000/server/student/stu/");
 //       setStudents(response.data || []);
 //       setFilteredStudents(response.data || []);
 //     } catch (error) {

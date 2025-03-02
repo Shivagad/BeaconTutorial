@@ -49,7 +49,7 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     try {
       setIsSubmitting(true);
       // Sending JSON (the image field is a base64 string if updated)
-      const response = await axios.put(`https://beacon-tutorial.vercel.app/server/tenth/students/${id}`, formData);
+      const response = await axios.put(`http://localhost:4000/server/tenth/students/${id}`, formData);
       setFormData({
         firstName: "",
         lastName: "",
@@ -76,7 +76,7 @@ const Edit10StudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   // Fetch student details by id when the modal opens.
   const fetchAllDetails = async () => {
     try {
-      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/tenth/students/getbyid/${id}`);
+      const response = await axios.get(`http://localhost:4000/server/tenth/students/getbyid/${id}`);
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",

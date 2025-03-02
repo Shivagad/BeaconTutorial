@@ -8,8 +8,6 @@ export const createTestimonial = async (req, res) => {
     // (Optional) You might check for an existing testimonial if needed:
     const existingTestimonial = await Testimonial.findOne({ name });
     if (existingTestimonial) return res.status(400).json({ message: "Testimonial already exists" });
-
-    // Create testimonial
     const newTestimonial = new Testimonial({ name, tag, seqno, description, youtubeVideoLink });
     await newTestimonial.save();
 
@@ -19,7 +17,6 @@ export const createTestimonial = async (req, res) => {
   }
 };
 
-// Get All Testimonials
 export const getTestimonials = async (req, res) => {
   try {
     const testimonials = await Testimonial.find();
