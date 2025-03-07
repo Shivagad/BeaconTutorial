@@ -125,19 +125,19 @@ function Home() {
               <li>
                 📧{" "}
                 <a
-                  href="mailto:secondbranch@beacontutorials.com"
+                  href="mailto:beacontutorials02.suncity@gmail.com"
                   className="text-blue-600 hover:underline"
                 >
-                  secondbranch@beacontutorials.com
+                  beacontutorials02.suncity@gmail.com
                 </a>
               </li>
               <li>
                 📞{" "}
                 <a
-                  href="tel:+918446222269"
+                  href="tel:+919527069991"
                   className="text-blue-600 hover:underline"
                 >
-                  +91 8446222269
+                  +91 9527069991
                 </a>
               </li>
             </ul>
@@ -271,7 +271,7 @@ function Home() {
                 {/* Stat 3 */}
                 <div className="flex flex-col items-center">
                   <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
-                  <p className="text-xl font-bold text-gray-800">5000+</p>
+                  <p className="text-xl font-bold text-gray-800">500+</p>
                   <p className="text-gray-600">Expert Faculty</p>
                 </div>
               </div>

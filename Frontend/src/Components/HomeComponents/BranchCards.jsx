@@ -2,21 +2,23 @@ import React from "react";
 import { MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
+
 const branches = [
   {
     name: "Beacon Mohan Nagar",
-    address: "123 Education Avenue, Knowledge Park, New York, NY 10001",
-    email: "maincampus@edutech.com",
-    phone: "+1 (555) 123-4567",
+    address: "Mohan Nagar,Dhankawadi,Pune-411043",
+    email: "beacontutorials7@gmail.com ",
+    phone: "+91 8446222268",
     image:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
   },
   {
     name: "Beacon Suncity",
     address:
-      "456 Learning Street, Innovation District, San Francisco, CA 94105",
-    email: "downtown@edutech.com",
-    phone: "+1 (555) 987-6543",
+      "Suncity,Ambegaon, Pune-411046",
+    email: "beacontutorials02.suncity@gmail.com",
+    phone: "+91 9527069991",
     image:
       "https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
   }

@@ -228,7 +228,8 @@ export default function ContactPage() {
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-6 h-6 text-[#4E77BB] mt-1 flex-shrink-0" />
                     <p className="text-gray-700">
-                      Sr no. 34/16, Sai Park, Row house no 3, Swami Samarth Nagar, Mohan Nagar, Pune, Maharashtra 411043
+                    Beacon Mohan Nagar,Dhankawadi,
+                    Pune-411043
                     </p>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -267,19 +268,19 @@ export default function ContactPage() {
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-6 h-6 text-[#4E77BB] mt-1 flex-shrink-0" />
                     <p className="text-gray-700">
-                      Sr no. 34/16, Sai Park, Row house no 4, XYZ Nagar, Pune, 411044
+                     Beacon Suncity,Ambegaon, Pune-411046.
                     </p>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="w-6 h-6 text-[#4E77BB] flex-shrink-0" />
-                    <a href="mailto:secondbranch@beacontutorials.com" className="text-gray-700 hover:text-[#4E77BB]">
-                      secondbranch@beacontutorials.com
+                    <a href="mailto:beacontutorials02.suncity@gmail.com" className="text-gray-700 hover:text-[#4E77BB]">
+                    beacontutorials02.suncity@gmail.com
                     </a>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Phone className="w-6 h-6 text-[#4E77BB] flex-shrink-0" />
-                    <a href="tel:+918446222269" className="text-gray-700 hover:text-[#4E77BB]">
-                      +91 8446222269
+                    <a href="tel:+919527069991" className="text-gray-700 hover:text-[#4E77BB]">
+                      +91 9527069991
                     </a>
                   </div>
                 </div>

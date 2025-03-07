@@ -31,11 +31,11 @@ const Navbar = ({ logoSrc }) => {
         <div className="container mx-auto px-4 flex justify-end items-center space-x-6">
           <div className="flex items-center space-x-2">
             <Phone size={16} className="text-gray-600" />
-            <span className="text-sm text-gray-600">+1 234 567 8900</span>
+            <span className="text-sm text-gray-600">+91 8446222268</span>
           </div>
           <div className="flex items-center space-x-2">
             <Mail size={16} className="text-gray-600" />
-            <span className="text-sm text-gray-600">info@example.com</span>
+            <span className="text-sm text-gray-600">beacontutorials7@gmail.com</span>
           </div>
           {currentUser ? (
             <div className="relative">
@@ -135,11 +135,11 @@ const Navbar = ({ logoSrc }) => {
               {/* Mobile contact info */}
               <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">
                 <Phone size={16} className="text-gray-600" />
-                <span className="text-sm text-gray-600">+1 234 567 8900</span>
+                <span className="text-sm text-gray-600">+91 8446222268</span>
               </div>
               <div className="flex items-center space-x-2 px-4 py-2 bg-gray-50 rounded">
                 <Mail size={16} className="text-gray-600" />
-                <span className="text-sm text-gray-600">info@example.com</span>
+                <span className="text-sm text-gray-600">beacontutorials7@gmail.com</span>
               </div>
               {currentUser ? (
                 <div className="flex items-center space-x-4 px-4 py-2 bg-gray-50 rounded">
