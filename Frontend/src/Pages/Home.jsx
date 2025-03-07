@@ -162,7 +162,7 @@ function Home() {
         {/* Page Content */}
         <div className="min-h-screen bg-gray-50">
         <div className="flex items-center justify-center bg-white px-4 py-1 rounded-t-lg shadow text-center gap-2">
-  <p className="text-gray-900 font-medium text-sm">JEE Main 2025: Results Out!</p>
+  <p className="text-gray-900 font-medium text-sm">Beacon Results Out!</p>
   <a href="/all-results" className="text-blue-600 font-medium text-sm flex items-center">
     View Results →
   </a>

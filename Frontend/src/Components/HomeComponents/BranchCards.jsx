@@ -29,7 +29,7 @@ const BranchCard = ({ name, address, email, phone, image }) => {
   return (
     <div className="relative group overflow-hidden rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl min-h-[400px]">
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 opacity-70 group-hover:opacity-80 group-hover:bg-black transition-opacity duration-500 z-10"></div>
+      <div className="absolute inset-0 opacity-70 group-hover:opacity-80 group-hover:bg-black transition-opacity duration-500 z-10 text-black group-hover:text-white"></div>
 
       {/* Background image */}
       <div
@@ -46,7 +46,8 @@ const BranchCard = ({ name, address, email, phone, image }) => {
         </h3>
 
         {/* Contact Information */}
-        <div className="mt-4 space-y-3 text-white/90">
+        <div className="mt-4 space-y-3 text-black font-bold group-hover:text-white">
+
           <div className="flex items-start space-x-3 transition-all duration-500">
             <MapPin className="w-5 h-5 text-[#4E77BB] flex-shrink-0 mt-1" />
             <p className="text-sm sm:text-base">{address}</p>
