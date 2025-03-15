@@ -87,7 +87,7 @@ function AppRoutes() {
           } />
           <Route path="results" element={<StudentResults />} />
           {/* Default child route */}
-          <Route index element={<BasicInfo />} />
+          {/* <Route index element={<BasicInfo />} /> */}
         </Route>
 
         <Route

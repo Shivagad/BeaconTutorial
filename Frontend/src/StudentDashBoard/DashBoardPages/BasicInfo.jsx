@@ -42,7 +42,7 @@ const BasicInfo = () => {
   
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-6 overflow-y-auto ">
+    <div className="max-w-6xl mx-auto p-4 md:p-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Student Information</h2>
 
       <div className="bg-white rounded-lg shadow-md p-6 md:p-8 space-y-8">

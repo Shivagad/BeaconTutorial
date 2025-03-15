@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const branches = [
   {
     name: "Beacon Mohan Nagar",
-    address: "Mohan Nagar,Dhankawadi,Pune-411043",
+    address: "Mohan Nagar, Dhankawadi, Pune-411043",
     email: "beacontutorials7@gmail.com ",
     phone: "+91 8446222268",
     image:
@@ -16,7 +16,7 @@ const branches = [
   {
     name: "Beacon Suncity",
     address:
-      "Suncity,Ambegaon, Pune-411046",
+      "Suncity, Ambegaon, Pune-411046",
     email: "beacontutorials02.suncity@gmail.com",
     phone: "+91 9527069991",
     image:
@@ -27,9 +27,9 @@ const branches = [
 const BranchCard = ({ name, address, email, phone, image }) => {
   const navigate = useNavigate();
   return (
-    <div className="relative group overflow-hidden rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl min-h-[400px]">
+    <div className="relative group overflow-hidden rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.02] shadow-2xl min-h-[300px]">
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 opacity-70 group-hover:opacity-80 group-hover:bg-black transition-opacity duration-500 z-10 text-black group-hover:text-white"></div>
+      <div className="absolute inset-0 text-white opacity-70 bg-black transition-opacity duration-500 z-10"></div>
 
       {/* Background image */}
       <div
@@ -42,11 +42,11 @@ const BranchCard = ({ name, address, email, phone, image }) => {
         {/* Branch Name */}
         <h3 className="text-2xl sm:text-3xl font-bold text-[#E85900] mb-2 relative inline-block">
           {name}
-          <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-blue-400 to-blue-200 group-hover:w-full transition-all duration-500"></span>
+          <span className="absolute bottom-0 left-0 top-10 w-0 h-1 bg-gradient-to-r from-blue-400 to-blue-200 w-full transition-all duration-500"></span>
         </h3>
 
         {/* Contact Information */}
-        <div className="mt-4 space-y-3 text-black font-bold group-hover:text-white">
+        <div className="mt-4 space-y-3 text-black font-bold text-white">
 
           <div className="flex items-start space-x-3 transition-all duration-500">
             <MapPin className="w-5 h-5 text-[#4E77BB] flex-shrink-0 mt-1" />
@@ -84,7 +84,7 @@ const BranchCard = ({ name, address, email, phone, image }) => {
               scrollTo(0, 0);
             }}
             
-            className="px-5 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transform transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
+            className="px-5 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg bg-white/10 transform transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
           >
             <ExternalLink className="w-4 h-4" />
             Inquire Now

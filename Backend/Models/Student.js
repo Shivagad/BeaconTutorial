@@ -10,7 +10,7 @@ const studentSchema = new mongoose.Schema({
   parentEmail: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  mobile: { type: String, required: true, unique: true },
+  mobile: { type: String, required: true },
   fatherMobile: { type: String, required: true },
   address: { type: String, required: true },
   state: { type: String, required: true },

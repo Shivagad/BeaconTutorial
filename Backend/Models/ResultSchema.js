@@ -6,6 +6,7 @@ const ResultSchema = new mongoose.Schema({
   exam: { type: String, required: true },
   examDate: { type: Date, required: true },
   totalMarks: { type: Number, required: true },
+  outof: { type: Number, required: true },
   rank: { type: String, required: true },
   correctAnswers: { type: Number, required: true },
   incorrectAnswers: { type: Number, required: true },

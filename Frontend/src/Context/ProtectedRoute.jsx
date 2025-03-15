@@ -12,7 +12,7 @@ export const NonDashboardRoute = ({ children }) => {
 
   // If the user is logged in but NOT an admin, send them to the student dashboard
   if (currentUser) {
-    return <Navigate to="/student-dashboard" replace />;
+    return <Navigate to="/student-dashboard/basic-info" replace />;
   }
 
   // If the user is NOT logged in, allow them to stay

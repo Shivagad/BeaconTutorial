@@ -10,6 +10,7 @@ const AddStudentResult = ({ isOpen, onClose, setToast }) => {
     examDate: "",
     totalMarks: "",
     rank: "",
+    outof:"",
     correctAnswers: "",
     incorrectAnswers: "",
     notAttempted: "",
@@ -41,6 +42,7 @@ const AddStudentResult = ({ isOpen, onClose, setToast }) => {
         setFormData({
           studentEmail: "",
           exam: "",
+          outof:"",
           examDate: "",
           totalMarks: "",
           rank: "",

@@ -14,7 +14,11 @@ import {
   deleteAllCourseStudent,
   downloadCourseCSV,
   addResult,
-  getResultsByEmail
+  getResultsByEmail,
+  getResultsDetail,
+  uploadStudentResultCSV,
+  deleteResultByEmail,
+  deleteResultByExamName,
 } from "../Controller/Student.js";
 
 import { sendOTPEmail, sendScholarregSuccessfull,ContactUsEmail } from "../Controller/EmailService.js";
@@ -55,6 +59,11 @@ router.delete("/delete-all/:course", deleteAllCourseStudent);
 router.get("/download-csv/:course", downloadCourseCSV);
 router.post("/add", addResult);
 router.get("/getresult/:email", getResultsByEmail);
+router.get("/resultbyid/:id", getResultsDetail);
+router.post("/studentresult-csv/", upload.single("file"), uploadStudentResultCSV);
+router.post("/resultdeletebyemail", deleteResultByEmail);
+router.post("/deleteallresultbyename", deleteResultByExamName);
+
 
 
 import {checkStudentEmail,resetStudentPassword} from '../Controller/Student.js';
