@@ -1,7 +1,9 @@
 import React from "react"
 import { Menu, LogOut } from "lucide-react"
+import { useAuth } from "../../Context/AuthProvider"
 
 const StudentDashNavbar = ({ toggleSidebar }) => {
+  const {logout} =useAuth();
   return (
     <header className="bg-white shadow-md">
       <div className="flex items-center justify-between px-4 md:px-8 py-4">
@@ -14,7 +16,7 @@ const StudentDashNavbar = ({ toggleSidebar }) => {
         </button>
 
         <button
-          onClick={() => console.log("Logout clicked")}
+           onClick={() => { logout(); navigate('/login'); }}
           className="flex items-center space-x-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
         >
           <LogOut className="h-5 w-5" />
