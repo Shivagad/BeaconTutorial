@@ -5,6 +5,7 @@ import fs from "fs";
 import csv from "csv-parser";
 import Student from "../Models/Student.js";
 import Course from "../Models/Course.js";
+import Result from '../Models/ResultSchema.js'
 import { Parser } from "json2csv";
 
 dotenv.config();
@@ -82,6 +83,7 @@ export const createStudent = async (req, res) => {
   try {
     const {
       name,
+      rollNo,
       fatherName,
       motherName,
       parentEmail,
@@ -108,6 +110,7 @@ export const createStudent = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const student = new Student({
       name,
+      rollNo,
       fatherName,
       motherName,
       parentEmail,
@@ -136,6 +139,7 @@ export const updateStudent = async (req, res) => {
   try {
     const {
       name,
+      rollNo,
       fatherName,
       motherName,
       parentEmail,
@@ -159,6 +163,7 @@ export const updateStudent = async (req, res) => {
 
     let updateData = {
       name,
+      rollNo,
       fatherName,
       motherName,
       parentEmail,
@@ -243,6 +248,7 @@ export const uploadStudentsCSV = async (req, res) => {
       // Expect CSV headers to match field names (adjust as needed)
       const {
         name,
+        rollNo,
         fatherName,
         motherName,
         parentEmail,
@@ -280,6 +286,7 @@ export const uploadStudentsCSV = async (req, res) => {
 
       students.push({
         name,
+        rollNo,
         fatherName,
         motherName,
         parentEmail,
@@ -356,6 +363,7 @@ export const downloadCourseCSV = async (req, res) => {
     // Define the CSV fields/columns
     const fields = [
       "name",
+      "rollNo",
       "fatherName",
       "motherName",
       "parentEmail",
@@ -382,6 +390,71 @@ export const downloadCourseCSV = async (req, res) => {
   }
 };
 
+export const addResult = async (req, res) => {
+  try {
+    const { studentEmail, exam, examDate, totalMarks, rank, correctAnswers, incorrectAnswers, notAttempted,
+      physics, physicsSectionA, physicsSectionB, chemistry, chemistrySectionA, chemistrySectionB,
+      maths, mathsSectionA, mathsSectionB, biology, biologySectionA, biologySectionB } = req.body;
+    const student = await Student.findOne({ email: studentEmail });
+    if (!student) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+    const newResult = new Result({
+      student: student._id,
+      exam,
+      examDate,
+      totalMarks,
+      rank,
+      correctAnswers,
+      incorrectAnswers,
+      notAttempted,
+      physics,
+      physicsSectionA,
+      physicsSectionB,
+      chemistry,
+      chemistrySectionA,
+      chemistrySectionB,
+      maths,
+      mathsSectionA,
+      mathsSectionB,
+      biology,
+      biologySectionA,
+      biologySectionB
+    });
+    try {
+      await newResult.save();
+      console.log("Student result added successfully");
+      student.results.push(newResult._id);  
+      await student.save();  
+      console.log(student);
+      res.status(201).json({ success: true, message: "Result added successfully", result: newResult });
+    } catch (error) {
+      console.error("Error saving student result:", error.message);
+      res.status(500).json({ success: false, message: "Error saving result", error: error.message });
+    }
+
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error adding result", error: error.message });
+  }
+};
 
 
+export const getResultsByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
 
+    // Find student by email
+    const student = await Student.findOne({ email });
+    if (!student) {
+      return res.status(404).json({ success: false, message: "Student not found" });
+    }
+
+    // Fetch all results for the student
+    const results = await Result.find({ student: student._id });
+  console.log(results);
+  
+    res.json({ success: true, results });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error fetching results", error: error.message });
+  }
+};

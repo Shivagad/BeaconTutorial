@@ -7,6 +7,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
   const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
+    rollNo:"",
     fatherName: "",
     motherName: "",
     parentEmail: "",
@@ -28,6 +29,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
     if (isOpen) {
       setFormData({
         name: "",
+        rollNo:"",
         fatherName: "",
         motherName: "",
         parentEmail: "",
@@ -46,7 +48,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
       setErrors({}); // Reset errors when modal opens
 
       axios
-        .get("https://beacon-tutorial.vercel.app/server/courses/getall/")
+        .get("http://localhost:4000/server/courses/getall/")
         .then((response) => {
           console.log("Courses API Response:", response.data.courses);
           setCourses(response.data.courses);
@@ -60,6 +62,9 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
   const validateForm = () => {
     let newErrors = {};
 
+    if (!formData.rollNo.trim()) {
+      newErrors.rollNo = "Roll No is required";
+    }
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     }
@@ -118,7 +123,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
     const selectedCourse = courses.find((course) => course._id === formData.course);
 
     try {
-      const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/createstu/", {
+      const response = await axios.post("http://localhost:4000/server/student/createstu/", {
         ...formData,
         course: selectedCourse ? selectedCourse.name : "",
       });
@@ -127,6 +132,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
         setToast({ success: true, message: "Student added successfully" });
         setFormData({
           name: "",
+          rollNo:"",
           fatherName: "",
           motherName: "",
           parentEmail: "",
@@ -176,6 +182,17 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
             {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Roll No</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.rollNo}
+              onChange={(e) => setFormData({ ...formData, rollNo: e.target.value })}
+            />
+            {errors.rollNo && <p className="text-red-500 text-sm">{errors.rollNo}</p>}
           </div>
 
           {/* Father's Name */}

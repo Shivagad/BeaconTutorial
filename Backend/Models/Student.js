@@ -4,6 +4,7 @@ import Result from './ResultSchema.js';
 
 const studentSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  rollNo: { type: String, required: true },
   fatherName: { type: String, required: true },
   motherName: { type: String, required: true },
   parentEmail: { type: String, required: true },
@@ -22,7 +23,7 @@ const studentSchema = new mongoose.Schema({
     default: "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"
   },
   course: { type: mongoose.Schema.Types.ObjectId, ref: "Course" },
-  results: [{ type: mongoose.Schema.Types.ObjectId, ref: "Result" }]
+  results: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Result' }]
 });
 
 const Student = mongoose.model("Student", studentSchema);

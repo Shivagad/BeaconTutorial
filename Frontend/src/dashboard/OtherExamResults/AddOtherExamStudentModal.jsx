@@ -45,7 +45,7 @@ const AddOtherExamStudentModal = ({ isOpen, onClose, setToast }) => {
       setIsSubmitting(true);
       console.log(formData);
       const response = await axios.post(
-        "https://beacon-tutorial.vercel.app/server/exam/otherexam",
+        "http://localhost:4000/server/exam/otherexam",
         formData
       );
      

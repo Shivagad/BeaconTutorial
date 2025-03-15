@@ -12,7 +12,9 @@ import {
   getStudentById,
   uploadStudentsCSV,
   deleteAllCourseStudent,
-  downloadCourseCSV
+  downloadCourseCSV,
+  addResult,
+  getResultsByEmail
 } from "../Controller/Student.js";
 
 import { sendOTPEmail, sendScholarregSuccessfull,ContactUsEmail } from "../Controller/EmailService.js";
@@ -51,5 +53,7 @@ router.delete("/stu/:id", deleteStudent);
 router.post("/upload-csv/", upload.single("file"), uploadStudentsCSV);
 router.delete("/delete-all/:course", deleteAllCourseStudent);
 router.get("/download-csv/:course", downloadCourseCSV);
+router.post("/add", addResult);
+router.get("/getresult/:email", getResultsByEmail);
 
 export default router;

@@ -53,7 +53,7 @@ const AddFacultyModal = ({ isOpen, onClose, setToast }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post("https://beacon-tutorial.vercel.app/server/faculty/add", formData);
+      const response = await axios.post("http://localhost:4000/server/faculty/add", formData);
 
       setFormData({
         name: "",

@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import AddStudentModal from "../Student/AddStudent";
 import EditStudentModal from "../Student/EditStudent";
 import DeleteStudentModal from "../Student/DeleteStudent";
+import AddResultModal from "../Student/AddResultModal";
+
 import { useParams } from "react-router-dom";
 
 const StudentTable = () => {
@@ -22,9 +24,9 @@ const StudentTable = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("https://beacon-tutorial.vercel.app/server/student/stu/");
+      const response = await axios.get("http://localhost:4000/server/student/stu/");
       const allStudents = response.data || [];
-
+      console.log(allStudents);
       // Filter only CET students (based on course name)
       const cetStudents = allStudents.filter(
         (student) =>
@@ -81,7 +83,7 @@ const StudentTable = () => {
     formData.append("file", csvFile);
 
     try {
-      const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/upload-csv/", formData, {
+      const response = await axios.post("http://localhost:4000/server/student/upload-csv/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -105,7 +107,7 @@ const StudentTable = () => {
   const handleDownloadCsv = async () => {
     try {
       const response = await axios.get(
-        `https://beacon-tutorial.vercel.app/server/student/download-csv/${course}`,
+        `http://localhost:4000/server/student/download-csv/${course}`,
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -126,12 +128,22 @@ const StudentTable = () => {
     if (!isConfirmed) return;
   
     try {
-      await axios.delete(`https://beacon-tutorial.vercel.app/server/student/delete-all/${course}`);
+      await axios.delete(`http://localhost:4000/server/student/delete-all/${course}`);
       toast.success("All students deleted successfully.");
       fetchStudents();
     } catch (error) {
       toast.error("Failed to delete students.");
     }
+  };
+  const [isAddResultModalOpen, setIsAddResultModalOpen] = useState(false);
+
+  const openAddResultModal = () => setIsAddResultModalOpen(true);
+  const closeAddResultModal = () => setIsAddResultModalOpen(false);
+  
+  const handleAddResult = (resultData) => {
+    console.log("Result added:", resultData);
+    toast.success("Result added successfully!");
+    fetchStudents();
   };
   
 
@@ -150,6 +162,11 @@ const StudentTable = () => {
           <button onClick={handleDeleteAll} className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
             <Trash2 className="w-5 h-5 mr-2" /> Delete All
           </button>
+
+          <button onClick={openAddResultModal} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+  Add Result
+</button>
+
         </div>
         <div className="flex space-x-4">
           <button
@@ -197,6 +214,7 @@ const StudentTable = () => {
             <thead>
               <tr className="bg-gray-100">
                 <th className="py-3 px-2 border border-gray-300 text-left">Name</th>
+                <th className="py-3 px-2 border border-gray-300 text-left">Roll No</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">Father's Name</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">Mother's Name</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">Parent Email</th>
@@ -209,7 +227,6 @@ const StudentTable = () => {
                 <th className="py-3 px-2 border border-gray-300 text-left">Gender</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">DOB</th>
                 <th className="py-3 px-2 border border-gray-300 text-left">Admission Year</th>
-               
                 <th className="py-3 px-2 border border-gray-300 text-center">Actions</th>
               </tr>
             </thead>
@@ -217,6 +234,7 @@ const StudentTable = () => {
               {filteredStudents.map((student) => (
                 <tr key={student._id} className="hover:bg-gray-50">
                   <td className="py-3 px-2 border border-gray-300">{student.name}</td>
+                  <td className="py-3 px-2 border border-gray-300">{student.rollNo}</td>
                   <td className="py-3 px-2 border border-gray-300">{student.fatherName}</td>
                   <td className="py-3 px-2 border border-gray-300">{student.motherName}</td>
                   <td className="py-3 px-2 border border-gray-300">{student.parentEmail}</td>
@@ -277,6 +295,13 @@ const StudentTable = () => {
         onClose={() => setIsDeleteModalOpen(false)}
         id={deleteStudentId}
       />
+
+<AddResultModal 
+  isOpen={isAddResultModalOpen} 
+  onClose={closeAddResultModal} 
+  setToast={setToast}
+/>
+
     </div>
   );
 };

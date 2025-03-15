@@ -13,7 +13,7 @@ const EditAdminModal = ({ isEditOpen, onClose, setToast, id }) => {
   // Fetch admin details by id when the modal opens.
   const fetchAdminDetails = async () => {
     try {
-      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/dashadmin/${id}`);
+      const response = await axios.get(`http://localhost:4000/server/dashadmin/${id}`);
       // Assuming the returned data has the fields 'name' and 'email'
       const data = response.data;
       setFormData({
@@ -44,7 +44,7 @@ const EditAdminModal = ({ isEditOpen, onClose, setToast, id }) => {
       if (formData.password) {
         updateData.password = formData.password;
       }
-      const response = await axios.put(`https://beacon-tutorial.vercel.app/server/dashadmin/${id}`, updateData);
+      const response = await axios.put(`http://localhost:4000/server/dashadmin/${id}`, updateData);
       if (response.data && response.data.message === "Admin updated successfully") {
         setToast({ success: true, message: "Admin updated successfully" });
       } else {

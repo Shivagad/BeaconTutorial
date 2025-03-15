@@ -14,7 +14,7 @@ const Faculty = () => {
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const response = await axios.get('https://beacon-tutorial.vercel.app/server/faculty/getfaculty/all');
+        const response = await axios.get('http://localhost:4000/server/faculty/getfaculty/all');
         const facultyData = response.data.data;
         const subjectWiseFaculty = {};
 
@@ -118,11 +118,11 @@ const Faculty = () => {
                       <div className="p-4 text-center">
                         <h3 className="font-semibold text-lg mb-2">{faculty.name}</h3>
                         <p className="text-gray-600">Email: {faculty.email}</p>
-                        <p className="text-gray-600">Phone: {faculty.phone}</p>
-                        <p className="text-gray-600">Qualification: {faculty.qualification}</p>
+                        {/* <p className="text-gray-600">Phone: {faculty.phone}</p> */}
+                        {/* <p className="text-gray-600">Qualification: {faculty.qualification}</p> */}
                         <p className="text-gray-600">Subjects: {faculty.subjects.join(', ')}</p>
                         <p className="text-gray-600">Bio: {faculty.bio || 'N/A'}</p>
-                        <p className="text-gray-700">Joined: {new Date(faculty.joiningDate).toLocaleDateString()}</p>
+                        {/* <p className="text-gray-700">Joined: {new Date(faculty.joiningDate).toLocaleDateString()}</p> */}
                       </div>
                     </div>
                   ))}

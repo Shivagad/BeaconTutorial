@@ -7,6 +7,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
   const [courses, setCourses] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
+    rollNo:"",
     fatherName: "",
     motherName: "",
     parentEmail: "",
@@ -26,7 +27,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
   // Fetch available courses
   useEffect(() => {
     axios
-      .get("https://beacon-tutorial.vercel.app/server/courses/getall/")
+      .get("http://localhost:4000/server/courses/getall/")
       .then((response) => {
         console.log("Courses API Response:", response.data.courses);
         setCourses(response.data.courses);
@@ -38,12 +39,13 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
   useEffect(() => {
     if (studentId) {
       axios
-        .get(`https://beacon-tutorial.vercel.app/server/student/byid/${studentId}`)
+        .get(`http://localhost:4000/server/student/byid/${studentId}`)
         .then((response) => {
           console.log("Student API Response:", response.data);
           const student = response.data;
           setFormData({
             name: student.name || "",
+            rollNo: student.rollNo || "",
             fatherName: student.fatherName || "",
             motherName: student.motherName || "",
             parentEmail: student.parentEmail || "",
@@ -81,7 +83,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
 
     try {
       const response = await axios.put(
-        `https://beacon-tutorial.vercel.app/server/student/stu/${studentId}`,
+        `http://localhost:4000/server/student/stu/${studentId}`,
         payload
       );
 
@@ -118,6 +120,17 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Roll No</label>
+            <input
+              type="text"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              value={formData.rollNo}
+              onChange={(e) => setFormData({ ...formData, rollNo: e.target.value })}
             />
           </div>
 
