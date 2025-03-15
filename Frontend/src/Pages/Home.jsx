@@ -98,7 +98,7 @@ function Home() {
             {/* Branch List */}
             <ul className="mt-4 text-gray-600">
               <li>
-                📍 <strong>Branch 1:</strong>
+                📍 <strong>Beacon Mohan Nagar</strong>
               </li>
               <li>
                 📧{" "}
@@ -120,7 +120,7 @@ function Home() {
               </li>
 
               <li className="mt-4">
-                📍 <strong>Branch 2:</strong>{" "}
+                📍 <strong>Suncity Ambegaon</strong>{" "}
               </li>
               <li>
                 📧{" "}

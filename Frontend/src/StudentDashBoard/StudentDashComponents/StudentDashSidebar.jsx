@@ -34,7 +34,7 @@ const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
                 <NavLink
                     to="/student-dashboard/basic-info"
                     className={({ isActive }) =>
-                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"
+                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700 " : "hover:bg-gray-700"
                         } transition-colors`
                     }
                 >
