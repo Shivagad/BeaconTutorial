@@ -121,7 +121,7 @@ const Faculty = () => {
                         {/* <p className="text-gray-600">Phone: {faculty.phone}</p> */}
                         {/* <p className="text-gray-600">Qualification: {faculty.qualification}</p> */}
                         <p className="text-gray-600">Subjects: {faculty.subjects.join(', ')}</p>
-                        <p className="text-gray-600">Bio: {faculty.bio || 'N/A'}</p>
+                        {/* <p className="text-gray-600">Bio: {faculty.bio || 'N/A'}</p> */}
                         {/* <p className="text-gray-700">Joined: {new Date(faculty.joiningDate).toLocaleDateString()}</p> */}
                       </div>
                     </div>
