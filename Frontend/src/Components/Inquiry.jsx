@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast, { Toaster } from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -20,6 +19,7 @@ const InquiryForm = () => {
     previousStandard: "",
     previousStandardMarks: "",
     inquiryFor: "CET",
+    branch:"Beacon Mohan Nagar",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,7 +77,7 @@ const InquiryForm = () => {
 
   return (
     <>
-      <ToastContainer />
+      <Toaster position="top-right" />
       <Navbar />
       <div className="min-h-screen">
       <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
@@ -317,6 +317,21 @@ const InquiryForm = () => {
                     placeholder="Enter any additional message"
                     className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
+                </div>
+
+                
+                <div>
+                  <label className="block font-medium mb-1">Inquiry For Which Branch*</label>
+                  <select
+                    name="branch"
+                    value={formData.branch}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="Beacon Mohan Nagar">Beacon Mohan Nagar</option>
+                    <option value="Beacon SunCity">Beacon SunCity</option>
+                  </select>
                 </div>
                 <div className="flex justify-center">
               <button

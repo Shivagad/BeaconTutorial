@@ -9,26 +9,31 @@ export const createBlog = async (req, res) => {
       return res.status(400).json({ message: 'Image is required', success: false });
     }
 
-    const base64Image = imagePath.split(';base64,').pop();
-    const uploadResponse = await cloudinary.uploader.upload(
-      `data:image/png;base64,${base64Image}`,
-      {
-        folder: 'blogImages',
-        use_filename: true,
-        unique_filename: true,
-        quality: 'auto:best',
-        format: 'auto',
-        width: 800,
-        height: 600,
-        crop: 'fit',
-      }
-    );
+    const imageUrls = [];
+    for (const image of imagePath) {
+      const base64Image = image.split(";base64,").pop();
+      const uploadResponse = await cloudinary.uploader.upload(
+        `data:image/png;base64,${base64Image}`,
+        {
+          folder: "EventGallery",
+          use_filename: true,
+          unique_filename: true,
+          quality: "auto:best",
+          format: "auto",
+          width: 500,
+          height: 700,
+          crop: "fit",
+        }
+      );
+      imageUrls.push(uploadResponse.secure_url);
+    }
+
 
     const newBlog = new Blog({
       title,
       content,
       author,
-      imagepath: uploadResponse.secure_url,
+      imagePath: imageUrls,
       rating: rating || 0,  // Default to 0 if rating is not provided
     });
 
@@ -75,28 +80,59 @@ export const updateBlog = async (req, res) => {
     const { id } = req.params;
     const { title, content, author, imagePath, rating } = req.body;
 
-    let newImageUrl = imagePath;
-    if (imagePath && imagePath.startsWith("data:image")) {
-      const base64Image = imagePath.split(";base64,").pop();
-      const uploadResponse = await cloudinary.uploader.upload(
-        `data:image/png;base64,${base64Image}`,
-        {
-          folder: "blogImages",
-          use_filename: true,
-          unique_filename: true,
-          quality: "auto:best",
-          format: "auto",
-          width: 800,
-          height: 600,
-          crop: "fit",
+    if (!imagePath) {
+      return res.status(400).json({ message: 'Image is required', success: false });
+    }
+
+    const updatedImageUrls = []
+    if (imagePath && imagePath.length > 0) {
+      for (const image of imagePath) {
+        // Check if image is a new Base64 string.
+        if (typeof image === "string" && image.startsWith("data:image")) {
+          const base64Image = image.split(";base64,").pop();
+          const uploadResponse = await cloudinary.uploader.upload(
+            `data:image/png;base64,${base64Image}`,
+            {
+              folder: "EventGallery",
+              use_filename: true,
+              unique_filename: true,
+              quality: "auto:best",
+              format: "auto",
+              width: 500,
+              height: 700,
+              crop: "fit",
+            }
+          );
+          updatedImageUrls.push(uploadResponse.secure_url);
         }
-      );
-      newImageUrl = uploadResponse.secure_url;
+        // If image is an object with a base64 property.
+        else if (typeof image === "object" && image.base64) {
+          const base64Image = image.base64.split(";base64,").pop();
+          const uploadResponse = await cloudinary.uploader.upload(
+            `data:image/png;base64,${base64Image}`,
+            {
+              folder: "EventGallery",
+              use_filename: true,
+              unique_filename: true,
+              quality: "auto:best",
+              format: "auto",
+              width: 500,
+              height: 700,
+              crop: "fit",
+            }
+          );
+          updatedImageUrls.push(uploadResponse.secure_url);
+        }
+        // Otherwise, assume it's an existing URL.
+        else {
+          updatedImageUrls.push(image);
+        }
+      }
     }
 
     const updatedBlog = await Blog.findByIdAndUpdate(
       id,
-      { title, content, author, imagepath: newImageUrl, rating },
+      { title, content, author, imagePath: updatedImageUrls, rating },
       { new: true }
     );
 
@@ -124,15 +160,15 @@ export const deleteBlog = async (req, res) => {
 
 
 export const getBlogById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const blog = await Blog.findById(id);
+  try {
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
 
-        if (!blog) {
-            return res.status(404).json({ message: "Blog  not found", success: false });
-        }
-        res.status(200).json({ message: "Blog fetched successfully", success: true, data: blog });
-    } catch (error) {
-        res.status(500).json({ message: error.message, success: false });
+    if (!blog) {
+      return res.status(404).json({ message: "Blog  not found", success: false });
     }
+    res.status(200).json({ message: "Blog fetched successfully", success: true, data: blog });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false });
+  }
 };

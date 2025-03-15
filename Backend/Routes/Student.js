@@ -56,4 +56,8 @@ router.get("/download-csv/:course", downloadCourseCSV);
 router.post("/add", addResult);
 router.get("/getresult/:email", getResultsByEmail);
 
+
+import {checkStudentEmail,resetStudentPassword} from '../Controller/Student.js';
+router.post('/check/email',checkStudentEmail)
+router.post('/reset-password',resetStudentPassword)
 export default router;

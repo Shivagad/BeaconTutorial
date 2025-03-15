@@ -35,6 +35,10 @@ import ForgotPassword from './Pages/ForgotPassword.jsx';
 import OtherExamsResults from './dashboard/dashboardpages/OtherExamResults.jsx'
 import StudentBlog from './Components/Studentblog.jsx'
 import BlogDetailPage from './Components/BlogComponent/BlogDetailPage.jsx';
+import StudentDashBoard from './StudentDashBoard/StudentDashComponents/StudentDashBoard.jsx';
+import StudentDashSidebar from './StudentDashBoard/StudentDashComponents/StudentDashSidebar.jsx';
+import BasicInfo from './StudentDashBoard/DashBoardPages/BasicInfo.jsx';
+import StudentResults from './StudentDashBoard/DashBoardPages/StudentResults.jsx';
 
 function AppRoutes() {
   const location = useLocation();
@@ -70,22 +74,22 @@ function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route
-          path="/student-dashboard"
-          element={
+
+        <Route path="/student-dashboard" element={
+          <ProtectedRoute>
+            <StudentDashBoard />
+          </ProtectedRoute>
+        }>
+          <Route path="basic-info" element={
             <ProtectedRoute>
-              <Studentdash />
+              <BasicInfo />
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/student-dashboard/blog"
-          element={
-            <ProtectedRoute>
-              <StudentBlog />
-            </ProtectedRoute>
-          }
-        />
+          } />
+          <Route path="results" element={<StudentResults />} />
+          {/* Default child route */}
+          <Route index element={<BasicInfo />} />
+        </Route>
+
         <Route
           path="/event-gallery"
           element={
@@ -118,7 +122,7 @@ function AppRoutes() {
             </NonDashboardRoute>
           }
         />
-         <Route
+        <Route
           path="/forgot-password"
           element={
             <NonDashboardRoute>
@@ -336,7 +340,7 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
-        
+
           <Route
             path="all-student/:course"
             element={

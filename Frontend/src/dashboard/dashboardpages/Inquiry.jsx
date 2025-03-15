@@ -8,6 +8,7 @@ const AdminInquiryTable = () => {
     axios
       .get("http://localhost:4000/server/getinquiries")
       .then((response) => {
+        console.log(response.data.data)
         setInquiries(response.data.data);
       })
       .catch((error) => {
@@ -94,6 +95,7 @@ const AdminInquiryTable = () => {
               <th className="px-4 py-2 border border-blue-500">Previous Standard</th>
               <th className="px-4 py-2 border border-blue-500">Marks</th>
               <th className="px-4 py-2 border border-blue-500">Inquiry For</th>
+              <th className="px-4 py-2 border border-blue-500">Inquire Branch</th>
               <th className="px-4 py-2 border border-blue-500">Message</th>
               <th className="px-4 py-2 border border-blue-500">Date & Time</th>
               <th className="px-4 py-2 border border-blue-500">Actions</th>
@@ -115,6 +117,7 @@ const AdminInquiryTable = () => {
                   <td className="px-4 py-2 border border-gray-400">{inquiry.previousStandard}</td>
                   <td className="px-4 py-2 border border-gray-400">{inquiry.previousStandardMarks}</td>
                   <td className="px-4 py-2 border border-gray-400">{inquiry.inquiryFor}</td>
+                  <td className="px-4 py-2 border border-gray-400">{inquiry.branch}</td>
                   <td className="px-4 py-2 border border-gray-400">{inquiry.message}</td>
                   <td className="px-4 py-2 border border-gray-400">{formatDateTime(inquiry.createdAt)}</td>
                   <td className="px-4 py-2 border border-gray-400">
