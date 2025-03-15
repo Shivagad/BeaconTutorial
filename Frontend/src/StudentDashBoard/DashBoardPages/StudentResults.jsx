@@ -10,7 +10,7 @@ const StudentResult = () => {
 
   useEffect(() => {
     if (currentUser?.email) {
-      axios.get(`http://localhost:4000/server/student/getresult/${currentUser.email}`)
+      axios.get(`https://beacon-tutorial.vercel.app/server/student/getresult/${currentUser.email}`)
         .then(response => {
           if (response.data.success) {
             setResults(response.data.results);
@@ -23,7 +23,7 @@ const StudentResult = () => {
   }, [currentUser]);
 
   const fetchDetailedResult = (resultId) => {
-    axios.get(`http://localhost:4000/server/student/resultbyid/${resultId}`)
+    axios.get(`https://beacon-tutorial.vercel.app/server/student/resultbyid/${resultId}`)
       .then(response => {
         if (response.data.success) {
           setDetailedResult(response.data.result);

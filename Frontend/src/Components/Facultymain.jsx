@@ -14,7 +14,7 @@ const Faculty = () => {
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/server/faculty/getfaculty/all');
+        const response = await axios.get('https://beacon-tutorial.vercel.app/server/faculty/getfaculty/all');
         const facultyData = response.data.data;
         const subjectWiseFaculty = {};
 

@@ -32,7 +32,7 @@ const EditFacultyModal = ({ isEditOpen, onClose, setToast, id }) => {
 
   const fetchFacultyDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/faculty/${id}`);
+      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/faculty/${id}`);
       const data = response.data.data;
 
       setFormData({
@@ -63,7 +63,7 @@ const EditFacultyModal = ({ isEditOpen, onClose, setToast, id }) => {
 
     setIsSubmitting(true);
     try {
-      const response = await axios.put(`http://localhost:4000/server/faculty/edit/${id}`, formData);
+      const response = await axios.put(`https://beacon-tutorial.vercel.app/server/faculty/edit/${id}`, formData);
 
       if (response.data.success) {
         setToast({ success: true, message: "Faculty updated successfully" });
