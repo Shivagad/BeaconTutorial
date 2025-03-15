@@ -34,6 +34,10 @@ import Facultymain from './Components/Facultymain.jsx';
 import ForgotPassword from './Pages/ForgotPassword.jsx';
 import StudentBlog from './Components/Studentblog.jsx'
 import BlogDetailPage from './Components/BlogComponent/BlogDetailPage.jsx';
+import StudentDashBoard from './StudentDashBoard/StudentDashComponents/StudentDashBoard.jsx';
+import StudentDashSidebar from './StudentDashBoard/StudentDashComponents/StudentDashSidebar.jsx';
+import BasicInfo from './StudentDashBoard/DashBoardPages/BasicInfo.jsx';
+import StudentResults from './StudentDashBoard/DashBoardPages/StudentResults.jsx';
 
 function AppRoutes() {
   const location = useLocation();
@@ -69,22 +73,22 @@ function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route
-          path="/student-dashboard"
-          element={
+
+        <Route path="/student-dashboard" element={
+          <ProtectedRoute>
+            <StudentDashBoard />
+          </ProtectedRoute>
+        }>
+          <Route path="basic-info" element={
             <ProtectedRoute>
-              <Studentdash />
+              <BasicInfo />
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/student-dashboard/blog"
-          element={
-            <ProtectedRoute>
-              <StudentBlog />
-            </ProtectedRoute>
-          }
-        />
+          } />
+          <Route path="results" element={<StudentResults />} />
+          {/* Default child route */}
+          <Route index element={<BasicInfo />} />
+        </Route>
+
         <Route
           path="/event-gallery"
           element={
@@ -117,7 +121,7 @@ function AppRoutes() {
             </NonDashboardRoute>
           }
         />
-         <Route
+        <Route
           path="/forgot-password"
           element={
             <NonDashboardRoute>
@@ -327,7 +331,7 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
-        
+
           <Route
             path="all-student/:course"
             element={
@@ -369,24 +373,24 @@ const WhatsAppButton = () => (
       />
     </a>
     <a
-  href="tel:+918767729499"
-  className="bg-blue-500 p-3 rounded-full shadow-lg flex items-center justify-center"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6 text-white"  // <-- Added text-white here
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.11l-2.42 2.42a16 16 0 007.36 7.36l2.42-2.42a1 1 0 011.11-.21L19 19v2a1 1 0 01-1 1C9.94 22 2 14.06 2 4a1 1 0 011-1h2a1 1 0 011 1z"
-    />
-  </svg>
-</a>
+      href="tel:+918767729499"
+      className="bg-blue-500 p-3 rounded-full shadow-lg flex items-center justify-center"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 text-white"  // <-- Added text-white here
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.11l-2.42 2.42a16 16 0 007.36 7.36l2.42-2.42a1 1 0 011.11-.21L19 19v2a1 1 0 01-1 1C9.94 22 2 14.06 2 4a1 1 0 011-1h2a1 1 0 011 1z"
+        />
+      </svg>
+    </a>
 
   </div>
 );

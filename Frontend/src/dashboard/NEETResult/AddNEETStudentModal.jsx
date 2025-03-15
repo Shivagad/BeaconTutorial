@@ -50,7 +50,7 @@ const AddNEETStudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
     try {
      setIsSubmitting(true);
      console.log(formData)
-      const response = await axios.post('https://beacon-tutorial.vercel.app/server/neet/students', formData);
+      const response = await axios.post('http://localhost:4000/server/neet/students', formData);
 
       setFormData({
         firstName: "",

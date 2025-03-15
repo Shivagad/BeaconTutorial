@@ -52,4 +52,8 @@ router.post("/upload-csv/", upload.single("file"), uploadStudentsCSV);
 router.delete("/delete-all/:course", deleteAllCourseStudent);
 router.get("/download-csv/:course", downloadCourseCSV);
 
+
+import {checkStudentEmail,resetStudentPassword} from '../Controller/Student.js';
+router.post('/check/email',checkStudentEmail)
+router.post('/reset-password',resetStudentPassword)
 export default router;

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const inquirySchema = new mongoose.Schema({
   firstName: String,
+  branch:String,
   lastName: String,
   phone: String,
   email: String,

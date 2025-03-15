@@ -22,7 +22,7 @@ const TestimonialSection = () => {
     useEffect(() => {
         async function fetchTesti() {
             try {
-                const response = await axios.get('https://beacon-tutorial.vercel.app/server/testimonial/test/three');
+                const response = await axios.get('http://localhost:4000/server/testimonial/test/three');
                 setTesti(response.data.data); // Ensure response is structured correctly
             } catch (error) {
                 console.error("Error fetching testimonials:", error);

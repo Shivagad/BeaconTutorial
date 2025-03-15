@@ -62,6 +62,7 @@ export const downloadInquiryCSV = async (req, res) => {
     const fields = [
       "firstName",
       "lastName",
+      "branch",
       "phone",
       "email",
       "gender",
