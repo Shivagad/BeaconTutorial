@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 const images = [
-    "/images/beacon_class1.jpg", "images/cbse.jpg", "images/cbse.jpg",
-    "images/cbse.jpg", "images/cbse.jpg", "images/cbse.jpg"
+    "/images/beacon_class1.jpg", "images/calss1.jpg", "images/class2.jpg",
+    "images/class3.jpg", "images/calss1.jpg", "images/cbse.jpg"
 ];
 
 const ClassGallery = () => {

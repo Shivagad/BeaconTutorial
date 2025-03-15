@@ -23,7 +23,6 @@ export const addJEEStudentResult = async (req, res) => {
                 crop: "fit",
             }
         );
-
         const newResult = new JEEResult({
             firstName,
             lastName,
@@ -37,9 +36,7 @@ export const addJEEStudentResult = async (req, res) => {
             seqno,
             Tag,
         });
-
         const savedResult = await newResult.save();
-
         res.status(201).json({ message: "JEE student result added successfully", success: true, data: savedResult });
     } catch (error) {
         console.error(error);
@@ -85,7 +82,6 @@ export const editJEEStudentResult = async (req, res) => {
             );
             newImageUrl = uploadResponse.secure_url;
         }
-
         const result = await JEEResult.findByIdAndUpdate(
             id,
             {
@@ -103,7 +99,6 @@ export const editJEEStudentResult = async (req, res) => {
             },
             { new: true }
         );
-
         if (!result) {
             return res.status(404).json({ message: "JEE student result not found", success: false });
         }

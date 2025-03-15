@@ -12,6 +12,7 @@ const Sidebar = () => {
     { icon: Users, label: '12th Results', path: '/dashboard/12th-results' },
     { icon: Users, label: 'MHT-CET Results', path: '/dashboard/cet-results' },
     { icon: Users, label: 'JEE Results', path: '/dashboard/jee-results' },
+    { icon: Users, label: 'Other Exam Results', path: '/dashboard/otherexams' },
     { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
     { icon: Album, label: 'Event Gallery', path: '/dashboard/event-gallery' },

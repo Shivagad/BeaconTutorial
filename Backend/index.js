@@ -20,6 +20,7 @@ import Inquiry from './Routes/Inquiry.js';
 import Blog from './Routes/Blog.js';
 import Course from './Routes/Course.js';
 import Faculty from './Routes/Faculty.js';
+import OtherExamResult from './Routes/OtherExamResults.js';
 
 dotenv.config();
 const app = express();
@@ -49,6 +50,7 @@ app.use('/server',Inquiry);
 app.use('/server',Blog);
 app.use('/server/courses',Course);
 app.use('/server/faculty',Faculty);
+app.use('/server',OtherExamResult);
 
 
 app.get('/', (req, res) => {

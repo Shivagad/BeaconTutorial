@@ -36,6 +36,9 @@ export const getAllScholarships = async (req, res) => {
   };
 
 
+
+
+
   export const downloadScholarshipCSV = async (req, res) => {
     try {
       // Query all scholarship entries from the database and return plain JavaScript objects.

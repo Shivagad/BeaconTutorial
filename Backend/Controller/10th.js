@@ -4,6 +4,7 @@ import TwelthExamModel from '../Models/12th.js';
 import CetExamModel from '../Models/CET.js';
 import JeeExamModel from '../Models/JEE.js';
 import NeetExamModel from '../Models/NEET.js';
+import OtherExamResult from '../Models/OtherExamResults.js';
 
 export const addStudentResult = async (req, res) => {
     try {
@@ -151,12 +152,13 @@ export const getResultById = async (req, res) => {
 
 export const getAllExamResults = async (req, res) => {
   try {
-    const [tenthResults, twelthResults, cetResults, jeeResults, neetResults] = await Promise.all([
+    const [tenthResults, twelthResults, cetResults, jeeResults, neetResults,otherExamResult] = await Promise.all([
       tenthResult.find().sort({ seqno: 1 }),
       TwelthExamModel.find().sort({ seqno: 1 }),
       CetExamModel.find().sort({ seqno: 1 }),
       JeeExamModel.find().sort({ seqno: 1 }),
-      NeetExamModel.find().sort({ seqno: 1 })
+      NeetExamModel.find().sort({ seqno: 1 }),
+      OtherExamResult.find().sort({ seqno: 1 })
     ]);
 
     // Structure the response
@@ -165,7 +167,8 @@ export const getAllExamResults = async (req, res) => {
       { title: "Class 12th Achievers", students: twelthResults },
       { title: "CET Stars", students: cetResults },
       { title: "JEE Champions", students: jeeResults },
-      { title: "NEET Achievers", students: neetResults }
+      { title: "NEET Achievers", students: neetResults },
+      { title: "Other Exam Achievers", students: otherExamResult}
     ];
     res.status(200).json({ success: true, secondSuccess: true, data: examData });
   } catch (error) {

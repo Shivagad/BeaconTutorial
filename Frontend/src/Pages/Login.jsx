@@ -3,7 +3,7 @@ import { AuthForm } from '../Components/AuthForm';
 import { GraduationCap, UserCog, X, ArrowLeft } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import beaconlogo from '../../public/images/beaconlogo.jpg'; // adjust the path as needed
+import beaconlogo from '../../public/images/logo.png'; // adjust the path as needed
 
 // LeftPanel component: displays the blue background with logo and text.
 const LeftPanel = ({ userType, }) => {
