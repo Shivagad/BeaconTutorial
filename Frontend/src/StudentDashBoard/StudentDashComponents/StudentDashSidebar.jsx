@@ -15,7 +15,7 @@ const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
         >
             <div className="flex items-center justify-between p-4">
                 <h1 className={`font-bold ${isOpen ? "block" : "hidden"}`}>
-                    Coaching Dashboard
+                    Student Dashboard
                 </h1>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
