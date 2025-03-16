@@ -72,6 +72,31 @@ function Home() {
     { desktop: "/images/aboutus_img1.avif", mobile: "/images/cbse.jpg" },
   ];
 
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/server/stat/getstat");
+        setStats(response.data);
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  if (!stats) {
+    return <div>Loading...</div>;
+  }
+  const statData = [
+    { icon: Users, value: stats.studentsCount, label: "Students" },
+    { icon: Trophy, value: `${stats.successRate}%`, label: "Success Rate" },
+    { icon: GraduationCap, value: stats.expertFacultyCount, label: "Expert Faculty" },
+    { icon: Award, value: `${stats.yearsOfExperience}+`, label: "Years Experience" },
+  ];
+
   return (
     <>
       <Navbar />
@@ -430,27 +455,18 @@ function Home() {
 
           {/* Stats Section */}
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">
-            <div className="flex justify-center">
-              <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                {[
-                  { icon: Users, value: "50,000+", label: "Students" },
-                  { icon: Trophy, value: "95%", label: "Success Rate" },
-                  {
-                    icon: GraduationCap,
-                    value: "200+",
-                    label: "Expert Faculty",
-                  },
-                  { icon: Award, value: "15+", label: "Years Experience" },
-                ].map((stat, index) => (
-                  <div key={index}>
-                    <stat.icon className="w-8 h-8 mx-auto mb-2" />
-                    <div className="text-3xl font-bold">{stat.value}</div>
-                    <div className="text-sm">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+      <div className="flex justify-center">
+        <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {statData.map((stat, index) => (
+            <div key={index}>
+              <stat.icon className="w-8 h-8 mx-auto mb-2" />
+              <div className="text-3xl font-bold">{stat.value}</div>
+              <div className="text-sm">{stat.label}</div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
+    </div>
         </div>
         <Footer />
       </div>

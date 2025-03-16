@@ -21,6 +21,7 @@ import Blog from './Routes/Blog.js';
 import Course from './Routes/Course.js';
 import Faculty from './Routes/Faculty.js';
 import OtherExamResult from './Routes/OtherExamResults.js';
+import Stat from './Routes/Stat.js';
 
 dotenv.config();
 const app = express();
@@ -51,6 +52,7 @@ app.use('/server',Blog);
 app.use('/server/courses',Course);
 app.use('/server/faculty',Faculty);
 app.use('/server',OtherExamResult);
+app.use('/server/stat',Stat);
 
 
 app.get('/', (req, res) => {
