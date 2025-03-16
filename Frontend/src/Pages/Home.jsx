@@ -155,18 +155,17 @@ function Home() {
 
       {/* Blur effect when popup is open */}
       <div
-        className={`min-h-screen ${
-          isPopupOpen ? "blur-sm" : ""
-        } transition-all duration-300`}
+        className={`min-h-screen ${isPopupOpen ? "blur-sm" : ""
+          } transition-all duration-300`}
       >
         {/* Page Content */}
         <div className="min-h-screen bg-gray-50">
-        <div className="flex items-center justify-center bg-white px-4 py-1 rounded-t-lg shadow text-center gap-2">
-  <p className="text-gray-900 font-medium text-sm">Beacon Results Out!</p>
-  <a href="/all-results" className="text-blue-600 font-medium text-sm flex items-center">
-    View Results →
-  </a>
-</div>
+          <div className="flex items-center justify-center bg-white px-4 py-1 rounded-t-lg shadow text-center gap-2">
+            <p className="text-gray-900 font-medium text-sm">Beacon Results Out!</p>
+            <a href="/all-results" className="text-blue-600 font-medium text-sm flex items-center">
+              View Results →
+            </a>
+          </div>
 
 
 
@@ -175,9 +174,8 @@ function Home() {
               posters.map((poster, index) => (
                 <div
                   key={`poster-${index}`}
-                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
-                    index === currentSlide ? "opacity-100" : "opacity-0"
-                  }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
                 >
                   <picture className="w-full h-full">
                     {/* Mobile Image */}
@@ -332,14 +330,12 @@ function Home() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-                  <stop
-                    stop-color=""
-                    offset="0%"
-                  ></stop>
-                  <stop stop-color="#3A5BA9" offset="100%"></stop>
+                <linearGradient id="myGradient" x1="0" x2="0" y1="1" y2="0">
+                  <stop stop-color="#4E77BB" offset="0%"></stop>
+                  <stop stop-color="#123456" offset="100%"></stop>
                 </linearGradient>
               </defs>
+
               <path
                 style={{ transform: "translate(0, 0px)", opacity: "1" }}
                 fill="url(#sw-gradient-0)"
