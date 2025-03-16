@@ -79,6 +79,7 @@ const BasicInfo = () => {
             </div>
 
             <div className="space-y-4">
+            <h3 className="text-lg font-semibold mb-4">Personal Contact Details</h3>
               <div>
                 <label className="text-gray-600 block mb-1">Email</label>
                 <p className="font-medium text-lg">{studentInfo.email}</p>

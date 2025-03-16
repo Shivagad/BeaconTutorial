@@ -334,13 +334,10 @@ function Home() {
               <defs>
                 <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
                   <stop
-                    stop-color="rgba(74.812, 162.276, 229.552, 1)"
+                    stop-color=""
                     offset="0%"
                   ></stop>
-                  <stop
-                    stop-color="rgba(11, 255, 253.622, 1)"
-                    offset="100%"
-                  ></stop>
+                  <stop stop-color="#3A5BA9" offset="100%"></stop>
                 </linearGradient>
               </defs>
               <path

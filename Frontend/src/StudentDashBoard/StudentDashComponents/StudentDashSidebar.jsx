@@ -17,25 +17,14 @@ const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
                 <h1 className={`font-bold ${isOpen ? "block" : "hidden"}`}>
                     Student Dashboard
                 </h1>
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="p-1 rounded-full hover:bg-gray-700"
-                    aria-label={isOpen ? "Collapse Sidebar" : "Expand Sidebar"}
-                >
-                    {isOpen ? (
-                        <ChevronLeft className="h-6 w-6" />
-                    ) : (
-                        <ChevronRight className="h-6 w-6" />
-                    )}
-                </button>
             </div>
 
             <nav className="mt-8">
                 <NavLink
                     to="/student-dashboard/basic-info"
                     className={({ isActive }) =>
-                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700 " : "hover:bg-gray-700"
-                        } transition-colors`
+                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"
+                        } transition-colors ${!isOpen && "px-0"}`
                     }
                 >
                     <UserCircle className="h-6 w-6" />
@@ -47,7 +36,7 @@ const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
                     to="/student-dashboard/results"
                     className={({ isActive }) =>
                         `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                        } transition-colors`
+                        } transition-colors ${!isOpen && "px-0"}`
                     }
                 >
                     <GraduationCap className="h-6 w-6" />
