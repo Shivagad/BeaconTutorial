@@ -21,6 +21,7 @@ import Blog from './Routes/Blog.js';
 import Course from './Routes/Course.js';
 import Faculty from './Routes/Faculty.js';
 import OtherExamResult from './Routes/OtherExamResults.js';
+import Stat from './Routes/Stat.js';
 
 dotenv.config();
 const app = express();
@@ -28,8 +29,7 @@ const PORT = process.env.PORT || 4000;
 
 connectDB();
 cloudinaryConnect();
-
-
+app.use(express.json()); 
 app.use(cors());  
 app.use(express.json({ limit: '50mb' })); 
 app.use(express.urlencoded({ limit: '50mb', extended: true })); 
@@ -51,6 +51,7 @@ app.use('/server',Blog);
 app.use('/server/courses',Course);
 app.use('/server/faculty',Faculty);
 app.use('/server',OtherExamResult);
+app.use('/server/stat',Stat);
 
 
 app.get('/', (req, res) => {

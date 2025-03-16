@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaInstagram, FaLinkedin, FaFacebook, FaYoutube } from 'react-icons/fa';
+import React from "react";
+import { FaInstagram, FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -8,30 +8,47 @@ const Footer = () => {
         {/* New sections - Why Choose Us and About Us stacked vertically */}
         <div className="grid grid-cols-1 gap-8 mb-12">
           <div className="bg-[#1c2e4a] p-6 rounded-lg shadow-md">
-            <h3 className="text-2xl font-semibold text-orange-500 mb-4">Why Choose Us?</h3>
+            <h3 className="text-2xl font-semibold text-orange-500 mb-4">
+              Why Choose Us?
+            </h3>
             <ul className="list-disc pl-5 space-y-2 text-white">
               <li className="leading-relaxed">
-                At Beacon Tutorials, we recognize that learning is pivotal for a student's success in academics and life. The Digital Age is deeply shaping the way students learn and will determine their future prospects. We encourage students to embrace this fast-changing world and make them ready for tomorrow by being their constant learning partner.
+                At Beacon Tutorials, we recognize that learning is pivotal for a
+                student's success in academics and life. The Digital Age is
+                deeply shaping the way students learn and will determine their
+                future prospects. We encourage students to embrace this
+                fast-changing world and make them ready for tomorrow by being
+                their constant learning partner.
               </li>
               <li className="leading-relaxed">
-                Our structured curriculum ensures comprehensive coverage of all subjects and topics.
+                Our structured curriculum ensures comprehensive coverage of all
+                subjects and topics.
               </li>
               <li className="leading-relaxed">
-                Interactive learning methods keep students engaged and promote better understanding.
+                Interactive learning methods keep students engaged and promote
+                better understanding.
               </li>
               <li className="leading-relaxed">
-                Regular assessments help track progress and identify areas for improvement.
+                Regular assessments help track progress and identify areas for
+                improvement.
               </li>
               <li className="leading-relaxed">
-                We focus on academic excellence through personalized attention and guidance.
+                We focus on academic excellence through personalized attention
+                and guidance.
               </li>
             </ul>
           </div>
-          
+
           <div className="bg-[#1c2e4a] p-6 rounded-lg shadow-md">
-            <h3 className="text-2xl font-semibold text-orange-500 mb-4">About Us</h3>
+            <h3 className="text-2xl font-semibold text-orange-500 mb-4">
+              About Us
+            </h3>
             <p className="text-white leading-relaxed">
-              Beacon Tutorials is a premier coaching institute dedicated to helping students excel in SSC, CBSE, ICSE, NEET, and JEE exams. With expert faculty, structured courses, and a student-focused approach, we ensure academic success and competitive excellence. Join us to achieve your educational goals with confidence!
+              Beacon Tutorials is a premier coaching institute dedicated to
+              helping students excel in SSC, CBSE, ICSE, NEET, and JEE exams.
+              With expert faculty, structured courses, and a student-focused
+              approach, we ensure academic success and competitive excellence.
+              Join us to achieve your educational goals with confidence!
             </p>
           </div>
         </div>
@@ -40,15 +57,66 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-semibold text-orange-500 mb-4">Quick Links</h3>
+            <h3 className="text-xl font-semibold text-orange-500 mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
-              <li><a href="/about" className="text-white hover:text-orange-300 transition-colors">About Us</a></li>
-              <li><a href="/courses" className="text-white hover:text-orange-300 transition-colors">Our Courses</a></li>
-              <li><a href="/scholarships" className="text-white hover:text-orange-300 transition-colors">Scholarships</a></li>
-              <li><a href="/all-results" className="text-white hover:text-orange-300 transition-colors">Our Results</a></li>
-              <li><a href="/testimonial" className="text-white hover:text-orange-300 transition-colors">Testimonials</a></li>
-              <li><a href="/event-gallery" className="text-white hover:text-orange-300 transition-colors">Event Gallary</a></li>
-              <li><a href="/contact" className="text-white hover:text-orange-300 transition-colors">Contact Us</a></li>
+              <li>
+                <a
+                  href="/about"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/courses"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  Our Courses
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/scholarships"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  Scholarships
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-results"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  Our Results
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/testimonial"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  Testimonials
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/event-gallery"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  Event Gallary
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/contact"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  Contact Us
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -83,21 +151,38 @@ const Footer = () => {
               </ul>
             </div>
 
-
           {/* Social Links */}
           <div>
-            <h3 className="text-xl font-semibold text-orange-500 mb-4">Connect with Us</h3>
+            <h3 className="text-xl font-semibold text-orange-500 mb-4">
+              Connect with Us
+            </h3>
             <div className="flex justify-center sm:justify-start space-x-4">
-              <a href="https://www.instagram.com/beacontutorialspune" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.instagram.com/beacontutorialspune"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaInstagram className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
               </a>
-              <a href="https://www.linkedin.com/company/beacon-tutorials/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.linkedin.com/company/beacon-tutorials/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaLinkedin className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
               </a>
-              <a href="https://www.facebook.com/BeaconTutorialsPune" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.facebook.com/BeaconTutorialsPune"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaFacebook className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
               </a>
-              <a href="https://youtube.com/@beacontutorialspune8750?si=RP78K2qNM22wySJm" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://youtube.com/@beacontutorialspune8750?si=RP78K2qNM22wySJm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaYoutube className="h-8 w-8 text-[#23395d] bg-white rounded-full p-2 hover:scale-110 transition-all duration-300" />
               </a>
             </div>
@@ -106,7 +191,8 @@ const Footer = () => {
 
         <div className="text-center mt-12 pt-6 border-t border-gray-700">
           <p className="text-sm text-white">
-            &copy; 2025 Beacon Tutorials | All Rights Reserved | Empowering Future Leaders
+            &copy; {new Date().getFullYear()} Beacon Tutorials | All Rights
+            Reserved | Empowering Future Leaders
           </p>
         </div>
       </div>

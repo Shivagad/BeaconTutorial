@@ -13,6 +13,21 @@ import { useNavigate } from 'react-router-dom';
 
 function AboutUs() {
   const navigate = useNavigate();
+    const [stats, setStats] = useState({});
+  
+    useEffect(() => {
+      const fetchStats = async () => {
+        try {
+          const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
+          console.log(response.data);
+          setStats(response.data);
+        } catch (error) {
+          console.error("Failed to fetch stats:", error);
+        }
+      };
+  
+      fetchStats();
+    }, []);
   return (
     <>
       <Navbar />
@@ -127,7 +142,7 @@ function AboutUs() {
                 <div className="flex justify-center mb-4">
                   <Users size={48} className="text-[#4e77bb]" />
                 </div>
-                <h3 className="text-2xl font-semibold text-[#4e77bb] mb-2">1000+ Students</h3>
+                <h3 className="text-2xl font-semibold text-[#4e77bb] mb-2">{stats.studentsCount ? `${stats.studentsCount}+` : "1000+"}</h3>
                 <p className="text-[#4e77bb]">Trusted by thousands of students for their academic journey</p>
               </div>
               <div className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center">
@@ -141,7 +156,7 @@ function AboutUs() {
                 <div className="flex justify-center mb-4">
                   <Clock size={48} className="text-[#4e77bb]" />
                 </div>
-                <h3 className="text-2xl font-semibold text-[#4e77bb] mb-2">15+ Years Experience</h3>
+                <h3 className="text-2xl font-semibold text-[#4e77bb] mb-2">{stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years Experience` : "15+ Years Experience"} </h3>
                 <p className="text-[#4e77bb]">Years of excellence in education</p>
               </div>
             </div>

@@ -39,6 +39,7 @@ import StudentDashBoard from './StudentDashBoard/StudentDashComponents/StudentDa
 import StudentDashSidebar from './StudentDashBoard/StudentDashComponents/StudentDashSidebar.jsx';
 import BasicInfo from './StudentDashBoard/DashBoardPages/BasicInfo.jsx';
 import StudentResults from './StudentDashBoard/DashBoardPages/StudentResults.jsx';
+import Stat from './dashboard/dashboardpages/Stat.jsx';
 
 function AppRoutes() {
   const location = useLocation();
@@ -61,6 +62,7 @@ function AppRoutes() {
     "/dashboard/blog",
     "/dashboard/cet-student",
     "/dashboard/jee-student",
+    "/dashboard/stat",
     "/dashboard/neet-student",
     "/student-dashboard",
     "/forgot-password",
@@ -317,6 +319,14 @@ function AppRoutes() {
             element={
               <ProtectedRoute requiredRole="admin">
                 <CETResult />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="stat"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <Stat />
               </ProtectedRoute>
             }
           />

@@ -24,6 +24,7 @@ const Sidebar = () => {
     { icon: Users, label: 'Blog', path: '/dashboard/blog' },
     { icon: Users, label: ' Manage Course', path: '/dashboard/courses' },
     { icon: Users, label: ' Manage Faculty', path: '/dashboard/faculty' },
+    { icon: Users, label: ' Stat', path: '/dashboard/stat' },
   ];
 
   return (
