@@ -5,7 +5,7 @@ const AdminScholarshipTable = () => {
   const [scholarships, setScholarships] = useState([]);
   const fetchScholarships = () => {
     axios
-      .get("https://beacon-tutorial.vercel.app/server/scholarship/getall")
+      .get("http://localhost:4000/server/scholarship/getall")
       .then((response) => {
         setScholarships(response.data.data);
       })
@@ -18,7 +18,7 @@ const AdminScholarshipTable = () => {
     fetchScholarships();
   }, []);
   const handleDownloadCSV = () => {
-    window.open("https://beacon-tutorial.vercel.app/server/scholarship/export", "_blank");
+    window.open("http://localhost:4000/server/scholarship/export", "_blank");
   };
 
   const handleDeleteEntry = async (id) => {
@@ -28,7 +28,7 @@ const AdminScholarshipTable = () => {
     if (!confirmDelete) return;
     
     try {
-      await axios.delete(`https://beacon-tutorial.vercel.app/server/scholarship/${id}`);
+      await axios.delete(`http://localhost:4000/server/scholarship/${id}`);
       // Remove the deleted entry from state
       setScholarships(
         scholarships.filter((scholarship) => scholarship._id !== id)
@@ -46,7 +46,7 @@ const AdminScholarshipTable = () => {
     if (!confirmDeleteAll) return;
 
     try {
-      await axios.delete("https://beacon-tutorial.vercel.app/server/scholarship/deleteAll");
+      await axios.delete("http://localhost:4000/server/scholarship/deleteAll");
       // Clear the state
       setScholarships([]);
     } catch (error) {

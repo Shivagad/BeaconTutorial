@@ -16,7 +16,7 @@ const DeleteNEETStudentModal = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`https://beacon-tutorial.vercel.app/server/neet/students/${id}`);
+      const response = await axios.delete(`http://localhost:4000/server/neet/students/${id}`);
       response.data.success ? (setToast3({
         success: true,
         message: `JEE Student deleted successfully`,

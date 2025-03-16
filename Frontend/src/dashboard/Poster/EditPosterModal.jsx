@@ -38,7 +38,7 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
     setIsSubmitting(true);
     try {
       const response = await axios.put(
-        `https://beacon-tutorial.vercel.app/server/poster/editposter/${id}`,
+        `http://localhost:4000/server/poster/editposter/${id}`,
         formData
       );
       if (response.data.success) {
@@ -56,7 +56,7 @@ const EditPosterModal = ({ isEditOpen, onClose, setToast, id }) => {
   const fetchPosterDetails = async () => {
     try {
       const response = await axios.get(
-        `https://beacon-tutorial.vercel.app/server/poster/getposter/${id}`
+        `http://localhost:4000/server/poster/getposter/${id}`
       );
       const data = response.data.data;
       setFormData({

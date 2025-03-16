@@ -17,7 +17,7 @@ const CourseManagement = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("https://beacon-tutorial.vercel.app/server/courses/getall");
+      const response = await axios.get("http://localhost:4000/server/courses/getall");
 
       console.log(response);
       if (response.data.courses) {

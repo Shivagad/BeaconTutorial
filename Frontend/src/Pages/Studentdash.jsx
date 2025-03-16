@@ -12,14 +12,14 @@ const StudentDashboard = () => {
   useEffect(() => {
     // Fetch course details
     if (currentUser?.course) {
-      axios.get(`https://beacon-tutorial.vercel.app/server/courses/getid/${currentUser.course}`)
+      axios.get(`http://localhost:4000/server/courses/getid/${currentUser.course}`)
         .then(response => setCourseDetails(response.data.course))
         .catch(error => console.error("Error fetching course details:", error));
     }
 
     // Fetch student results by email
     if (currentUser?.email) {
-      axios.get(`https://beacon-tutorial.vercel.app/server/student/getresult/${currentUser.email}`)
+      axios.get(`http://localhost:4000/server/student/getresult/${currentUser.email}`)
         .then(response => {
           console.log(response.data);
           if (response.data.success) {
