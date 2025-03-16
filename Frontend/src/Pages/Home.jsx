@@ -343,6 +343,7 @@ function Home() {
               ></path>
             </svg>
           </div>
+          {/* container end */}
 
           <div className="relative bg-white">
             {/* Content Grid */}
