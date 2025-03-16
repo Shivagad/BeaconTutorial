@@ -543,26 +543,26 @@ export const addResult = async (req, res) => {
   try {
     const {
       studentEmail,
-      exam,
-      examDate,
-      totalMarks,
-      rank,
-      correctAnswers,
-      incorrectAnswers,
-      notAttempted,
-      physics,
-      physicsSectionA,
-      physicsSectionB,
-      chemistry,
-      chemistrySectionA,
-      chemistrySectionB,
-      maths,
-      mathsSectionA,
-      mathsSectionB,
-      biology,
-      biologySectionA,
-      biologySectionB,
-      outof,
+      exam = "",
+      examDate = new Date(),
+      totalMarks = 0,
+      rank = "0",
+      correctAnswers = 0,
+      incorrectAnswers = 0,
+      notAttempted = 0,
+      physics = 0,
+      physicsSectionA = 0,
+      physicsSectionB = 0,
+      chemistry = 0,
+      chemistrySectionA = 0,
+      chemistrySectionB = 0,
+      maths = 0,
+      mathsSectionA = 0,
+      mathsSectionB = 0,
+      biology = 0,
+      biologySectionA = 0,
+      biologySectionB = 0,
+      outof = 0,
     } = req.body;
     const student = await Student.findOne({ email: studentEmail });
     if (!student) {
@@ -683,72 +683,65 @@ export const uploadStudentResultCSV = async (req, res) => {
         studentEmail,
         exam,
         examDate,
-        totalMarks,
-        outof,
-        rank,
-        correctAnswers,
-        incorrectAnswers,
-        notAttempted,
-        physics,
-        physicsSectionA,
-        physicsSectionB,
-        chemistry,
-        chemistrySectionA,
-        chemistrySectionB,
-        maths,
-        mathsSectionA,
-        mathsSectionB,
-        biology,
-        biologySectionA,
-        biologySectionB,
+        totalMarks = 0,
+        outof = 0,
+        rank = "0",
+        correctAnswers = 0,
+        incorrectAnswers = 0,
+        notAttempted = 0,
+        physics = 0,
+        physicsSectionA = 0,
+        physicsSectionB = 0,
+        chemistry = 0,
+        chemistrySectionA = 0,
+        chemistrySectionB = 0,
+        maths = 0,
+        mathsSectionA = 0,
+        mathsSectionB = 0,
+        biology = 0,
+        biologySectionA = 0,
+        biologySectionB = 0,
       } = row;
 
       const student = await Student.findOne({ email: studentEmail.trim() });
       if (!student) {
-        console.warn(
-          `Student with email "${studentEmail}" not found. Skipping.`
-        );
+        console.warn(`Student with email "${studentEmail}" not found. Skipping.`);
         continue;
       }
 
-      // Convert examDate to a valid Date object
-      // Parse the date manually (Expecting format: DD-MM-YYYY)
       const [day, month, year] = examDate.trim().split("-");
       const parsedExamDate = new Date(`${year}-${month}-${day}`);
 
       if (isNaN(parsedExamDate)) {
-        console.warn(
-          `Invalid date format for examDate: "${examDate}". Skipping.`
-        );
+        console.warn(`Invalid date format for examDate: "${examDate}". Skipping.`);
         continue;
       }
 
       const newResult = new Result({
         student: student._id,
-        exam: exam.trim(),
+        exam: exam?.trim() || "Unknown Exam",
         examDate: parsedExamDate,
-        totalMarks: Number(totalMarks),
-        outof: Number(outof),
+        totalMarks: Number(totalMarks) || 0,
+        outof: Number(outof) || 0,
         rank,
-        correctAnswers: Number(correctAnswers),
-        incorrectAnswers: Number(incorrectAnswers),
-        notAttempted: Number(notAttempted),
-        physics: Number(physics),
-        physicsSectionA: Number(physicsSectionA),
-        physicsSectionB: Number(physicsSectionB),
-        chemistry: Number(chemistry),
-        chemistrySectionA: Number(chemistrySectionA),
-        chemistrySectionB: Number(chemistrySectionB),
-        maths: Number(maths),
-        mathsSectionA: Number(mathsSectionA),
-        mathsSectionB: Number(mathsSectionB),
-        biology: Number(biology),
-        biologySectionA: Number(biologySectionA),
-        biologySectionB: Number(biologySectionB),
+        correctAnswers: Number(correctAnswers) || 0,
+        incorrectAnswers: Number(incorrectAnswers) || 0,
+        notAttempted: Number(notAttempted) || 0,
+        physics: Number(physics) || 0,
+        physicsSectionA: Number(physicsSectionA) || 0,
+        physicsSectionB: Number(physicsSectionB) || 0,
+        chemistry: Number(chemistry) || 0,
+        chemistrySectionA: Number(chemistrySectionA) || 0,
+        chemistrySectionB: Number(chemistrySectionB) || 0,
+        maths: Number(maths) || 0,
+        mathsSectionA: Number(mathsSectionA) || 0,
+        mathsSectionB: Number(mathsSectionB) || 0,
+        biology: Number(biology) || 0,
+        biologySectionA: Number(biologySectionA) || 0,
+        biologySectionB: Number(biologySectionB) || 0,
       });
 
       await newResult.save();
-
       student.results.push(newResult._id);
       await student.save();
 
@@ -758,28 +751,16 @@ export const uploadStudentResultCSV = async (req, res) => {
     fs.unlinkSync(filePath);
 
     if (results.length > 0) {
-      res
-        .status(201)
-        .json({ success: true, message: "CSV uploaded successfully", results });
+      res.status(201).json({ success: true, message: "CSV uploaded successfully", results });
     } else {
-      res
-        .status(400)
-        .json({
-          success: false,
-          message: "No valid results were added. Check CSV data.",
-        });
+      res.status(400).json({ success: false, message: "No valid results were added. Check CSV data." });
     }
   } catch (error) {
     console.error("CSV upload failed:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "CSV upload failed",
-        error: error.message,
-      });
+    res.status(500).json({ success: false, message: "CSV upload failed", error: error.message });
   }
 };
+
 
 // Delete a result by student email and exam name
 export const deleteResultByEmail = async (req, res) => {
