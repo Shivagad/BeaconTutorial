@@ -321,6 +321,7 @@ const courses = [
 const CourseSection = ({ course }) => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
+  const driveFolderUrl = "https://drive.google.com/drive/folders/1Tv9vag9jvWmYPo_1lxop2TLOqIp0Pmjm?usp=sharing";
 
   return (
     <div className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 bg-white transform transition-all duration-500">
@@ -382,37 +383,28 @@ const CourseSection = ({ course }) => {
           </div>
 
           {/* PDF File Section */}
-          {/* <div className="md:col-span-2 flex flex-col items-center bg-gray-100 p-5 rounded-lg shadow-md">
-            <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-[#4e77bb]" />
-              Course Brochure
-            </h3>
-            <iframe
-              src={course.pdfUrl}
-              className="w-full md:w-3/4 h-64 border border-gray-300 rounded-md"
-              title="Course Brochure"
-            ></iframe>
-            <a
-              href={course.pdfUrl}
-              download
-              className="mt-3 px-6 py-2 bg-[#E85900] text-white rounded-lg font-semibold hover:bg-[#faa975] hover:text-black transition-colors"
-            >
-              Download PDF
-            </a>
-          </div> */}
+          <div className="flex flex-col md:flex-row items-center justify-center md:justify-between md:col-span-2 gap-4">
+  <a
+    href={driveFolderUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-6 py-2 bg-[#0d6efd] text-white rounded-lg font-semibold hover:bg-[#0a58ca] transition-colors w-full md:w-auto text-center"
+  >
+    Read More
+  </a>
 
-          {/* Enroll Now Button */}
-          <div className="flex items-center justify-center md:col-span-2">
-            <button
-              onClick={() => {
-                navigate("/inquiry");
-                window.scrollTo(0, 0);
-              }}
-              className="bg-[#E85900] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#faa975] hover:text-black transition-colors"
-            >
-              Enroll Now
-            </button>
-          </div>
+  <button
+    onClick={() => {
+      navigate("/inquiry");
+      window.scrollTo(0, 0);
+    }}
+    className="px-8 py-3 bg-[#0d6efd] text-white rounded-full font-semibold hover:bg-[#0a58ca] transition-colors w-full md:w-auto"
+  >
+    Enroll Now
+  </button>
+</div>
+
+          
         </div>
       </div>
     </div>
