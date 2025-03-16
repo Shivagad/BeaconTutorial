@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { BookOpen, Clock, Users, Award, ChevronDown } from "lucide-react"
+import { BookOpen, Clock, Users, Award,Monitor, ChevronDown } from "lucide-react"
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
 import { useNavigate } from "react-router-dom"
@@ -8,421 +8,401 @@ const courses = [
     title: "8th, 9th, 10th Foundation",
     description:
       "Build a strong foundation in Science, Mathematics, and Logical Reasoning to excel in competitive exams like NEET, JEE, and Olympiads. This course is designed to strengthen conceptual understanding and problem-solving skills for students in grades 8, 9, and 10.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+    Batch_Starts: "2025-03-20",
+    mode:"Offline",
     highlights: [
       "Conceptual clarity in Mathematics and Science",
-      " Problem-solving techniques for competitive exams",
+      "Problem-solving techniques for competitive exams",
       "Logical reasoning and aptitude development",
-      "Hands-on practice with real-world applications",
-      "Regular assessments and doubt-solving sessions",
+      "Regular assessments and doubt-solving sessions"
     ]
   },
   {
-    "title": "8th, 9th, 10th Regular Board Batches",
-    "description": "Strengthen your foundational knowledge in Science, Mathematics, and other core subjects. Designed for students aiming to excel in their board examinations and build a robust base for future competitive exams.",
-    "duration": "16 weeks",
-    "students": "180+",
-    "level": "Intermediate",
-    "highlights": [
+    title: "8th, 9th, 10th Regular Board Batches",
+    description:
+      "Strengthen your foundational knowledge in Science, Mathematics, and other core subjects. Designed for students aiming to excel in their board examinations and build a robust base for future competitive exams.",
+    Batch_Starts: "2025-03-25",
+    mode:"Offline",
+    highlights: [
       "Comprehensive coverage of CBSE, ICSE, and SSC syllabi",
       "Experienced faculty with personalized attention",
       "Regular assessments and feedback sessions",
       "Focus on conceptual clarity and problem-solving skills"
     ]
   },
-  
   {
     title: "SSC",
     description:
-      "Master modern web development with this comprehensive bootcamp. Learn React, Node.js, and cutting-edge web technologies. Build real-world projects and develop a strong portfolio.",
-    duration: "12 weeks",
-    students: "250+",
-    level: "Intermediate to Advanced",
+      "Comprehensive course for SSC board students to help them achieve excellent results in their board exams.",
+    Batch_Starts: "2025-04-01",
+    mode:"Offline",
     highlights: [
-      "Full-stack JavaScript development",
-      "Modern frameworks and tools",
-      "Real-world project experience",
-      "Industry-standard best practices"
+      "Detailed coverage of all SSC subjects",
+      "Expert guidance and study materials",
+      "Regular tests and performance evaluation",
+      "Time management strategies for exams"
     ]
   },
   {
     title: "CBSE",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "A complete course designed for CBSE students, focusing on NCERT syllabus with in-depth conceptual clarity.",
+    Batch_Starts: "2025-03-18",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "NCERT syllabus-based teaching approach",
+      "Chapter-wise tests and revision classes",
+      "Doubt-solving and one-on-one mentorship",
+      "Performance tracking and progress analysis"
     ]
   },
   {
     title: "ICSE",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "A structured program tailored for ICSE students, covering all subjects with conceptual clarity and exam-oriented preparation.",
+    Batch_Starts: "2025-04-05",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "Detailed explanation of ICSE syllabus",
+      "Regular quizzes and practice tests",
+      "Emphasis on English language skills",
+      "Time management techniques for exams"
     ]
   },
   {
     title: "11th + 12th Board Classes",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "A well-structured program to help students ace their 11th and 12th board exams with proper guidance and study materials.",
+    Batch_Starts: "2025-03-22",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Complete syllabus coverage",
+      "Regular practice papers and mock tests",
+      "Personalized guidance for weak subjects",
+      "Comprehensive revision before exams"
     ]
   },
   {
     title: "11th + 12th JEE Mains + Advance",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "Intensive coaching for JEE Mains and Advanced aspirants, focusing on concept clarity and problem-solving techniques.",
+    Batch_Starts: "2025-03-30",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Advanced problem-solving techniques",
+      "Daily practice problems and assignments",
+      "Doubt-clearing sessions with experts",
+      "Mock tests with detailed analysis"
     ]
   },
   {
     title: "11th + 12th NEET",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "Comprehensive NEET coaching for 11th and 12th students covering the full syllabus with expert faculty guidance.",
+    Batch_Starts: "2025-04-10",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Thorough NCERT-based teaching",
+      "Daily MCQs and mock tests",
+      "Doubt-solving sessions",
+      "Focus on time management and accuracy"
     ]
   },
   {
     title: "11th + 12th IISER",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "Specialized training for IISER entrance, covering physics, chemistry, mathematics, and biology with an emphasis on research-based learning.",
+    Batch_Starts: "2025-04-08",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Concept-based learning approach",
+      "Advanced study materials",
+      "Problem-solving techniques",
+      "Mock exams for better preparation"
     ]
   },
   {
     title: "11th + 12th MHTCET",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "Intensive coaching for MHT-CET aspirants, covering physics, chemistry, and mathematics.",
+    Batch_Starts: "2025-03-27",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Concept-based learning with MCQs",
+      "Detailed problem-solving sessions",
+      "Time management strategies",
+      "Full-length mock tests"
     ]
   },
   {
     title: "11th + 12th NDA",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "Specialized coaching for NDA entrance exams, covering mathematics, general ability, and physical training.",
+    Batch_Starts: "2025-04-12",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Conceptual learning with exam-oriented approach",
+      "Mock tests and previous year paper practice",
+      "Interview and personality development training",
+      "Physical fitness training guidance"
     ]
   },
   {
     title: "11th + 12th CUET",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "CUET preparation course covering aptitude, domain-specific subjects, and logical reasoning.",
+    Batch_Starts: "2025-04-18",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Comprehensive coverage of CUET syllabus",
+      "Logical reasoning and quantitative aptitude practice",
+      "Time management and speed enhancement techniques",
+      "Practice with past year CUET papers"
     ]
   },
   {
-    title: "HSC",
-    description:
-      "Master modern web development with this comprehensive bootcamp. Learn React, Node.js, and cutting-edge web technologies. Build real-world projects and develop a strong portfolio.",
-    duration: "12 weeks",
-    students: "250+",
-    level: "Intermediate to Advanced",
-    highlights: [
-      "Full-stack JavaScript development",
-      "Modern frameworks and tools",
-      "Real-world project experience",
-      "Industry-standard best practices"
-    ]
+      title: "HSC",
+      description:
+        "Comprehensive HSC board preparation covering all subjects with expert guidance, practice tests, and revision strategies.",
+      Batch_Starts: "2025-04-07",
+      mode:"Offline",
+      highlights: [
+        "Full syllabus coverage",
+        "Regular mock tests and assessments",
+        "Concept clarity with in-depth explanations",
+        "Exam-focused preparation strategies"
+      ]
   },
   {
     title: "JEE Mains",
     description:
-      "Dive deep into the world of data science and machine learning. Learn to analyze complex datasets, build predictive models, and make data-driven decisions. Perfect for aspiring data scientists and analysts.",
-    duration: "16 weeks",
-    students: "180+",
-    level: "Advanced",
+      "Specialized preparation for JEE Mains with conceptual clarity and in-depth problem-solving techniques.",
+    Batch_Starts: "2025-03-29",
+    mode:"Offline",
     highlights: [
-      "Statistical analysis and visualization",
-      "Machine learning algorithms",
-      "Deep learning fundamentals",
-      "Big data processing"
+      "Advanced problem-solving methods",
+      "Daily assignments and mock tests",
+      "Detailed analysis of previous year papers",
+      "Time management strategies"
     ]
   },
   {
     title: "JEE Advanced",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "Expert-led coaching for JEE Advanced, covering physics, chemistry, and mathematics with a strategic approach.",
+    Batch_Starts: "2025-04-03",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "Focus on high-level problem-solving",
+      "Regular doubt-clearing sessions",
+      "Mock exams with performance tracking",
+      "Detailed coverage of difficult topics"
     ]
   },
   {
-    title: "JEE (Mains + Advance)",
-    description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
-    highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
-    ]
+      title: "JEE (Mains + Advance)",
+      description:
+        "Intensive coaching for JEE aspirants, covering Mains and Advanced syllabus with problem-solving techniques and mock tests.",
+      Batch_Starts: "2025-04-10",
+      mode:"Offline",
+      highlights: [
+        "Advanced problem-solving techniques",
+        "Regular JEE mock tests and analysis",
+        "Concept-building for Physics, Chemistry, and Mathematics",
+        "Personalized doubt-clearing sessions"
+      ]
   },
   {
-    title: "NEET",
-    description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
-    highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
-    ]
+      title: "NEET",
+      description:
+        "Comprehensive coaching for NEET aspirants covering Physics, Chemistry, and Biology with in-depth conceptual clarity and problem-solving techniques.",
+      Batch_Starts: "2025-04-20",
+      mode:"Offline",
+      highlights: [
+        "Complete NEET syllabus coverage",
+        "Daily practice tests and performance tracking",
+        "Conceptual learning with real-life applications",
+        "Exam-focused strategies and time management"
+      ]
   },
   {
     title: "NEET Foundation",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "A strong foundation course for students aiming for NEET, focusing on fundamental concepts in physics, chemistry, and biology.",
+    Batch_Starts: "2025-04-15",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "NCERT-based teaching methodology",
+      "Daily MCQs and tests",
+      "Concept clarity and application",
+      "Mock exams for real-time practice"
     ]
   },
   {
-    title: "NEET Repeaters",
-    description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
-    highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
-    ]
+      title: "NEET Repeaters",
+      description:
+        "Specialized program for NEET repeaters focusing on strengthening weak areas, improving accuracy, and maximizing scores.",
+      Batch_Starts: "2025-04-15",
+      mode:"Offline",
+      highlights: [
+        "Complete NEET syllabus revision",
+        "Regular practice with previous year papers",
+        "Error analysis and time management strategies",
+        "Exclusive doubt-solving and mentoring sessions"
+      ]
   },
   {
     title: "MHT - CET",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "A structured course covering the complete MHT-CET syllabus with problem-solving strategies.",
+    Batch_Starts: "2025-03-23",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "MCQ-based learning",
+      "Mock tests with answer analysis",
+      "Speed enhancement techniques",
+      "Detailed concept explanation"
     ]
   },
   {
     title: "NDA",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "Comprehensive NDA preparation with subject-wise coaching and personality development training.",
+    Batch_Starts: "2025-03-31",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "Full NDA syllabus coverage",
+      "Mock tests and interview training",
+      "Physical training guidance",
+      "Time management strategies"
     ]
   },
   {
     title: "NTSE",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "Dedicated course for NTSE aspirants covering the complete syllabus with advanced problem-solving techniques.",
+    Batch_Starts: "2025-03-28",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "Conceptual clarity in Mathematics and Science",
+      "Logical reasoning and aptitude development",
+      "Full-length mock tests",
+      "Personalized mentorship"
     ]
   },
   {
     title: "IISER",
     description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
+      "Targeted preparation for IISER entrance exams focusing on research-based learning and analytical skills.",
+    Batch_Starts: "2025-04-06",
+    mode:"Offline",
     highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
+      "Concept-based learning",
+      "Problem-solving techniques",
+      "Mock tests and revisions",
+      "Time management tips"
     ]
   },
   {
-    title: "CUET",
-    description:
-      "Transform your design skills with our comprehensive UI/UX masterclass. Learn the principles of user-centered design, prototyping, and modern design tools. Create stunning interfaces that users love.",
-    duration: "10 weeks",
-    students: "150+",
-    level: "Beginner to Intermediate",
-    highlights: [
-      "Design thinking methodology",
-      "User research techniques",
-      "Interactive prototyping",
-      "Portfolio development"
-    ]
-  },
-]
+      title: "CUET",
+      description:
+        "Focused preparation for CUET aspirants, covering aptitude, subject-specific topics, and exam-oriented practice.",
+      Batch_Starts: "2025-04-18",
+      mode:"Offline",
+      highlights: [
+        "Comprehensive coverage of CUET syllabus",
+        "Logical reasoning and quantitative aptitude training",
+        "Time management and exam strategies",
+        "Practice with previous years' CUET papers"
+      ]
+  }
+];
 
 const CourseSection = ({ course }) => {
-  const navigate = useNavigate()
-  const [isExpanded, setIsExpanded] = useState(false)
+  const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div
-      className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 
-    transform transition-all duration-500 bg-white"
-    >
+    <div className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 bg-white transform transition-all duration-500">
       <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <h2 className="text-3xl font-bold text-gray-900 bg-gradient-to-r from-[#8fb7f7] to-[#4e77bb] bg-clip-text text-transparent">
             {course.title}
           </h2>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-2 px-4 py-2 bg-[#6ba2fa] text-white rounded-lg hover:bg-[#4e77bb]
-                       transform transition-all duration-300 hover:scale-105"
+            className="flex items-center gap-2 px-4 py-2 bg-[#6ba2fa] text-white rounded-lg hover:bg-[#4e77bb] transform transition-all duration-300 hover:scale-105"
           >
             Learn More
             <ChevronDown
-              className={`transform transition-transform duration-300 ${isExpanded ? "rotate-180" : ""
-                }`}
+              className={`transform transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}
             />
           </button>
         </div>
 
-        <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-          {course.description}
-        </p>
+        {/* Course Description */}
+        <p className="mt-4 text-lg text-gray-600 leading-relaxed">{course.description}</p>
 
+        {/* Expandable Course Details */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 overflow-hidden transition-all duration-500 ease-in-out
-                     ${isExpanded
-              ? "max-h-[500px] opacity-100"
-              : "max-h-0 opacity-0"
-            }`}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}
         >
+          {/* Batch Start Date */}
           <div className="flex items-center gap-3">
             <Clock className="w-6 h-6 text-[#4e77bb]" />
             <div>
-              <p className="font-semibold text-gray-900">Duration</p>
-              <p className="text-gray-600">{course.duration}</p>
+              <p className="font-semibold text-gray-900">Batch Starts</p>
+              <p className="text-gray-600">{course.Batch_Starts}</p>
             </div>
           </div>
 
+          {/* Mode of Learning */}
           <div className="flex items-center gap-3">
-            <Users className="w-6 h-6 text-[#4e77bb]" />
+            <Monitor className="w-6 h-6 text-[#4e77bb]" />
             <div>
-              <p className="font-semibold text-gray-900">Students Enrolled</p>
-              <p className="text-gray-600">{course.students}</p>
+              <p className="font-semibold text-gray-900">Mode of Learning</p>
+              <p className="text-gray-600">{course.mode}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Award className="w-6 h-6 text-[#4e77bb]" />
-            <div>
-              <p className="font-semibold text-gray-900">Level</p>
-              <p className="text-gray-600">{course.level}</p>
-            </div>
-          </div>
-
-          <div className="md:col-span-3">
+          {/* Course Highlights */}
+          <div className="md:col-span-2">
             <h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-[#4e77bb]" />
               Course Highlights
             </h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 p-5">
               {course.highlights.map((highlight, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-2 text-gray-600"
-                >
+                <li key={index} className="flex items-center gap-2 text-gray-600">
                   <span className="w-2 h-2 bg-[#4e77bb] rounded-full" />
                   {highlight}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="flex items-center justify-center">
+
+          {/* PDF File Section */}
+          {/* <div className="md:col-span-2 flex flex-col items-center bg-gray-100 p-5 rounded-lg shadow-md">
+            <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <FileText className="w-5 h-5 text-[#4e77bb]" />
+              Course Brochure
+            </h3>
+            <iframe
+              src={course.pdfUrl}
+              className="w-full md:w-3/4 h-64 border border-gray-300 rounded-md"
+              title="Course Brochure"
+            ></iframe>
+            <a
+              href={course.pdfUrl}
+              download
+              className="mt-3 px-6 py-2 bg-[#E85900] text-white rounded-lg font-semibold hover:bg-[#faa975] hover:text-black transition-colors"
+            >
+              Download PDF
+            </a>
+          </div> */}
+
+          {/* Enroll Now Button */}
+          <div className="flex items-center justify-center md:col-span-2">
             <button
               onClick={() => {
                 navigate("/inquiry");
@@ -436,8 +416,9 @@ const CourseSection = ({ course }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
 
 const AllCourses = () => {
   const navigate = useNavigate()

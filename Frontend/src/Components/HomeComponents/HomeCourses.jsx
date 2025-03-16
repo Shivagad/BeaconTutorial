@@ -352,8 +352,8 @@ const HomeCourses = () => {
                     </div>
                     <button
                         onClick={() => {
-                          navigate(course.slug);
-                          window.scrollTo(0, course.value); // Scroll to the top of the page
+                          navigate("/inquiry");
+                          window.scrollTo(0,0); // Scroll to the top of the page
                         }}
                         className="w-full bg-[#d68b5c] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
                       >
@@ -394,8 +394,8 @@ const HomeCourses = () => {
                       </div>
                       <button
                         onClick={() => {
-                          navigate(course.slug);
-                          window.scrollTo(0, course.value); // Scroll to the top of the page
+                          navigate("/inquiry");
+                          window.scrollTo(0,0); // Scroll to the top of the page
                         }}
                         className="w-full bg-[#d68b5c] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
                       >

@@ -72,12 +72,13 @@ function Home() {
     { desktop: "/images/aboutus_img1.avif", mobile: "/images/cbse.jpg" },
   ];
 
-  const [stats, setStats] = useState(null);
+  const [stats, setStats] = useState({});
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/server/stat/getstat");
+        const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
+        console.log(response.data);
         setStats(response.data);
       } catch (error) {
         console.error("Failed to fetch stats:", error);
@@ -87,15 +88,14 @@ function Home() {
     fetchStats();
   }, []);
 
-  if (!stats) {
-    return <div>Loading...</div>;
-  }
+
   const statData = [
     { icon: Users, value: stats.studentsCount, label: "Students" },
     { icon: Trophy, value: `${stats.successRate}%`, label: "Success Rate" },
     { icon: GraduationCap, value: stats.expertFacultyCount, label: "Expert Faculty" },
     { icon: Award, value: `${stats.yearsOfExperience}+`, label: "Years Experience" },
   ];
+
 
   return (
     <>
@@ -269,8 +269,9 @@ function Home() {
             <div className="justify-center place-items-center bg-white rounded-xl shadow-md p-6 md:p-10">
               {/* Heading */}
               <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
-                15+ Years of Legacy
-              </h2>
+  {stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years of Legacy` : "15+ Years of Legacy"}
+</h2>
+
               <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
                 with excellent Results
               </p>
@@ -285,16 +286,16 @@ function Home() {
                 {/* Stat 2 */}
                 <div className="flex flex-col items-center">
                   <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
-                  <p className="text-xl font-bold text-gray-800">131,700+</p>
+                  <p className="text-xl font-bold text-gray-800">{stats.studentsCount ? `${stats.studentsCount}+` : "1000+"}</p>
                   <p className="text-gray-600">
-                    Beaconian qualified NEET &amp; JEE in 2024
+                    Beaconian qualified NEET,JEE &amp; CET
                   </p>
                 </div>
 
                 {/* Stat 3 */}
                 <div className="flex flex-col items-center">
                   <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
-                  <p className="text-xl font-bold text-gray-800">500+</p>
+                  <p className="text-xl font-bold text-gray-800">{stats.expertFacultyCount ? `${stats.expertFacultyCount}+` : "100+"}</p>
                   <p className="text-gray-600">Expert Faculty</p>
                 </div>
               </div>
@@ -368,6 +369,7 @@ function Home() {
               ></path>
             </svg>
           </div>
+          {/* container end */}
 
           <div className="relative bg-white">
             {/* Content Grid */}
@@ -452,8 +454,6 @@ function Home() {
               </button>
             </div>
           </div>
-
-          {/* Stats Section */}
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">
       <div className="flex justify-center">
         <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
