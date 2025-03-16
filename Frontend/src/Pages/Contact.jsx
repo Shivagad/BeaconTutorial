@@ -35,7 +35,7 @@ export default function ContactPage() {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post("http://localhost:4000/server/student/contactusemail", formData);
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/contactusemail", formData);
       console.log(response.data.success);
       if (response.data.success) {
         toast.success("Form submitted successfully!");

@@ -338,7 +338,7 @@ const CourseSection = ({ course }) => {
   useEffect(() => {
     const fetchBatchDate = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/server/batches/getallbatch"); 
+        const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch"); 
         const batches = response.data;
         const matchingBatch = batches.find(
           (batch) => batch.batchName.toLowerCase() === course.title.toLowerCase()

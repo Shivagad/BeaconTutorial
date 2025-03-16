@@ -12,7 +12,7 @@ const EditCourseModal = ({ isEditOpen, onClose, setToast, id }) => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/courses/getid/${id}`);
+      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/courses/getid/${id}`);
       if (response.data.success) {
         setFormData({
           name: response.data.course.name || "",
@@ -32,7 +32,7 @@ const EditCourseModal = ({ isEditOpen, onClose, setToast, id }) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await axios.put(`http://localhost:4000/server/courses/change/${id}`, formData);
+      const response = await axios.put(`https://beacon-tutorial.vercel.app/server/courses/change/${id}`, formData);
       setToast({ success: response.data.success, message: response.data.message });
     } catch (error) {
       setToast({ success: false, message: "Error updating course" });
