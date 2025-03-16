@@ -10,8 +10,7 @@ import {
 const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
     return (
         <div
-            className={`fixed bg-gray-800 text-white transition-all duration-300 h-screen z-10 ${isOpen ? "w-64" : "w-0"
-                }`}
+            className={`fixed bg-gray-800 text-white transition-all duration-300 h-screen z-10 overflow-hidden ${isOpen ? "w-64" : "w-0"}`}
         >
             <div className="flex items-center justify-between p-4">
                 <h1 className={`font-bold ${isOpen ? "block" : "hidden"}`}>
@@ -23,8 +22,7 @@ const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
                 <NavLink
                     to="/student-dashboard/basic-info"
                     className={({ isActive }) =>
-                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                        } transition-colors ${!isOpen && "px-0"}`
+                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"} transition-colors`
                     }
                 >
                     <UserCircle className="h-6 w-6" />
@@ -35,8 +33,7 @@ const StudentDashSidebar = ({ isOpen, setIsOpen }) => {
                 <NavLink
                     to="/student-dashboard/results"
                     className={({ isActive }) =>
-                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"
-                        } transition-colors ${!isOpen && "px-0"}`
+                        `flex items-center px-4 py-3 ${isActive ? "bg-gray-700" : "hover:bg-gray-700"} transition-colors ${!isOpen ? "px-0" : ""}`
                     }
                 >
                     <GraduationCap className="h-6 w-6" />
