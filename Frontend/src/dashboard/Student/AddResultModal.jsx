@@ -95,7 +95,6 @@ const AddStudentResult = ({ isOpen, onClose, setToast }) => {
                     ? "date"
                     : "text"
                 }
-                required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                 value={formData[key]}
                 onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
