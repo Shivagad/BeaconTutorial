@@ -9,11 +9,11 @@ import {
 } from "lucide-react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
+// import { BookOpen, Clock, Users, Award,Monitor, ChevronDown } from "lucide-react"
 
-
-
+import { useNavigate,useLocation } from "react-router-dom"
 const courses = [
   {
     title: "8th, 9th, 10th Foundation",
@@ -359,7 +359,8 @@ const CourseSection = ({ course }) => {
   const driveFolderUrl = "https://drive.google.com/drive/folders/1Tv9vag9jvWmYPo_1lxop2TLOqIp0Pmjm?usp=sharing";
 
   return (
-    <div className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 bg-white transform transition-all duration-500">
+    <div id={course.title.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "-").toLowerCase()}
+    className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 bg-white transform transition-all duration-500">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <h2 className="text-3xl font-bold text-gray-900 bg-gradient-to-r from-[#8fb7f7] to-[#4e77bb] bg-clip-text text-transparent">
@@ -444,7 +445,27 @@ const CourseSection = ({ course }) => {
 
 
 const AllCourses = () => {
-  const navigate = useNavigate();
+ 
+  const location = useLocation();
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    if (location.hash) {
+      requestAnimationFrame(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          const offset = 80; // Move slightly above
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+
+          window.scrollTo({
+            top: elementPosition - offset,
+            behavior: "smooth",
+          });
+        }
+      });
+    }
+  }, [location.hash]);
+
   return (
     <>
       <Navbar />
