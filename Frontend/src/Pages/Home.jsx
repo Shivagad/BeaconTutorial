@@ -120,7 +120,7 @@ function Home() {
               </li>
 
               <li className="mt-4">
-                📍 <strong>Suncity Ambegaon</strong>{" "}
+                📍 <strong>Beacon Suncity Ambegaon</strong>{" "}
               </li>
               <li>
                 📧{" "}
