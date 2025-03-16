@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import course from '../../public/images/courses.png'
 import { useNavigate,useLocation } from "react-router-dom"
@@ -330,31 +329,22 @@ const courses = [
 ];
 
 
-const CourseSection = ({ course }) => {
+const CourseSection = ({ course,batchData  }) => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [batchStartDate, setBatchStartDate] = useState(course.Batch_Starts); 
+  const [batchStartDate, setBatchStartDate] = useState("");
 
   useEffect(() => {
-    const fetchBatchDate = async () => {
-      try {
-        const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch"); 
-        const batches = response.data;
-        const matchingBatch = batches.find(
-          (batch) => batch.batchName.toLowerCase() === course.title.toLowerCase()
-        );
+    const matchingBatch = batchData.find(
+      (batch) => batch.batchName.toLowerCase() === course.title.toLowerCase()
+    );
 
-        if (matchingBatch) {
-          const formattedDate = new Date(matchingBatch.startDate).toISOString().split("T")[0];
-          setBatchStartDate(formattedDate);
-        }
-      } catch (error) {
-        console.error("Error fetching batch date:", error);
-      }
-    };
+    if (matchingBatch) {
+      const formattedDate = new Date(matchingBatch.startDate).toISOString().split("T")[0];
+      setBatchStartDate(formattedDate);
+    }
+  }, [batchData, course.title]);
 
-    fetchBatchDate();
-  }, [course.title]);
 
   const driveFolderUrl = "https://drive.google.com/drive/folders/1Tv9vag9jvWmYPo_1lxop2TLOqIp0Pmjm?usp=sharing";
 
@@ -449,12 +439,28 @@ const AllCourses = () => {
   const location = useLocation();
   const navigate = useNavigate(); 
 
+  const [batchData, setBatchData] = useState([]);
+
+  useEffect(() => {
+    const fetchAllBatches = async () => {
+      try {
+        const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch");
+        setBatchData(response.data); 
+        // console.log(response);
+      } catch (error) {
+        console.error("Error fetching batches:", error);
+      }
+    };
+
+    fetchAllBatches();
+  }, []);
+
   useEffect(() => {
     if (location.hash) {
       requestAnimationFrame(() => {
         const element = document.querySelector(location.hash);
         if (element) {
-          const offset = 80; // Move slightly above
+          const offset = 80; 
           const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 
           window.scrollTo({
@@ -502,7 +508,7 @@ const AllCourses = () => {
 
         <div className="divide-y">
           {courses.map((course, index) => (
-            <CourseSection key={index} course={course} />
+            <CourseSection key={index} course={course}  batchData={batchData} />
           ))}
         </div>
         <div className="bg-white text-[#E85900] py-16">
