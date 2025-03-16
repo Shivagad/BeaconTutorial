@@ -122,34 +122,204 @@ const Footer = () => {
 
           {/* Admission Policies */}
           <div>
-              <h3 className="text-xl font-semibold text-orange-500 mb-4">Admission Policies</h3>
-              <ul className="space-y-2">
-                <li><a href="/all-courses#8th-9th-10th-foundation" className="text-white hover:text-orange-300 transition-colors">8th, 9th, 10th Foundation</a></li>
-                <li><a href="/all-courses#8th-9th-10th-regular-board-batches" className="text-white hover:text-orange-300 transition-colors">8th, 9th, 10th Regular Board Batches</a></li>
-                <li><a href="/all-courses#ssc" className="text-white hover:text-orange-300 transition-colors">SSC</a></li>
-                <li><a href="/all-courses#cbse" className="text-white hover:text-orange-300 transition-colors">CBSE</a></li>
-                <li><a href="/all-courses#icse" className="text-white hover:text-orange-300 transition-colors">ICSE</a></li>
-                <li><a href="/all-courses#11th-12th-board-classes" className="text-white hover:text-orange-300 transition-colors">11th + 12th Board Classes</a></li>
-                <li><a href="/all-courses#11th-12th-jee-mains-advance" className="text-white hover:text-orange-300 transition-colors">11th + 12th JEE Mains + Advance</a></li>
-                <li><a href="/all-courses#11th-12th-neet" className="text-white hover:text-orange-300 transition-colors">11th + 12th NEET</a></li>
-                <li><a href="/all-courses#11th-12th-iiser" className="text-white hover:text-orange-300 transition-colors">11th + 12th IISER</a></li>
-                <li><a href="/all-courses#11th-12th-mhtcet" className="text-white hover:text-orange-300 transition-colors">11th + 12th MHTCET</a></li>
-                <li><a href="/all-courses#11th-12th-nda" className="text-white hover:text-orange-300 transition-colors">11th + 12th NDA</a></li>
-                <li><a href="/all-courses#11th-12th-cuet" className="text-white hover:text-orange-300 transition-colors">11th + 12th CUET</a></li>
-                <li><a href="/all-courses#hsc" className="text-white hover:text-orange-300 transition-colors">HSC</a></li>
-                <li><a href="/all-courses#jee-mains" className="text-white hover:text-orange-300 transition-colors">JEE Mains</a></li>
-                <li><a href="/all-courses#jee-advanced" className="text-white hover:text-orange-300 transition-colors">JEE Advanced</a></li>
-                <li><a href="/all-courses#jee-mains-advance" className="text-white hover:text-orange-300 transition-colors">JEE (Mains + Advance)</a></li>
-                <li><a href="/all-courses#neet" className="text-white hover:text-orange-300 transition-colors">NEET</a></li>
-                <li><a href="/all-courses#neet-foundation" className="text-white hover:text-orange-300 transition-colors">NEET Foundation</a></li>
-                <li><a href="/all-courses#neet-repeaters" className="text-white hover:text-orange-300 transition-colors">NEET Repeaters</a></li>
-                <li><a href="/all-courses#mht-cet" className="text-white hover:text-orange-300 transition-colors">MHT - CET</a></li>
-                <li><a href="/all-courses#nda" className="text-white hover:text-orange-300 transition-colors">NDA</a></li>
-                <li><a href="/all-courses#ntse" className="text-white hover:text-orange-300 transition-colors">NTSE</a></li>
-                <li><a href="/all-courses#iiser" className="text-white hover:text-orange-300 transition-colors">IISER</a></li>
-                <li><a href="/all-courses#cuet" className="text-white hover:text-orange-300 transition-colors">CUET</a></li>
-              </ul>
-            </div>
+            <h3 className="text-xl font-semibold text-orange-500 mb-4">
+              Admission Policies
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="/all-courses#8th-9th-10th-foundation"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  8th, 9th, 10th Foundation
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#8th-9th-10th-regular-board-batches"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  8th, 9th, 10th Regular Board Batches
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#ssc"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  SSC
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#cbse"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  CBSE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#icse"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  ICSE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-board-classes"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th Board Classes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-jee-mains-advance"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th JEE Mains + Advance
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-neet"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th NEET
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-iiser"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th IISER
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-mhtcet"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th MHTCET
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-nda"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th NDA
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#11th-12th-cuet"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  11th + 12th CUET
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#hsc"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  HSC
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#jee-mains"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  JEE Mains
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#jee-advanced"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  JEE Advanced
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#jee-mains-advance"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  JEE (Mains + Advance)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#neet"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  NEET
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#neet-foundation"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  NEET Foundation
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#neet-repeaters"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  NEET Repeaters
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#mht-cet"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  MHT - CET
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#nda"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  NDA
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#ntse"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  NTSE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#iiser"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  IISER
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/all-courses#cuet"
+                  className="text-white hover:text-orange-300 transition-colors"
+                >
+                  CUET
+                </a>
+              </li>
+            </ul>
+          </div>
 
           {/* Social Links */}
           <div>
@@ -191,8 +361,11 @@ const Footer = () => {
 
         <div className="text-center mt-12 pt-6 border-t border-gray-700">
           <p className="text-sm text-white">
-            &copy; {new Date().getFullYear()} Beacon Tutorials | All Rights
-            Reserved | Empowering Future Leaders
+            &copy;{" "}
+            {2025 === new Date().getFullYear()
+              ? "2025"
+              : `2025 - ${new Date().getFullYear()}`}{" "}
+            Beacon Tutorials | All Rights Reserved | Empowering Future Leaders
           </p>
         </div>
       </div>
