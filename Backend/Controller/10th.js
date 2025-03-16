@@ -163,11 +163,11 @@ export const getAllExamResults = async (req, res) => {
 
     // Structure the response
     const examData = [
-      { title: "Class 10th Toppers", students: tenthResults },
-      { title: "Class 12th Achievers", students: twelthResults },
-      { title: "CET Stars", students: cetResults },
       { title: "JEE Champions", students: jeeResults },
       { title: "NEET Achievers", students: neetResults },
+      { title: "CET Stars", students: cetResults },
+      { title: "Class 12th Achievers", students: twelthResults },
+      { title: "Class 10th Toppers", students: tenthResults },
       { title: "Other Exam Achievers", students: otherExamResult}
     ];
     res.status(200).json({ success: true, secondSuccess: true, data: examData });
