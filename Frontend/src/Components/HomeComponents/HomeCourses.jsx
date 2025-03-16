@@ -355,7 +355,7 @@ const HomeCourses = () => {
                           navigate("/inquiry");
                           window.scrollTo(0,0); // Scroll to the top of the page
                         }}
-                        className="w-full bg-[#d68b5c] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
+                        className="w-full bg-[#E85900] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
                       >
                       <span className="relative z-10">Inquire Now</span>
                       <div className="absolute inset-0 animate-shine"></div>
@@ -397,7 +397,7 @@ const HomeCourses = () => {
                           navigate("/inquiry");
                           window.scrollTo(0,0); // Scroll to the top of the page
                         }}
-                        className="w-full bg-[#d68b5c] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
+                        className="w-full bg-[#E85900] text-white py-4 px-8 rounded-xl font-semibold transform transition-all duration-500 hover:scale-105 group relative overflow-hidden"
                       >
                         <span className="relative z-10">Inquire Now</span>
                         <div className="absolute inset-0 animate-shine"></div>

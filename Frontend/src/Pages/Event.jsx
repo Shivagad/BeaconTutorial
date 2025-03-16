@@ -6,7 +6,7 @@ import axios from "axios"
 import Footer from "../Components/Footer"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
-
+import eventg from '../../public/images/event.png'
 const FancyDescription = ({ text, maxLength = 70 }) => {
   const [expanded, setExpanded] = useState(false)
   const isLong = text.length > maxLength
@@ -106,6 +106,12 @@ const Event = () => {
         {/* Header with wave */}
         <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
           <div className="max-w-4xl mx-auto text-center px-4">
+            <div className="flex justify-center mb-4">
+                              <img
+                              src={eventg}
+                              className="h-20 w-20 filter invert brightness-0 contrast-200"
+                              ></img>
+                                </div>
             <h1 className="text-4xl font-bold text-white mb-4">
               Event Gallery
             </h1>

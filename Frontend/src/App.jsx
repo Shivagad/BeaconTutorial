@@ -41,7 +41,7 @@ import BasicInfo from './StudentDashBoard/DashBoardPages/BasicInfo.jsx';
 import StudentResults from './StudentDashBoard/DashBoardPages/StudentResults.jsx';
 import Stat from './dashboard/dashboardpages/Stat.jsx';
 import Batches from './dashboard/dashboardpages/Batches.jsx';
-
+import phone from '../public/images/phone.png'
 function AppRoutes() {
   const location = useLocation();
   const protectedPaths = [
@@ -332,7 +332,7 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
-           <Route
+          <Route
             path="batches"
             element={
               <ProtectedRoute requiredRole="admin">
@@ -409,21 +409,13 @@ const WhatsAppButton = () => (
       href="tel:+918446222268"
       className="bg-blue-500 p-3 rounded-full shadow-lg flex items-center justify-center"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-white"  // <-- Added text-white here
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 5h2l3.6 7.59a1 1 0 01-.21 1.11l-2.42 2.42a16 16 0 007.36 7.36l2.42-2.42a1 1 0 011.11-.21L19 19v2a1 1 0 01-1 1C9.94 22 2 14.06 2 4a1 1 0 011-1h2a1 1 0 011 1z"
-        />
-      </svg>
+      <img
+        src={phone}
+        alt="Phone call"
+        className="h-6 w-6 filter invert brightness-0 contrast-200"
+      />
     </a>
+
 
   </div>
 );

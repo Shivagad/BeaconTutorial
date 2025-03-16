@@ -5,7 +5,7 @@ import Footer from "../Components/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
-
+import scolarship from '../../public/images/scolarship.png';
 
 const Scholarships = () => {
   const [formData, setFormData] = useState({
@@ -96,6 +96,12 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       <div className=" min-h-screen">
         <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
           <div className="max-w-4xl mx-auto text-center px-4">
+            <div className="flex justify-center mb-1">
+                                      <img
+                                      src={scolarship}
+                                      className="h-20 w-20 filter invert brightness-0 contrast-200"
+                                      ></img>
+                                        </div>
             <h1 className="text-4xl font-bold text-white mb-4">
             Beacon Eligibility Cum Scholarship Test
             </h1>

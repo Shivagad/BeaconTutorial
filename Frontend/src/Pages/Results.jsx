@@ -6,6 +6,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import results from '../../public/images/results.png'
 
 const sectionColors = [
   'bg-blue-50',
@@ -58,11 +59,12 @@ const Results = () => {
       <>
         <Navbar />
         <div className="w-full min-h-screen bg-gray-50">
+
           {/* Header Skeleton */}
           <header className="bg-gradient-to-r from-[#4e77bb] to-[#3d76d4] text-white py-12 px-4 -mb-20">
             <div className="max-w-7xl mx-auto flex flex-col items-center">
               <div className="flex items-center justify-center gap-3 mb-6">
-          
+
                 <Skeleton height={50} width="60%" />
               </div>
               <Skeleton height={30} width="70%" />
@@ -98,20 +100,33 @@ const Results = () => {
     <>
       <Navbar />
       <div className="w-full min-h-screen bg-gray-50">
-        <header className="bg-gradient-to-r from-[#4e77bb] to-[#3d76d4] text-white py-12 px-4 -mb-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Trophy className="w-20 h-20 sm:w-32 text-yellow-300" />
-              <h1 className="text-5xl font-bold text-center">
-                Academic Excellence Showcase
-              </h1>
+        <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <div className="flex justify-center mb-3">
+              <img
+                src={results}
+                className="h-16 w-16 filter invert brightness-0 contrast-200"
+              ></img>
             </div>
-            <p className="text-center text-indigo-100 text-lg max-w-3xl mx-auto">
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Academic Excellence Showcase
+            </h1>
+            <p className="text-white text-center max-w-2xl mx-auto">
               Celebrating the outstanding achievements of our students across various
               competitive examinations and academic milestones.
             </p>
           </div>
-        </header>
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
 
         {/* Main Content */}
         <main className='-mb-20'>

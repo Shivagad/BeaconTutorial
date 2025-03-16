@@ -23,6 +23,7 @@ import ClassGallery from "../Components/HomeComponents/ClassGallery";
 import { useNavigate } from "react-router-dom";
 import BranchCards from "../Components/HomeComponents/BranchCards";
 
+
 function Home() {
   const navigate = useNavigate();
   const [posters, setPosters] = useState([]);
@@ -96,6 +97,7 @@ function Home() {
     { icon: Award, value: `${stats.yearsOfExperience}+`, label: "Years Experience" },
   ];
 
+  
 
   return (
     <>
@@ -157,7 +159,7 @@ function Home() {
                 </a>
               </li>
               <li>
-                📞{" "}
+              📞{" "}
                 <a
                   href="tel:+919527069991"
                   className="text-blue-600 hover:underline"
@@ -269,8 +271,8 @@ function Home() {
             <div className="justify-center place-items-center bg-white rounded-xl shadow-md p-6 md:p-10">
               {/* Heading */}
               <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
-  {stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years of Legacy` : "15+ Years of Legacy"}
-</h2>
+                {stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years of Legacy` : "15+ Years of Legacy"}
+              </h2>
 
               <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
                 with excellent Results
@@ -301,31 +303,11 @@ function Home() {
               </div>
             </div>
           </div>
+          <div className="relative bg-[#4E77BB] text-white overflow-hidden p-10 before:absolute before:inset-0 before:border-8 
+  before:border-white before:rounded-[50px] before:clip-path-[polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%)] before:shadow-[0_0_20px_rgba(255,255,255,0.5)]">
 
-          <div className="w-full mt-20 overflow-hidden leading-[0]">
-            <svg
-              id="wave"
-              style={{ transform: "rotate(0deg)", transition: "0.3s" }}
-              viewBox="0 0 1440 120"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-                  <stop stop-color="#4E77BB" offset="0%"></stop>
-                  <stop stop-color="" offset="100%"></stop>
-                </linearGradient>
-              </defs>
-              <path
-                style={{ transform: "translate(0, 0px)", opacity: "1" }}
-                fill="url(#sw-gradient-0)"
-                d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-              ></path>
-            </svg>
-          </div>
-          <div className="relative bg-[#4E77BB] text-white overflow-hidden">
             {/* Content Container */}
-            <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col items-center space-y-4 md:space-y-6">
+            <div className="relative max-w-7xl mx-auto px-6 py-16 flex flex-col items-center space-y-4 md:space-y-6">
               <h1 className="text-3xl md:text-4xl font-bold text-center">
                 BEST - Talent Test
               </h1>
@@ -339,36 +321,15 @@ function Home() {
                   window.scrollTo(0, 0);
                 }}
                 className="bg-orange-400 hover:bg-orange-500 px-6 py-2 
-                     rounded-full text-white text-lg font-semibold 
-                     transform hover:-translate-y-1 hover:scale-105 
-                     transition duration-300"
+           rounded-full text-white text-lg font-semibold 
+           transform hover:-translate-y-1 hover:scale-105 
+           transition duration-300 shadow-lg"
               >
                 Register Now for Free
               </button>
             </div>
           </div>
-          <div className="w-full overflow-hidden leading-[0]">
-            <svg
-              id="wave"
-              style={{ transform: "rotate(180deg)", transition: "0.3s" }}
-              viewBox="0 0 1440 120"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="myGradient" x1="0" x2="0" y1="1" y2="0">
-                  <stop stop-color="#4E77BB" offset="0%"></stop>
-                  <stop stop-color="#123456" offset="100%"></stop>
-                </linearGradient>
-              </defs>
 
-              <path
-                style={{ transform: "translate(0, 0px)", opacity: "1" }}
-                fill="url(#sw-gradient-0)"
-                d="M0,36L60,40C120,44,240,52,360,62C480,72,600,84,720,74C840,64,960,32,1080,18C1200,4,1320,8,1440,12C1560,16,1680,20,1800,24C1920,28,2040,32,2160,44C2280,56,2400,76,2520,78C2640,80,2760,64,2880,56C3000,48,3120,48,3240,58C3360,68,3480,88,3600,90C3720,92,3840,76,3960,74C4080,72,4200,84,4320,78C4440,72,4560,48,4680,34C4800,20,4920,16,5040,24C5160,32,5280,52,5400,54C5520,56,5640,40,5760,40C5880,40,6000,56,6120,70C6240,84,6360,96,6480,88C6600,80,6720,52,6840,44C6960,36,7080,48,7200,60C7320,72,7440,84,7560,78C7680,72,7800,48,7920,46C8040,44,8160,64,8280,64C8400,64,8520,44,8580,34L8640,24L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-              ></path>
-            </svg>
-          </div>
           {/* container end */}
 
           <div className="relative bg-white">
@@ -395,7 +356,7 @@ function Home() {
                     navigate("/about");
                     window.scrollTo(0, 0);
                   }}
-                  className="bg-[#4E77BB] hover:bg-[#5786d9] text-white 
+                  className="bg-[#E85900] hover:bg-[#E85909] text-white 
                        px-6 py-2 rounded-full transform transition 
                        hover:rotate-3 hover:scale-105"
                 >
@@ -448,25 +409,27 @@ function Home() {
                   navigate("/inquiry");
                   window.scrollTo(0, 0);
                 }}
-                className="bg-[#4e77bb] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#a6d8f7] hover:text-black transition-colors"
+                className="bg-[#E85900] text-white px-8 py-3 rounded-full font-semibold 
+             transform transition hover:scale-105"
               >
                 Enroll Now
               </button>
+
             </div>
           </div>
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">
-      <div className="flex justify-center">
-        <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {statData.map((stat, index) => (
-            <div key={index}>
-              <stat.icon className="w-8 h-8 mx-auto mb-2" />
-              <div className="text-3xl font-bold">{stat.value}</div>
-              <div className="text-sm">{stat.label}</div>
+            <div className="flex justify-center">
+              <div className="container grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                {statData.map((stat, index) => (
+                  <div key={index}>
+                    <stat.icon className="w-8 h-8 mx-auto mb-2" />
+                    <div className="text-3xl font-bold">{stat.value}</div>
+                    <div className="text-sm">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
+          </div>
         </div>
         <Footer />
       </div>

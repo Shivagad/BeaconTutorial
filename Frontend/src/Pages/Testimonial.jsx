@@ -62,24 +62,31 @@ export default function App() {
     <>
       <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-[#73a6fa]">
-        <div className="container mx-auto px-4 py-8 -mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-10"
-          >
-            <div className="flex justify-center mb-4">
-              <MessageSquareQuote className="w-12 h-12 text-[#4e77bb]" />
+      <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
+          <div className="max-w-4xl mx-auto text-center px-4">
+          <div className="flex justify-center mb-4">
+              <MessageSquareQuote className="w-16 h-16 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              What Our Students Say
+            <h1 className="text-4xl font-bold text-white mb-4">
+             What Our Students Say
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              At our coaching institute, we empower students to excel in JEE, NEET, CET, and board exams (10th/12th). Our expert faculty, personalized coaching, and proven study materials help students unlock their full potential and achieve success in these highly competitive exams. Discover why thousands of students trust us for their academic journey and experience the difference in results and confidence.
+            <p className="text-white text-center max-w-2xl mx-auto">
+            At our coaching institute, we empower students to excel in JEE, NEET, CET, and board exams (10th/12th). Our expert faculty, personalized coaching, and proven study materials help students unlock their full potential and achieve success in these highly competitive exams. Discover why thousands of students trust us for their academic journey and experience the difference in results and confidence.
             </p>
-          </motion.div>
-
-          {/* Testimonials Grid */}
+          </div>
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div className="container mx-auto px-4 py-8 -mb-12">
+         
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {Array(testimonialsPerPage).fill(0).map((_, index) => (

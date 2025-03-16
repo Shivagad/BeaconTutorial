@@ -9,8 +9,15 @@ const ResultSection = ({ title, students, bgColor }) => {
   const totalPages = Math.ceil(students.length / studentsPerPage);
   const navRef = useRef(null);
 
-  const handlePrevPage = () => {setCurrentPage((prev) => Math.max(prev - 1, 0));navRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });}
-  const handleNextPage = () => {setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));navRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });}
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
+    document.querySelector("#resultGrid")?.scrollIntoView({ behavior: "smooth" });
+  };
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
+    document.querySelector("#resultGrid")?.scrollIntoView({ behavior: "smooth" });
+  };
+
 
   const currentStudents = students.slice(
     currentPage * studentsPerPage,
@@ -26,16 +33,16 @@ const ResultSection = ({ title, students, bgColor }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div id="resultGrid" className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {currentStudents.map((student) => (
             <div key={student.id} className="bg-white rounded-xl shadowmd transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
               <div className="mx-auto mt-4 w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB] bg-white flex-shrink-0">
-  <img 
-    src={student.imagePath} 
-    alt={student.firstName} 
-    className="w-full h-full object-cover max-w-full max-h-full"
-  />
-</div>
+                <img
+                  src={student.imagePath}
+                  alt={student.firstName}
+                  className="w-full h-full object-cover max-w-full max-h-full"
+                />
+              </div>
 
               <div className="p-4 text-center">
                 <h3 className="font-semibold text-lg mb-2">{student.firstName} {student.lastName}</h3>

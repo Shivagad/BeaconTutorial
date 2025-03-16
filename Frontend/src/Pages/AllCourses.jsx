@@ -11,9 +11,9 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { BookOpen, Clock, Users, Award,Monitor, ChevronDown } from "lucide-react"
-
+import course from '../../public/images/courses.png'
 import { useNavigate,useLocation } from "react-router-dom"
+
 const courses = [
   {
     title: "8th, 9th, 10th Foundation",
@@ -470,18 +470,35 @@ const AllCourses = () => {
     <>
       <Navbar />
       <div className="min-h-screen bg-orange-50">
-        <div className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Our Featured Courses
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover our carefully curated selection of courses designed to
+        <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
+                  <div className="max-w-4xl mx-auto text-center px-4">
+                  <div className="flex justify-center mb-4">
+                  <img
+                  src={course}
+                  className="h-20 w-20 filter invert brightness-0 contrast-200"
+                  ></img>
+                    </div>
+                    <h1 className="text-4xl font-bold text-white mb-4">
+                    Our Featured Courses
+                    </h1>
+                    <p className="text-white text-center max-w-2xl mx-auto">
+                    Discover our carefully curated selection of courses designed to
               help you master the skills you need for success in today's digital
               world.
-            </p>
-          </div>
-        </div>
+                    </p>
+                  </div>
+                  {/* Wave SVG */}
+                  <div className="absolute bottom-0 left-0 right-0">
+                    <svg viewBox="0 0 1440 100" className="w-full h-auto">
+                      <path
+                        fill="#fff"
+                        fillOpacity="1"
+                        d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+       
 
         <div className="divide-y">
           {courses.map((course, index) => (

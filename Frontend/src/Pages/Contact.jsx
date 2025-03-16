@@ -6,6 +6,7 @@ import Navbar from "../Components/Navbar";
 import axios from "axios";
 import { toast,ToastContainer  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import contact from '../../public/images/contact.png'
 
 export default function ContactPage() {
   const navigate = useNavigate();
@@ -57,19 +58,36 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              If you have any questions regarding our tuition services, please
+      <div className="min-h-screen">
+        <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
+          <div className="max-w-4xl mx-auto text-center px-4">
+             <div className="flex justify-center mb-1">
+                                      <img
+                                      src={contact}
+                                      className="h-20 w-20 filter invert brightness-0 contrast-200"
+                                      ></img>
+                                        </div>
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Contact Us
+            </h1>
+            <p className="text-white text-center max-w-2xl mx-auto">
+            If you have any questions regarding our tuition services, please
               do not hesitate to contact us. Visit us today and we will be more
               than happy to answer any of your questions.
             </p>
           </div>
-
-          {/* Main Content */}
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <div className="max-w-7xl py-12 px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Left Column - Card */}
             <div className="space-y-8 lg:col-span-1">
@@ -100,12 +118,14 @@ export default function ContactPage() {
                   </a>
                 </div>
                 <div className="mt-6 text-center">
-      <button
-        onClick={() => navigate("/inquiry")}
-        className="bg-[#4E77BB] hover:bg-[#5786d9] text-white px-6 py-2 rounded-full transition-colors align-left"
-      >
-        Make an Inquiry
-      </button>
+                <button
+  onClick={() => navigate("/inquiry")}
+  className="bg-[#E85900] text-white px-6 py-2 rounded-full 
+             transition-transform transform scale-100 hover:scale-105"
+>
+  Make an Inquiry
+</button>
+
     </div>
               </div>
             </div>
@@ -208,7 +228,7 @@ export default function ContactPage() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-auto px-6 py-2 text-sm font-bold text-white bg-[#FFA500] hover:bg-[#E69500] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFA500] rounded-md shadow-md transition-colors mx-auto block"
+                    className="w-auto px-6 py-2 text-sm font-bold text-white bg-[#E85900] hover:bg-[#E85901] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFA500] rounded-md shadow-md transition-colors mx-auto block"
                   >
                     Send Message
                   </button>
@@ -223,13 +243,13 @@ export default function ContactPage() {
             <div className="flex flex-col space-y-6">
               {/* Address Card */}
               <div className="bg-white p-6 rounded-lg shadow-md flex-grow">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">First Branch - Address</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Beacon Mohan Nagar - Address</h2>
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-6 h-6 text-[#4E77BB] mt-1 flex-shrink-0" />
                     <p className="text-gray-700">
-                    Beacon Mohan Nagar,Dhankawadi,
-                    Pune-411043
+                    Beacon Mohan Nagar, Dhankawadi,
+                    Pune - 411043.
                     </p>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -263,12 +283,13 @@ export default function ContactPage() {
             <div className="flex flex-col space-y-6">
               {/* Address Card */}
               <div className="bg-white p-6 rounded-lg shadow-md flex-grow">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Second Branch - Address</h2>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Beacon Suncity Ambegaon - Address</h2>
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-6 h-6 text-[#4E77BB] mt-1 flex-shrink-0" />
                     <p className="text-gray-700">
-                     Beacon Suncity,Ambegaon, Pune-411046.
+                     Beacon Suncity, Ambegaon, 
+                      Pune - 411046.
                     </p>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -294,6 +315,12 @@ export default function ContactPage() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
+                />
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.7600586347903!2d73.8350821!3d18.449200299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b93229468374967%3A0xfb42b258ba2f112!2sBeacon%20Tutorials!5e0!3m2!1sen!2sin!4v1742133537017!5m2!1sen!2sin" 
+                 className="absolute top-0 left-0 w-full h-full"
+                 allowFullScreen
+                 loading="lazy"
+                 referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
             </div>

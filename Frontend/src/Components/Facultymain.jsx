@@ -3,13 +3,14 @@ import axios from 'axios';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import staff from '../../public/images/staff.png'
 
 const Faculty = () => {
   const [facultyMembers, setFacultyMembers] = useState([]);
   const [filteredFaculty, setFilteredFaculty] = useState({});
   const [currentPage, setCurrentPage] = useState({});
   const facultyPerPage = 6;
-  const subjectRefs = useRef({}); 
+  const subjectRefs = useRef({});
 
   useEffect(() => {
     const fetchFaculty = async () => {
@@ -34,7 +35,7 @@ const Faculty = () => {
           initialPages[subject] = 0;
           subjectRefs.current[subject] = React.createRef(); // Initialize ref
         });
-        setCurrentPage(initialPages);      
+        setCurrentPage(initialPages);
       } catch (error) {
         console.error('Error fetching faculty:', error);
       }
@@ -72,14 +73,20 @@ const Faculty = () => {
     <>
       <Navbar />
       <div className="min-h-screen">
-          <div className="bg-[#4E77BB] pt-12 pb-24 relative shadow-md">
+        <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
           <div className="max-w-4xl mx-auto text-center px-4">
+            <div className="flex justify-center mb-3">
+              <img
+                src={staff}
+                className="h-20 w-20 filter invert brightness-0 contrast-200"
+              ></img>
+            </div>
             <h1 className="text-4xl font-bold text-white mb-4">
               Our Faculty Members
             </h1>
             <p className="text-white text-center max-w-2xl mx-auto">
-            Get to know the passionate and experienced educators dedicated to shaping the future of our students. 
-            Our faculty members bring expertise, innovation, and commitment to excellence in education.
+              Get to know the passionate and experienced educators dedicated to shaping the future of our students.
+              Our faculty members bring expertise, innovation, and commitment to excellence in education.
             </p>
           </div>
           {/* Wave SVG */}
@@ -109,7 +116,7 @@ const Faculty = () => {
                   {capitalizeSubject(subject)} Faculty
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {currentFaculty.map((faculty) => (
                     <div key={faculty._id} className="bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
                       <div className="mx-auto mt-4 w-32 h-32 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB]">
@@ -120,8 +127,8 @@ const Faculty = () => {
                         {/* <p className="text-gray-600">Email: {faculty.email}</p> */}
                         {/* <p className="text-gray-600">Phone: {faculty.phone}</p> */}
                         {/* <p className="text-gray-600">Qualification: {faculty.qualification}</p> */}
-                        <p className="text-gray-600">Subjects: {faculty.subjects.join(', ')}</p>
-                        <p className="text-gray-600">Bio: {faculty.bio || 'N/A'}</p>
+                        <p className="text-gray-600">{faculty.subjects.join(', ')}</p>
+                        <p className="text-gray-800 italic">{faculty.bio || 'N/A'}</p>
                         {/* <p className="text-gray-700">Joined: {new Date(faculty.joiningDate).toLocaleDateString()}</p> */}
                       </div>
                     </div>

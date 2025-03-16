@@ -8,7 +8,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import about from '../../public/images/about.png'
 
 
 function AboutUs() {
@@ -32,8 +32,34 @@ function AboutUs() {
     <>
       <Navbar />
       <div className="min-h-screen">
+         <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
+                          <div className="max-w-4xl mx-auto text-center px-4">
+                          <div className="flex justify-center mb-1">
+                          <img
+                          src={about}
+                          className="h-20 w-20 filter invert brightness-0 contrast-200"
+                          ></img>
+                            </div>
+                            <h1 className="text-4xl font-bold text-white mb-4">
+                            About Us
+                            </h1>
+                            <p className="text-white text-center max-w-2xl mx-auto">
+                            Chase your dreams with passion and determination, for they hold the key to your future success
+                            </p>
+                          </div>
+                          {/* Wave SVG */}
+                          <div className="absolute bottom-0 left-0 right-0">
+                            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+                              <path
+                                fill="#fff"
+                                fillOpacity="1"
+                                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
         {/* Hero Section */}
-        <section className="relative h-[50vh]">
+        {/* <section className="relative h-[50vh]">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -49,7 +75,7 @@ function AboutUs() {
               "Chase your dreams with passion and determination, for they hold the key to your future success"
             </h1>
           </div>
-        </section>
+        </section> */}
 
         {/* About Beacon */}
         <section className="py-20 bg-orange-100">

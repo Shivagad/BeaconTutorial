@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios"; // Added axios import
 import { useNavigate } from "react-router-dom";
-
+import person from '../../../public/images/person.png'
 const TestimonialSection = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [activeIndex, setActiveIndex] = useState(0);
     const [flipped, setFlipped] = useState(false);
     const [testi, setTesti] = useState([]); // Ensure it has a default value
@@ -38,24 +38,27 @@ const TestimonialSection = () => {
 
             <div className="relative z-10 max-w-4xl w-full flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-10">
                 {/* Left Section */}
-                <div className="text-center md:text-left max-w-md md:mt-2 -mt-15"> 
+                <div className="text-center md:text-left max-w-md md:mt-2 -mt-15">
                     <div className="flex justify-center md:justify-start mb-4">
-                        <div className="bg-blue-700 p-3 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-orange-500" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm1 8c-1.1 0-2 .9-2 2h4c0-1.1-.9-2-2-2z" />
-                            </svg>
-                        </div>
+                        <img
+                            src={person}
+                            className="h-20 w-20 filter invert sepia saturate-200 hue-rotate-10 brightness-105 contrast-110"
+                            style={{ filter: "invert(27%) sepia(87%) saturate(4228%) hue-rotate(12deg) brightness(96%) contrast(100%)" }}
+                            alt="Satisfied Learners"
+                        />
+
+
                     </div>
                     <h2 className="text-3xl font-bold text-[#fc9b5d]">Satisfied Learners</h2>
                     <p className="mt-2 text-white">
                         Testimonials from our students and parents. We are proud of our track record of success and the satisfaction of our students.
                     </p>
-                    <button 
-                    onClick={() => {
-                        navigate('/testimonial')
-                        window.scrollTo(0, 0);
-                    }}
-                    className="mt-4 md:mb-1 mb-14 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full">
+                    <button
+                        onClick={() => {
+                            navigate('/testimonial')
+                            window.scrollTo(0, 0);
+                        }}
+                        className="mt-4 md:mb-1 mb-14 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-full">
                         See all Testimonials
                     </button>
                 </div>
@@ -75,7 +78,7 @@ const TestimonialSection = () => {
                     <div className="absolute mt-60 ml-40 flex space-x-2">
                         {testi?.map((_, index) => (
                             <button key={index} onClick={() => handleDotClick(index)}
-                            className={`w-3 h-3 rounded-full transition border-2 ${activeIndex === index ? "bg-white border-white" : "bg-gray-500 border-white"}`}
+                                className={`w-3 h-3 rounded-full transition border-2 ${activeIndex === index ? "bg-white border-white" : "bg-gray-500 border-white"}`}
                             ></button>
                         ))}
                     </div>
