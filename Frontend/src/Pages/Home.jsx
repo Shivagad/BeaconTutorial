@@ -22,6 +22,8 @@ import TestimonialSection from "../Components/HomeComponents/TestiMonialSection"
 import ClassGallery from "../Components/HomeComponents/ClassGallery";
 import { useNavigate } from "react-router-dom";
 import BranchCards from "../Components/HomeComponents/BranchCards";
+import { motion } from "framer-motion";
+import { FaAward } from "react-icons/fa";
 
 
 function Home() {
@@ -303,31 +305,64 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="relative bg-[#4E77BB] text-white overflow-hidden p-10 before:absolute before:inset-0 before:border-8 
-  before:border-white before:rounded-[50px] before:clip-path-[polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%)] before:shadow-[0_0_20px_rgba(255,255,255,0.5)]">
+          {/* container start */}
+          <div className="w-full bg-white-100 py-6">
+              <div className="relative w-full max-w-7xl mx-auto bg-white p-2 rounded-3xl shadow-2xl">
+                
+                {/* Card Content */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="relative bg-gradient-to-br from-[#4E77BB] via-[#3A5D99] to-[#2B4778] rounded-2xl px-6 md:px-10 py-4 md:py-6 flex flex-col md:flex-row items-center md:items-start overflow-hidden w-full"
+                >
+                  
+                  {/* Wave Background Animation */}
+                  <div className="absolute inset-0">
+                    <motion.svg
+                      className="absolute bottom-0 left-0 w-full h-16 md:h-20 text-[#3A5D99]"
+                      fill="currentColor"
+                      viewBox="0 0 1440 320"
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                    >
+                      <path d="M0,160L48,165.3C96,171,192,181,288,186.7C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,192C1248,181,1344,139,1392,117.3L1440,96L1440,320L0,320Z"></path>
+                    </motion.svg>
+                  </div>
 
-            {/* Content Container */}
-            <div className="relative max-w-7xl mx-auto px-6 py-16 flex flex-col items-center space-y-4 md:space-y-6">
-              <h1 className="text-3xl md:text-4xl font-bold text-center">
-                BEST - Talent Test
-              </h1>
-              <p className="text-center text-lg md:text-xl max-w-xl">
-                Up to 99% Scholarship for qualifying students from 10th SSC /
-                CBSE / ICSE
-              </p>
-              <button
-                onClick={() => {
-                  navigate("/scholarship");
-                  window.scrollTo(0, 0);
-                }}
-                className="bg-orange-400 hover:bg-orange-500 px-6 py-2 
-           rounded-full text-white text-lg font-semibold 
-           transform hover:-translate-y-1 hover:scale-105 
-           transition duration-300 shadow-lg"
-              >
-                Register Now for Free
-              </button>
-            </div>
+                  {/* Left Side - Text */}
+                  <div className="relative flex-1 text-white space-y-3 md:space-y-4">
+                    <h1 className="text-2xl md:text-3xl font-bold">
+                      BEST - Talent Test
+                    </h1>
+                    <p className="text-lg md:text-xl max-w-lg">
+                      Up to 99% Scholarship for qualifying students from 10th SSC / CBSE / ICSE.
+                    </p>
+
+                    {/* Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        navigate("/scholarship");
+                        window.scrollTo(0, 0);
+                      }}
+                      className="bg-orange-400 hover:bg-orange-500 px-5 py-2 rounded-full text-lg font-semibold transition shadow-md"
+                    >
+                      Register Now for Free
+                    </motion.button>
+                  </div>
+
+                  {/* Right Side - Animated Icon */}
+                  <motion.div
+                    className="relative w-24 h-24 md:w-28 md:h-28 bg-white/20 rounded-full shadow-lg flex items-center justify-center mt-6 md:mt-0 md:ml-6"
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <FaAward className="text-white text-4xl md:text-5xl" />
+                  </motion.div>
+                </motion.div>
+              </div>
           </div>
 
           {/* container end */}
