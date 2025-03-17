@@ -101,7 +101,7 @@ const Faculty = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-8 -mt-3">
+        <div className="max-w-7xl mx-auto px-0 py-6 -mt-3">
           {Object.keys(filteredFaculty).map((subject) => {
             const facultyList = filteredFaculty[subject];
             const totalPages = Math.ceil(facultyList.length / facultyPerPage);

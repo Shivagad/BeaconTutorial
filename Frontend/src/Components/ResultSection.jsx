@@ -1,23 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef } from 'react';
-
 
 const ResultSection = ({ title, students, bgColor }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const studentsPerPage = 10;
   const totalPages = Math.ceil(students.length / studentsPerPage);
-  const navRef = useRef(null);
+  const resultRef = useRef(null);
+
+  const scrollToResultGrid = () => {
+    const resultGrid = document.querySelector("#resultGrid");
+    if (resultGrid) {
+      const headerOffset = 100; // Adjust this value as needed
+      const elementPosition = resultGrid.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const handlePrevPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 0));
-    document.querySelector("#resultGrid")?.scrollIntoView({ behavior: "smooth" });
-  };
-  const handleNextPage = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
-    document.querySelector("#resultGrid")?.scrollIntoView({ behavior: "smooth" });
+    scrollToResultGrid();
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
+    scrollToResultGrid();
+  };
 
   const currentStudents = students.slice(
     currentPage * studentsPerPage,
@@ -25,23 +37,21 @@ const ResultSection = ({ title, students, bgColor }) => {
   );
 
   return (
-    <div className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 rounded-2xl shadow-lg ${bgColor} mb-6`}>
+    <div ref={resultRef} className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 rounded-2xl shadow-lg ${bgColor} mb-6`}>
+      {/* Result Header */}
       <div className="max-w-7xl mx-auto px-4">
-        <div className="sticky z-10 -mt-20 mb-8">
+        <div id="resultGrid" className="sticky z-10 -mt-20 mb-8">
           <div className="bg-white/95 border-b-4 py-4 py-12 rounded-2xl border-[#4E77BB] shadow-lg">
             <h2 className="text-4xl font-bold text-center text-[#4e77bb]">{title}</h2>
           </div>
         </div>
 
-        <div id="resultGrid" className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {/* Student Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {currentStudents.map((student) => (
-            <div key={student.id} className="bg-white rounded-xl shadowmd transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
+            <div key={student.id} className="bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
               <div className="mx-auto mt-4 w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB] bg-white flex-shrink-0">
-                <img
-                  src={student.imagePath}
-                  alt={student.firstName}
-                  className="w-full h-full object-cover max-w-full max-h-full"
-                />
+                <img src={student.imagePath} alt={student.firstName} className="w-full h-full object-cover max-w-full max-h-full" />
               </div>
 
               <div className="p-4 text-center">
@@ -69,8 +79,10 @@ const ResultSection = ({ title, students, bgColor }) => {
             </div>
           ))}
         </div>
+
+        {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div ref={navRef} className="sticky bottom-4 z-10 flex justify-center items-center mt-8">
+          <div className="sticky bottom-4 z-10 flex justify-center items-center mt-8">
             <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-4">
               <button
                 onClick={handlePrevPage}
