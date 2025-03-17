@@ -19,7 +19,7 @@ const Blog = () => {
       try {
         // Try to fetch from API
         const response = await axios.get(
-          "https://beacon-tutorial.vercel.app/server/blog/getall"
+          "http://localhost:4000/server/blog/getall"
         )
         setBlogs(response.data)
       } catch (err) {

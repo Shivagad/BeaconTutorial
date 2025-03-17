@@ -11,7 +11,7 @@ const DeleteFacultyModal = ({ isDeleteOpen, onClose, setToast, facultyName, id }
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
       try {
-        const response = await axios.delete(`https://beacon-tutorial.vercel.app/server/faculty/delete/${id}`);
+        const response = await axios.delete(`http://localhost:4000/server/faculty/delete/${id}`);
         setToast({
           success: response.data.success,
           message: response.data.success ? `Faculty deleted successfully` : `Failed to delete faculty`,

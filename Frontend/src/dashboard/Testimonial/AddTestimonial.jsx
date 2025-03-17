@@ -19,7 +19,7 @@ const AddTestimonialModal = ({ isOpen, onClose, setToast }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post("https://beacon-tutorial.vercel.app/server/testimonial", formData);
+      const response = await axios.post("http://localhost:4000/server/testimonial", formData);
 
       if (response.data) {
         setToast({ success: true, message: "Testimonial added successfully" });

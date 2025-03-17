@@ -48,7 +48,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
       setErrors({}); // Reset errors when modal opens
 
       axios
-        .get("https://beacon-tutorial.vercel.app/server/courses/getall/")
+        .get("http://localhost:4000/server/courses/getall/")
         .then((response) => {
           console.log("Courses API Response:", response.data.courses);
           setCourses(response.data.courses);
@@ -123,7 +123,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
     const selectedCourse = courses.find((course) => course._id === formData.course);
 
     try {
-      const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/createstu/", {
+      const response = await axios.post("http://localhost:4000/server/student/createstu/", {
         ...formData,
         course: selectedCourse ? selectedCourse.name : "",
       });

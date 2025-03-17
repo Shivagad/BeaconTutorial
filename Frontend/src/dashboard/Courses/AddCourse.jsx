@@ -16,7 +16,7 @@ const AddCourseModal = ({ isOpen, onClose, setToast }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post("https://beacon-tutorial.vercel.app/server/courses/", formData);
+      const response = await axios.post("http://localhost:4000/server/courses/", formData);
       
       if (response.data.message === "Course created successfully") {
         setToast({ success: true, message: "Course added successfully" });

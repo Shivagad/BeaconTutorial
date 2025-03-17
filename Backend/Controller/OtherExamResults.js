@@ -4,8 +4,7 @@ import cloudinary from 'cloudinary';
 export const addOtherExamResult = async (req, res) => {
     try {
         const { firstName, lastName, imagePath, ExamName, seqno, Tag } = req.body;
-        // console.log(req.body);
-
+        console.log(req.body);
         if (!imagePath) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
@@ -136,11 +135,45 @@ export const editOtherExamResult = async (req, res) => {
     }
 };
 
+// export const deleteOtherExamResult = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const result = await OtherExamResult.findByIdAndDelete(id);
+
+//         if (!result) {
+//             return res.status(404).json({ message: "Other Exam student result not found", success: false });
+//         }
+
+//         res.status(200).json({ message: "Other Exam student result deleted successfully", success: true });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message, success: false });
+//     }
+// };
+
 export const deleteOtherExamResult = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await OtherExamResult.findByIdAndDelete(id);
 
+        // Fetch the existing record to get the image URL
+        const existingResult = await OtherExamResult.findById(id);
+        if (!existingResult) {
+            return res.status(404).json({ message: "Other Exam student result not found", success: false });
+        }
+       console.log(existingResult);
+        // Extract public ID from the existing image URL
+        if (existingResult.imagePath) {
+            const publicIdMatch = existingResult.imagePath.match(/OtherExamResults\/([^/]+)\.(jpg|jpeg|png|webp|gif)$/);
+            if (publicIdMatch && publicIdMatch[1]) {
+                const oldImagePublicId = `OtherExamResults/${publicIdMatch[1]}`;
+                console.log(oldImagePublicId);
+                // Delete the image from Cloudinary
+                await cloudinary.uploader.destroy(oldImagePublicId);
+                console.log(oldImagePublicId);
+            }
+        }
+        console.log("dfvcds");
+        // Delete the record from the database
+        const result = await OtherExamResult.findByIdAndDelete(id);
         if (!result) {
             return res.status(404).json({ message: "Other Exam student result not found", success: false });
         }
