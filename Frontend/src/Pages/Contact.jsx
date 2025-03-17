@@ -245,7 +245,7 @@ export default function ContactPage() {
                       name="phone"
                       id="phone"
                       required
-                      placeholder="+91 9876543210"
+                      placeholder="9876543210"
                       value={formData.phone}
                       onChange={handleChange}
                       className="mt-2 block w-3/4 mx-auto rounded-md border border-[#4E77BB] shadow-sm focus:border-[#FFA500] focus:ring-[#FFA500] text-sm py-2 placeholder-gray-400 bg-[#EAF2FF] pl-4"
