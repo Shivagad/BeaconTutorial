@@ -27,7 +27,7 @@ const branches = [
 const BranchCard = ({ name, address, email, phone, image }) => {
   const navigate = useNavigate();
   return (
-    <div className="relative group overflow-hidden rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.02] shadow-2xl min-h-[300px]">
+    <div className="relative group overflow-hidden rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-[1.02] shadow-2xl min-h-[300px] max-h-[400px]">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 text-white opacity-70 bg-black transition-opacity duration-500 z-10"></div>
 
@@ -97,7 +97,7 @@ const BranchCard = ({ name, address, email, phone, image }) => {
 
 const BranchCards = () => {
   return (
-    <div className="min-h-screen py-6 px-4 sm:px-6 lg:px-8 bg-white">
+    <div className=" py-6 px-4 sm:px-6 lg:px-8 bg-white rounded-2xl shadow-xl">
       <div className="max-w-7xl mx-auto mt-3">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#4E77BB] to-[#4E77BB] bg-clip-text text-transparent mb-7">

@@ -406,12 +406,12 @@ const CourseSection = ({ course, batchData }) => {
           </div>
 
         </div>
-        <div className={`flex items-center justify-center gap-10 mt-6 -mb-10 ${isExpanded ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className={`flex items-center justify-between gap-10 mt-6 -mb-10 ${isExpanded ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
           <a
             href={driveFolderUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
+            className="px-7 py-3 bg-[#4e77bb] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
            transition duration-300 shadow-lg text-center"
           >
             Read More
@@ -422,7 +422,7 @@ const CourseSection = ({ course, batchData }) => {
               navigate("/inquiry");
               window.scrollTo(0, 0);
             }}
-            className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
+            className="px-7 py-3 bg-[#4e77bb] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
            transition duration-300 shadow-lg"
           >
             Enroll Now

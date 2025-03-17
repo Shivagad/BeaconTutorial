@@ -264,49 +264,52 @@ function Home() {
             )}
           </div>
 
-          <div>
-            <BranchCards />
-          </div>
+          <div className="bg-white py-10"> 
+              {/* Branch Cards Section */}
+              <div className="max-w-7xl mx-auto shadow-lg rounded-xl">
+                <BranchCards />
+              </div>
 
-          <div className="max-w-7xl mx-auto -mt-3">
-            {/* Card Container */}
-            <div className="justify-center place-items-center bg-white rounded-xl shadow-md p-6 md:p-10">
-              {/* Heading */}
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
-                {stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years of Legacy` : "15+ Years of Legacy"}
-              </h2>
+              {/* Stats Section */}
+              <div className="max-w-7xl mx-auto mt-10 shadow-lg rounded-xl">
+                {/* Card Container */}
+                <div className="bg-white rounded-xl shadow-md p-6 md:p-10">
+                  {/* Heading */}
+                  <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
+                    {stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years of Legacy` : "15+ Years of Legacy"}
+                  </h2>
 
-              <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
-                with excellent Results
-              </p>
-
-              {/* Subtext */}
-              <p className="text-center text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Be the next stellar of Beacon Tutorial. Accomplish greatness and
-                be a part of our legacy. Find your course now.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center place-items-center">
-                {/* Stat 2 */}
-                <div className="flex flex-col items-center">
-                  <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
-                  <p className="text-xl font-bold text-gray-800">{stats.studentsCount ? `${stats.studentsCount}+` : "1000+"}</p>
-                  <p className="text-gray-600">
-                    Beaconian qualified NEET,JEE &amp; CET
+                  <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
+                    with excellent Results
                   </p>
-                </div>
 
-                {/* Stat 3 */}
-                <div className="flex flex-col items-center">
-                  <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
-                  <p className="text-xl font-bold text-gray-800">{stats.expertFacultyCount ? `${stats.expertFacultyCount}+` : "100+"}</p>
-                  <p className="text-gray-600">Expert Faculty</p>
+                  {/* Subtext */}
+                  <p className="text-center text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Be the next stellar of Beacon Tutorial. Accomplish greatness and
+                    be a part of our legacy. Find your course now.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center place-items-center">
+                    {/* Stat 2 */}
+                    <div className="flex flex-col items-center">
+                      <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
+                      <p className="text-xl font-bold text-gray-800">{stats.studentsCount ? `${stats.studentsCount}+` : "1000+"}</p>
+                      <p className="text-gray-600">Beaconian qualified NEET, JEE &amp; CET</p>
+                    </div>
+
+                    {/* Stat 3 */}
+                    <div className="flex flex-col items-center">
+                      <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
+                      <p className="text-xl font-bold text-gray-800">{stats.expertFacultyCount ? `${stats.expertFacultyCount}+` : "100+"}</p>
+                      <p className="text-gray-600">Expert Faculty</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+
           {/* container start */}
-          <div className="w-full bg-white-100 py-6">
+          <div className="w-full bg-white py-6">
               <div className="relative w-full max-w-7xl mx-auto bg-white p-2 rounded-3xl shadow-2xl">
                 
                 {/* Card Content */}
