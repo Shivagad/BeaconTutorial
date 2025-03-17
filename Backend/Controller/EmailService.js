@@ -130,6 +130,7 @@ export const sendInquiryForm = async (inquiryData) => {
 export const ContactUsEmail = async (req, res) => {
     try {
       const { name, phone, email, subject } = req.body;
+      console.log(req.body);
 
       if (!name || !phone || !email || !subject) {
         return res.status(400).json({ message: "All fields are required." });
