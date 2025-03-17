@@ -379,7 +379,7 @@ export const uploadStudentsCSV = async (req, res) => {
         admissionYear,
         course,
       } = row;
-      console.log("Processing:", row);
+      // console.log("Processing:", row);
 
       const existingStudent = await Student.findOne({
         $or: [{ email }],

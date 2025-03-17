@@ -54,7 +54,7 @@ export const sendSignUpSuccessfulEmail = async (req, res) => {
     let htmlContent = template({ name });
 
     const mailOptions = {
-        from: `CodeFolio <${process.env.MAIL_USER}>`,
+        from: `Beacon Tutorials <${process.env.MAIL_USER}>`,
         to: email,
         subject: "Welcome to Our Platform",
         html: htmlContent,
@@ -71,6 +71,7 @@ export const sendSignUpSuccessfulEmail = async (req, res) => {
 };
 
 
+
 export const sendScholarregSuccessfull = async (req, res) => {
     console.log(req.body);
     const { firstName, lastName, email } = req.body;
@@ -80,7 +81,7 @@ export const sendScholarregSuccessfull = async (req, res) => {
     let htmlContent = template({ firstName, lastName });
 
     const mailOptions = {
-        from: `Beacon Tutorail <${process.env.MAIL_USER}>`,
+        from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
         to: email,
         subject: "Congratulation you have Successfully Register For Beacon Tutorial Scholarship Test",
         html: htmlContent,
@@ -109,17 +110,17 @@ export const sendInquiryForm = async (inquiryData) => {
     const mailOptions = {
         from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
         to: inquiryData.email,
-        subject: "Response of Your Inquiry",
+        subject: " Your Inquiry Submitted Successfully",
         html: htmlContent,
     };
 
     try {
         await transporter.sendMail(mailOptions);
         // console.log("OTP email sent successfully.");
-        // res.status(200).json({ message: "Email sent successfully" });
+        res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
         // console.error("Error sending OTP email:", error);
-        // res.status(500).json({ error: "Failed to send email" });
+        res.status(500).json({ error: "Failed to send email" });
     }
 };
 
@@ -129,7 +130,7 @@ export const sendInquiryForm = async (inquiryData) => {
 export const ContactUsEmail = async (req, res) => {
     try {
       const { name, phone, email, subject } = req.body;
-      console.log(req.body);
+    //   console.log(req.body);
       if (!name || !phone || !email || !subject) {
         return res.status(400).json({ message: "All fields are required." });
       }
@@ -144,7 +145,7 @@ export const ContactUsEmail = async (req, res) => {
         subject:subject,
         html: htmlContent,
       };
-      console.log(mailOptions);
+    //   console.log(mailOptions);
       await transporter.sendMail(mailOptions);
       console.log("Contact email sent successfully.");
       res.status(200).json({ message: "Email sent successfully",success:true });
