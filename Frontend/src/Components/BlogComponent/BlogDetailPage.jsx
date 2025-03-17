@@ -413,21 +413,13 @@ const BlogDetailPage = () => {
                 </div>
               </div>
 
-              {/* <div className="flex space-x-4 mt-4 sm:mt-0">
-                                <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                                    <Share2 size={20} className="text-gray-700" />
-                                </button>
-                                <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-                                    <Bookmark size={20} className="text-gray-700" />
-                                </button>
-                            </div> */}
               <div className="flex space-x-4 mt-4 sm:mt-0">
                 <Popover className="relative">
                   <Popover.Button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
                     <Share2 size={20} className="text-gray-700" />
                   </Popover.Button>
 
-                  <Popover.Panel className="absolute z-10 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg p-2 space-y-2">
+                  <Popover.Panel className="absolute z-10 mt-2 -ml-16 w-40 bg-white border border-gray-200 rounded-lg shadow-lg p-2 space-y-2">
                     <a
                       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
                         shareLink

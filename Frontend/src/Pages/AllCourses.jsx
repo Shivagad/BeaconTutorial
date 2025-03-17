@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BookOpen,
   Clock,
@@ -11,7 +11,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import axios from "axios";
 import course from '../../public/images/courses.png'
-import { useNavigate,useLocation } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 const courses = [
   {
@@ -329,7 +329,7 @@ const courses = [
 ];
 
 
-const CourseSection = ({ course,batchData  }) => {
+const CourseSection = ({ course, batchData }) => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [batchStartDate, setBatchStartDate] = useState("");
@@ -350,7 +350,7 @@ const CourseSection = ({ course,batchData  }) => {
 
   return (
     <div id={course.title.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "-").toLowerCase()}
-    className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 bg-white transform transition-all duration-500">
+      className="w-full py-20 px-6 sm:px-6 lg:px-8 border-b border-gray-400 last:border-b-2 bg-white transform transition-all duration-500">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <h2 className="text-3xl font-bold text-gray-900 bg-gradient-to-r from-[#8fb7f7] to-[#4e77bb] bg-clip-text text-transparent">
@@ -372,9 +372,8 @@ const CourseSection = ({ course,batchData  }) => {
         </p>
 
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 overflow-hidden transition-all duration-500 ease-in-out ${
-            isExpanded ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+            }`}
         >
           <div className="flex items-center gap-3">
             <Clock className="w-6 h-6 text-[#4e77bb]" />
@@ -406,12 +405,14 @@ const CourseSection = ({ course,batchData  }) => {
             </ul>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-center md:justify-between md:col-span-2 gap-4">
+        </div>
+        <div className="flex items-center justify-center gap-10 w-full mt-6">
             <a
               href={driveFolderUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 bg-[#0d6efd] text-white rounded-lg font-semibold hover:bg-[#0a58ca] transition-colors w-full md:w-auto text-center"
+              className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
+           transition duration-300 shadow-lg text-center"
             >
               Read More
             </a>
@@ -421,12 +422,12 @@ const CourseSection = ({ course,batchData  }) => {
                 navigate("/inquiry");
                 window.scrollTo(0, 0);
               }}
-              className="px-8 py-3 bg-[#0d6efd] text-white rounded-full font-semibold hover:bg-[#0a58ca] transition-colors w-full md:w-auto"
+              className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
+           transition duration-300 shadow-lg"
             >
               Enroll Now
             </button>
           </div>
-        </div>
       </div>
     </div>
   );
@@ -435,9 +436,9 @@ const CourseSection = ({ course,batchData  }) => {
 
 
 const AllCourses = () => {
- 
+
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [batchData, setBatchData] = useState([]);
 
@@ -445,7 +446,7 @@ const AllCourses = () => {
     const fetchAllBatches = async () => {
       try {
         const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch");
-        setBatchData(response.data); 
+        setBatchData(response.data);
         // console.log(response);
       } catch (error) {
         console.error("Error fetching batches:", error);
@@ -460,7 +461,7 @@ const AllCourses = () => {
       requestAnimationFrame(() => {
         const element = document.querySelector(location.hash);
         if (element) {
-          const offset = 80; 
+          const offset = 80;
           const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 
           window.scrollTo({
@@ -477,38 +478,38 @@ const AllCourses = () => {
       <Navbar />
       <div className="min-h-screen bg-orange-50">
         <div className="bg-[#4E77BB] pt-12 pb-20 relative shadow-md">
-                  <div className="max-w-4xl mx-auto text-center px-4">
-                  <div className="flex justify-center mb-4">
-                  <img
-                  src={course}
-                  className="h-20 w-20 filter invert brightness-0 contrast-200"
-                  ></img>
-                    </div>
-                    <h1 className="text-4xl font-bold text-white mb-4">
-                    Our Featured Courses
-                    </h1>
-                    <p className="text-white text-center max-w-2xl mx-auto">
-                    Discover our carefully curated selection of courses designed to
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <div className="flex justify-center mb-4">
+              <img
+                src={course}
+                className="h-20 w-20 filter invert brightness-0 contrast-200"
+              ></img>
+            </div>
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Our Featured Courses
+            </h1>
+            <p className="text-white text-center max-w-2xl mx-auto">
+              Discover our carefully curated selection of courses designed to
               help you master the skills you need for success in today's digital
               world.
-                    </p>
-                  </div>
-                  {/* Wave SVG */}
-                  <div className="absolute bottom-0 left-0 right-0">
-                    <svg viewBox="0 0 1440 100" className="w-full h-auto">
-                      <path
-                        fill="#fff"
-                        fillOpacity="1"
-                        d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-       
+            </p>
+          </div>
+          {/* Wave SVG */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 100" className="w-full h-auto">
+              <path
+                fill="#fff"
+                fillOpacity="1"
+                d="M0,32L80,37.3C160,43,320,53,480,58.7C640,64,800,64,960,58.7C1120,53,1280,43,1360,37.3L1440,32L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
 
         <div className="divide-y">
           {courses.map((course, index) => (
-            <CourseSection key={index} course={course}  batchData={batchData} />
+            <CourseSection key={index} course={course} batchData={batchData} />
           ))}
         </div>
         <div className="bg-white text-[#E85900] py-16">
