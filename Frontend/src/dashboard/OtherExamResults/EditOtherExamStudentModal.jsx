@@ -18,7 +18,7 @@ const EditOtherExamModal = ({ isEditOpen, onClose, setToast, id }) => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:4000/server/other-exam-results/${id}`)
+        .get(`https://beacon-tutorial.vercel.app/server/other-exam-results/${id}`)
         .then((response) => {
           const result = response.data.data;
           setFormData({
@@ -65,7 +65,7 @@ const EditOtherExamModal = ({ isEditOpen, onClose, setToast, id }) => {
 
     try {
       const response = await axios.put(
-        `http://localhost:4000/server/other-exam-results/${id}`,
+        `https://beacon-tutorial.vercel.app/server/other-exam-results/${id}`,
         formData
       );
 

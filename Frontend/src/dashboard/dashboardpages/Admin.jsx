@@ -17,7 +17,7 @@ const AdminManagement = () => {
 
   const fetchAdmins = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/dashadmin/");
+      const response = await axios.get("https://beacon-tutorial.vercel.app/server/dashadmin/");
       console.log(response); 
       if (response.data) {
         setAdmins(response.data);

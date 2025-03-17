@@ -48,7 +48,7 @@ function ForgotPassword() {
     const handleCheckEmailAndGenerateOTP = async () => {
         try {
             const response = await axios.post(
-                "http://localhost:4000/server/student/check/email",
+                "https://beacon-tutorial.vercel.app/server/student/check/email",
                 formData
             );
             if (response.data.success) {
@@ -56,7 +56,7 @@ function ForgotPassword() {
                 try {
                     const gotp = Math.floor(100000 + Math.random() * 900000).toString()
                     const res = await axios.post(
-                        "http://localhost:4000/server/student/otp-email", {
+                        "https://beacon-tutorial.vercel.app/server/student/otp-email", {
                         name: response.data.name,
                         email: formData.email,
                         otp: gotp
@@ -115,7 +115,7 @@ function ForgotPassword() {
         }
         try {
             const response = await axios.post(
-                "http://localhost:4000/server/student/reset-password",
+                "https://beacon-tutorial.vercel.app/server/student/reset-password",
                 { email: formData.email, password: newPassword }
             );
             if (response.data.success) {
