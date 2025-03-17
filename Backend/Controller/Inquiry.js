@@ -2,35 +2,22 @@ import Inquiry from "../Models/Inquiry.js";
 import { Parser } from "json2csv";
 import { sendInquiryForm } from "./EmailService.js";
 
+
+
 export const submitInquiry = async (req, res) => {
   try {
     const inquiryData = req.body;
-
-    // Save the inquiry in the database
     const newInquiry = new Inquiry(inquiryData);
     await newInquiry.save();
-
-    // Prepare email data for the inquiry form submission
-    const userInquiryEmailData = {
-      subject: "Inquiry Submission Details",
-      ...inquiryData,
-    };
-    await sendInquiryForm(userInquiryEmailData);
-
-    // Prepare email data for notifying the admin
-    const adminInquiryEmailData = {
-      subject: "New Inquiry Submission Details",
-      email: "omkumavat2004@gmail.com", // Admin email
-      ...inquiryData,
-    };
-    await sendInquiryForm(adminInquiryEmailData);
-
+    await sendInquiryForm(inquiryData, inquiryData.email);
+    await sendInquiryForm(inquiryData, "beacontutorial1234@gmail.com");
     res.status(200).json({ message: "Inquiry form submitted successfully!" });
   } catch (error) {
     console.error("Error saving inquiry:", error);
     res.status(500).json({ message: "Error submitting inquiry form." });
   }
 };
+
 
 
 export const getAllInquiry = async (req, res) => {

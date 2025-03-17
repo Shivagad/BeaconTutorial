@@ -6,7 +6,7 @@ const ScholarshipSchema = new mongoose.Schema(
     lastName: { type: String, required: true },
     birthday: { type: Date, required: true },
     gender: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true},
     address: { type: String },
     phone: { type: String, required: true },
     educationMode: { type: String },

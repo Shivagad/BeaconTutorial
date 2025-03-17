@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #1a73e8;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1a73e8;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>Hello {{name}},</h2>
+        <p>Your result for the exam <strong>{{exam}}</strong> dated <strong>{{examDate}}</strong> has been Out.</p>
+        <p><strong>Total Marks:</strong> {{totalMarks}} / {{outof}}</p>
+        <p><strong>Rank:</strong> {{rank}}</p>
+        <p><strong>Correct Answers:</strong> {{correctAnswers}}</p>
+        <p><strong>Incorrect Answers:</strong> {{incorrectAnswers}}</p>
+        <p><strong>Not Attempted:</strong> {{notAttempted}}</p>
+        
+        <h3>Section-wise Scores:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Total</th>
+                    <th>Section A</th>
+                    <th>Section B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Physics</td>
+                    <td>{{physics}}</td>
+                    <td>{{physicsSectionA}}</td>
+                    <td>{{physicsSectionB}}</td>
+                </tr>
+                <tr>
+                    <td>Chemistry</td>
+                    <td>{{chemistry}}</td>
+                    <td>{{chemistrySectionA}}</td>
+                    <td>{{chemistrySectionB}}</td>
+                </tr>
+                <tr>
+                    <td>Maths</td>
+                    <td>{{maths}}</td>
+                    <td>{{mathsSectionA}}</td>
+                    <td>{{mathsSectionB}}</td>
+                </tr>
+                <tr>
+                    <td>Biology</td>
+                    <td>{{biology}}</td>
+                    <td>{{biologySectionA}}</td>
+                    <td>{{biologySectionB}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <br>
+        <p>Thank you,<br>Beacon Tutorials</p>
+    </div>
+</body>
+</html>
