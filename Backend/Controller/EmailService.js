@@ -97,6 +97,7 @@ export const sendScholarregSuccessfull = async (req, res) => {
     }
 };
 
+
 export const sendInquiryForm = async (inquiryData) => {
     console.log(inquiryData);
     
@@ -117,10 +118,10 @@ export const sendInquiryForm = async (inquiryData) => {
     try {
         await transporter.sendMail(mailOptions);
         // console.log("OTP email sent successfully.");
-        res.status(200).json({ message: "Email sent successfully" });
+        // res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
         // console.error("Error sending OTP email:", error);
-        res.status(500).json({ error: "Failed to send email" });
+        // res.status(500).json({ error: "Failed to send email" });
     }
 };
 
@@ -146,7 +147,7 @@ export const ContactUsEmail = async (req, res) => {
         subject: `New Inquiry from ${name}`,  // Make it clear for the admin
         html: htmlContent,
       };
-      
+      console.log(mailOptions);
       await transporter.sendMail(mailOptions);
       console.log("Contact email sent successfully.");
       res.status(200).json({ message: "Email sent successfully", success: true });

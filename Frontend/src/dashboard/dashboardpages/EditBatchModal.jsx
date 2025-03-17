@@ -9,7 +9,7 @@ const EditBatchModal = ({ setToast, isEditOpen, onClose, id }) => {
     if (id) {
       const fetchBatch = async () => {
         try {
-          const response = await axios.get(`https://beacon-tutorial.vercel.app/server/batches/getbatch/${id}`);
+          const response = await axios.get(`http://localhost:4000/server/batches/getbatch/${id}`);
           if (response.data) {
             setBatchName(response.data.batchName);
             setStartDate(new Date(response.data.startDate).toISOString().split("T")[0]);
@@ -27,7 +27,7 @@ const EditBatchModal = ({ setToast, isEditOpen, onClose, id }) => {
 
     try {
       const response = await axios.put(
-        `https://beacon-tutorial.vercel.app/server/batches/updatebatch/${id}`,
+        `http://localhost:4000/server/batches/updatebatch/${id}`,
         { batchName, startDate }
       );
       setToast({ success: true, message: response.data.message });
