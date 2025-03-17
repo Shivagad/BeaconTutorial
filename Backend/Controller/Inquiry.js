@@ -5,8 +5,6 @@ import { sendInquiryForm } from "./EmailService.js";
 export const submitInquiry = async (req, res) => {
   try {
     const inquiryData = req.body;
-
-    // Save the inquiry in the database
     const newInquiry = new Inquiry(inquiryData);
     await newInquiry.save();
 
@@ -20,11 +18,11 @@ export const submitInquiry = async (req, res) => {
     // Prepare email data for notifying the admin
     const adminInquiryEmailData = {
       subject: "New Inquiry Submission Details",
-      email: "omkumavat2004@gmail.com", // Admin email
+      email: "beacontutorial1234@gmail.com", // Admin email
       ...inquiryData,
     };
     await sendInquiryForm(adminInquiryEmailData);
-
+  console.log("dfvgvfddcv");
     res.status(200).json({ message: "Inquiry form submitted successfully!" });
   } catch (error) {
     console.error("Error saving inquiry:", error);

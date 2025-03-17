@@ -7,6 +7,26 @@ import Student from "../Models/Student.js";
 import Course from "../Models/Course.js";
 import Result from "../Models/ResultSchema.js";
 import { Parser } from "json2csv";
+import nodemailer from "nodemailer";
+// import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import Handlebars from "handlebars";
+// import * as dotenv from "dotenv";
+
+
+const transporter = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+    },
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 export const getStudents = async (req, res) => {
@@ -565,11 +585,13 @@ export const addResult = async (req, res) => {
       outof = 0,
     } = req.body;
     const student = await Student.findOne({ email: studentEmail });
+
     if (!student) {
       return res
         .status(404)
         .json({ success: false, message: "Student not found" });
     }
+    //  console.log(student);
     const newResult = new Result({
       student: student._id,
       exam,
@@ -593,9 +615,48 @@ export const addResult = async (req, res) => {
       biologySectionA,
       biologySectionB,
     });
+
+     const templatePath = path.join(__dirname, "../views", 'Result.hbs');
+    
+        const templateSource = fs.readFileSync(templatePath, "utf-8");
+        // console.log("hiihgf");
+        const template = Handlebars.compile(templateSource);
+        // console.log("hihgfihgf");
+        const htmlContent = template({
+          name: student.name,
+          exam,
+          examDate,
+          totalMarks,
+          outof,
+          rank,
+          correctAnswers,
+          incorrectAnswers,
+          notAttempted,
+          physics,
+          physicsSectionA,
+          physicsSectionB,
+          chemistry,
+          chemistrySectionA,
+          chemistrySectionB,
+          maths,
+          mathsSectionA,
+          mathsSectionB,
+          biology,
+          biologySectionA,
+          biologySectionB,
+        });
+        // console.log(htmlContent);
+        const mailOptions = {
+            from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
+            to: `${student.email}, ${student.parentEmail}`,
+            subject: "Your Beacon Tutorial  Test Result is Released!",
+            html: htmlContent,
+        };
+        // console.log("mail sent");
     try {
       await newResult.save();
-      console.log("Student result added successfully");
+      await transporter.sendMail(mailOptions);
+      // console.log("Student result added successfully");
       student.results.push(newResult._id);
       await student.save();
       console.log(student);
@@ -740,12 +801,50 @@ export const uploadStudentResultCSV = async (req, res) => {
         biologySectionA: Number(biologySectionA) || 0,
         biologySectionB: Number(biologySectionB) || 0,
       });
+  
 
+      const templatePath = path.join(__dirname, "../views", 'Result.hbs');
+    
+      const templateSource = fs.readFileSync(templatePath, "utf-8");
+      // console.log("hiihgf");
+      const template = Handlebars.compile(templateSource);
+      // console.log("hihgfihgf");
+      const htmlContent = template({
+        name: student.name,
+        exam,
+        examDate,
+        totalMarks,
+        outof,
+        rank,
+        correctAnswers,
+        incorrectAnswers,
+        notAttempted,
+        physics,
+        physicsSectionA,
+        physicsSectionB,
+        chemistry,
+        chemistrySectionA,
+        chemistrySectionB,
+        maths,
+        mathsSectionA,
+        mathsSectionB,
+        biology,
+        biologySectionA,
+        biologySectionB,
+      });
+      // console.log(htmlContent);
+      const mailOptions = {
+        from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
+        to: `${student.email}, ${student.parentEmail}`, // Sending email to both student and parent
+        subject: "Your Beacon Tutorial Test Result is Released!",
+        html: htmlContent,
+    };
+    
       await newResult.save();
       student.results.push(newResult._id);
       await student.save();
-
       results.push(newResult);
+      await transporter.sendMail(mailOptions);
     }
 
     fs.unlinkSync(filePath);

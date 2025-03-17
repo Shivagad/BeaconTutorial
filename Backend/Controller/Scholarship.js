@@ -2,28 +2,17 @@ import Scholarship from "../Models/Scholarship.js";
 import { Parser } from "json2csv";
 
 
-export const createScholarship = async (req, res) => {
-  try {
-    const existingScholarship = await Scholarship.findOne({ email: req.body.email });
-    if (existingScholarship) {
-      return res.status(409).json({
-        success: false,
-        error: "Scholarship already exists for this email",
-      });
+  export const createScholarship = async (req, res) => {
+    try {
+      // await Scholarship.collection.dropIndex("email_1");
+      const scholarship = await Scholarship.create(req.body);
+      res.status(201).json({ success: true, data: scholarship });
+    } catch (error) {
+      console.error("Error creating scholarship:", error);
+      res.status(500).json({ success: false, error: error.message });
     }
-    const scholarship = await Scholarship.create(req.body);
-    res.status(201).json({ success: true, data: scholarship });
-  } catch (error) {
-    console.error("Error creating scholarship:", error);
-    if (error.code === 11000) {
-      return res.status(409).json({
-        success: false,
-        error: "Scholarship already exists",
-      });
-    }
-    res.status(500).json({ success: false, error: error.message });
-  }
-};
+  };  
+
 
 export const getAllScholarships = async (req, res) => {
     try {
@@ -34,10 +23,6 @@ export const getAllScholarships = async (req, res) => {
       res.status(500).json({ success: false, error: error.message });
     }
   };
-
-
-
-
 
   export const downloadScholarshipCSV = async (req, res) => {
     try {
@@ -88,7 +73,7 @@ export const getAllScholarships = async (req, res) => {
       res.status(500).json({ error: "Failed to delete scholarship entry" });
     }
   };
-  
+
 
   export const deleteAllScholarships = async (req, res) => {
     try {
