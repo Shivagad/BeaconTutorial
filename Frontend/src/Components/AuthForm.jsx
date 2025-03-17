@@ -51,8 +51,8 @@ export function AuthForm({ mode }) {
           throw new Error("Email and password are required!");
         }
         apiEndpoint = isStudentLogin
-          ? "http://localhost:4000/server/student/login-student"
-          : "http://localhost:4000/server/dashadmin/login-admin";
+          ? "https://beacon-tutorial.vercel.app/server/student/login-student"
+          : "https://beacon-tutorial.vercel.app/server/dashadmin/login-admin";
         requestData = { email, password };
       }
 
