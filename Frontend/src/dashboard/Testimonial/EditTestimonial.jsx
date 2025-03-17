@@ -18,7 +18,7 @@ const EditTestimonialModal = ({ isEditOpen, onClose, setToast, id }) => {
     setIsSubmitting(true);
     try {
       const response = await axios.put(
-        `https://beacon-tutorial.vercel.app/server/testimonial/${id}`,
+        `http://localhost:4000/server/testimonial/${id}`,
         formData
       );
       if (response.data) {
@@ -36,7 +36,7 @@ const EditTestimonialModal = ({ isEditOpen, onClose, setToast, id }) => {
   const fetchTestimonialDetails = async () => {
     try {
       const response = await axios.get(
-        `https://beacon-tutorial.vercel.app/server/testimonial/${id}`
+        `http://localhost:4000/server/testimonial/${id}`
       );
       const data = response.data.data;
       setFormData({
