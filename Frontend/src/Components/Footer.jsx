@@ -168,7 +168,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-board-classes"
+                  href="/all-courses#11th-and-12th-board-classes"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th Board Classes
@@ -176,7 +176,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-jee-mains-advance"
+                  href="/all-courses#11th-and-12th-jee-mains-and-advance"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th JEE Mains + Advance
@@ -184,7 +184,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-neet"
+                  href="/all-courses#11th-and-12th-neet"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th NEET
@@ -192,7 +192,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-iiser"
+                  href="/all-courses#11th-and-12th-iiser"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th IISER
@@ -200,7 +200,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-mhtcet"
+                  href="/all-courses#11th-and-12th-mhtcet"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th MHTCET
@@ -208,7 +208,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-nda"
+                  href="/all-courses#11th-and-12th-nda"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th NDA
@@ -216,7 +216,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-cuet"
+                  href="/all-courses#11th-and-12th-cuet"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th CUET
@@ -248,7 +248,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#jee-mains-advance"
+                  href="/all-courses#jee-mains-and-advance"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   JEE (Mains + Advance)

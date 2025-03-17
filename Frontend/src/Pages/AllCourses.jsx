@@ -80,7 +80,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th Board Classes",
+    title: "11th and 12th Board Classes",
     description:
       "A well-structured program to help students ace their 11th and 12th board exams with proper guidance and study materials.",
     Batch_Starts: "2025-03-22",
@@ -93,7 +93,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th JEE Mains + Advance",
+    title: "11th and 12th JEE Mains and Advance",
     description:
       "Intensive coaching for JEE Mains and Advanced aspirants, focusing on concept clarity and problem-solving techniques.",
     Batch_Starts: "2025-03-30",
@@ -106,7 +106,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th NEET",
+    title: "11th and 12th NEET",
     description:
       "Comprehensive NEET coaching for 11th and 12th students covering the full syllabus with expert faculty guidance.",
     Batch_Starts: "2025-04-10",
@@ -119,7 +119,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th IISER",
+    title: "11th and 12th IISER",
     description:
       "Specialized training for IISER entrance, covering physics, chemistry, mathematics, and biology with an emphasis on research-based learning.",
     Batch_Starts: "2025-04-08",
@@ -132,7 +132,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th MHTCET",
+    title: "11th and 12th MHTCET",
     description:
       "Intensive coaching for MHT-CET aspirants, covering physics, chemistry, and mathematics.",
     Batch_Starts: "2025-03-27",
@@ -145,7 +145,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th NDA",
+    title: "11th and 12th NDA",
     description:
       "Specialized coaching for NDA entrance exams, covering mathematics, general ability, and physical training.",
     Batch_Starts: "2025-04-12",
@@ -158,7 +158,7 @@ const courses = [
     ],
   },
   {
-    title: "11th + 12th CUET",
+    title: "11th and 12th CUET",
     description:
       "CUET preparation course covering aptitude, domain-specific subjects, and logical reasoning.",
     Batch_Starts: "2025-04-18",
@@ -210,7 +210,7 @@ const courses = [
     ],
   },
   {
-    title: "JEE (Mains + Advance)",
+    title: "JEE (Mains and Advance)",
     description:
       "Intensive coaching for JEE aspirants, covering Mains and Advanced syllabus with problem-solving techniques and mock tests.",
     Batch_Starts: "2025-04-10",
@@ -262,7 +262,7 @@ const courses = [
     ],
   },
   {
-    title: "MHT - CET",
+    title: "MHT CET",
     description:
       "A structured course covering the complete MHT-CET syllabus with problem-solving strategies.",
     Batch_Starts: "2025-03-23",
@@ -461,7 +461,7 @@ const AllCourses = () => {
       requestAnimationFrame(() => {
         const element = document.querySelector(location.hash);
         if (element) {
-          const offset = 80;
+          const offset = 120;
           const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 
           window.scrollTo({
