@@ -23,7 +23,7 @@ const Results = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:4000/server/tenth/result')
+    axios.get('https://beacon-tutorial.vercel.app/server/tenth/result')
       .then(response => {
         if (response.data.success) {
           console.log(response.data.data);

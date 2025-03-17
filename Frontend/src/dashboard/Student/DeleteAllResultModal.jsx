@@ -15,7 +15,7 @@ const DeleteResultModal = ({ isOpen, onClose, setToast }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post("http://localhost:4000/server/student/deleteallresultbyename", formData);
+      const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/deleteallresultbyename", formData);
       if (response.data.success) {
         setToast({ success: true, message: "Result deleted successfully" });
         setFormData({

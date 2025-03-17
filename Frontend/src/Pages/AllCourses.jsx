@@ -406,28 +406,28 @@ const CourseSection = ({ course, batchData }) => {
           </div>
 
         </div>
-        <div className="flex items-center justify-center gap-10 w-full mt-6">
-            <a
-              href={driveFolderUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
+        <div className={`flex items-center justify-center gap-10 mt-6 -mb-10 ${isExpanded ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
+          <a
+            href={driveFolderUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
            transition duration-300 shadow-lg text-center"
-            >
-              Read More
-            </a>
+          >
+            Read More
+          </a>
 
-            <button
-              onClick={() => {
-                navigate("/inquiry");
-                window.scrollTo(0, 0);
-              }}
-              className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
+          <button
+            onClick={() => {
+              navigate("/inquiry");
+              window.scrollTo(0, 0);
+            }}
+            className="px-7 py-3 bg-[#E85900] text-white rounded-lg font-semibold hover:-translate-y-1 hover:scale-105 
            transition duration-300 shadow-lg"
-            >
-              Enroll Now
-            </button>
-          </div>
+          >
+            Enroll Now
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -445,7 +445,7 @@ const AllCourses = () => {
   useEffect(() => {
     const fetchAllBatches = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/server/batches/getallbatch");
+        const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch");
         setBatchData(response.data);
         // console.log(response);
       } catch (error) {

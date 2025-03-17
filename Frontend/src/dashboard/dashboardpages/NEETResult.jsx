@@ -19,7 +19,7 @@ const NEETResult = () => {
   const [students, setStudents] = useState([]);
   const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/neet/students");
+      const response = await axios.get("https://beacon-tutorial.vercel.app/server/neet/students");
       console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {

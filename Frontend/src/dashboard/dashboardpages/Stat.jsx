@@ -11,7 +11,7 @@ const StatManagement = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/stat/getstat");
+      const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
       if (response.data) {
         setStats(response.data);
       } else {
