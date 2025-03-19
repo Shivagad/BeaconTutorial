@@ -380,7 +380,7 @@ function AppRoutes() {
           path="*"
           element={
             <NonDashboardRoute>
-              <Navigate to="/login" />
+              <Navigate to="/" />
             </NonDashboardRoute>
           }
         />

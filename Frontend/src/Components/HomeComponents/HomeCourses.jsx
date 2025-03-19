@@ -338,7 +338,7 @@ const HomeCourses = () => {
                 <div
                   className={`relative ${cardWidthClass} backdrop-blur-lg rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 border border-white/20 bg-white/10`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[black] to-[#4e77bb] opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
                   <div className="relative p-8">
                     <h3 className="text-2xl font-bold text-white mb-3">{course.title}</h3>
                     <p className="text-indigo-200 mb-6">{course.description}</p>
@@ -380,7 +380,7 @@ const HomeCourses = () => {
                   <div
                     className={`relative ${cardWidthClass} backdrop-blur-lg rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 border border-white/20 bg-white/10`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[black] to-[#4e77bb] opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
                     <div className="relative p-8">
                       <h3 className="text-2xl font-bold text-white mb-3">{course.title}</h3>
                       <p className="text-white mb-6">{course.description}</p>
