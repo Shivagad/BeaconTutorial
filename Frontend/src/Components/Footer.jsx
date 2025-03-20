@@ -367,6 +367,12 @@ const Footer = () => {
               : `2025 - ${new Date().getFullYear()}`}{" "}
             Beacon Tutorials | All Rights Reserved | Empowering Future Leaders
           </p>
+          <p className="text-sm text-white">
+            Made with
+            <span className="text-red-500 text-2xl ml-2 mr-2 mt-1 animate-pulse">&hearts;</span>
+            By PICT Developers
+          </p>
+
         </div>
       </div>
     </footer>
