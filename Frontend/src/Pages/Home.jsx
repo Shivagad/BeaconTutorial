@@ -170,7 +170,6 @@ function Home() {
                 </a>
               </li>
             </ul>
-
             {/* Contact Page Link */}
             <p className="text-gray-700 mt-4">
               For More Information, Visit our{" "}
@@ -226,23 +225,7 @@ function Home() {
                 </div>
               ))
             ) : (
-              <div className="flex items-center justify-center h-full">
-                {placeholderPosters.length > 0 ? (
-                  <picture>
-                    <source
-                      srcSet={placeholderPosters[0].mobile}
-                      media="(max-width: 768px)"
-                    />
-                    <img
-                      src={placeholderPosters[0].desktop}
-                      alt="Poster"
-                      className="w-full h-[350px] object-cover"
-                    />
-                  </picture>
-                ) : (
-                  <p className="text-gray-500">No posters available</p>
-                )}
-              </div>
+              <div className="w-full h-[350px] bg-white"></div>
             )}
 
             {/* Carousel Buttons */}

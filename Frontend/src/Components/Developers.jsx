@@ -17,7 +17,7 @@ const Developers = () => {
         },
         {
             name: "Akshay Sir",
-            image: "/images/beacon.png",
+            image: "/images/akshaysir.JPG",
             bio:"Physics Faculty At Beacon Tutorial (Pune)",
         }
     ];
