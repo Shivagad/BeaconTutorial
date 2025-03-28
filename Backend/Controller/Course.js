@@ -43,8 +43,6 @@ export const getCourseById = async (req, res) => {
 export const createCourse = async (req, res) => {
   try {
     const { name, code } = req.body;
-
-
     const existingCourse = await Course.findOne({ code });
     if (existingCourse) {
       return res.status(400).json({ success: false, message: "Course code already exists" });

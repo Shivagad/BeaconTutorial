@@ -5,12 +5,9 @@ const router = express.Router();
 
 router.post('/students', addStudentResult);
 
-
 router.get('/students', getAllStudentResults);
 
-
 router.put('/students/:id', editStudentResult);
-
 
 router.delete('/students/:id', deleteStudentResult);
 

@@ -3,7 +3,6 @@ import { Parser } from "json2csv";
 import { sendInquiryForm } from "./EmailService.js";
 
 
-
 export const submitInquiry = async (req, res) => {
   try {
     const inquiryData = req.body;
@@ -36,9 +35,6 @@ export const getAllInquiry = async (req, res) => {
     });
   }
 };
-
-
-
 
 
 export const downloadInquiryCSV = async (req, res) => {

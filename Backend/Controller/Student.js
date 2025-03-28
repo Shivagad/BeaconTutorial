@@ -62,7 +62,7 @@ export const getStudentById = async (req, res) => {
 export const checkStudentEmail = async (req, res) => {
   try {
     console.log(req.body);
-    const { email, dob } = req.body;
+    const { email, dob }=req.body;
 
     // Find student by email
     const student = await Student.findOne({ email });
@@ -74,7 +74,6 @@ export const checkStudentEmail = async (req, res) => {
     }
 
     const storedDOB = new Date(student.dob).toISOString().split("T")[0];
-
     if (storedDOB === dob) {
       return res
         .status(200)
@@ -87,7 +86,7 @@ export const checkStudentEmail = async (req, res) => {
           message: "Unauthorized: Incorrect Date of Birth",
         });
     }
-  } catch (error) {
+  }catch (error) {
     console.error("Error checking student email:", error);
     res
       .status(500)
@@ -149,12 +148,8 @@ export const createStudent = async (req, res) => {
       admissionYear,
       course,
     } = req.body;
-
     console.log(req.body);
-
-
     const existingStudent = await Student.findOne({ email });
-    
     if (existingStudent) {
       return res.status(400).json({
         success: false,
@@ -374,7 +369,7 @@ export const uploadStudentsCSV = async (req, res) => {
         .status(400)
         .json({ success: false, message: "CSV file is required" });
     }
-
+    
     const students = [];
     const filePath = req.file.path;
     const readStream = fs.createReadStream(filePath).pipe(csv());
@@ -400,7 +395,6 @@ export const uploadStudentsCSV = async (req, res) => {
         course,
       } = row;
       // console.log("Processing:", row);
-
       const existingStudent = await Student.findOne({
         $or: [{ email }],
       });
@@ -617,7 +611,7 @@ export const addResult = async (req, res) => {
     });
 
      const templatePath = path.join(__dirname, "../views", 'Result.hbs');
-    
+
         const templateSource = fs.readFileSync(templatePath, "utf-8");
         // console.log("hiihgf");
         const template = Handlebars.compile(templateSource);
