@@ -10,7 +10,7 @@ export const addTwelfthStudentResult = async (req, res) => {
         }
 
         const base64Image = imagePath.split(";base64,").pop();
-        // console.log(base64Image);
+        // // console.log(base64Image);
         const uploadResponse = await cloudinary.uploader.upload(
             `data:image/png;base64,${base64Image}`,
             {

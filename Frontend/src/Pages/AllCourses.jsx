@@ -447,7 +447,7 @@ const AllCourses = () => {
       try {
         const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch");
         setBatchData(response.data);
-        // console.log(response);
+        // // console.log(response);
       } catch (error) {
         console.error("Error fetching batches:", error);
       }

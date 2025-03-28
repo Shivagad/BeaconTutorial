@@ -17,7 +17,7 @@ const AddAdminModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
       setIsSubmitting(true);
-      console.log(formData);
+      // console.log(formData);
       const response = await axios.post('https://beacon-tutorial.vercel.app/server/dashadmin/', formData);
 if (response.data.message === "Admin created successfully") {
   setToast({

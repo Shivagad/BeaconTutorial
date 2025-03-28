@@ -20,7 +20,7 @@ const EventGallery = () => {
   const fetchStudents = useCallback(async () => {
     try {
       const response = await axios.get("https://beacon-tutorial.vercel.app/server/event/getevent");
-      console.log(response.data.data)
+      // console.log(response.data.data)
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
       setStudents([])

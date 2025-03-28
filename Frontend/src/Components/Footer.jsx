@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaInstagram, FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
@@ -359,14 +360,27 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-center mt-12 pt-6 border-t border-gray-700">
+        <div className="text-center mt-7 -mb-10 pt-6 border-t border-gray-700">
           <p className="text-sm text-white">
             &copy;{" "}
             {2025 === new Date().getFullYear()
               ? "2025"
               : `2025 - ${new Date().getFullYear()}`}{" "}
-            Beacon Tutorials | All Rights Reserved | Empowering Future Leaders
+            Beacon Tutorials  &nbsp;|&nbsp;  All Rights Reserved  &nbsp;|&nbsp;  Empowering Future Leaders
           </p>
+          <p className="text-sm text-white mt-2">
+            Developed by
+            <Link
+              to="/developers"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <span className="hover:pointer text-orange-500">  WEB Team  </span>
+            </Link>
+
+            of PICT
+            {/* <span className="text-red-500 text-2xl ml-2 mr-2">&hearts;</span> */}
+          </p>
+
         </div>
       </div>
     </footer>

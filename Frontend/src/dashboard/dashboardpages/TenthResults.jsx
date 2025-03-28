@@ -19,7 +19,7 @@ const TenthResults = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("https://beacon-tutorial.vercel.app/server/tenth/students");
-    //  console.log(response.data.data);
+    //  // console.log(response.data.data);
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
       setStudents([])

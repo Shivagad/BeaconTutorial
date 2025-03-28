@@ -21,7 +21,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const sendOTPEmail = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { name, email, otp } = req.body;
     const templatePath = path.join(__dirname, "../views", 'SignupOTP.hbs');
     const templateSource = fs.readFileSync(templatePath, "utf-8");
@@ -36,7 +36,7 @@ export const sendOTPEmail = async (req, res) => {
     };
     try {
         await transporter.sendMail(mailOptions);
-        console.log("OTP email sent successfully.");
+        // console.log("OTP email sent successfully.");
         res.status(200).json({success:true, message: "Email sent successfully" });
     } catch (error) {
         console.error("Error sending OTP email:", error);
@@ -45,7 +45,7 @@ export const sendOTPEmail = async (req, res) => {
 };
 
 export const sendSignUpSuccessfulEmail = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { name, email } = req.body;
     const templatePath = path.join(__dirname, "../views", 'SignupSuccess.hbs');
     const templateSource = fs.readFileSync(templatePath, "utf-8");
@@ -61,7 +61,7 @@ export const sendSignUpSuccessfulEmail = async (req, res) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        console.log("OTP email sent successfully.");
+        // console.log("OTP email sent successfully.");
         res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
         console.error("Error sending OTP email:", error);
@@ -72,7 +72,7 @@ export const sendSignUpSuccessfulEmail = async (req, res) => {
 
 
 export const sendScholarregSuccessfull = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { firstName, lastName, email } = req.body;
     const templatePath = path.join(__dirname, "../views", 'ScholarshipregSuccess.hbs');
     const templateSource = fs.readFileSync(templatePath, "utf-8");
@@ -88,7 +88,7 @@ export const sendScholarregSuccessfull = async (req, res) => {
 
     try {
         await transporter.sendMail(mailOptions);
-        // console.log("OTP email sent successfully.");
+        // // console.log("OTP email sent successfully.");
         res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
         // console.error("Error sending OTP email:", error);
@@ -122,7 +122,7 @@ export const sendInquiryForm = async (inquiryData, toEmail) => {
 export const ContactUsEmail = async (req, res) => {
     try {
       const { name, phone, email, subject } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
 
       if (!name || !phone || !email || !subject) {
         return res.status(400).json({ message: "All fields are required." });
@@ -140,9 +140,9 @@ export const ContactUsEmail = async (req, res) => {
         subject: `New Inquiry from ${name}`,  // Make it clear for the admin
         html: htmlContent,
       };
-      console.log(mailOptions);
+      // console.log(mailOptions);
       await transporter.sendMail(mailOptions);
-      console.log("Contact email sent successfully.");
+      // console.log("Contact email sent successfully.");
       res.status(200).json({ message: "Email sent successfully", success: true });
     } catch (error) {
       console.error("Error sending Contact Us email:", error);

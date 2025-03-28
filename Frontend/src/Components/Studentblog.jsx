@@ -10,10 +10,10 @@ import 'react-loading-skeleton/dist/skeleton.css';
 const StarRating = ({ blogId, currentRating }) => {
     const [rating, setRating] = useState(currentRating);
     const [hover, setHover] = useState(null);
-    console.log(blogId);
+    // console.log(blogId);
     const handleRating = async (newRating) => {
       setRating(newRating);
-      console.log(newRating);
+      // console.log(newRating);
     
       try {
         await axios.put(`https://beacon-tutorial.vercel.app/server/blog/update-rating/${blogId}`, {

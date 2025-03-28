@@ -9,7 +9,7 @@ import beaconlogo from '../../public/images/logo.png'; // adjust the path as nee
 const LeftPanel = ({ userType, }) => {
   return (
     <div className="h-full relative bg-[#4E77BB] text-white flex flex-col items-center justify-center p-8 md:p-12">
-      <img src={beaconlogo} alt="Coaching Center Logo" className="w-30 h-30 mb-4" />
+      <img src={"/images/beacon.png"} alt="Coaching Center Logo" className="w-30 h-30 -mb-5" />
       <h2 className="text-3xl text-center font-bold">
         {userType === 'admin' ? 'Admin Administration' : 'Student Administration'}
         <p className="text-center">System</p>

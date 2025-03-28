@@ -19,7 +19,7 @@ const CourseManagement = () => {
     try {
       const response = await axios.get("https://beacon-tutorial.vercel.app/server/courses/getall");
 
-      console.log(response);
+      // console.log(response);
       if (response.data.courses) {
         setCourses(response.data.courses);
       } else {

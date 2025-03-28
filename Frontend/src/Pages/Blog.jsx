@@ -23,7 +23,7 @@ const Blog = () => {
         )
         setBlogs(response.data)
       } catch (err) {
-        console.log("Using mock data instead of API")
+        // console.log("Using mock data instead of API")
         // Fall back to mock data if API fails
         setBlogs(MOCK_BLOGS)
       } finally {
@@ -75,7 +75,7 @@ const Blog = () => {
             </svg>
           </div>
         </div>
-        <div className="max-w-6xl py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl py-16 px-4 sm:px-6 lg:px-8 lg:ml-16">
           {/* Blog posts grid */}
           {loading ? (
             <div className="space-y-10">

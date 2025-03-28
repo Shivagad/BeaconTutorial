@@ -82,7 +82,7 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
           toast.error("Error submitting form");
         });
     } else {
-      console.log("Form validation failed");
+      // console.log("Form validation failed");
     }
   };
   

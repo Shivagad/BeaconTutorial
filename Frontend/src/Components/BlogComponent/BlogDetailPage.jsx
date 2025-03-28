@@ -24,103 +24,6 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { Popover } from "@headlessui/react";
 
-// Mock data for development (remove when connecting to real API)
-const MOCK_BLOGS = [
-  {
-    id: "1",
-    title: "Mastering Advanced Mathematics: Tips and Tricks",
-    content: `Mathematics is often considered one of the most challenging subjects for students. However, with the right approach and techniques, anyone can excel in this field.
-
-In this comprehensive guide, we explore advanced strategies for tackling complex mathematical problems, from calculus to linear algebra. Our expert tutors share their insights on developing mathematical intuition and problem-solving skills that will serve you well beyond the classroom.
-
-## Key Strategies for Mathematical Success
-
-1. **Build a Strong Foundation**: Make sure you thoroughly understand fundamental concepts before moving to advanced topics.
-
-2. **Practice Regularly**: Mathematics requires consistent practice. Set aside time each day to work through problems.
-
-3. **Understand, Don't Memorize**: Focus on understanding the underlying principles rather than memorizing formulas.
-
-4. **Visualize Problems**: Try to create mental or physical representations of abstract concepts.
-
-5. **Seek Multiple Approaches**: There's often more than one way to solve a problem. Exploring different methods deepens your understanding.
-
-## Advanced Problem-Solving Techniques
-
-When facing complex problems, break them down into smaller, manageable parts. Identify what you know and what you need to find. Look for patterns and connections to concepts you're already familiar with.
-
-Remember that making mistakes is an essential part of the learning process. Analyze your errors to understand where your reasoning went wrong, and use that insight to improve your approach.
-
-## The Role of Technology in Mathematics Learning
-
-Modern technology offers powerful tools for mathematics education. From graphing calculators to specialized software like MATLAB and Mathematica, these resources can help visualize complex concepts and verify your solutions.
-
-However, it's important to use technology as a supplement to, not a replacement for, understanding the underlying mathematics. Always strive to grasp the concepts before relying on technological aids.`,
-    author: "Dr. Sarah Johnson",
-    imagepath:
-      "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-    rating: 4.8,
-    createdAt: "2023-11-15T10:30:00Z",
-    readTime: "8 min read",
-    category: "Mathematics",
-    additionalImages: [
-      "https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-      "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-      "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-    ],
-  },
-  {
-    id: "2",
-    title: "The Science of Effective Study Techniques",
-    content: `Studying effectively is not just about putting in hours; it's about optimizing how you learn and retain information. This article delves into evidence-based study techniques that have been proven to enhance learning outcomes.
-
-From spaced repetition to the Pomodoro technique, discover methods that can transform your academic performance and help you achieve your educational goals with less stress and more efficiency.
-
-## The Myth of Multitasking
-
-Many students believe they can effectively study while checking social media, texting friends, or watching TV. However, research consistently shows that multitasking significantly reduces learning efficiency and retention. When you switch between tasks, your brain needs time to refocus, resulting in lost productivity and decreased comprehension.
-
-Instead, try focused study sessions with minimal distractions. Put your phone in another room, use website blockers if necessary, and create a dedicated study environment.
-
-## Spaced Repetition: The Memory Hack
-
-One of the most powerful study techniques is spaced repetition, which involves reviewing material at increasing intervals. Rather than cramming all your study into one session, space it out over days or weeks.
-
-For example, after learning new material, review it:
-- The same day
-- One day later
-- Three days later
-- One week later
-- Two weeks later
-
-This approach works with how your brain forms long-term memories and can dramatically improve retention compared to cramming.
-
-## The Pomodoro Technique: Managing Focus
-
-The Pomodoro Technique breaks study time into focused intervals (typically 25 minutes) followed by short breaks (5 minutes). After completing four "pomodoros," take a longer break of 15-30 minutes.
-
-This method helps maintain concentration while preventing burnout. The time constraint also creates a sense of urgency that can boost productivity.
-
-## Active Recall: Testing Yourself
-
-Instead of passively rereading notes or textbooks, actively test your knowledge. Close your materials and try to explain concepts in your own words, solve problems without looking at examples, or create and answer your own questions.
-
-Research shows that the effort of retrieving information strengthens memory much more effectively than simply reviewing it.`,
-    author: "Prof. Michael Chen",
-    imagepath:
-      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-    rating: 4.5,
-    createdAt: "2023-12-03T14:45:00Z",
-    readTime: "6 min read",
-    category: "Study Skills",
-    additionalImages: [
-      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-      "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-    ],
-  },
-  // Additional mock blogs would be defined here
-];
-
 const formatDate = (timestamp) => {
   const date = new Date(timestamp);
   return date.toLocaleDateString("en-US", {
@@ -173,11 +76,11 @@ const BlogDetailPage = () => {
         const response = await axios.get(
           `https://beacon-tutorial.vercel.app/server/blog/${id}`
         );
-        console.log(response.data.data);
+        // console.log(response.data.data);
 
         setBlog(response.data.data);
       } catch (err) {
-        console.log("Using mock data instead of API");
+        // console.log("Using mock data instead of API");
         // Fall back to mock data if API fails
         const mockBlog = MOCK_BLOGS.find((blog) => blog.id === id);
         if (mockBlog) {
@@ -210,37 +113,6 @@ const BlogDetailPage = () => {
         prevIndex === 0 ? blog.imagePath.length - 1 : prevIndex - 1
       );
     }
-  };
-
-  // Function to convert markdown-like content to HTML
-  const formatContent = (content) => {
-    if (!content) return "";
-
-    // Replace headers
-    let formattedContent = content.replace(
-      /## (.*?)$/gm,
-      '<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-800">$1</h2>'
-    );
-
-    // Replace paragraphs (double newlines)
-    formattedContent = formattedContent.replace(
-      /\n\n(.*?)(?=\n\n|$)/gs,
-      '<p class="mb-4 text-gray-700 leading-relaxed">$1</p>'
-    );
-
-    // Replace numbered lists
-    formattedContent = formattedContent.replace(
-      /(\d+)\. (.*?)(?=\n\d+\.|$)/gs,
-      '<li class="ml-6 mb-2 list-decimal text-gray-700">$2</li>'
-    );
-
-    // Replace bold text
-    formattedContent = formattedContent.replace(
-      /\*\*(.*?)\*\*/g,
-      "<strong>$1</strong>"
-    );
-
-    return formattedContent;
   };
 
   if (loading) {
@@ -348,7 +220,7 @@ const BlogDetailPage = () => {
                 <img
                   src={blog.imagePath[currentImageIndex]}
                   alt={`${blog.title} - image ${currentImageIndex + 1}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
 
                 {/* Navigation arrows */}
@@ -393,7 +265,7 @@ const BlogDetailPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: formatContent(blog.content) }}
+            dangerouslySetInnerHTML={{ __html: blog.content }}
           />
 
           {/* Article footer */}

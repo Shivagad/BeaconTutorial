@@ -42,6 +42,7 @@ import StudentResults from './StudentDashBoard/DashBoardPages/StudentResults.jsx
 import Stat from './dashboard/dashboardpages/Stat.jsx';
 import Batches from './dashboard/dashboardpages/Batches.jsx';
 import phone from '../public/images/phone.png'
+import Developers from './Components/Developers.jsx';
 function AppRoutes() {
   const location = useLocation();
   const protectedPaths = [
@@ -183,6 +184,14 @@ function AppRoutes() {
           element={
             <NonDashboardRoute>
               <About />
+            </NonDashboardRoute>
+          }
+        />
+        <Route
+          path="/developers"
+          element={
+            <NonDashboardRoute>
+              <Developers />
             </NonDashboardRoute>
           }
         />

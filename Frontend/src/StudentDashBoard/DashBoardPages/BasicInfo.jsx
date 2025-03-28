@@ -29,7 +29,7 @@ const BasicInfo = () => {
     if (currentUser?.course) {
       axios.get(`https://beacon-tutorial.vercel.app/server/courses/getid/${currentUser.course}`)
         .then(response => {
-          console.log("Course Details Response:", response.data);
+          // console.log("Course Details Response:", response.data);
           if (response.data?.course?.name) {
             setCourseDetails(response.data.course.name);
           } else {

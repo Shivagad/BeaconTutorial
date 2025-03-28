@@ -21,7 +21,7 @@ const StudentDashboard = () => {
     if (currentUser?.email) {
       axios.get(`https://beacon-tutorial.vercel.app/server/student/getresult/${currentUser.email}`)
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data.success) {
             setResults(response.data.results);
           } else {

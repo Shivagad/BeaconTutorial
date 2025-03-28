@@ -19,7 +19,7 @@ function AboutUs() {
       const fetchStats = async () => {
         try {
           const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
-          console.log(response.data);
+          // console.log(response.data);
           setStats(response.data);
         } catch (error) {
           console.error("Failed to fetch stats:", error);

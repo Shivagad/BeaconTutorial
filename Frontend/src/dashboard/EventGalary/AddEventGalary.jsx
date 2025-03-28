@@ -72,7 +72,7 @@ const AddEventGallery = ({ isOpen, onClose, setToast }) => {
       imagesPath: formData.images.map((img) => img.base64), // only send the base64 strings
     };
 
-    console.log(dataToSend)
+    // console.log(dataToSend)
 
     try {
       const response = await axios.post("https://beacon-tutorial.vercel.app/server/event/addevent", dataToSend);

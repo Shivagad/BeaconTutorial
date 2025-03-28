@@ -49,7 +49,7 @@ const Add12StudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
      setIsSubmitting(true);
-     console.log(formData)
+     // console.log(formData)
       const response = await axios.post('https://beacon-tutorial.vercel.app/server/twelve/students', formData);
 
       setFormData(
