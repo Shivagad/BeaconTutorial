@@ -59,7 +59,7 @@ const StudentTable = () => {
         "https://beacon-tutorial.vercel.app/server/student/stu/"
       );
       const allStudents = response.data || [];
-      console.log(allStudents);
+      // console.log(allStudents);
       // Filter only CET students (based on course name)
       const cetStudents = allStudents.filter(
         (student) =>

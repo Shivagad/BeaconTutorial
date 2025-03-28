@@ -1,63 +1,91 @@
-import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useRef, useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const ResultSection = ({ title, students, bgColor }) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const studentsPerPage = 10;
-  const totalPages = Math.ceil(students.length / studentsPerPage);
-  const resultRef = useRef(null);
+const ResultSection = ({ title, students }) => {
+  const scrollRef = useRef(null);
+  const [showButtons, setShowButtons] = useState(false);
+  const [cardWidth, setCardWidth] = useState(0);
+  const [cardsPerRow, setCardsPerRow] = useState(5); // Default for Desktop
 
-  const scrollToResultGrid = () => {
-    const resultGrid = document.querySelector("#resultGrid");
-    if (resultGrid) {
-      const headerOffset = 100; // Adjust this value as needed
-      const elementPosition = resultGrid.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-  
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+  useEffect(() => {
+    const checkScrollable = () => {
+      if (scrollRef.current) {
+        const firstCard = scrollRef.current.querySelector(".card");
+        if (firstCard) {
+          setCardWidth(firstCard.offsetWidth + 16); // Including gap
+        }
+
+        // Check if scrolling is needed
+        const isScrollable = scrollRef.current.scrollWidth > scrollRef.current.clientWidth;
+        setShowButtons(isScrollable);
+      }
+    };
+
+    // Handle responsive design
+    const updateCardsPerRow = () => {
+      if (window.innerWidth < 640) {
+        setCardsPerRow(2); // Mobile (2 cards visible)
+      } else {
+        setCardsPerRow(5); // Desktop (5 cards visible)
+      }
+      checkScrollable();
+    };
+
+    updateCardsPerRow();
+    window.addEventListener("resize", updateCardsPerRow);
+    return () => window.removeEventListener("resize", updateCardsPerRow);
+  }, [students]);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
     }
   };
 
-  const handlePrevPage = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 0));
-    scrollToResultGrid();
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
+    }
   };
-
-  const handleNextPage = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
-    scrollToResultGrid();
-  };
-
-  const currentStudents = students.slice(
-    currentPage * studentsPerPage,
-    (currentPage + 1) * studentsPerPage
-  );
 
   return (
-    <div ref={resultRef} className={`w-full max-w-7xl mx-auto px-4 pt-24 py-12 rounded-2xl shadow-lg ${bgColor} mb-6`}>
+    <div className="w-full max-w-[90rem] mx-auto px-4 pt-24 py-12 rounded-2xl shadow-lg bg-lightblue-100 mb-6">
       {/* Result Header */}
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-[90rem] mx-auto px-4 bg-[#fff7e6]">
         <div id="resultGrid" className="sticky z-10 -mt-20 mb-8">
-          <div className="bg-white/95 border-b-4 py-4 py-12 rounded-2xl border-[#4E77BB] shadow-lg">
-            <h2 className="text-4xl font-bold text-center text-[#4e77bb]">{title}</h2>
+          <div className="bg-lightorange-100 border-b-4 py-4 rounded-2xl border-[#4E77BB] shadow-lg">
+            <h2 className="text-4xl font-bold text-center text-[#4E77BB]">{title}</h2>
           </div>
         </div>
 
-        {/* Student Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {currentStudents.map((student) => (
-            <div key={student.id} className="bg-white rounded-xl shadow-md transform hover:scale-105 transition-transform duration-500 border-2 border-[#4E77BB]">
-              <div className="mx-auto mt-4 w-32 h-32 sm:w-40 sm:h-40 overflow-hidden rounded-full flex items-center justify-center border-4 border-[#4E77BB] bg-white flex-shrink-0">
-                <img src={student.imagePath} alt={student.firstName} className="w-full h-full object-cover max-w-full max-h-full" />
-              </div>
+        {/* Scrollable Student Cards Row */}
+        <div className="relative">
+          {/* Scrollable Container */}
+          <div
+            ref={scrollRef}
+            className="overflow-hidden flex gap-4 px-6 pb-12"
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {students.map((student) => (
+              <div
+                key={student.id}
+                className="card w-56 sm:w-72 lg:w-60 xl:w-64 h-96 flex-shrink-0 bg-blue-100 border-2 border-[#4E77BB] rounded-xl shadow-lg p-5 text-center transition-all duration-300 hover:shadow-xl hover:scale-105"
+              >
+                {/* Student Image */}
+                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-[#4E77BB] shadow-md">
+                  <img
+                    src={student.imagePath}
+                    alt={student.firstName}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              <div className="p-4 text-center">
-                <h3 className="font-semibold text-lg mb-2">{student.firstName} {student.lastName}</h3>
-                <div className="space-y-1 text-sm text-gray-600">
-                  {student.AIR && <p>AIR - {student.AIR}</p>}
+                {/* Student Information */}
+                <h3 className="mt-4 font-semibold text-xl text-[#4E77BB]">
+                  {student.firstName} {student.lastName}
+                </h3>
+                <div className="space-y-1 text-sm text-gray-700 mt-3">
+                  {student.AIR && <p className="font-medium text-black">AIR - {student.AIR}</p>}
                   {student.mathMarks && <p>Maths - {student.mathMarks}</p>}
                   {student.scienceMarks && <p>Science - {student.scienceMarks}</p>}
                   {student.chemistryMarks && <p>Chemistry - {student.chemistryMarks}</p>}
@@ -70,40 +98,36 @@ const ResultSection = ({ title, students, bgColor }) => {
                   {student.totalPercentile && <p>Aggregate - {student.totalPercentile}%ile</p>}
                   {student.totalMarks && <p>Aggregate - {student.totalMarks}</p>}
                   {student.percentage && <p>Aggregate - {student.percentage.toFixed(2)}%</p>}
-                  {student.boardName && <p className="font-bold">Board ({student.boardName})</p>}
-                  {student.college && <p className="font-bold">{student.college} College</p>}
-                  {student.Tag && <p className="font-bold">{student.Tag}</p>}
-                  {student.ExamName && <p className="font-bold">{student.ExamName}</p>}
+                  {student.boardName && <p className="font-bold text-gray-900">Board ({student.boardName})</p>}
+                  {student.college && <p className="font-bold text-gray-900">{student.college} College</p>}
+                  {student.Tag && <p className="font-bold text-gray-900">{student.Tag}</p>}
+                  {student.ExamName && <p className="font-bold text-gray-900">{student.ExamName}</p>}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="sticky bottom-4 z-10 flex justify-center items-center mt-8">
-            <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-4">
-              <button
-                onClick={handlePrevPage}
-                disabled={currentPage === 0}
-                className="p-2 rounded-full bg-indigo-100 text-indigo-700 disabled:opacity-50 hover:bg-indigo-200 transition-colors"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <span className="text-gray-700 font-medium">
-                Page {currentPage + 1} of {totalPages}
-              </span>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages - 1}
-                className="p-2 rounded-full bg-indigo-100 text-indigo-700 disabled:opacity-50 hover:bg-indigo-200 transition-colors"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
+            ))}
           </div>
-        )}
+
+          {/* Scroll Buttons - Always Show If More Cards Than Visible Limit */}
+          {showButtons && (
+            <div className="flex justify-center mt-4">
+              <button
+                className="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition-all duration-300 hover:scale-110 mx-2"
+                onClick={scrollLeft}
+                aria-label="Scroll Left"
+              >
+                <ChevronLeft size={28} />
+              </button>
+
+              <button
+                className="bg-gray-200 hover:bg-gray-300 p-3 rounded-full shadow-md transition-all duration-300 hover:scale-110 mx-2"
+                onClick={scrollRight}
+                aria-label="Scroll Right"
+              >
+                <ChevronRight size={28} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const AdminInquiryTable = () => {
     axios
       .get("https://beacon-tutorial.vercel.app/server/getinquiries")
       .then((response) => {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         setInquiries(response.data.data);
       })
       .catch((error) => {

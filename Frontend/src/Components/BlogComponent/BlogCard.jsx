@@ -18,9 +18,8 @@ const StarRating = ({ rating }) => (
       <Star
         key={index}
         size={16}
-        className={`${
-          index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
-        }`}
+        className={`${index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+          }`}
       />
     ))}
   </div>
@@ -29,8 +28,8 @@ const StarRating = ({ rating }) => (
 const BlogCard = ({ blog }) => {
   // Limit content to 120 characters for preview
   const previewContent =
-    blog.content.length > 120
-      ? blog.content.substring(0, 120) + "..."
+    blog.content.length > 500
+      ? blog.content.substring(0, 500) + "..."
       : blog.content
 
   return (
@@ -52,7 +51,7 @@ const BlogCard = ({ blog }) => {
       <div className="md:flex h-full">
         {/* Image container with overlay */}
         <div className="md:w-2/5 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#4E77BB] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
           <img
             src={blog.imagePath[0]}
             alt={blog.title}
@@ -67,9 +66,11 @@ const BlogCard = ({ blog }) => {
               {blog.title}
             </h2>
 
-            <p className="text-gray-600 leading-relaxed mb-4">
-              {previewContent}
-            </p>
+            <div
+              className="text-gray-800 text-lg leading-relaxed bg-white p-6"
+              style={{ fontFamily: 'Arial, sans-serif' }}
+              dangerouslySetInnerHTML={{ __html: previewContent }}
+            />
           </div>
 
           {/* Author and date info */}

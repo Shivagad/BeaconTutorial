@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 export const createAdmin = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    // console.log(req.body);
+    // // console.log(req.body);
 
     // Check if admin already exists
     const existingAdmin = await Admin.findOne({ email });
@@ -19,9 +19,9 @@ export const createAdmin = async (req, res) => {
     await newAdmin.save();
     
     res.status(201).json({ message: "Admin created successfully" });
-    // console.log("cv");
+    // // console.log("cv");
   } catch (error) {
-    // console.log("cvdfc");
+    // // console.log("cvdfc");
     res.status(500).json({ message: "Error creating admin", error: error.message });
     
   }
@@ -88,7 +88,7 @@ export const deleteAdmin = async (req, res) => {
 // Login
 export const loginAdmin = async (req, res) => {
   try {
-      // console.log(req.body)
+      // // console.log(req.body)
       const { email, password } = req.body;
       if (!email || !password) {
           return res.status(400).json({

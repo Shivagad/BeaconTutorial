@@ -26,7 +26,7 @@ const Results = () => {
     axios.get('https://beacon-tutorial.vercel.app/server/tenth/result')
       .then(response => {
         if (response.data.success) {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setExamData(response.data.data);
         } else {
           setError('Error fetching exam data');

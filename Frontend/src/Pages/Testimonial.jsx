@@ -17,7 +17,7 @@ export default function App() {
     axios.get('https://beacon-tutorial.vercel.app/server/testimonial/sorted')
       .then((response) => {
         setTestimonials(Array.isArray(response.data.data) ? response.data.data : []);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => console.error('Error fetching testimonials:', error))
       .finally(() => setLoading(false));

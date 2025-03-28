@@ -61,7 +61,7 @@ export const getStudentById = async (req, res) => {
 
 export const checkStudentEmail = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, dob } = req.body;
 
     // Find student by email
@@ -101,7 +101,7 @@ export const checkStudentEmail = async (req, res) => {
 
 export const resetStudentPassword = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password } = req.body;
 
     const student = await Student.findOne({ email });
@@ -150,7 +150,7 @@ export const createStudent = async (req, res) => {
       course,
     } = req.body;
 
-    console.log(req.body);
+    // console.log(req.body);
 
 
     const existingStudent = await Student.findOne({ email });
@@ -190,10 +190,10 @@ export const createStudent = async (req, res) => {
       admissionYear,
       course: courseId,
     });
-    // console.log(student);
+    // // console.log(student);
     try {
       await student.save();
-      console.log("Student saved successfully"); // Log success message
+      // console.log("Student saved successfully"); // Log success message
     } catch (error) {
       console.error("Student save failed:", error); // Log detailed error message
       res.status(500).json({
@@ -399,7 +399,7 @@ export const uploadStudentsCSV = async (req, res) => {
         admissionYear,
         course,
       } = row;
-      // console.log("Processing:", row);
+      // // console.log("Processing:", row);
 
       const existingStudent = await Student.findOne({
         $or: [{ email }],
@@ -414,7 +414,7 @@ export const uploadStudentsCSV = async (req, res) => {
       const courseExists = await Course.findOne({
         name: { $regex: new RegExp(`^${course}$`, "i") },
       });
-      console.log(courseExists);
+      // console.log(courseExists);
       if (!courseExists) {
         console.error(`Course "${course}" not found. Skipping.`);
         continue;
@@ -451,7 +451,7 @@ export const uploadStudentsCSV = async (req, res) => {
 
     if (students.length > 0) {
       const insertedStudents = await Student.insertMany(students);
-      console.log("Inserted Students:", insertedStudents);
+      // console.log("Inserted Students:", insertedStudents);
       res
         .status(201)
         .json({
@@ -591,7 +591,7 @@ export const addResult = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Student not found" });
     }
-    //  console.log(student);
+    //  // console.log(student);
     const newResult = new Result({
       student: student._id,
       exam,
@@ -619,9 +619,9 @@ export const addResult = async (req, res) => {
      const templatePath = path.join(__dirname, "../views", 'Result.hbs');
     
         const templateSource = fs.readFileSync(templatePath, "utf-8");
-        // console.log("hiihgf");
+        // // console.log("hiihgf");
         const template = Handlebars.compile(templateSource);
-        // console.log("hihgfihgf");
+        // // console.log("hihgfihgf");
         const htmlContent = template({
           name: student.name,
           exam,
@@ -645,21 +645,21 @@ export const addResult = async (req, res) => {
           biologySectionA,
           biologySectionB,
         });
-        // console.log(htmlContent);
+        // // console.log(htmlContent);
         const mailOptions = {
             from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
             to: `${student.email}, ${student.parentEmail}`,
             subject: "Your Beacon Tutorial  Test Result is Released!",
             html: htmlContent,
         };
-        // console.log("mail sent");
+        // // console.log("mail sent");
     try {
       await newResult.save();
       await transporter.sendMail(mailOptions);
-      // console.log("Student result added successfully");
+      // // console.log("Student result added successfully");
       student.results.push(newResult._id);
       await student.save();
-      console.log(student);
+      // console.log(student);
       res
         .status(201)
         .json({
@@ -702,7 +702,7 @@ export const getResultsByEmail = async (req, res) => {
 
     // Fetch all results for the student
     const results = await Result.find({ student: student._id });
-    console.log(results);
+    // console.log(results);
 
     res.json({ success: true, results });
   } catch (error) {
@@ -718,7 +718,7 @@ export const getResultsByEmail = async (req, res) => {
 
 export const getResultsDetail = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
+  // console.log(req.params);
   try {
     const result = await Result.findById(id);
     res.json({ success: true, result });
@@ -806,9 +806,9 @@ export const uploadStudentResultCSV = async (req, res) => {
       const templatePath = path.join(__dirname, "../views", 'Result.hbs');
     
       const templateSource = fs.readFileSync(templatePath, "utf-8");
-      // console.log("hiihgf");
+      // // console.log("hiihgf");
       const template = Handlebars.compile(templateSource);
-      // console.log("hihgfihgf");
+      // // console.log("hihgfihgf");
       const htmlContent = template({
         name: student.name,
         exam,
@@ -832,7 +832,7 @@ export const uploadStudentResultCSV = async (req, res) => {
         biologySectionA,
         biologySectionB,
       });
-      // console.log(htmlContent);
+      // // console.log(htmlContent);
       const mailOptions = {
         from: `Beacon Tutorial <${process.env.MAIL_USER}>`,
         to: `${student.email}, ${student.parentEmail}`, // Sending email to both student and parent
@@ -864,7 +864,7 @@ export const uploadStudentResultCSV = async (req, res) => {
 // Delete a result by student email and exam name
 export const deleteResultByEmail = async (req, res) => {
   let { studentEmail, examName } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   try {
     // Trim inputs
     studentEmail = studentEmail.trim();
@@ -908,7 +908,7 @@ export const deleteResultByEmail = async (req, res) => {
 
 export const deleteResultByExamName = async (req, res) => {
   let { examName } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     examName = examName.trim();

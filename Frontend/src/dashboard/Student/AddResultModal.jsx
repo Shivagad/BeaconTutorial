@@ -36,7 +36,7 @@ const AddStudentResult = ({ isOpen, onClose, setToast }) => {
 
     try {
       const response = await axios.post("https://beacon-tutorial.vercel.app/server/student/add", formData);
-      console.log(response);
+      // console.log(response);
       if (response.data.success) {
         setToast({ success: true, message: "Result added successfully" });
         setFormData({

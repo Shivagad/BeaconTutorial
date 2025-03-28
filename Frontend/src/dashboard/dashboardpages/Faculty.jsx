@@ -20,7 +20,7 @@ const Faculty = () => {
   const fetchFaculty = async () => {
     try {
       const response = await axios.get("https://beacon-tutorial.vercel.app/server/faculty/getfaculty/all");
-      console.log(response);
+      // console.log(response);
       setFacultyList(response.data.data || []);
     } catch (error) {
       console.error("Error fetching faculty:", error);

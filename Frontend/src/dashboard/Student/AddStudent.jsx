@@ -50,7 +50,7 @@ const AddStudentModal = ({ isOpen, onClose, setToast }) => {
       axios
         .get("https://beacon-tutorial.vercel.app/server/courses/getall/")
         .then((response) => {
-          console.log("Courses API Response:", response.data.courses);
+          // console.log("Courses API Response:", response.data.courses);
           setCourses(response.data.courses);
         })
         .catch((error) => console.error("Error fetching courses:", error));

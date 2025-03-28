@@ -11,3 +11,4 @@ const OtherExamResults = new mongoose.Schema({
 
 const OtherExamResult= mongoose.model('OtherExamResults', OtherExamResults);
 export default OtherExamResult;
+

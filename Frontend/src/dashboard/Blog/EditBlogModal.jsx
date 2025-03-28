@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { X, Upload } from "lucide-react";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthProvider";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 
 const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
   const { currentUser } = useAuth();
@@ -51,7 +54,7 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
       imagePath: prev.imagePath.filter((_, i) => i !== index),
     }));
   };
-  
+
 
   const validateForm = () => {
     let newErrors = {};
@@ -67,7 +70,7 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    console.log(formData);
+    // console.log(formData);
 
     const dataToSend = {
       title: formData.title,
@@ -96,7 +99,7 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
     try {
       const response = await axios.get(`https://beacon-tutorial.vercel.app/server/blog/${blogId}`);
       const data = response.data.data;
-      console.log(data)
+      // console.log(data)
       setFormData({
         title: data.title || "",
         content: data.content || "",
@@ -139,13 +142,28 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
           {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
 
           <label className="block font-semibold">Content</label>
-          <textarea
+          {/* <textarea
             placeholder="Content"
             className="w-full px-4 py-2 border rounded-lg h-32"
             value={formData.content}
             onChange={(e) => setFormData({ ...formData, content: e.target.value })}
             required
-          />
+          /> */}
+          <div
+            contentEditable
+            className="border p-2 rounded-lg"
+            dangerouslySetInnerHTML={{ __html: formData.content }}
+            onInput={(e) =>
+              setFormData({ ...formData, content: e.currentTarget.innerHTML })
+            }
+          ></div>
+
+          {/* <ReactQuill
+            value={formData.content}
+            onChange={(content) => setFormData({ ...formData, content })}
+            theme="snow"
+            placeholder="Write your blog content here..."
+          /> */}
           {errors.content && <p className="text-red-500 text-sm">{errors.content}</p>}
 
           <label className="block font-semibold">Author</label>
@@ -154,6 +172,7 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
             placeholder="Author"
             className="w-full px-4 py-2 border rounded-lg"
             value={formData.author}
+            // onChange={(author) => setFormData({ ...formData, author })}
             onChange={(e) => setFormData({ ...formData, author: e.target.value })}
             required
           />

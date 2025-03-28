@@ -4,7 +4,7 @@ import cloudinary from 'cloudinary';
 export const addOtherExamResult = async (req, res) => {
     try {
         const { firstName, lastName, imagePath, ExamName, seqno, Tag } = req.body;
-        // console.log(req.body);
+        // // console.log(req.body);
 
         if (!imagePath) {
             return res.status(400).json({ message: "Image is required", success: false });

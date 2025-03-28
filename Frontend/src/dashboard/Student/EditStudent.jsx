@@ -29,7 +29,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
     axios
       .get("https://beacon-tutorial.vercel.app/server/courses/getall/")
       .then((response) => {
-        console.log("Courses API Response:", response.data.courses);
+        // console.log("Courses API Response:", response.data.courses);
         setCourses(response.data.courses);
       })
       .catch((error) => console.error("Error fetching courses:", error));
@@ -41,7 +41,7 @@ const EditStudentModal = ({ isEditOpen, onClose, setToast, studentId }) => {
       axios
         .get(`https://beacon-tutorial.vercel.app/server/student/byid/${studentId}`)
         .then((response) => {
-          console.log("Student API Response:", response.data);
+          // console.log("Student API Response:", response.data);
           const student = response.data;
           setFormData({
             name: student.name || "",

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaInstagram, FaLinkedin, FaFacebook, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
@@ -168,7 +169,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-board-classes"
+                  href="/all-courses#11th-and-12th-board-classes"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th Board Classes
@@ -176,7 +177,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-jee-mains-advance"
+                  href="/all-courses#11th-and-12th-jee-mains-and-advance"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th JEE Mains + Advance
@@ -184,7 +185,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-neet"
+                  href="/all-courses#11th-and-12th-neet"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th NEET
@@ -192,7 +193,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-iiser"
+                  href="/all-courses#11th-and-12th-iiser"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th IISER
@@ -200,7 +201,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-mhtcet"
+                  href="/all-courses#11th-and-12th-mhtcet"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th MHTCET
@@ -208,7 +209,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-nda"
+                  href="/all-courses#11th-and-12th-nda"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th NDA
@@ -216,7 +217,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#11th-12th-cuet"
+                  href="/all-courses#11th-and-12th-cuet"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   11th + 12th CUET
@@ -248,7 +249,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="/all-courses#jee-mains-advance"
+                  href="/all-courses#jee-mains-and-advance"
                   className="text-white hover:text-orange-300 transition-colors"
                 >
                   JEE (Mains + Advance)
@@ -359,18 +360,25 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-center mt-12 pt-6 border-t border-gray-700">
+        <div className="text-center mt-7 -mb-10 pt-6 border-t border-gray-700">
           <p className="text-sm text-white">
             &copy;{" "}
             {2025 === new Date().getFullYear()
               ? "2025"
               : `2025 - ${new Date().getFullYear()}`}{" "}
-            Beacon Tutorials | All Rights Reserved | Empowering Future Leaders
+            Beacon Tutorials  &nbsp;|&nbsp;  All Rights Reserved  &nbsp;|&nbsp;  Empowering Future Leaders
           </p>
-          <p className="text-sm text-white">
-            Made with
-            <span className="text-red-500 text-2xl ml-2 mr-2 mt-1 animate-pulse">&hearts;</span>
-            By PICT Developers
+          <p className="text-sm text-white mt-2">
+            Developed by
+            <Link
+              to="/developers"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <span className="hover:pointer hover:text-orange-500">  WEB Team  </span>
+            </Link>
+
+            of PICT
+            {/* <span className="text-red-500 text-2xl ml-2 mr-2">&hearts;</span> */}
           </p>
 
         </div>

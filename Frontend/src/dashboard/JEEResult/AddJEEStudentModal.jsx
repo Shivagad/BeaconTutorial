@@ -49,7 +49,7 @@ const AddJEEStudentModal = ({ isOpen, onClose, setToast, onSubmit }) => {
 
     try {
      setIsSubmitting(true);
-     console.log(formData)
+     // console.log(formData)
       const response = await axios.post('https://beacon-tutorial.vercel.app/server/jee/students', formData);
 
       setFormData({

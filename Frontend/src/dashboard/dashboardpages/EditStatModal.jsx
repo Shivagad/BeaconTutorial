@@ -13,7 +13,7 @@ const EditStatModal = ({ isOpen, onClose, setToast }) => {
     const fetchStats = async () => {
       try {
         const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data) {
           setFormData(response.data); // Assuming you only have one stat entry, hence [0]
         }

@@ -26,7 +26,7 @@ export const addStudentResult = async (req, res) => {
           crop: "fit", 
         }
       );
-        // console.log(uploadResponse)
+        // // console.log(uploadResponse)
         const newResult = new tenthResult({
             firstName,
             lastName,
@@ -39,7 +39,7 @@ export const addStudentResult = async (req, res) => {
             seqno:seqno,
         });
         const savedResult = await newResult.save();
-        // console.log("HII")
+        // // console.log("HII")
         res.status(201).json({ message: "Student result added successfully", success: true, data: savedResult });
     } catch (error) {
         console.error(error);
@@ -136,13 +136,13 @@ export const deleteStudentResult = async (req, res) => {
 export const getResultById = async (req, res) => {
     try {
         const { id } = req.params;
-        // console.log(id)
+        // // console.log(id)
         const results = await tenthResult.findById(id);
 
         if (!results) {
             return res.status(404).json({ message: "No student results found", success: false });
         }
-        // console.log(results)
+        // // console.log(results)
         res.status(200).json({ message: "Student results fetched successfully", success: true, data: results });
     } catch (error) {
         res.status(500).json({ message: error.message, success: false });

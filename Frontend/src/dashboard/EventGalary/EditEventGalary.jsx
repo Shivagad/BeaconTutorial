@@ -21,7 +21,7 @@ const EditEventGallery = ({ isEditOpen, onClose, setToast2, id }) => {
     try {
       const response = await axios.get(`https://beacon-tutorial.vercel.app/server/event/geteventbyid/${id}`);
       const data = response.data.data;
-      console.log(data);
+      // console.log(data);
       setFormData({
         eventName: data.eventName || "",
         year: data.year || "",
@@ -88,7 +88,7 @@ const EditEventGallery = ({ isEditOpen, onClose, setToast2, id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    console.log(formData);
+    // console.log(formData);
     setIsSubmitting(true);
     try {
       const dataToSend = {
