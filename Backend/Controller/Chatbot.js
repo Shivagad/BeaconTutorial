@@ -45,6 +45,7 @@ async function getAnswer(userQuestion) {
             `Answer this based on my coaching institute FAQs: ${JSON.stringify(faqs)}. Question: ${userQuestion}`
         );
 
+        
         return response.response.text();  
     } catch (error) {
         console.error("Error:", error);
