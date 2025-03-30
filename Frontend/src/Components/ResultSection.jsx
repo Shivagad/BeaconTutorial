@@ -104,6 +104,21 @@ const ResultSection = ({ title, students }) => {
                 <h3 className="mt-4 font-semibold text-xl text-[#4E77BB]">
                   {student.firstName} {student.lastName}
                 </h3>
+                <div className="space-y-1 text-sm text-gray-700 mt-3">
+                  {student.AIR && <p className="font-medium text-black">AIR - {student.AIR}</p>}
+                  {student.mathMarks && <p>Maths - {student.mathMarks}</p>}
+                  {student.scienceMarks && <p>Science - {student.scienceMarks}</p>}
+                  {student.chemistryMarks && <p>Chemistry - {student.chemistryMarks}</p>}
+                  {student.physicsMarks && <p>Physics - {student.physicsMarks}</p>}
+                  {student.biologyMarks && <p>Biology - {student.biologyMarks}</p>}
+                  {student.totalPercentile && <p>Aggregate - {student.totalPercentile}%ile</p>}
+                  {student.totalMarks && <p>Aggregate - {student.totalMarks}</p>}
+                  {student.percentage && <p>Aggregate - {student.percentage.toFixed(2)}%</p>}
+                  {student.boardName && <p className="font-bold text-gray-900">Board ({student.boardName})</p>}
+                  {student.college && <p className="font-bold text-gray-900">{student.college} College</p>}
+                  {student.Tag && <p className="font-bold text-gray-900">{student.Tag}</p>}
+                  {student.ExamName && <p className="font-bold text-gray-900">{student.ExamName}</p>}
+                </div>
               </div>
             ))}
           </div>
