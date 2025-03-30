@@ -29,6 +29,7 @@ import {
 } from "./Context/ProtectedRoute.jsx";
 import MainTestimonial from "./Pages/Testimonial";
 import About from "./Pages/About";
+import FloatingDropdown from "./Components/FloatingDropDown.jsx";
 import Scholarships from "./Pages/Scholarships";
 import AdminScholarship from "./dashboard/dashboardpages/Scholarship";
 import Inquiry from "./Components/Inquiry";
@@ -415,47 +416,12 @@ function AppRoutes() {
           }
         />
       </Routes>
-      {!isProtectedRoute && <WhatsAppButton />}
-      <button
-  onClick={() => setIsChatOpen(true)}
-  className="fixed bottom-36 right-6 bg-blue-500 p-4 rounded-lg shadow-lg flex items-center justify-center hover:bg-blue-600 transition duration-300 z-40"
->
-  <span className="text-white">
-    Chat Us
-  </span>
-</button>
-
+      {!isProtectedRoute && <FloatingDropdown setIsChatOpen={setIsChatOpen} />}
       <ChatbotModal isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
     </>
   );
 }
 
-const WhatsAppButton = () => (
-  <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2">
-    <a
-      href="https://wa.me/918446222268"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bg-green-500 p-3 rounded-full shadow-lg flex items-center justify-center"
-    >
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-        alt="WhatsApp"
-        className="w-6 h-6"
-      />
-    </a>
-    <a
-      href="tel:+918446222268"
-      className="bg-blue-500 p-3 rounded-full shadow-lg flex items-center justify-center"
-    >
-      <img
-        src={phone}
-        alt="Phone call"
-        className="h-6 w-6 filter invert brightness-0 contrast-200"
-      />
-    </a>
-  </div>
-);
 
 function AppWrapper() {
   return (
