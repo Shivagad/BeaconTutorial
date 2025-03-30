@@ -267,6 +267,7 @@ const BlogDetailPage = () => {
             className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: blog.content }}
           />
+         
 
           {/* Article footer */}
           <motion.div
