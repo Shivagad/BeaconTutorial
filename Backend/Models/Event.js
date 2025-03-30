@@ -6,12 +6,10 @@ const eventGallerySchema = new mongoose.Schema({
   },
   year: {
     type: Number,
-   
   },
   imagesPath: [
     {
       type: String,
-      
     }
   ],
   description: {

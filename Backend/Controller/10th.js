@@ -111,13 +111,13 @@ export const editStudentResult = async (req, res) => {
       if (!result) {
         return res.status(404).json({ message: "Student result not found", success: false });
       }
-  
       res.status(200).json({ message: "Student result updated successfully", success: true, data: result });
     } catch (error) {
       res.status(500).json({ message: error.message, success: false });
     }
   };
-  
+
+
 
 
 export const deleteStudentResult = async (req, res) => {

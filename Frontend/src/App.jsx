@@ -1,50 +1,64 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import DashboardLayout from './dashboard/Layout';
-import TenthResults from './dashboard/dashboardpages/TenthResults';
-import TwelthResult from './dashboard/dashboardpages/TwelthResults';
-import CETResult from './dashboard/dashboardpages/CETResults';
-import JEEResult from './dashboard/dashboardpages/JEEResult';
-import NEETResult from './dashboard/dashboardpages/NEETResult';
-import Poster from './dashboard/dashboardpages/Poster';
-import Results from './Pages/Results';
-import Home from './Pages/Home';
-import EventGallery from './dashboard/dashboardpages/EventGallery';
-import Contact from './Pages/Contact';
-import Event from './Pages/Event';
-import Admin from './dashboard/dashboardpages/Admin';
-import Testimonial from './dashboard/dashboardpages/Testimonial';
-import Login from './Pages/Login';
-import { NonDashboardRoute, ProtectedRoute } from './Context/ProtectedRoute.jsx';
-import MainTestimonial from './Pages/Testimonial';
-import About from './Pages/About';
-import Scholarships from './Pages/Scholarships';
-import AdminScholarship from './dashboard/dashboardpages/Scholarship';
-import Inquiry from './Components/Inquiry';
-import DashInquiry from './dashboard/dashboardpages/Inquiry.jsx';
-import Blog from './Pages/Blog.jsx';
-import BlogAdmin from './dashboard/dashboardpages/Blog.jsx';
-import Courses from './dashboard/dashboardpages/Courses.jsx';
-import AllCourses from './Pages/AllCourses.jsx';
-import CourseCards from './dashboard/dashboardpages/coursescard.jsx';
-import StudentDetails from './dashboard/StudentManagement/StudentDetails.jsx';
-import Studentdash from './Pages/Studentdash.jsx';
-import Faculty from './dashboard/dashboardpages/Faculty.jsx';
-import Facultymain from './Components/Facultymain.jsx';
-import ForgotPassword from './Pages/ForgotPassword.jsx';
-import OtherExamsResults from './dashboard/dashboardpages/OtherExamResults.jsx'
-import StudentBlog from './Components/Studentblog.jsx'
-import BlogDetailPage from './Components/BlogComponent/BlogDetailPage.jsx';
-import StudentDashBoard from './StudentDashBoard/StudentDashComponents/StudentDashBoard.jsx';
-import StudentDashSidebar from './StudentDashBoard/StudentDashComponents/StudentDashSidebar.jsx';
-import BasicInfo from './StudentDashBoard/DashBoardPages/BasicInfo.jsx';
-import StudentResults from './StudentDashBoard/DashBoardPages/StudentResults.jsx';
-import Stat from './dashboard/dashboardpages/Stat.jsx';
-import Batches from './dashboard/dashboardpages/Batches.jsx';
-import phone from '../public/images/phone.png'
-import Developers from './Components/Developers.jsx';
+import React from "react";
+import { useState } from "react";
+// import { MessageCircle } from "lucide-react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import DashboardLayout from "./dashboard/Layout";
+import TenthResults from "./dashboard/dashboardpages/TenthResults";
+import TwelthResult from "./dashboard/dashboardpages/TwelthResults";
+import CETResult from "./dashboard/dashboardpages/CETResults";
+import JEEResult from "./dashboard/dashboardpages/JEEResult";
+import NEETResult from "./dashboard/dashboardpages/NEETResult";
+import Poster from "./dashboard/dashboardpages/Poster";
+import Results from "./Pages/Results";
+import Home from "./Pages/Home";
+import EventGallery from "./dashboard/dashboardpages/EventGallery";
+import Contact from "./Pages/Contact";
+import Event from "./Pages/Event";
+import Admin from "./dashboard/dashboardpages/Admin";
+import Testimonial from "./dashboard/dashboardpages/Testimonial";
+import Login from "./Pages/Login";
+import {
+  NonDashboardRoute,
+  ProtectedRoute,
+} from "./Context/ProtectedRoute.jsx";
+import MainTestimonial from "./Pages/Testimonial";
+import About from "./Pages/About";
+import Scholarships from "./Pages/Scholarships";
+import AdminScholarship from "./dashboard/dashboardpages/Scholarship";
+import Inquiry from "./Components/Inquiry";
+import DashInquiry from "./dashboard/dashboardpages/Inquiry.jsx";
+import Blog from "./Pages/Blog.jsx";
+import BlogAdmin from "./dashboard/dashboardpages/Blog.jsx";
+import Courses from "./dashboard/dashboardpages/Courses.jsx";
+import AllCourses from "./Pages/AllCourses.jsx";
+import CourseCards from "./dashboard/dashboardpages/coursescard.jsx";
+import StudentDetails from "./dashboard/StudentManagement/StudentDetails.jsx";
+import Studentdash from "./Pages/Studentdash.jsx";
+import Faculty from "./dashboard/dashboardpages/Faculty.jsx";
+import Facultymain from "./Components/Facultymain.jsx";
+import ForgotPassword from "./Pages/ForgotPassword.jsx";
+import OtherExamsResults from "./dashboard/dashboardpages/OtherExamResults.jsx";
+import StudentBlog from "./Components/Studentblog.jsx";
+import BlogDetailPage from "./Components/BlogComponent/BlogDetailPage.jsx";
+import StudentDashBoard from "./StudentDashBoard/StudentDashComponents/StudentDashBoard.jsx";
+import StudentDashSidebar from "./StudentDashBoard/StudentDashComponents/StudentDashSidebar.jsx";
+import BasicInfo from "./StudentDashBoard/DashBoardPages/BasicInfo.jsx";
+import StudentResults from "./StudentDashBoard/DashBoardPages/StudentResults.jsx";
+import Stat from "./dashboard/dashboardpages/Stat.jsx";
+import Batches from "./dashboard/dashboardpages/Batches.jsx";
+import phone from "../public/images/phone.png";
+import Developers from "./Components/Developers.jsx";
+import ChatbotModal from "./Components/Chatbotmodal.jsx";
+import { MessageCircle } from "react-feather";
 function AppRoutes() {
   const location = useLocation();
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const protectedPaths = [
     "/dashboard",
     "/dashboard/10th-results",
@@ -69,7 +83,7 @@ function AppRoutes() {
     "/dashboard/neet-student",
     "/student-dashboard",
     "/forgot-password",
-    "/login"
+    "/login",
   ];
 
   const isProtectedRoute = protectedPaths.some((path) =>
@@ -79,25 +93,32 @@ function AppRoutes() {
   return (
     <>
       <Routes>
-
-        <Route path="/student-dashboard" element={
-          <ProtectedRoute>
-            <StudentDashBoard />
-          </ProtectedRoute>
-        }>
-          <Route index element={
+        <Route
+          path="/student-dashboard"
+          element={
             <ProtectedRoute>
-              <BasicInfo />
+              <StudentDashBoard />
             </ProtectedRoute>
-          } />
-          <Route path="basic-info" element={
-            <ProtectedRoute>
-              <BasicInfo />
-            </ProtectedRoute>
-          } />
+          }
+        >
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <BasicInfo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="basic-info"
+            element={
+              <ProtectedRoute>
+                <BasicInfo />
+              </ProtectedRoute>
+            }
+          />
           <Route path="results" element={<StudentResults />} />
         </Route>
-
 
         <Route
           path="/event-gallery"
@@ -395,10 +416,19 @@ function AppRoutes() {
         />
       </Routes>
       {!isProtectedRoute && <WhatsAppButton />}
+      <button
+  onClick={() => setIsChatOpen(true)}
+  className="fixed bottom-36 right-6 bg-blue-500 p-4 rounded-lg shadow-lg flex items-center justify-center hover:bg-blue-600 transition duration-300 z-40"
+>
+  <span className="text-white">
+    Chat Us
+  </span>
+</button>
+
+      <ChatbotModal isChatOpen={isChatOpen} setIsChatOpen={setIsChatOpen} />
     </>
   );
 }
-
 
 const WhatsAppButton = () => (
   <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2">
@@ -424,11 +454,8 @@ const WhatsAppButton = () => (
         className="h-6 w-6 filter invert brightness-0 contrast-200"
       />
     </a>
-
-
   </div>
 );
-
 
 function AppWrapper() {
   return (

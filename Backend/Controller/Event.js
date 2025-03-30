@@ -127,7 +127,6 @@ export const editEventGallery = async (req, res) => {
       res.status(500).json({ message: error.message, success: false });
     }
   };
-  
 
 
 export const deleteEventGallery = async (req, res) => {
@@ -138,7 +137,6 @@ export const deleteEventGallery = async (req, res) => {
         if (!event) {
             return res.status(404).json({ message: "Event not found", success: false });
         }
-
         res.status(200).json({ message: "Event deleted successfully", success: true });
     } catch (error) {
         res.status(500).json({ message: error.message, success: false });

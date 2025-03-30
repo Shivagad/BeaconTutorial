@@ -374,7 +374,7 @@ const Footer = () => {
               to="/developers"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <span className="hover:pointer hover:text-orange-500">  WEB Team  </span>
+              <span className="hover:pointer text-orange-500">  WEB Team  </span>
             </Link>
 
             of PICT

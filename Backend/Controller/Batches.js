@@ -47,7 +47,6 @@ export const updateBatchById = async (req, res) => {
 };
 
 
-
 export const getAllBatches = async (req, res) => {
   try {
     const batches = await Batch.find();

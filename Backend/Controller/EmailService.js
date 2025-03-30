@@ -34,7 +34,6 @@ export const sendOTPEmail = async (req, res) => {
         subject: "Your OTP Verification Code",
         html: htmlContent,
     };
-
     try {
         await transporter.sendMail(mailOptions);
         // console.log("OTP email sent successfully.");

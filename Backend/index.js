@@ -23,6 +23,7 @@ import Faculty from './Routes/Faculty.js';
 import OtherExamResult from './Routes/OtherExamResults.js';
 import Stat from './Routes/Stat.js';
 import Batches from './Routes/Batches.js';
+import Chatbot from './Routes/Chatbot.js';
 
 dotenv.config();
 const app = express();
@@ -53,6 +54,7 @@ app.use('/server/faculty',Faculty);
 app.use('/server',OtherExamResult);
 app.use('/server/stat',Stat);
 app.use('/server/batches',Batches);
+app.use('/server',Chatbot);
 
 
 app.get('/', (req, res) => {
