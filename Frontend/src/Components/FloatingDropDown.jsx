@@ -54,12 +54,12 @@ const FloatingDropdown = ({ setIsChatOpen }) => {
         >
           {dropdownOpen ? (
             <div className="flex items-center gap-2">
-              <span className="text-white font-semibold">Need Help?</span>
+              {/* <span className="text-white font-semibold">Need Help?</span> */}
               <ChevronDown className="text-white" />
             </div>
           ) : (
             <div className="flex items-center gap-2">
-            <span className="text-white font-semibold">Need Help?</span>
+            {/* <span className="text-white font-semibold">Need Help?</span> */}
             <ChevronUp className="text-white" />
           </div>
           )}
