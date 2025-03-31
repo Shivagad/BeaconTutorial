@@ -693,7 +693,7 @@ export const getResultsByEmail = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Student not found" });
     }
-
+    
     // Fetch all results for the student
     const results = await Result.find({ student: student._id });
     // console.log(results);

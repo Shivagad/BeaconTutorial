@@ -258,7 +258,7 @@ const StudentResult = () => {
               <div className="mb-6">
                 <div className="bg-white border rounded-lg overflow-hidden">
                   <div className="grid grid-cols-3 divide-x border-b">
-                    <div className="p-4">
+                  {( detailedResult.physics !== 0 || detailedResult.physicsSectionA !== 0 || detailedResult.physicsSectionB!== 0) && (  <div className="p-4">
                       <h5 className="text-sm font-semibold text-gray-800 mb-3">Physics</h5>
                       <div className="flex justify-between mb-2">
                         <span className="text-sm text-gray-600">Total:</span>
@@ -272,8 +272,8 @@ const StudentResult = () => {
                         <span className="text-sm text-gray-600">Section B:</span>
                         <span className="text-sm font-medium">{detailedResult.physicsSectionB}</span>
                       </div>
-                    </div>
-                    <div className="p-4">
+                    </div>)}
+               { ( detailedResult.chemistry !== 0 || detailedResult.chemistrySectionA !== 0 || detailedResult.chemistrySectionA !== 0) && (    <div className="p-4">
                       <h5 className="text-sm font-semibold text-gray-800 mb-3">Chemistry</h5>
                       <div className="flex justify-between mb-2">
                         <span className="text-sm text-gray-600">Total:</span>
@@ -285,10 +285,10 @@ const StudentResult = () => {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-sm text-gray-600">Section B:</span>
-                        <span className="text-sm font-medium">{detailedResult.chemistrySectionB}</span>
+                        <span className="text-sm font-medium">{detailedResult.chemistrySectionA}</span>
                       </div>
-                    </div>
-                    <div className="p-4">
+                    </div>)}
+                   {( detailedResult.maths !== 0 || detailedResult.mathsSectionA !== 0 || detailedResult.mathsSectionB !== 0) && (<div className="p-4">
                       <h5 className="text-sm font-semibold text-gray-800 mb-3">Mathematics</h5>
                       <div className="flex justify-between mb-2">
                         <span className="text-sm text-gray-600">Total:</span>
@@ -302,7 +302,25 @@ const StudentResult = () => {
                         <span className="text-sm text-gray-600">Section B:</span>
                         <span className="text-sm font-medium">{detailedResult.mathsSectionB}</span>
                       </div>
-                    </div>
+                    </div>)}
+                    {(detailedResult.biology !== 0 || detailedResult.biologySectionA !== 0 || detailedResult.biologySectionB !== 0) && (
+  <div className="p-4">
+    <h5 className="text-sm font-semibold text-gray-800 mb-3">Biology</h5>
+    <div className="flex justify-between mb-2">
+      <span className="text-sm text-gray-600">Total:</span>
+      <span className="text-sm font-medium">{detailedResult.biology}</span>
+    </div>
+    <div className="flex justify-between mb-2">
+      <span className="text-sm text-gray-600">Section A:</span>
+      <span className="text-sm font-medium">{detailedResult.biologySectionA}</span>
+    </div>
+    <div className="flex justify-between">
+      <span className="text-sm text-gray-600">Section B:</span>
+      <span className="text-sm font-medium">{detailedResult.biologySectionB}</span>
+    </div>
+  </div>
+)}
+
                   </div>
                 </div>
               </div>
