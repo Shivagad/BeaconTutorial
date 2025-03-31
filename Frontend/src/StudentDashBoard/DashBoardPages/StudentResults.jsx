@@ -11,7 +11,9 @@ const StudentResult = () => {
   const [showModal, setShowModal] = useState(false);
   const [detailedResult, setDetailedResult] = useState(null);
   useEffect(() => {
-    document.body.style.zoom = "67%"; 
+    if (window.innerWidth <= 768) { 
+      document.body.style.zoom = "67%";
+    }
   }, []);
 
   useEffect(() => {
