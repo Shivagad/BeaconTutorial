@@ -10,6 +10,9 @@ const StudentResult = () => {
   const [showNoResult, setShowNoResult] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [detailedResult, setDetailedResult] = useState(null);
+  useEffect(() => {
+    document.body.style.zoom = "67%"; 
+  }, []);
 
   useEffect(() => {
     if (currentUser?.email) {
