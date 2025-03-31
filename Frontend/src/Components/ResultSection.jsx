@@ -60,7 +60,6 @@ const ResultSection = ({ title, students }) => {
   const handleTouchEnd = () => {
     if (!scrollRef.current) return;
     const swipeDistance = touchStartX - touchEndX;
-    
     if (swipeDistance > 50) {
       // Swipe left → Scroll Right
       scrollRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
