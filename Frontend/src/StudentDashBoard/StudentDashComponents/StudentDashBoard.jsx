@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import StudentDashSidebar from "./StudentDashSidebar";
+import React, { useState, useEffect, Suspense, lazy } from "react";
+import { Outlet, Navigate } from "react-router-dom";
 import StudentDashNavbar from "./StudentDashNavbar";
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const StudentDashSidebar = lazy(() => import('./StudentDashSidebar'));
+
 const StudentDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
 
@@ -18,48 +20,36 @@ const StudentDashboard = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Check if we're on the exact dashboard route and redirect to profile
+  const path = window.location.pathname;
+  if (path === "/student-dashboard" || path === "/student-dashboard/") {
+    return <Navigate to="/student-dashboard/basic-info" replace />;
+  }
+
   return (
-    <><StudentDashNavbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-      <div className="bg-gray-100 min-h-screen">
-        {/* Navbar at the top */}
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <StudentDashNavbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-        {/* Container below navbar: sidebar and main content */}
-        <div className="flex">
-          {/* {isSidebarOpen && (
-            <StudentDashSidebar
-              isOpen={isSidebarOpen}
-              setIsOpen={setIsSidebarOpen}
-              className="w-64 bg-white shadow-lg" // adjust styling as needed
-            />
-          )} */}
-          <StudentDashSidebar
-            isOpen={isSidebarOpen}
-            setIsOpen={setIsSidebarOpen}
-            // className={`fixed inset-y-0 left-0 z-50 transform bg-white shadow-lg transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            //   } md:relative md:translate-x-0 md:w-64`}
-            className="w-64 bg-white shadow-lg"
-          />
+      <div className="flex flex-grow relative pt-16">
+        {/* Sidebar */}
+        <aside 
+          className={`fixed top-16 bottom-0 left-0 z-30 h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out ${
+            isSidebarOpen ? 'w-64' : 'w-0'
+          } overflow-hidden bg-white shadow-lg`}
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            <StudentDashSidebar isOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+          </Suspense>
+        </aside>
 
-          <div
-            className={`fixed
-              ${!isSidebarOpen ? 'left-0' : 'left-64'}
-               top-1/2 transform -translate-y-1/2 bg-[#4E77BB] rounded-r-full w-7 h-16 flex items-center justify-center cursor-pointer`}
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          >
-            {isSidebarOpen ? (
-              <ChevronLeft className="h-6 w-6 text-white" />
-            ) : (
-              <ChevronRight className="h-6 w-6 text-white" />
-            )}
-          </div>
-
-          {/* Main content area */}
-          <div className="flex-1 p-4">
+        {/* Main content area */}
+        <main className={`flex-1 p-4 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
+          <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
-          </div>
-        </div>
+          </Suspense>
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 
