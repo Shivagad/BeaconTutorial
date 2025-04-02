@@ -2,6 +2,70 @@ import { useState, useEffect } from "react";
 import { X } from "react-feather";
 import axios from "axios";
 
+const links = {
+  result: "https://www.beacontutorials.com/all-results",
+  course: "https://www.beacontutorials.com/all-courses",
+  beacon: "https://www.beacontutorials.com/about",
+  about: "https://www.beacontutorials.com/about",
+  event: "https://www.beacontutorials.com/event-gallery",
+  gallery: "https://www.beacontutorials.com/event-gallery",
+  testimonial: "https://www.beacontutorials.com/testimonial",
+  feedback: "https://www.beacontutorials.com/testimonial",
+  review: "https://www.beacontutorials.com/testimonial",
+  blog: "https://www.beacontutorials.com/student-corner",
+  inquiry: "https://www.beacontutorials.com/inquiry",
+  address: "https://www.beacontutorials.com/contact",
+  contact: "https://www.beacontutorials.com/contact",
+  details: "https://www.beacontutorials.com/contact",
+  scolarship: "https://www.beacontutorials.com/scholarship",
+  login: "https://www.beacontutorials.com/login",
+};
+
+const getUsefulLinks = (text) => {
+  const foundKeywords = new Set();
+  // Match words using word boundaries (ignoring punctuation)
+  const words = text.match(/\b\w+\b/g);
+
+  if (words) {
+    words.forEach((word) => {
+      const normalized = word.toLowerCase();
+      // Check if the exact word is in our links object
+      if (links[normalized]) {
+        foundKeywords.add(normalized);
+      } else {
+        // If word ends with 's', try checking its singular version
+        if (normalized.endsWith("s")) {
+          const singular = normalized.slice(0, -1);
+          if (links[singular]) {
+            foundKeywords.add(singular);
+          }
+        }
+      }
+    });
+  }
+
+  console.log(foundKeywords);
+
+
+  // Build an array of link objects from the unique keywords
+  const foundLinks = [];
+  foundKeywords.forEach((keyword) => {
+    const linkText =
+      keyword === "result"
+        ? "Beacon Results"
+        : keyword === "beacon" ? "Beacon Tutorials"
+          : keyword === "feedback" || keyword === "testimonial" ||
+            keyword === "review" || keyword === "student" ? "Beacon Students Reviews"
+            : `Beacon ${keyword.charAt(0).toUpperCase() + keyword.slice(1)}`;
+    foundLinks.push({ text: linkText, url: links[keyword] });
+  });
+
+  console.log(foundLinks);
+
+
+  return foundLinks;
+};
+
 const ChatModal = ({ isChatOpen, setIsChatOpen }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -10,50 +74,32 @@ const ChatModal = ({ isChatOpen, setIsChatOpen }) => {
   useEffect(() => {
     if (isChatOpen) {
       const welcomeMessage = "Welcome! At Beacon Tutorial, how can we assist you today?";
-      setChat([{ role: "bot", content: welcomeMessage }]);
+      // Compute useful links for the welcome message, if any
+      // const welcomeLinks = getUsefulLinks(welcomeMessage);
+      setChat([{ role: "bot", content: welcomeMessage, links: [] }]);
     }
   }, [isChatOpen]);
 
-  // Function to parse bot messages and inject hyperlinks for specific keywords
-  const parseBotMessage = (text) => {
-    const links = {
-      result: "https://www.beacontutorials.com/all-results",
-      blog: "https://www.beacontutorials.com/student-corner",
-      inquiry: "https://www.beacontutorials.com/inquiry",
-      address: "https://www.beacontutorials.com/contact",
-      // Add more keywords and corresponding URLs as needed
-    };
-
-    let parsed = text;
-    Object.keys(links).forEach((keyword) => {
-      // Use word boundaries and optional "s" to match singular/plural
-      const regex = new RegExp(`\\b(${keyword}(s)?)\\b`, "gi");
-      parsed = parsed.replace(
-        regex,
-        `<a href="${links[keyword]}" target="_blank" class="text-blue-500 underline">$1</a>`
-      );
-    });
-    return parsed;
-  };
-
   const sendMessage = async () => {
     if (!message) return;
-    // Add user's message to chat
+    // Add user's message as plain text (without links)
+    const botLinks = getUsefulLinks(message);
     const newChat = [...chat, { role: "user", content: message }];
     setChat(newChat);
     setMessage("");
-    setLoading(true); // show loader
+    setLoading(true);
 
     try {
       const res = await axios.post("https://beacon-tutorial.vercel.app/server/chat", { message });
-      setChat([...newChat, { role: "bot", content: res.data.reply }]);
+      // Compute useful links for the bot response
+      // const botLinks = getUsefulLinks(res.data.reply);
+      const botMessage = { role: "bot", content: res.data.reply, links: botLinks };
+      setChat([...newChat, botMessage]);
     } catch (error) {
-      setChat([
-        ...newChat,
-        { role: "bot", content: "Sorry, there was an error fetching the response." },
-      ]);
+      const errorMessage = "Sorry, there was an error fetching the response.";
+      setChat([...newChat, { role: "bot", content: errorMessage, links: [] }]);
     } finally {
-      setLoading(false); // hide loader when response is received
+      setLoading(false);
     }
   };
 
@@ -77,29 +123,50 @@ const ChatModal = ({ isChatOpen, setIsChatOpen }) => {
         </button>
       </div>
       <div className="h-60 overflow-y-auto p-2 bg-gray-100 rounded mb-2">
-        {chat.map((msg, index) => (
-          <div
-            key={index}
-            className={`flex ${msg.role === "bot" ? "justify-start" : "justify-end"} mb-3`}
-          >
-            <div
-              className={`p-2 rounded-lg max-w-[75%] ${
-                msg.role === "bot" ? "bg-gray-200 text-gray-700" : "bg-blue-100 text-[#4E77BB]"
-              }`}
-            >
-              {msg.role === "bot" ? (
-                <span
-                  dangerouslySetInnerHTML={{ __html: parseBotMessage(msg.content) }}
-                ></span>
-              ) : (
-                msg.content
+        {chat.map((msg, index) => {
+          if (msg.role === "user") {
+            return (
+              <div key={index} className="flex justify-end mb-3">
+                <div className="p-2 rounded-lg max-w-[75%] bg-blue-100 text-[#4E77BB]">
+                  {msg.content}
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div key={index} className="mb-3">
+              <div className="flex justify-start">
+                <div className="p-2 rounded-lg max-w-[75%] bg-gray-200 text-gray-700">
+                  {msg.content}
+                </div>
+              </div>
+              {/* Render Useful Links below bot response if any exist */}
+              {msg.links && msg.links.length > 0 && (
+                <div className="mt-1 ml-2 text-sm">
+                  <div className="font-semibold">Useful Links:</div>
+                  <ul className="list-disc list-inside">
+                    {msg.links.map((link, i) => (
+                      <li key={i}>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 underline"
+                        >
+                          {link.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
-          </div>
-        ))}
+          );
+        })}
+
         {loading && (
           <div className="flex items-center gap-2">
-            {/* Simple loader spinner */}
             <div
               style={{
                 border: "4px solid #f3f3f3",
@@ -123,7 +190,6 @@ const ChatModal = ({ isChatOpen, setIsChatOpen }) => {
           placeholder="Ask me anything..."
           className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        
         <button
           onClick={sendMessage}
           className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-200"
@@ -131,8 +197,6 @@ const ChatModal = ({ isChatOpen, setIsChatOpen }) => {
           Send
         </button>
       </div>
-      
-      {/* Inline keyframes for loader spinner */}
       <style jsx>{`
         @keyframes spin {
           0% { transform: rotate(0deg); }
