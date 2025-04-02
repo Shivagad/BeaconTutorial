@@ -42,10 +42,12 @@ async function getAnswer(userQuestion) {
 
         const chat = model.startChat();
         const response = await chat.sendMessage(
-            `Answer this based on my coaching institute FAQs: ${JSON.stringify(faqs)}. Question: ${userQuestion}`
+            `Answer this based on my coaching institute FAQs: ${JSON.stringify(faqs)}. 
+            If the answer is not found in the FAQs, respond with: 
+            "The answer to your question is not available in our FAQs. Please contact our admin through the contact page." 
+            Question: ${userQuestion}`
         );
 
-        
         return response.response.text();  
     } catch (error) {
         console.error("Error:", error);
