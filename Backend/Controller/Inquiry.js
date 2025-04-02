@@ -9,7 +9,7 @@ export const submitInquiry = async (req, res) => {
     const newInquiry = new Inquiry(inquiryData);
     await newInquiry.save();
     await sendInquiryForm(inquiryData, inquiryData.email);
-    await sendInquiryForm(inquiryData, "beacontutorial1234@gmail.com");
+    await sendInquiryForm(inquiryData, "beacontutorialspune@gmail.com");
     res.status(200).json({ message: "Inquiry form submitted successfully!" });
   } catch (error) {
     console.error("Error saving inquiry:", error);
