@@ -346,7 +346,7 @@ const CourseSection = ({ course, batchData }) => {
   }, [batchData, course.title]);
 
 
-  const driveFolderUrl = "https://drive.google.com/drive/folders/1Tv9vag9jvWmYPo_1lxop2TLOqIp0Pmjm?usp=sharing";
+  const driveFolderUrl = "https://drive.google.com/drive/folders/1-gsPQ5joi0TjqkWArX4lIdAEsZOPcPNP?usp=drive_link";
 
   return (
     <div id={course.title.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "-").toLowerCase()}

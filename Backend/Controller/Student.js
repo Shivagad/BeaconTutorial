@@ -855,7 +855,6 @@ export const uploadStudentResultCSV = async (req, res) => {
 };
 
 
-// Delete a result by student email and exam name
 export const deleteResultByEmail = async (req, res) => {
   let { studentEmail, examName } = req.body;
   // console.log(req.body);
