@@ -46,11 +46,10 @@ const FloatingDropdown = ({ setIsChatOpen }) => {
         )}
         <button
           onClick={() => setDropdownOpen((prev) => !prev)}
-          className={`bg-blue-500 shadow-lg flex items-center justify-center transition-all duration-300 ease-in-out ${
-            dropdownOpen
-              ? "px-6 py-3 rounded-full"
+          className={`bg-blue-500 shadow-lg flex items-center justify-center transition-all duration-700 ease-in-out ${dropdownOpen
+              ? "p-4 rounded-full"
               : "p-4 rounded-full"
-          }`}
+            }`}
         >
           {dropdownOpen ? (
             <div className="flex items-center gap-2">
@@ -59,9 +58,9 @@ const FloatingDropdown = ({ setIsChatOpen }) => {
             </div>
           ) : (
             <div className="flex items-center gap-2">
-            {/* <span className="text-white font-semibold">Need Help?</span> */}
-            <ChevronUp className="text-white" />
-          </div>
+              {/* <span className="text-white font-semibold">Need Help?</span> */}
+              <ChevronUp className="text-white" />
+            </div>
           )}
         </button>
       </div>
