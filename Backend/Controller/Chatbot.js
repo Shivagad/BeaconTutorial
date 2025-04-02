@@ -54,8 +54,6 @@ async function getAnswer(userQuestion) {
             
             Question: ${userQuestion}`
         );
-        
-
         return response.response.text();  
     } catch (error) {
         console.error("Error:", error);

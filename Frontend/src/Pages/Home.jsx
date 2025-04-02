@@ -25,7 +25,6 @@ import BranchCards from "../Components/HomeComponents/BranchCards";
 import { motion } from "framer-motion";
 import { FaAward } from "react-icons/fa";
 
-
 function Home() {
   const navigate = useNavigate();
   const [posters, setPosters] = useState([]);
@@ -71,16 +70,14 @@ function Home() {
     }
   }, [posters.length]);
 
-  const placeholderPosters = [
-    { desktop: "/images/aboutus_img1.avif", mobile: "/images/cbse.jpg" },
-  ];
-
   const [stats, setStats] = useState({});
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
+        const response = await axios.get(
+          "https://beacon-tutorial.vercel.app/server/stat/getstat"
+        );
         // console.log(response.data);
         setStats(response.data);
       } catch (error) {
@@ -91,15 +88,20 @@ function Home() {
     fetchStats();
   }, []);
 
-
   const statData = [
     { icon: Users, value: stats.studentsCount, label: "Students" },
     { icon: Trophy, value: `${stats.successRate}%`, label: "Success Rate" },
-    { icon: GraduationCap, value: stats.expertFacultyCount, label: "Expert Faculty" },
-    { icon: Award, value: `${stats.yearsOfExperience}+`, label: "Years Experience" },
+    {
+      icon: GraduationCap,
+      value: stats.expertFacultyCount,
+      label: "Expert Faculty",
+    },
+    {
+      icon: Award,
+      value: `${stats.yearsOfExperience}+`,
+      label: "Years Experience",
+    },
   ];
-
-  
 
   return (
     <>
@@ -161,7 +163,7 @@ function Home() {
                 </a>
               </li>
               <li>
-              📞{" "}
+                📞{" "}
                 <a
                   href="tel:+919527069991"
                   className="text-blue-600 hover:underline"
@@ -183,37 +185,43 @@ function Home() {
 
       {/* Blur effect when popup is open */}
       <div
-        className={`min-h-screen ${isPopupOpen ? "blur-sm" : ""
-          } transition-all duration-300`}
+        className={`min-h-screen ${
+          isPopupOpen ? "blur-sm" : ""
+        } transition-all duration-300`}
       >
         {/* Page Content */}
         <div className="min-h-screen bg-gray-50">
           <div className="flex items-center justify-center bg-white px-4 py-1 rounded-t-lg shadow text-center gap-2">
-            <p className="text-gray-900 font-medium text-sm">Beacon Results Out!</p>
-            <a href="/all-results" className="text-blue-600 font-medium text-sm flex items-center">
+            <p className="text-gray-900 font-medium text-sm">
+              Beacon Results Out!
+            </p>
+            <a
+              href="/all-results"
+              className="text-blue-600 font-medium text-sm flex items-center"
+            >
               View Results →
             </a>
           </div>
-
-
 
           <div className="relative w-full aspect-square md:aspect-auto md:min-h-[50vh] flex items-center justify-center mb-6">
             {posters.length > 0 ? (
               posters.map((poster, index) => (
                 <div
                   key={`poster-${index}`}
-                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${
+                    index === currentSlide ? "opacity-100" : "opacity-0"
+                  }`}
                 >
                   <picture className="w-full h-full">
                     {/* Mobile Image */}
+                    {/* Mobile Image */}
                     <source
                       media="(max-width: 768px)"
-                      srcSet={`${poster.mobileImagePath}?f_auto,q_auto,w_600,h_600,c_fill`}
+                      srcSet={`${poster.mobileImagePath}?f_auto,q_auto,w_600,h_600,c_fill,dpr_auto`}
                     />
                     {/* Default (Desktop) Image */}
                     <img
-                      src={`${poster.imagePath}?f_auto,q_auto,w_1200,h_800,c_fill`}
+                      src={`${poster.imagePath}?f_auto,q_auto,w_1200,h_800,c_fill,dpr_auto`}
                       alt={`Poster ${index + 1}`}
                       role="presentation"
                       className="w-full h-full object-contain md:object-fill"
@@ -247,108 +255,127 @@ function Home() {
             )}
           </div>
 
-          <div className="bg-white py-10"> 
-              {/* Branch Cards Section */}
-              <div className="max-w-7xl mx-auto shadow-lg rounded-xl">
-                <BranchCards />
-              </div>
+          <div className="bg-white py-10">
+            {/* Branch Cards Section */}
+            <div className="max-w-7xl mx-auto shadow-lg rounded-xl">
+              <BranchCards />
+            </div>
 
-              {/* Stats Section */}
-              <div className="max-w-7xl mx-auto mt-10 shadow-lg rounded-xl">
-                {/* Card Container */}
-                <div className="bg-white rounded-xl shadow-md p-6 md:p-10">
-                  {/* Heading */}
-                  <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
-                    {stats.yearsOfExperience ? `${stats.yearsOfExperience}+ Years of Legacy` : "15+ Years of Legacy"}
-                  </h2>
+            {/* Stats Section */}
+            <div className="max-w-7xl mx-auto mt-10 shadow-lg rounded-xl">
+              {/* Card Container */}
+              <div className="bg-white rounded-xl shadow-md p-6 md:p-10">
+                {/* Heading */}
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-[#4E77BB] mb-2">
+                  {stats.yearsOfExperience
+                    ? `${stats.yearsOfExperience}+ Years of Legacy`
+                    : "15+ Years of Legacy"}
+                </h2>
 
-                  <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
-                    with excellent Results
-                  </p>
+                <p className="text-center text-gray-600 text-lg md:text-xl mb-8">
+                  with excellent Results
+                </p>
 
-                  {/* Subtext */}
-                  <p className="text-center text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Be the next stellar of Beacon Tutorial. Accomplish greatness and
-                    be a part of our legacy. Find your course now.
-                  </p>
+                {/* Subtext */}
+                <p className="text-center text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
+                  Be the next stellar of Beacon Tutorial. Accomplish greatness
+                  and be a part of our legacy. Find your course now.
+                </p>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center place-items-center">
-                    {/* Stat 2 */}
-                    <div className="flex flex-col items-center">
-                      <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
-                      <p className="text-xl font-bold text-gray-800">{stats.studentsCount ? `${stats.studentsCount}+` : "1000+"}</p>
-                      <p className="text-gray-600">Beaconian qualified NEET, JEE &amp; CET</p>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center place-items-center">
+                  {/* Stat 2 */}
+                  <div className="flex flex-col items-center">
+                    <Award className="w-10 h-10 text-[#4E77BB] mb-2" />
+                    <p className="text-xl font-bold text-gray-800">
+                      {stats.studentsCount
+                        ? `${stats.studentsCount}+`
+                        : "1000+"}
+                    </p>
+                    <p className="text-gray-600">
+                      Beaconian qualified NEET, JEE &amp; CET
+                    </p>
+                  </div>
 
-                    {/* Stat 3 */}
-                    <div className="flex flex-col items-center">
-                      <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
-                      <p className="text-xl font-bold text-gray-800">{stats.expertFacultyCount ? `${stats.expertFacultyCount}+` : "100+"}</p>
-                      <p className="text-gray-600">Expert Faculty</p>
-                    </div>
+                  {/* Stat 3 */}
+                  <div className="flex flex-col items-center">
+                    <UsersRound className="w-10 h-10 text-[#4E77BB] mb-2" />
+                    <p className="text-xl font-bold text-gray-800">
+                      {stats.expertFacultyCount
+                        ? `${stats.expertFacultyCount}+`
+                        : "100+"}
+                    </p>
+                    <p className="text-gray-600">Expert Faculty</p>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
           {/* container start */}
           <div className="w-full bg-white py-6">
-              <div className="relative w-full max-w-7xl mx-auto bg-white p-2 rounded-3xl shadow-2xl">
-                
-                {/* Card Content */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="relative bg-gradient-to-br from-[#4E77BB] via-[#3A5D99] to-[#2B4778] rounded-2xl px-6 md:px-10 py-4 md:py-6 flex flex-col md:flex-row items-center md:items-start overflow-hidden w-full"
-                >
-                  
-                  {/* Wave Background Animation */}
-                  <div className="absolute inset-0">
-                    <motion.svg
-                      className="absolute bottom-0 left-0 w-full h-16 md:h-20 text-[#3A5D99]"
-                      fill="currentColor"
-                      viewBox="0 0 1440 320"
-                      animate={{ y: [0, 5, 0] }}
-                      transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                    >
-                      <path d="M0,160L48,165.3C96,171,192,181,288,186.7C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,192C1248,181,1344,139,1392,117.3L1440,96L1440,320L0,320Z"></path>
-                    </motion.svg>
-                  </div>
-
-                  {/* Left Side - Text */}
-                  <div className="relative flex-1 text-white space-y-3 md:space-y-4">
-                    <h1 className="text-2xl md:text-3xl font-bold">
-                      BEST - Talent Test
-                    </h1>
-                    <p className="text-lg md:text-xl max-w-lg">
-                      Up to 99% Scholarship for qualifying students from 10th SSC / CBSE / ICSE.
-                    </p>
-
-                    {/* Button */}
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => {
-                        navigate("/scholarship");
-                        window.scrollTo(0, 0);
-                      }}
-                      className="bg-orange-400 hover:bg-orange-500 px-5 py-2 rounded-full text-lg font-semibold transition shadow-md"
-                    >
-                      Register Now for Free
-                    </motion.button>
-                  </div>
-
-                  {/* Right Side - Animated Icon */}
-                  <motion.div
-                    className="relative w-24 h-24 md:w-28 md:h-28 bg-white/20 rounded-full shadow-lg flex items-center justify-center mt-6 md:mt-0 md:ml-6"
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            <div className="relative w-full max-w-7xl mx-auto bg-white p-2 rounded-3xl shadow-2xl">
+              {/* Card Content */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="relative bg-gradient-to-br from-[#4E77BB] via-[#3A5D99] to-[#2B4778] rounded-2xl px-6 md:px-10 py-4 md:py-6 flex flex-col md:flex-row items-center md:items-start overflow-hidden w-full"
+              >
+                {/* Wave Background Animation */}
+                <div className="absolute inset-0">
+                  <motion.svg
+                    className="absolute bottom-0 left-0 w-full h-16 md:h-20 text-[#3A5D99]"
+                    fill="currentColor"
+                    viewBox="0 0 1440 320"
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 3,
+                      ease: "easeInOut",
+                    }}
                   >
-                    <FaAward className="text-white text-4xl md:text-5xl" />
-                  </motion.div>
+                    <path d="M0,160L48,165.3C96,171,192,181,288,186.7C384,192,480,192,576,186.7C672,181,768,171,864,176C960,181,1056,203,1152,192C1248,181,1344,139,1392,117.3L1440,96L1440,320L0,320Z"></path>
+                  </motion.svg>
+                </div>
+
+                {/* Left Side - Text */}
+                <div className="relative flex-1 text-white space-y-3 md:space-y-4">
+                  <h1 className="text-2xl md:text-3xl font-bold">
+                    BEST - Talent Test
+                  </h1>
+                  <p className="text-lg md:text-xl max-w-lg">
+                    Up to 99% Scholarship for qualifying students from 10th SSC
+                    / CBSE / ICSE.
+                  </p>
+
+                  {/* Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      navigate("/scholarship");
+                      window.scrollTo(0, 0);
+                    }}
+                    className="bg-orange-400 hover:bg-orange-500 px-5 py-2 rounded-full text-lg font-semibold transition shadow-md"
+                  >
+                    Register Now for Free
+                  </motion.button>
+                </div>
+
+                {/* Right Side - Animated Icon */}
+                <motion.div
+                  className="relative w-24 h-24 md:w-28 md:h-28 bg-white/20 rounded-full shadow-lg flex items-center justify-center mt-6 md:mt-0 md:ml-6"
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <FaAward className="text-white text-4xl md:text-5xl" />
                 </motion.div>
-              </div>
+              </motion.div>
+            </div>
           </div>
 
           {/* container end */}
@@ -435,7 +462,6 @@ function Home() {
               >
                 Enroll Now
               </button>
-
             </div>
           </div>
           <div className="bg-[#4e77bb] -mb-14 text-white py-12">
