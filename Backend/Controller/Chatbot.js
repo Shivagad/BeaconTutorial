@@ -42,11 +42,19 @@ async function getAnswer(userQuestion) {
 
         const chat = model.startChat();
         const response = await chat.sendMessage(
-            `Answer this based on my coaching institute FAQs: ${JSON.stringify(faqs)}. 
-            If the answer is not found in the FAQs, respond with: 
-            "The answer to your question is not available in our FAQs. Please contact our admin through the contact page." 
+            `You are an assistant for my coaching institute. Answer the following question based on the provided FAQs: 
+            ${JSON.stringify(faqs)}.
+            
+            If the answer is not found in the FAQs, search for information on https://beacontutorials.com and provide the most relevant answer. 
+            
+            If you still cannot find the answer, respond with: 
+            "The answer to your question is not available in our FAQs or website. Please contact our admin through the contact page: https://beacontutorials.com/contact" 
+            
+            Additionally, if relevant, provide a link to the page on our website where the user can find more details. 
+            
             Question: ${userQuestion}`
         );
+        
 
         return response.response.text();  
     } catch (error) {
