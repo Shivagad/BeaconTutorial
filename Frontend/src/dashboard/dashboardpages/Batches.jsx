@@ -12,7 +12,7 @@ const BatchManagement = () => {
 
   const fetchBatches = async () => {
     try {
-      const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch");
+      const response = await axios.get("http://localhost:4000/server/batches/getallbatch");
       if (response.data) {
         setBatches(response.data);
       } else {

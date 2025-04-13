@@ -24,6 +24,7 @@ import OtherExamResult from './Routes/OtherExamResults.js';
 import Stat from './Routes/Stat.js';
 import Batches from './Routes/Batches.js';
 import Chatbot from './Routes/Chatbot.js';
+import Ads from './Routes/Ads.js';
 
 dotenv.config();
 const app = express();
@@ -55,6 +56,7 @@ app.use('/server',OtherExamResult);
 app.use('/server/stat',Stat);
 app.use('/server/batches',Batches);
 app.use('/server',Chatbot);
+app.use('/server/ads',Ads);
 
 
 app.get('/', (req, res) => {
@@ -74,10 +76,10 @@ app.get("/s", (req, res) => {
 });
 
 
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 
 
-export default app;
+// export default app;

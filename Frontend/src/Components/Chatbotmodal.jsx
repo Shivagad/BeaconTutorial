@@ -90,7 +90,7 @@ const ChatModal = ({ isChatOpen, setIsChatOpen }) => {
     setLoading(true);
 
     try {
-      const res = await axios.post("https://beacon-tutorial.vercel.app/server/chat", { message });
+      const res = await axios.post("http://localhost:4000/server/chat", { message });
       // Compute useful links for the bot response
       // const botLinks = getUsefulLinks(res.data.reply);
       const botMessage = { role: "bot", content: res.data.reply, links: botLinks };

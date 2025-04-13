@@ -50,7 +50,7 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
     setIsSubmitting(true);
     try {
       const response = await axios.put(
-        `https://beacon-tutorial.vercel.app/server/jee/students/${id}`,
+        `http://localhost:4000/server/jee/students/${id}`,
         formData
       );
 
@@ -84,7 +84,7 @@ const EditJEEStudentModal = ({ isEditOpen, onClose, setToast2, id }) => {
   // Fetch student details by id when the modal opens.
   const fetchAllDetails = async () => {
     try {
-      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/jee/students/${id}`);
+      const response = await axios.get(`http://localhost:4000/server/jee/students/${id}`);
       const data = response.data.data;
       setFormData({
         seqno: data.seqno || "",

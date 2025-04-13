@@ -14,7 +14,7 @@ export default function App() {
   const testimonialsPerPage = 8;
 
   useEffect(() => {
-    axios.get('https://beacon-tutorial.vercel.app/server/testimonial/sorted')
+    axios.get('http://localhost:4000/server/testimonial/sorted')
       .then((response) => {
         setTestimonials(Array.isArray(response.data.data) ? response.data.data : []);
         // console.log(response);

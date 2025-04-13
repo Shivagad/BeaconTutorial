@@ -2,37 +2,27 @@ import React, { useState } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import axios from 'axios';
 
-const Delete10StudentModal = ({
-  isDeleteOpen,
-  onClose,
-  setToast3,
-  studentName,
-  id
-}) => {
+const DeleteAdModal = ({ isDeleteOpen, onClose, setToast, adTitle, id }) => {
   const [confirmText, setConfirmText] = useState('');
 
-  if(!isDeleteOpen) return null;
+  if (!isDeleteOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
-      const response = await axios.delete(`http://localhost:4000/server/tenth/students/${id}`);
-      response.data.success ? (setToast3({
-        success: true,
-        message: `10th Student deleted successfully`,
-      })) : (
-        setToast3({
-          success: false,
-          message: `Failed to delete Student`,
-        })
-      )
+      try {
+        const response = await axios.delete(`http://localhost:4000/server/ads/${id}`);
+        setToast({
+          success: response.data.success,
+          message: response.data.success ? `Ad deleted successfully` : `Failed to delete ad`,
+        });
+      } catch (error) {
+        setToast({ success: false, message: `Error deleting ad` });
+      }
       setConfirmText('');
       onClose();
     } else {
-      setToast3({
-        success: false,
-        message: `Please confirm deletion`,
-      })
+      setToast({ success: false, message: `Please confirm deletion` });
     }
   };
 
@@ -42,7 +32,7 @@ const Delete10StudentModal = ({
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
             <AlertTriangle className="w-6 h-6 text-red-500 mr-2" />
-            <h2 className="text-xl font-bold text-gray-800">Delete Student</h2>
+            <h2 className="text-xl font-bold text-gray-800">Delete Ad</h2>
           </div>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="w-6 h-6" />
@@ -51,7 +41,7 @@ const Delete10StudentModal = ({
 
         <div className="mb-6">
           <p className="text-gray-600 mb-4">
-            Are you sure you want to delete <span className="font-semibold">{studentName}</span>? This action cannot be undone.
+            Are you sure you want to delete <span className="font-semibold">{adTitle}</span>? This action cannot be undone.
           </p>
           <p className="text-sm text-gray-500">
             Type <span className="font-mono font-semibold">delete</span> to confirm
@@ -89,5 +79,4 @@ const Delete10StudentModal = ({
   );
 };
 
-export default Delete10StudentModal;
-
+export default DeleteAdModal;

@@ -39,6 +39,7 @@ import BlogAdmin from "./dashboard/dashboardpages/Blog.jsx";
 import Courses from "./dashboard/dashboardpages/Courses.jsx";
 import AllCourses from "./Pages/AllCourses.jsx";
 import CourseCards from "./dashboard/dashboardpages/coursescard.jsx";
+import Ads from "./dashboard/dashboardpages/Ads.jsx";
 import StudentDetails from "./dashboard/StudentManagement/StudentDetails.jsx";
 import Studentdash from "./Pages/Studentdash.jsx";
 import Faculty from "./dashboard/dashboardpages/Faculty.jsx";
@@ -84,6 +85,7 @@ function AppRoutes() {
     "/dashboard/neet-student",
     "/student-dashboard",
     "/forgot-password",
+    "/dashboard/adsbackend",
     "/login",
   ];
 
@@ -256,6 +258,14 @@ function AppRoutes() {
             element={
               <ProtectedRoute requiredRole="admin">
                 <TenthResults />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="adsbackend"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <Ads />
               </ProtectedRoute>
             }
           />

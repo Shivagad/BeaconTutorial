@@ -17,7 +17,7 @@ const OtherExamResults = () => {
 
   const fetchStudents = useCallback(async () => {
     try {
-      const response = await axios.get("https://beacon-tutorial.vercel.app/server/other-exam-results");
+      const response = await axios.get("http://localhost:4000/server/other-exam-results");
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
       setStudents([]);

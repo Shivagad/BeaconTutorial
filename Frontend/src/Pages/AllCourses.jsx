@@ -445,7 +445,7 @@ const AllCourses = () => {
   useEffect(() => {
     const fetchAllBatches = async () => {
       try {
-        const response = await axios.get("https://beacon-tutorial.vercel.app/server/batches/getallbatch");
+        const response = await axios.get("http://localhost:4000/server/batches/getallbatch");
         setBatchData(response.data);
         // // console.log(response);
       } catch (error) {

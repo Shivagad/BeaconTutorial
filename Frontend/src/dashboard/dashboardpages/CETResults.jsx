@@ -17,7 +17,7 @@ const CETResults = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("https://beacon-tutorial.vercel.app/server/cet/students");
+      const response = await axios.get("http://localhost:4000/server/cet/students");
       response.data.data ? setStudents(response.data.data) : setStudents([]);
     } catch (error) {
         setStudents([])

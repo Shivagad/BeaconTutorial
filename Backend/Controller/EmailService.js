@@ -21,7 +21,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const sendOTPEmail = async (req, res) => {
-    // console.log(req.body);
     const { name, email, otp } = req.body;
     const templatePath = path.join(__dirname, "../views", 'SignupOTP.hbs');
     const templateSource = fs.readFileSync(templatePath, "utf-8");

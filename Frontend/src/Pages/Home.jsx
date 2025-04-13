@@ -36,7 +36,7 @@ function Home() {
     const fetchPosters = async () => {
       try {
         const response = await axios.get(
-          "https://beacon-tutorial.vercel.app/server/poster/getallposter"
+          "http://localhost:4000/server/poster/getallposter"
         );
         setPosters(response.data.data || []);
       } catch (error) {
@@ -76,7 +76,7 @@ function Home() {
     const fetchStats = async () => {
       try {
         const response = await axios.get(
-          "https://beacon-tutorial.vercel.app/server/stat/getstat"
+          "http://localhost:4000/server/stat/getstat"
         );
         // console.log(response.data);
         setStats(response.data);
