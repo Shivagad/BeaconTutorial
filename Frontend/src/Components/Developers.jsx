@@ -13,12 +13,12 @@ const Developers = () => {
     {
       name: "Ruturaj Patil",
       image: "/images/ruturajpatil.jpg",
-      bio: "Technical Head at Beacon Tutorial (Pune)",
+      bio: "Technical Head at Beacon Tutorials Pune",
     },
     {
       name: "Akshay Sir",
       image: "/images/akshaysir.JPG",
-      bio: "Physics Faculty At Beacon Tutorial (Pune)",
+      bio: "Physics Faculty at Beacon Tutorials Pune",
     },
   ];
 

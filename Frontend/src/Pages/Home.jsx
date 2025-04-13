@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import BranchCards from "../Components/HomeComponents/BranchCards";
 import { motion } from "framer-motion";
 import { FaAward } from "react-icons/fa";
+import VideoAdv from "../Components/HomeComponents/VidoAdv";
 
 function Home() {
   const navigate = useNavigate();
@@ -432,6 +433,10 @@ function Home() {
 
           <div>
             <HomeWhyChooseUse />
+          </div>
+
+          <div>
+            <VideoAdv/>
           </div>
 
           <div>
