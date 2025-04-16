@@ -85,7 +85,7 @@ const Event = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/server/event/getevent')
+      const response = await axios.get('https://beacon-tutorial.vercel.app/server/event/getevent')
       // console.log(response.data.data)
       setEvents(response.data.data)
     } catch (error) {

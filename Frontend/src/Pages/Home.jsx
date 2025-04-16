@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import BranchCards from "../Components/HomeComponents/BranchCards";
 import { motion } from "framer-motion";
 import { FaAward } from "react-icons/fa";
+import VideoAdv from "../Components/HomeComponents/VidoAdv";
 
 function Home() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Home() {
     const fetchPosters = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/server/poster/getallposter"
+          "https://beacon-tutorial.vercel.app/server/poster/getallposter"
         );
         setPosters(response.data.data || []);
       } catch (error) {
@@ -76,7 +77,7 @@ function Home() {
     const fetchStats = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/server/stat/getstat"
+          "https://beacon-tutorial.vercel.app/server/stat/getstat"
         );
         // console.log(response.data);
         setStats(response.data);
@@ -432,6 +433,10 @@ function Home() {
 
           <div>
             <HomeWhyChooseUse />
+          </div>
+
+          <div>
+            <VideoAdv/>
           </div>
 
           <div>

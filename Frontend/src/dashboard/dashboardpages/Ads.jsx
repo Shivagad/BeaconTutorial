@@ -9,103 +9,93 @@ import DeleteAdModal from "../Ads/DeleteAds";
 const Ads = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deleteAdId, setDeleteAdId] = useState(null);
-  const [adsList, setAdsList] = useState([]);
+  const [videoData, setVideoData] = useState(null);
+  const [videoKey, setVideoKey] = useState(Date.now()); // To force video reload when needed
 
-  const fetchAds = async () => {
+  // Function to fetch the video metadata
+  const fetchVideo = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/server/ads");
-      setAdsList(response.data.data || []);
-    } catch (error) {
-      console.error("Error fetching ads:", error);
-      setAdsList([]);
+      const res = await axios.get("https://beacon-tutorial.vercel.app/server/ads/metadata");
+      console.log("Video metadata:", res.data);
+      
+      if (res.data) {
+        setVideoData(res.data);
+        // Force video element to reload
+        setVideoKey(Date.now());
+      } else {
+        setVideoData(null);
+      }
+    } catch (err) {
+      console.error("Error fetching video metadata:", err);
+      setVideoData(null);
     }
   };
 
   useEffect(() => {
-    fetchAds();
+    fetchVideo();
   }, []);
 
+  // Toast notification logic
   const setToast = (msg) => {
-    msg.success ? toast.success(msg.message) : toast.error(msg.message);
-    fetchAds();
+    if (msg.success) {
+      toast.success(msg.message);
+    } else {
+      toast.error(msg.message);
+    }
+    // Refresh video data after actions
+    setTimeout(fetchVideo, 1000);
   };
-
-  const openDeleteModal = (id) => {
-    setDeleteAdId(id);
-    setIsDeleteModalOpen(true);
-  };
-  const getYouTubeVideoId = (url) => {
-    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-    const match = url.match(regex);
-    return match && match[1] ? match[1] : null;
-  };
-  
 
   return (
     <div className="p-6 ml-64">
       <ToastContainer position="top-right" autoClose={3000} />
-
+      
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Ads</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Admin Video</h1>
         <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           <PlusCircle className="w-5 h-5 mr-2" />
-          Add Ad
+          Upload Video
         </button>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {adsList.map((ad) => (
-          <div
-            key={ad._id}
-            className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
-          >
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              {ad.title}
-            </h3>
-
-            {ad.videoUrl && (
-  <div className="relative w-full h-48 mb-3 overflow-hidden rounded-md shadow-md bg-gray-100">
-    <iframe
-      width="100%"
-      height="100%"
-      src={`https://www.youtube.com/embed/${getYouTubeVideoId(ad.videoUrl)}?autoplay=0&controls=1&modestbranding=1&showinfo=0&rel=0`}
-      frameBorder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title={ad.title}
-      className="w-full h-full object-cover rounded-md"
-    ></iframe>
-  </div>
-)}
-
-
-            <div className="flex justify-end">
-              <button
-                onClick={() => openDeleteModal(ad._id)}
-                className="text-gray-600 hover:text-red-600 transition-colors"
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
-            </div>
+      {videoData ? (
+        <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">{videoData.title}</h3>
+          
+          {/* Video element with correct URL */}
+          <video
+            key={videoKey}
+            controls
+             className="w-1/4 h-auto rounded-lg mb-4"
+            src={`https://beacon-tutorial.vercel.app/server/ads/video`}
+          ></video>
+          
+          <div className="flex justify-end">
+            <button
+              onClick={() => setIsDeleteModalOpen(true)}
+              className="text-gray-600 hover:text-red-600 transition-colors"
+            >
+              <Trash2 className="w-5 h-5" />
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <p className="text-gray-500">No video uploaded yet.</p>
+      )}
 
       <AddAdModal
-        setToast={setToast}
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
+        setToast={setToast}
       />
 
       <DeleteAdModal
-        setToast={setToast}
-        isDeleteOpen={isDeleteModalOpen}
+        isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        id={deleteAdId}
+        setToast={setToast}
       />
     </div>
   );

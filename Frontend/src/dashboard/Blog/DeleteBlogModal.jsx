@@ -16,7 +16,7 @@ const DeleteBlogModal = ({
     e.preventDefault();
     if (confirmText.toLowerCase() === 'delete') {
       try {
-        const response = await axios.delete(`http://localhost:4000/server/blog/delete/${id}`);
+        const response = await axios.delete(`https://beacon-tutorial.vercel.app/server/blog/delete/${id}`);
         // console.log(response.data.success);
         setToast({
           success: response.data.success,

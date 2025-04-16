@@ -81,7 +81,7 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
 
     setIsSubmitting(true);
     try {
-      const response = await axios.put(`http://localhost:4000/server/blog/update/${blogId}`, dataToSend);
+      const response = await axios.put(`https://beacon-tutorial.vercel.app/server/blog/update/${blogId}`, dataToSend);
 
       if (response.data.success) {
         setToast({ success: true, message: "Blog updated successfully" });
@@ -97,7 +97,7 @@ const EditBlogModal = ({ isOpen, onClose, setToast, blogId }) => {
 
   const fetchBlogDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/blog/${blogId}`);
+      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/blog/${blogId}`);
       const data = response.data.data;
       // console.log(data)
       setFormData({

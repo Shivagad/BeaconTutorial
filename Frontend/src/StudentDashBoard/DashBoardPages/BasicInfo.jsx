@@ -28,7 +28,7 @@ const BasicInfo = () => {
   
   useEffect(() => {
     if (currentUser?.course) {
-      axios.get(`http://localhost:4000/server/courses/getid/${currentUser.course}`)
+      axios.get(`https://beacon-tutorial.vercel.app/server/courses/getid/${currentUser.course}`)
         .then(response => {
           if (response.data?.course?.name) {
             setCourseDetails(response.data.course.name);

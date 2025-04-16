@@ -1,98 +1,102 @@
-import React, { useState } from "react";
-import { X } from "lucide-react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 
 const AddAdModal = ({ isOpen, onClose, setToast }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState({
-    title: "",
-    videoLink: "", // For YouTube video link
-  });
+  const fileRef = useRef(null);
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
-  const validateInputs = () => {
-    let newErrors = {};
-    if (!formData.title.trim()) newErrors.title = "Title is required";
-    if (!formData.videoLink.trim()) newErrors.videoLink = "YouTube video link is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const validate = () => {
+    if (!file) {
+      setError("Please select a video file.");
+      return false;
+    }
+    setError("");
+    return true;
   };
 
-  const handleSubmit = async (e) => {
+  const handleUpload = async (e) => {
     e.preventDefault();
-    if (!validateInputs()) return;
+    if (!validate()) return;
+
+    const formData = new FormData();
+    formData.append("video", file);
+
 
     try {
-      setIsSubmitting(true);
-      const response = await axios.post("http://localhost:4000/server/ads/add", {
-        title: formData.title,
-        videoLink: formData.videoLink,
+      setLoading(true);
+      const res = await axios.post("https://beacon-tutorial.vercel.app/server/ads/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
-      setFormData({ title: "", videoLink: "" });
-      setToast({
-        success: response.data.success,
-        message: response.data.message,
-      });
-
+      setToast({ success: true, message: res.data.message });
+      setFile(null);
       onClose();
-    } catch (error) {
+    } catch (err) {
       setToast({
         success: false,
-        message: error.response?.data?.message || "Error adding ad",
+        message: err.response?.data || "Upload failed",
       });
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-6 w-full max-w-xl">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Add New Ad</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Title</label>
-            <input
-              type="text"
-              value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className={`w-full px-4 py-2 border rounded-lg ${errors.title ? "border-red-500" : ""}`}
-              placeholder="Enter Ad Title"
-            />
-            {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
-          </div>
+      <form onSubmit={handleUpload} className="bg-white p-6 rounded w-full max-w-md space-y-4">
+        <h2 className="text-xl font-bold">Upload Video</h2>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">YouTube Video Link</label>
-            <input
-              type="text"
-              value={formData.videoLink}
-              onChange={(e) => setFormData({ ...formData, videoLink: e.target.value })}
-              className={`w-full px-4 py-2 border rounded-lg ${errors.videoLink ? "border-red-500" : ""}`}
-              placeholder="Enter YouTube Video Link"
-            />
-            {errors.videoLink && <p className="text-red-500 text-sm mt-1">{errors.videoLink}</p>}
-          </div>
-
-          <div className="border-t pt-6">
+        <div>
+          {file ? (
+            <div className="flex items-center justify-between border p-2 rounded">
+              <span className="truncate">{file.name}</span>
+              <button
+                type="button"
+                onClick={() => setFile(null)}
+                className="text-red-500"
+              >
+                X
+              </button>
+            </div>
+          ) : (
             <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700"
+              type="button"
+              onClick={() => fileRef.current.click()}
+              className="w-full py-2 border-2 border-dashed text-gray-500 rounded hover:border-blue-500"
             >
-              {isSubmitting ? "Adding..." : "Add Ad"}
+              Select Video
             </button>
-          </div>
-        </form>
-      </div>
+          )}
+          <input
+            ref={fileRef}
+            type="file"
+            accept="video/*"
+            onChange={(e) => setFile(e.target.files?.[0])}
+            className="hidden"
+          />
+          {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
+          {loading ? "Uploading..." : "Upload Video"}
+        </button>
+
+        <button
+          type="button"
+          onClick={onClose}
+          className="w-full mt-2 text-sm text-gray-600 underline"
+        >
+          Cancel
+        </button>
+      </form>
     </div>
   );
 };

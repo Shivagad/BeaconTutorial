@@ -1,10 +1,14 @@
-
 import mongoose from 'mongoose';
 
-const AdSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  videoUrl: { type: String, required: true },  
-});
+const AdsSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    videoUrl: {
+        type: String,
+        required: true,
+    }
+}, { timestamps: true });
 
-const Ads = mongoose.model("Ads", AdSchema);
-export default Ads;
+export default mongoose.model('Ads', AdsSchema);

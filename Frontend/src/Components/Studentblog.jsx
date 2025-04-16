@@ -16,7 +16,7 @@ const StarRating = ({ blogId, currentRating }) => {
       // console.log(newRating);
     
       try {
-        await axios.put(`http://localhost:4000/server/blog/update-rating/${blogId}`, {
+        await axios.put(`https://beacon-tutorial.vercel.app/server/blog/update-rating/${blogId}`, {
           rating: newRating,
         });
       } catch (error) {
@@ -121,7 +121,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/server/blog/getall');
+        const response = await axios.get('https://beacon-tutorial.vercel.app/server/blog/getall');
         // Format the date from createdAt field (adjust if your field is different)
         const formattedBlogs = response.data.map(blog => ({
           ...blog,

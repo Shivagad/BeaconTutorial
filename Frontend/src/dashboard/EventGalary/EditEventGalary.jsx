@@ -19,7 +19,7 @@ const EditEventGallery = ({ isEditOpen, onClose, setToast2, id }) => {
   // Fetch event details when the modal opens.
   const fetchEventDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/server/event/geteventbyid/${id}`);
+      const response = await axios.get(`https://beacon-tutorial.vercel.app/server/event/geteventbyid/${id}`);
       const data = response.data.data;
       // console.log(data);
       setFormData({
@@ -99,7 +99,7 @@ const EditEventGallery = ({ isEditOpen, onClose, setToast2, id }) => {
         imagesPath: formData.images,
       };
       const response = await axios.put(
-        `http://localhost:4000/server/event/editevent/${id}`,
+        `https://beacon-tutorial.vercel.app/server/event/editevent/${id}`,
         dataToSend,
         { headers: { "Content-Type": "application/json" } }
       );

@@ -74,7 +74,7 @@ const BlogDetailPage = () => {
       try {
         // Try to fetch from API
         const response = await axios.get(
-          `http://localhost:4000/server/blog/${id}`
+          `https://beacon-tutorial.vercel.app/server/blog/${id}`
         );
         // console.log(response.data.data);
 

@@ -12,7 +12,7 @@ const EditStatModal = ({ isOpen, onClose, setToast }) => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/server/stat/getstat");
+        const response = await axios.get("https://beacon-tutorial.vercel.app/server/stat/getstat");
         // console.log(response.data);
         if (response.data) {
           setFormData(response.data); // Assuming you only have one stat entry, hence [0]
@@ -34,7 +34,7 @@ const EditStatModal = ({ isOpen, onClose, setToast }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put("http://localhost:4000/server/stat/updatestat", formData);
+      const response = await axios.put("https://beacon-tutorial.vercel.app/server/stat/updatestat", formData);
       if (response.data) {
         setToast({ success: true, message: "Statistics updated successfully!" });
         onClose();
