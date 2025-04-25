@@ -25,6 +25,7 @@ import Stat from './Routes/Stat.js';
 import Batches from './Routes/Batches.js';
 import Chatbot from './Routes/Chatbot.js';
 import Ads from './Routes/Ads.js';
+import AdminDashAnalysis from './Routes/AdminDashAnalysis.js';
 
 dotenv.config();
 const app = express();
@@ -57,6 +58,7 @@ app.use('/server/stat',Stat);
 app.use('/server/batches',Batches);
 app.use('/server',Chatbot);
 app.use('/server/ads',Ads);
+app.use('/server/admin',AdminDashAnalysis);
 
 
 app.get('/', (req, res) => {

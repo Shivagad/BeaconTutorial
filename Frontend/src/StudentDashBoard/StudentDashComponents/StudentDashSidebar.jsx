@@ -67,6 +67,18 @@ const StudentDashSidebar = ({ isOpen, toggleSidebar }) => {
           <GraduationCap className="h-5 w-5" />
           <span className="ml-3 text-sm">Results</span>
         </NavLink>
+        {/* <NavLink 
+          to="/student-dashboard/analysis" 
+          className={({ isActive }) => `
+            flex items-center px-4 py-2.5 mb-1 mx-2
+            ${isActive ? 'bg-blue-50 text-[#4E77BB]' : 'text-gray-700 hover:bg-gray-100'} 
+            rounded-md transition-colors
+          `}
+          onClick={handleNavLinkClick}
+        >
+          <GraduationCap className="h-5 w-5" />
+          <span className="ml-3 text-sm">Result Analysis</span>
+        </NavLink> */}
         
         <NavLink 
           to="/student-dashboard/attendance" 

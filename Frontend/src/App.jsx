@@ -58,6 +58,8 @@ import phone from "../public/images/phone.png";
 import Developers from "./Components/Developers.jsx";
 import ChatbotModal from "./Components/Chatbotmodal.jsx";
 import { MessageCircle } from "react-feather";
+import MainPage from './dashboard/MainPage.jsx';
+import StudResultAnalysis from './StudentDashBoard/DashBoardPages/StudResultAnalysis.jsx'
 function AppRoutes() {
   const location = useLocation();
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -121,6 +123,7 @@ function AppRoutes() {
             }
           />
           <Route path="results" element={<StudentResults />} />
+          <Route path="analysis" element={<StudResultAnalysis />} />
         </Route>
 
         <Route
@@ -253,6 +256,14 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         >
+          <Route
+          path="/dashboard/mainpage"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <MainPage/>
+            </ProtectedRoute>
+          }
+        ></Route>
           <Route
             path="10th-results"
             element={

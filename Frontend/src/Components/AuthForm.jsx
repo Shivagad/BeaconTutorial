@@ -67,7 +67,7 @@ export function AuthForm({ mode }) {
         dispatch(signInSuccess(response.data.user));
         toast.success(response.data.message);
         if (isAdminLogin) {
-          navigate('/dashboard');
+          navigate('/dashboard/mainpage');
         } else if (isStudentLogin) {
           navigate('/'); // Adjust route as needed
         }

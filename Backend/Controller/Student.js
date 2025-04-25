@@ -681,7 +681,6 @@ export const addResult = async (req, res) => {
       });
   }
 };
-
 export const getResultsByEmail = async (req, res) => {
   try {
     const { email } = req.params;
@@ -694,9 +693,19 @@ export const getResultsByEmail = async (req, res) => {
         .json({ success: false, message: "Student not found" });
     }
     
-    // Fetch all results for the student
-    const results = await Result.find({ student: student._id });
-    // console.log(results);
+    // Get today's date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);  // Reset time to 00:00:00 for accurate comparison
+
+    // Fetch all results for the student and filter by today's date, sorted by examDate (latest first)
+    const results = await Result.find({ student: student._id, examDate: { $lte: today } })
+      .sort({ examDate: -1 });  // Sort by examDate in descending order (latest first)
+
+    if (results.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No results found for this student" });
+    }
 
     res.json({ success: true, results });
   } catch (error) {
@@ -709,6 +718,7 @@ export const getResultsByEmail = async (req, res) => {
       });
   }
 };
+
 
 export const getResultsDetail = async (req, res) => {
   const { id } = req.params;
@@ -942,5 +952,78 @@ export const deleteResultByExamName = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+
+export const getExamAnalysisByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    // Find student by email
+    const student = await Student.findOne({ email });
+    if (!student) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Student not found" });
+    }
+    
+    // Fetch the last 5 results for the student, sorted by examDate
+    const results = await Result.find({ student: student._id })
+      .sort({ examDate: -1 })  // Sort by most recent exams first
+      .limit(5);
+
+    if (results.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No results found for this student" });
+    }
+
+    // Initialize variables for each subject
+    const subjectData = {
+      physics: { total: 0, count: 0 },
+      chemistry: { total: 0, count: 0 },
+      maths: { total: 0, count: 0 },
+      biology: { total: 0, count: 0 }
+    };
+
+    // Loop through the results and sum the marks for each subject
+    results.forEach(result => {
+      if (result.physics) {
+        subjectData.physics.total += result.physics;
+        subjectData.physics.count++;
+      }
+      if (result.chemistry) {
+        subjectData.chemistry.total += result.chemistry;
+        subjectData.chemistry.count++;
+      }
+      if (result.maths) {
+        subjectData.maths.total += result.maths;
+        subjectData.maths.count++;
+      }
+      if (result.biology) {
+        subjectData.biology.total += result.biology;
+        subjectData.biology.count++;
+      }
+    });
+
+    // Calculate averages for each subject
+    const averages = {};
+    if (subjectData.physics.count > 0) averages.physics = subjectData.physics.total / subjectData.physics.count;
+    if (subjectData.chemistry.count > 0) averages.chemistry = subjectData.chemistry.total / subjectData.chemistry.count;
+    if (subjectData.maths.count > 0) averages.maths = subjectData.maths.total / subjectData.maths.count;
+    if (subjectData.biology.count > 0) averages.biology = subjectData.biology.total / subjectData.biology.count;
+
+    // Send the calculated averages as a response
+    res.json({ success: true, averages });
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error fetching exam analysis",
+        error: error.message,
+      });
   }
 };

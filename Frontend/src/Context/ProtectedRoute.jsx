@@ -7,7 +7,7 @@ export const NonDashboardRoute = ({ children }) => {
 
   // If the user is an admin, redirect to the admin dashboard
   if (currentUser?.role === 'admin') {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/dashboard/mainpage" replace />;
   }
 
 

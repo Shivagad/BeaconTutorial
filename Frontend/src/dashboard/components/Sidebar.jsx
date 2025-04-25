@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { GraduationCap, Users, FileImage, Album } from 'lucide-react';
+import { GraduationCap,BarChart, Users, FileImage, Album, UserCog, User, MessageSquareQuote, ScrollText, BookOpenText, HelpCircle, LayoutDashboard, CalendarDays, BarChart3, Megaphone } from 'lucide-react';
 import { useAuth } from '../../Context/AuthProvider';
 
 const Sidebar = () => {
@@ -8,27 +8,27 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { icon: Users, label: '10th Results', path: '/dashboard/10th-results' },
-    { icon: Users, label: '12th Results', path: '/dashboard/12th-results' },
-    { icon: Users, label: 'MHT-CET Results', path: '/dashboard/cet-results' },
-    { icon: Users, label: 'JEE Results', path: '/dashboard/jee-results' },
-    { icon: Users, label: 'Other Exam Results', path: '/dashboard/otherexams' },
-    { icon: Users, label: 'NEET Results', path: '/dashboard/neet-results' },
+    { icon: BarChart, label: 'Result Analysis', path: '/dashboard/mainpage' },
+    { icon: GraduationCap, label: '10th Results', path: '/dashboard/10th-results' },
+    { icon: GraduationCap, label: '12th Results', path: '/dashboard/12th-results' },
+    { icon: GraduationCap, label: 'MHT-CET Results', path: '/dashboard/cet-results' },
+    { icon: GraduationCap, label: 'JEE Results', path: '/dashboard/jee-results' },
+    { icon: GraduationCap, label: 'Other Exam Results', path: '/dashboard/otherexams' },
+    { icon: GraduationCap, label: 'NEET Results', path: '/dashboard/neet-results' },
     { icon: FileImage, label: 'Poster', path: '/dashboard/poster' },
     { icon: Album, label: 'Event Gallery', path: '/dashboard/event-gallery' },
-    { icon: Users, label: 'Manage Admins', path: '/dashboard/admin' },
-    { icon: Users, label: 'Manage Students',path:'/dashboard/coursescard'},
-    { icon: Users, label: 'Testimonial', path: '/dashboard/testimonial' },
-    { icon: Users, label: 'Scholarship', path: '/dashboard/scholarship' },
-    { icon: Users, label: 'Inquiry', path: '/dashboard/inquiry' },
-    { icon: Users, label: 'Blog', path: '/dashboard/blog' },
-    { icon: Users, label: ' Manage Course', path: '/dashboard/courses' },
-    { icon: Users, label: ' Manage Faculty', path: '/dashboard/faculty' },
-    { icon: Users, label: ' Stat', path: '/dashboard/stat' },
-    { icon: Users, label: 'Batch Start Date', path: '/dashboard/batches' },
-    { icon: Users, label: 'Ads', path: '/dashboard/adsbackend' },
+    { icon: UserCog, label: 'Manage Admins', path: '/dashboard/admin' },
+    { icon: Users, label: 'Manage Students', path: '/dashboard/coursescard' },
+    { icon: MessageSquareQuote, label: 'Testimonial', path: '/dashboard/testimonial' },
+    { icon: ScrollText, label: 'Scholarship', path: '/dashboard/scholarship' },
+    { icon: HelpCircle, label: 'Inquiry', path: '/dashboard/inquiry' },
+    { icon: BookOpenText, label: 'Blog', path: '/dashboard/blog' },
+    { icon: LayoutDashboard, label: 'Manage Course', path: '/dashboard/courses' },
+    { icon: User, label: 'Manage Faculty', path: '/dashboard/faculty' },
+    { icon: BarChart3, label: 'Stat', path: '/dashboard/stat' },
+    { icon: CalendarDays, label: 'Batch Start Date', path: '/dashboard/batches' },
+    { icon: Megaphone, label: 'Ads', path: '/dashboard/adsbackend' },
   ];
-
   return (
     <div className="fixed left-0 top-0 h-screen w-64 bg-gray-900 text-white p-4 shadow-lg flex flex-col">
       <div>
