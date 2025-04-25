@@ -8,7 +8,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { icon: BarChart, label: 'Result Analysis', path: '/dashboard/mainpage' },
+    // { icon: BarChart, label: 'Result Analysis', path: '/dashboard/mainpage' },
     { icon: GraduationCap, label: '10th Results', path: '/dashboard/10th-results' },
     { icon: GraduationCap, label: '12th Results', path: '/dashboard/12th-results' },
     { icon: GraduationCap, label: 'MHT-CET Results', path: '/dashboard/cet-results' },

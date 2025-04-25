@@ -9,10 +9,14 @@ import OtherExamResult from '../Models/OtherExamResults.js';
 export const addStudentResult = async (req, res) => {
     try {
         const { firstName, lastName,image, percentage, board, science, math, tags, seqno } = req.body;
+        //console.log(req.body);
+        
         if (!image) {
             return res.status(400).json({ message: "Image is required", success: false });
         }
         const base64Image = image.split(";base64,").pop(); 
+        //console.log(base64Image);
+        
       const uploadResponse = await cloudinary.uploader.upload(
         `data:image/png;base64,${base64Image}`,
         {
