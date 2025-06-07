@@ -213,13 +213,14 @@ function Home() {
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  {/* <picture className="w-full h-full">
-                
+                  <picture className="w-full h-full">
+                    {/* Mobile Image */}
+                    {/* Mobile Image */}
                     <source
                       media="(max-width: 768px)"
                       srcSet={`${poster.mobileImagePath}?f_auto,q_auto,w_600,h_600,c_fill,dpr_auto`}
                     />
-                   
+                    {/* Default (Desktop) Image */}
                     <img
                       src={`${poster.imagePath}?f_auto,q_auto,w_1200,h_800,c_fill,dpr_auto`}
                       alt={`Poster ${index + 1}`}
@@ -229,31 +230,7 @@ function Home() {
                       decoding="async"
                       fetchPriority="high"
                     />
-                  </picture> */}
-
-                  <picture className="w-full h-full">
-  {/* Mobile Image */}
-  <source
-    media="(max-width: 768px)"
-    srcSet={poster.mobileImagePath}
-  />
-  {/* Desktop Image */}
-  <img
-    src={poster.imagePath}
-    alt={`Poster ${index + 1}`}
-    role="presentation"
-    className="w-full h-full object-contain md:object-fill"
-    loading="lazy"
-    decoding="async"
-    fetchPriority="auto"
-    style={{
-      background: `url(${poster.blurImagePath})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  />
-</picture>
-
+                  </picture>
                 </div>
               ))
             ) : (
