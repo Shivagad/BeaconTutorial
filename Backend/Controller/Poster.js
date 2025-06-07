@@ -46,19 +46,53 @@ export const addPoster = async (req, res) => {
 };
 
 // Get all posters sorted by seqno
+// export const getAllPosters = async (req, res) => {
+//     try {
+//         const posters = await Poster.find().sort({ seqno: 1 });
+
+//         if (!posters || posters.length === 0) {
+//             return res.status(404).json({ message: "No posters found", success: false });
+//         }
+
+//         res.status(200).json({ message: "Posters fetched successfully", success: true, data: posters });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message, success: false });
+//     }
+// };
 export const getAllPosters = async (req, res) => {
-    try {
-        const posters = await Poster.find().sort({ seqno: 1 });
+  try {
+    const posters = await Poster.find().sort({ seqno: 1 });
 
-        if (!posters || posters.length === 0) {
-            return res.status(404).json({ message: "No posters found", success: false });
-        }
-
-        res.status(200).json({ message: "Posters fetched successfully", success: true, data: posters });
-    } catch (error) {
-        res.status(500).json({ message: error.message, success: false });
+    if (!posters || posters.length === 0) {
+      return res.status(404).json({ message: "No posters found", success: false });
     }
+
+    // Map and attach optimized image URLs
+    const transformedPosters = posters.map((poster) => {
+      const imageBase = poster.imagePath.split("/upload/")[0] + "/upload";
+      const imageRest = poster.imagePath.split("/upload/")[1];
+
+      const mobileBase = poster.mobileImagePath?.split("/upload/")[0] + "/upload";
+      const mobileRest = poster.mobileImagePath?.split("/upload/")[1];
+
+      return {
+        ...poster._doc,
+        imagePath: `${imageBase}/f_auto,q_auto,w_1200,h_800,c_fill,dpr_auto/${imageRest}`,
+        mobileImagePath: `${mobileBase}/f_auto,q_auto,w_600,h_600,c_fill,dpr_auto/${mobileRest}`,
+        blurImagePath: `${imageBase}/w_20,e_blur:200,q_auto,f_auto/${imageRest}`,
+      };
+    });
+
+    res.status(200).json({
+      message: "Posters fetched successfully",
+      success: true,
+      data: transformedPosters,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false });
+  }
 };
+
 
 // Delete a poster
 export const deletePoster = async (req, res) => {

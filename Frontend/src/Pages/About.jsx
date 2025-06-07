@@ -44,10 +44,13 @@ function AboutUs() {
                             About Us
                             </h1>
                             <p className="text-white text-center max-w-2xl mx-auto">
-                            Chase your dreams with passion and determination, for they hold the key to your future success
+                            Chase your dreams with passion and determination, for they hold the key to your future success hgfsgdh
                             </p>
                           </div>
-                          {/* Wave SVG */}
+                
+
+
+
                           <div className="absolute bottom-0 left-0 right-0">
                             <svg viewBox="0 0 1440 100" className="w-full h-auto">
                               <path
