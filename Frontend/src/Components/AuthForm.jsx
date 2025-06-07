@@ -21,8 +21,7 @@ export function AuthForm({ mode }) {
   const [showPassword, setShowPassword] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
-
-  // Toast helper for OTP modal
+  
   const setToast = (obj) => {
     if (obj.success) {
       toast.success("Email Verified Successfully");
@@ -69,7 +68,7 @@ export function AuthForm({ mode }) {
         if (isAdminLogin) {
           navigate('/dashboard/mainpage');
         } else if (isStudentLogin) {
-          navigate('/'); // Adjust route as needed
+          navigate('/'); 
         }
       }
     } catch (error) {
