@@ -109,6 +109,8 @@ export const editJEEStudentResult = async (req, res) => {
     }
 };
 
+
+
 export const deleteJEEStudentResult = async (req, res) => {
     try {
         const { id } = req.params;

@@ -45,6 +45,10 @@ export const addPoster = async (req, res) => {
     }
 };
 
+
+
+
+
 // Get all posters sorted by seqno
 export const getAllPosters = async (req, res) => {
     try {
