@@ -3,7 +3,6 @@ import Result from "../Models/ResultSchema.js";
 export const getAllStudentsAverageAnalysis = async (req, res) => {
   try {
     const results = await Result.find();
-
     if (results.length === 0) {
       return res.status(404).json({ message: "No results found" });
     }

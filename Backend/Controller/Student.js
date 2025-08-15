@@ -128,6 +128,7 @@ export const resetStudentPassword = async (req, res) => {
   }
 };
 
+
 export const createStudent = async (req, res) => {
   try {
     const {
